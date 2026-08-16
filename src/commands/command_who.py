@@ -111,7 +111,7 @@ def get_who_players():
     """
     players = []
 
-    for conn in connections.itervalues():
+    for conn in connections.values():
         if conn.player:
             players.append(conn.player)
 

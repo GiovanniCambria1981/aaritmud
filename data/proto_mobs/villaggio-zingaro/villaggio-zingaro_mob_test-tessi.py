@@ -74,7 +74,7 @@ def on_sunrise(test_tessi):
     test_tessi.after_copy_existing_attributes()
     test_tessi.location = location
 
-    print "villaggio-zingaro_mob_test-tessi - >>>  On Sunrise done  <<<"
+    print("villaggio-zingaro_mob_test-tessi - >>>  On Sunrise done  <<<")
     location.act("\nIl fiero rapace, straziato dal dolore, si è trasformato...")
 #- Fine Funzione -
 
@@ -85,7 +85,7 @@ def on_midnight(test_tessi):
     test_tessi.after_copy_existing_attributes()
     test_tessi.location = location
 
-    print "villaggio-zingaro_mob_test-tessi - >>>  On Sunset done  <<<"
+    print("villaggio-zingaro_mob_test-tessi - >>>  On Sunset done  <<<")
     location.act("\nLa tessitrice, lacerata dal dolore, si è trasformata in un rapace.")
 #- Fine Funzione -
 
@@ -94,18 +94,18 @@ def on_midnight(test_tessi):
 
 def before_look(player, tessi, descr, detail, use_examine, behavioured):
     if not player.IS_PLAYER:
-        print "villaggio-zingaro_mob_test-tessi - >>> NO PLAYER <<<"
+        print("villaggio-zingaro_mob_test-tessi - >>> NO PLAYER <<<")
         return
 
     if "lookable" in tessi.specials and not tessi.specials["lookable"]:
-        print "villaggio-zingaro_mob_test-tessi - >>> NON LOOK <<<"
+        print("villaggio-zingaro_mob_test-tessi - >>> NON LOOK <<<")
         return
 
     if tessi.race == RACE.TUAREG:
-        print "villaggio-zingaro_mob_test-tessi - >>> TUAREG <<<"
+        print("villaggio-zingaro_mob_test-tessi - >>> TUAREG <<<")
         defer_if_possible(1, 2, tessi, player, ask_help, tessi, player)
     else:
-        print "villaggio-zingaro_mob_test-tessi - >>> BAGGIA <<<"
+        print("villaggio-zingaro_mob_test-tessi - >>> BAGGIA <<<")
         to_say = "a %s skreee skreee!" % player.code
         defer_if_possible(1, 2, tessi, player, command_say, tessi, to_say)
 
@@ -125,7 +125,7 @@ def ask_help(tessi, player):
     if not tessi or not player:
         return
 
-    print "villaggio-zingaro_mob_test-tessi - >>>  ask_help <<<"
+    print("villaggio-zingaro_mob_test-tessi - >>>  ask_help <<<")
     # (TD) calcolo del tempo rimanente per la quest già in corso
 
     if "player_on_quest" in tessi.specials and tessi.specials["player_on_quest"]:
@@ -211,13 +211,13 @@ def after_listen_say(tessi, player, target, phrase, behavioured):
     if not is_same(phrase, ("si", "certo")):
         return
 
-    print "villaggio-zingaro_mob_test-tessi -  tessi ", tessi.code
+    print("villaggio-zingaro_mob_test-tessi -  tessi ", tessi.code)
     tessi.specials["player_for_reply"] = ""
 
-    print "villaggio-zingaro_mob_test-tessi - >>> ora cerco una room <<<"
+    print("villaggio-zingaro_mob_test-tessi - >>> ora cerco una room <<<")
     room = find_room(ROOM_PROTO_CODE)
     if not room:
-        print "villaggio-zingaro_mob_test-tessi - >>> nessuna room trovata per testtessi. Exit  <<<"
+        print("villaggio-zingaro_mob_test-tessi - >>> nessuna room trovata per testtessi. Exit  <<<")
         to_say = "a %s *imbarazzata* Uh, oh... ora ricordo dove ho messo il fermaglio; perdonami, tutto risolto." % player.code
         defer_if_possible(1, 2, tessi, player, command_say, tessi, to_say)
         tessi.specials["player_on_quest"] = ""
@@ -248,11 +248,11 @@ def find_room(proto_code):
     Ricava una sola random room dal database del mud tramite prototipo.
     """
     rooms = []
-    for room in database["rooms"].itervalues():
+    for room in database["rooms"].values():
         #print room.prototype.code, proto_code
         if room.prototype.code == proto_code:
             rooms.append(room)
-            print "villaggio-zingaro_mob_test-tessi - >>> Room ragno trovata  <<< ", room
+            print("villaggio-zingaro_mob_test-tessi - >>> Room ragno trovata  <<< ", room)
 
     if rooms:
         return random.choice(rooms)
@@ -294,12 +294,12 @@ def before_giving(player, item, tessi, direction, behavioured):
         defer_if_possible(1, 2, tessi, player, command_say, tessi, to_say)
         return True
 
-    for proto_fermaglio in database["proto_items"].itervalues():
+    for proto_fermaglio in database["proto_items"].values():
         if proto_fermaglio.code == FERMAGLIO_PROTO_CODE:
             proto_fermaglio.split_entity(1)
             break
     else:
-        print ">>> niente fermaglio nel database <<<"
+        print(">>> niente fermaglio nel database <<<")
         to_say = "a %s *imbarazzata* C'è stato un problema, mi spiace ma non c'è più il mio fermaglio! La ricerca va abbandonata." % player.code
         defer_if_possible(1, 2, tessi, player, command_say, tessi, to_say)
         tessi.specials["player_on_quest"] = ""
@@ -314,7 +314,7 @@ def before_giving(player, item, tessi, direction, behavioured):
         return True
 
     if not tessi.specials["player_on_quest"]:
-        print ">>> di qui non si dovrebbe passare a meno che qualche admin abbia creato item <<<"
+        print(">>> di qui non si dovrebbe passare a meno che qualche admin abbia creato item <<<")
         return True
 
     # Se il giocatore che porta il fermaglio non è quello della quest la
@@ -393,7 +393,7 @@ def reset_quest(tessi):
 
     bozzolo = find_item(BOZZOLO_PROTO_CODE)
     while bozzolo:
-        print ">>> removing bozzolo<<< ", bozzolo.code
+        print(">>> removing bozzolo<<< ", bozzolo.code)
         player_container = bozzolo.get_player_carrier()
         #print ">>> <<< : ", player_container.code
         if player_container:
@@ -405,7 +405,7 @@ def reset_quest(tessi):
 
     ragno = find_mob(RAGNO_PROTO_CODE)
     while ragno:
-        print ">>> removing ragno<<< ", ragno.code
+        print(">>> removing ragno<<< ", ragno.code)
         # (GATTO) sì, ma sarebe da testare che un pg picchi un ragno durante
         # questo extract, mi sa che cosa brutte accadrebbero
         ragno.extract(1)
@@ -423,7 +423,7 @@ def find_item(proto_code):
     """
     Ricava la room dal database del mud tramite prototipo.
     """
-    for item in database["items"].itervalues():
+    for item in database["items"].values():
         #print "Acciderbolina >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ", item.proto
         #if not item:
         #    pass
@@ -438,7 +438,7 @@ def find_mob(proto_code):
     """
     Ricava il mob dal database del mud tramite prototipo.
     """
-    for mob in database["mobs"].itervalues():
+    for mob in database["mobs"].values():
         if mob.prototype.code == proto_code:
             return mob.split_entity(1)
 

@@ -8,6 +8,7 @@ Comando che permette di invocare un'istanza esistente di item.
 #= IMPORT ======================================================================
 
 from src.config import config
+from importlib import reload
 from src.log    import log
 
 if config.reload_commands:
@@ -19,7 +20,7 @@ from src.commands.command_invoke import invoke_handler
 
 def command_iinvoke(entity, argument=""):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -30,7 +31,7 @@ def command_iinvoke(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

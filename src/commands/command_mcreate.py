@@ -8,6 +8,7 @@ Comando che permette di creare un'istanza di un mob.
 #= IMPORT ======================================================================
 
 from src.config import config
+from importlib import reload
 from src.log    import log
 
 if config.reload_commands:
@@ -19,7 +20,7 @@ from src.commands.command_create import create_handler
 
 def command_mcreate(entity, argument=""):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -30,7 +31,7 @@ def command_mcreate(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------
@@ -39,8 +40,8 @@ def get_syntax_template(entity):
     syntax += "mcreate\n"
     syntax += "mcreate <codice mob o suo prefisso>\n"
     syntax += "mcreate <nome mob o suo prefisso>\n"
-    syntax += "mcreate <quantità> <codice mob o suo prefisso>\n"
-    syntax += "mcreate <quantità> <nome mob o suo prefisso>\n"
+    syntax += "mcreate <quantitï¿½> <codice mob o suo prefisso>\n"
+    syntax += "mcreate <quantitï¿½> <nome mob o suo prefisso>\n"
 
     return syntax
 #- Fine Funzione -

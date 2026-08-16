@@ -1503,13 +1503,13 @@ class BehaviourUpdaterSuperclass(object):
         # Prepara la lista di liste con coppie [nome attributo, valore] dei
         # comportamenti
         cached_behaviour_draw_attrs = []
-        for attr_name, draw_value in self.BEHAVIOUR_DRAW.iteritems():
+        for attr_name, draw_value in self.BEHAVIOUR_DRAW.items():
             value = getattr(behaviour, attr_name)
             if value > 0:
                 cached_behaviour_draw_attrs.append([attr_name, value])
             # Per evitare casini di import vengono importati solo
             # successivamente i comandi
-            if isinstance(draw_value[2], basestring):
+            if isinstance(draw_value[2], str):
                 command_module = __import__("src.commands.%s" % draw_value[2], globals(), locals(), [""])
                 draw_value[2] = getattr(command_module, draw_value[2])
 

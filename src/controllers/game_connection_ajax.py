@@ -2,13 +2,13 @@
 
 """
 Modulo per la gestione della connessione alla pagina di gioco di output
-tramite ajax, questa è la tipologia di connessione al gioco standard.
+tramite ajax, questa ï¿½ la tipologia di connessione al gioco standard.
 """
 
 
 #= IMPORT ======================================================================
 
-import urllib
+from urllib.parse import quote as _urllib_quote, unquote as _urllib_unquote
 
 from src.config       import config
 from src.enums        import OPTION
@@ -73,7 +73,7 @@ class GameConnectionAjaxPage(WebResource):
             input = request.args["input_content"][0]
 
         if input:
-            input = urllib.unquote(input).strip()
+            input = _urllib_unquote(input).strip()
 
             if OPTION.ITALIAN in conn.account.options:
                 send_input(conn.player, input, "it")

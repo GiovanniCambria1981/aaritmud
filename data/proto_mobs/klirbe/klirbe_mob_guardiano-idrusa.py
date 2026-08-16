@@ -31,7 +31,7 @@ ALFA_ONLY_PATTERN = re.compile("[^a-zA-Zì ]+")
 #= FUNZIONI ====================================================================
 
 def on_booting(idrusa):
-    print "on_booting dell'idrusa", idrusa
+    print("on_booting dell'idrusa", idrusa)
 
     # Concettualmente al riavvio del gioco è meglio raddoppiare i tempi di
     # reset in maniera tale che il giocatore abbia il tempo di "riprendersi"

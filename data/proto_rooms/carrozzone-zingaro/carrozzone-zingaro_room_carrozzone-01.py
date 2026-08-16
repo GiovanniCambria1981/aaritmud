@@ -85,7 +85,7 @@ def find_carrozzone():
     """
     Ricava il carrozzone in movimento dal database degli oggetti del mud.
     """
-    for item in database["items"].itervalues():
+    for item in database["items"].values():
         if item.prototype.code == CODICE_CARROZZONE:
             return item.split_entity(1)
 

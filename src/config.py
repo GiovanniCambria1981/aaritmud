@@ -8,7 +8,7 @@ modulo engine.
 
 #= IMPORT ======================================================================
 
-import ConfigParser
+import configparser as ConfigParser
 import sys
 
 from src.color  import check_colors, colors
@@ -161,12 +161,16 @@ SUPPORTED_COMPRESSIONS = ("tar", "gz", "bz2")
 
 #= CLASSI ======================================================================
 
-class Config(ConfigParser.SafeConfigParser):
+class Config(ConfigParser.ConfigParser):
     """
     Classe la cui variabile singleton è inizializzata a fine modulo.
     """
     ready = False
     filename = ""
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("interpolation", None)
+        ConfigParser.ConfigParser.__init__(self, *args, **kwargs)
 
     def check_option_names(self):
         try:
@@ -195,7 +199,7 @@ class Config(ConfigParser.SafeConfigParser):
     def load(self, filename):
         self.filename = filename
         self.check_option_names()
-        ConfigParser.SafeConfigParser.read(self, filename)
+        ConfigParser.ConfigParser.read(self, filename)
 
         for option in CONFIG_OPTIONS:
             if hasattr(self, option.name):
@@ -239,7 +243,7 @@ class Config(ConfigParser.SafeConfigParser):
             log.bug("Impossibile aprire il file %s in scrittura" % self.filename)
             return
 
-        ConfigParser.SafeConfigParser.write(self, config_file)
+        ConfigParser.ConfigParser.write(self, config_file)
         config_file.close()
     #- Fine Metodo -
 
@@ -473,13 +477,13 @@ class Config(ConfigParser.SafeConfigParser):
     #- Metodi getter e setter --------------------------------------------------
 
     def getemail(self, section_name, option_name):
-        return ConfigParser.SafeConfigParser.get(self, section_name, option_name)
+        return ConfigParser.ConfigParser.get(self, section_name, option_name)
     #- Fine Metodo -
 
     def set(self, section_name, option_name, value):
         # Qui anche le opzioni che hanno entità o altri oggetti (gift_on_enter)
         # funzionano senza problemi grazie al metodo __str__
-        ConfigParser.SafeConfigParser.set(self, section_name, option_name, str(value))
+        ConfigParser.ConfigParser.set(self, section_name, option_name, str(value))
     #- Fine Metodo -
 
 

@@ -8,6 +8,7 @@ Modulo per la gestione del comando per piantare.
 #= IMPORT ======================================================================
 
 from src.config import config
+from importlib import reload
 from src.log    import log
 
 if config.reload_commands:
@@ -29,12 +30,12 @@ VERBS = {"infinitive" : "[green]piantare[close]",
 
 def command_plant(entity, argument="", verbs=VERBS, behavioured=False):
     if not verbs:
-        log.bug("verbs non è un parametro valido: %r" % verbs)
+        log.bug("verbs non ï¿½ un parametro valido: %r" % verbs)
         return False
 
     # -------------------------------------------------------------------------
 
-    # È possibile se il comando è stato deferrato
+    # ï¿½ possibile se il comando ï¿½ stato deferrato
     if not entity:
         return False
 
@@ -44,7 +45,7 @@ def command_plant(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

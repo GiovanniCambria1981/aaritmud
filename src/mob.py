@@ -499,7 +499,7 @@ class Mob(ProtoMob, BehaviourUpdaterSuperclass):
 
         # Non si può guadagnare per volta più della metà della rimanenza dei punti
         if points >= 2:
-            gain = min(gain, points / 2)
+            gain = min(gain, points // 2)
         else:
             # Caso particolare, la disperazione porta a piccole grazie!
             # (TD) aggiungere un messaggio e un check sulla fortuna invece del random.randint
@@ -779,9 +779,9 @@ def create_random_mob(mob=None, name="", level=0, race=RACE.NONE, sex=SEX.NONE, 
     mob.max_life      = random.randint(90, 110)
     mob.max_mana      = random.randint(90, 110)
     mob.max_vigour    = random.randint(90, 110)
-    mob.life          = mob.max_life - random.randint(0, mob.max_life / 4)
-    mob.mana          = mob.max_mana - random.randint(0, mob.max_mana / 4)
-    mob.vigour        = mob.max_vigour - random.randint(0, mob.max_vigour / 4)
+    mob.life          = mob.max_life - random.randint(0, mob.max_life // 4)
+    mob.mana          = mob.max_mana - random.randint(0, mob.max_mana // 4)
+    mob.vigour        = mob.max_vigour - random.randint(0, mob.max_vigour // 4)
 
     # Attributi
     mob.strength      = random.randint(5, 95)
@@ -809,7 +809,7 @@ def create_random_mob(mob=None, name="", level=0, race=RACE.NONE, sex=SEX.NONE, 
     mob.position.randomize(from_element=POSITION.REST, to_element=POSITION.STAND)
     mob.skills = create_random_skills(mob)
     mob.constellation.randomize()
-    mob.voice_potence = random.randint(45, 55) + mob.level / 4
+    mob.voice_potence = random.randint(45, 55) + mob.level // 4
 
     if random.randint(0, 200) == 0:
         mob.flags += Element(FLAG.AMBIDEXTROUS)

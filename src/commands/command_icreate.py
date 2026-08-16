@@ -8,6 +8,7 @@ Comando che permette di creare un'istanza di un oggetto.
 #= IMPORT ======================================================================
 
 from src.config import config
+from importlib import reload
 from src.log    import log
 
 if config.reload_commands:
@@ -19,7 +20,7 @@ from src.commands.command_create import create_handler
 
 def command_icreate(entity, argument=""):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -30,7 +31,7 @@ def command_icreate(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------
@@ -39,8 +40,8 @@ def get_syntax_template(entity):
     syntax += "icreate\n"
     syntax += "icreate <codice oggetto o suo prefisso>\n"
     syntax += "icreate <nome oggetto o suo prefisso>\n"
-    syntax += "icreate <quantità> <codice oggetto o suo prefisso>\n"
-    syntax += "icreate <quantità> <nome oggetto o suo prefisso>\n"
+    syntax += "icreate <quantitï¿½> <codice oggetto o suo prefisso>\n"
+    syntax += "icreate <quantitï¿½> <nome oggetto o suo prefisso>\n"
 
     return syntax
 #- Fine Funzione -

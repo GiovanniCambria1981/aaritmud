@@ -13,7 +13,7 @@ from src.utility  import is_same, is_prefix, one_argument, nifty_value_search
 
 def command_links(entity, argument="", behavioured=False):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -38,8 +38,8 @@ def command_links(entity, argument="", behavioured=False):
     results.append('''<th class="nowrap" align="left">Current Room At Coords</th>''')
     results.append('''</tr>''')
     for area in areas:
-        for proto_room in area.proto_rooms.itervalues():
-            for exit in proto_room.exits.itervalues():
+        for proto_room in area.proto_rooms.values():
+            for exit in proto_room.exits.values():
                 if not exit.destination:
                     continue
                 if exit.destination.area != area:
@@ -63,7 +63,7 @@ def command_links(entity, argument="", behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

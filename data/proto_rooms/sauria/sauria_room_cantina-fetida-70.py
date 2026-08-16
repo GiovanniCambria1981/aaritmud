@@ -25,7 +25,7 @@ def after_smelled(entity, target, detail, descr, behavioured):
 
     if behavioured:
         return False
-    print "Behavioured parameter room: ", behavioured
+    print("Behavioured parameter room: ", behavioured)
     entity.act("Hai respirato cose qui che sarebbe meglio non aver respirato!", TO.ENTITY)
     entity.act("Prova Respiro!", TO.TARGET, target)
     entity.act("$n ha annusato $l e già boccheggia...", TO.OTHERS)

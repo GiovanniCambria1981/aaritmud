@@ -35,7 +35,7 @@ def direction_choice(list_direction, room):
         return
 
     direction = random.choice(list_direction)
-    print "DIREZIONE = ", direction
+    print("DIREZIONE = ", direction)
     if direction in room.exits:
         return
 

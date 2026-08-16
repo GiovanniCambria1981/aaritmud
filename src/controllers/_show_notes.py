@@ -45,7 +45,7 @@ class ShowNotesPage(WebResource):
         discovered = False
 
         page = ""
-        for account in database["accounts"].itervalues():
+        for account in database["accounts"].values():
             notices = getattr(account, type)
             if not notices:
                 continue

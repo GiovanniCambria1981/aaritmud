@@ -54,7 +54,7 @@ class ManagePlayersGiftsPage(WebResource):
     def render_POST(self, request, conn):
         gift_counter = 0
 
-        for player in database["players"].itervalues():
+        for player in database["players"].values():
             if not player.gifts:
                 continue
             for gift in player.gifts:
@@ -78,11 +78,11 @@ class ManagePlayersGiftsPage(WebResource):
 
 def get_gift_codes(player, conn):
     if not player:
-        log.bug("player non è un parametro valido: %r" % player)
+        log.bug("player non ï¿½ un parametro valido: %r" % player)
         return ""
 
     if not conn:
-        log.bug("conn non è un parametro valido: %r" % conn)
+        log.bug("conn non ï¿½ un parametro valido: %r" % conn)
         return ""
 
     # ---------------------------------------------------------------------
@@ -102,17 +102,17 @@ def get_gift_codes(player, conn):
 
 def player_has_gift(player, gift):
     if not player:
-        log.bug("player non è un parametro valido: %r" % player)
+        log.bug("player non ï¿½ un parametro valido: %r" % player)
         return False
 
     if not gift:
-        log.bug("gift non è un parametro valido: %r" % gift)
+        log.bug("gift non ï¿½ un parametro valido: %r" % gift)
         return False
 
     # ---------------------------------------------------------------------
 
     table_name = gift.ACCESS_ATTR.split("_")[1]
-    for entity in database[table_name].itervalues():
+    for entity in database[table_name].values():
         if not entity.prototype:
             log.bug("entity senza prototipo valido: %r" % entity)
             continue

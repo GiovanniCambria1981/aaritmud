@@ -9,7 +9,7 @@ Modulo per la modifica delle descrizioni dei personaggi.
 
 import pprint
 import string
-import urllib
+from urllib.parse import quote as _urllib_quote, unquote as _urllib_unquote
 
 from src.config       import config
 from src.interpret    import translate_input
@@ -83,7 +83,7 @@ class DescriptionsPage(WebResource):
         descriptions = {}
         for descr_attr in self.DESCR_ATTRS:
             if getattr(choised_player, descr_attr):
-                descriptions[descr_attr] = urllib.quote(getattr(choised_player, descr_attr))
+                descriptions[descr_attr] = _urllib_quote(getattr(choised_player, descr_attr))
 
         return pprint.pformat(descriptions, indent=0)
     #- Fine Metodo -
@@ -91,7 +91,7 @@ class DescriptionsPage(WebResource):
     def save_descrs(self, request, conn, choised_player):
         for descr_attr in self.DESCR_ATTRS:
             if descr_attr in request.args:
-                text_to_save = urllib.unquote(request.args[descr_attr][0])
+                text_to_save = _urllib_unquote(request.args[descr_attr][0])
                 setattr(choised_player, descr_attr, text_to_save)
             else:
                 setattr(choised_player, descr_attr, "")

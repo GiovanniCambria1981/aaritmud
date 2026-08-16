@@ -3,6 +3,7 @@
 #= IMPORT ======================================================================
 
 from src.command import get_command_syntax
+from importlib import reload
 from src.config  import config
 from src.log     import log
 

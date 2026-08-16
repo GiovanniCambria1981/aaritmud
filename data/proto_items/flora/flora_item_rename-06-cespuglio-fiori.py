@@ -260,7 +260,7 @@ def after_inject(entity, room):
 #   defer(1, after_inject_deferred, seme, room) 
 #
 #def after_inject_deferred(seme, room):
-    print ">>> inserimento fiori via inject"
+    print(">>> inserimento fiori via inject")
     if not entity.specials or not 'ancestors' in entity.specials or entity.specials['ancestors'] == False:
 
         # Qui genero un genotipo solo per fare dei contacci e passare il valore ai successivi genotipi
@@ -343,61 +343,61 @@ def on_next_stage(old_entity, new_entity, choised_attr, entities):
 # == FUNZIONI DI TEST =========================================================
 
 def test_funzioni(verbose=False):
-    print "=== Primo Fiore ==="
+    print("=== Primo Fiore ===")
     primo_fiore = genera_genotipo()
-    print 'generazione genotipo:\t', primo_fiore.fiore_2g
+    print('generazione genotipo:\t', primo_fiore.fiore_2g)
     primo_fiore.update_head()
-    print 'testa primo fiore:\t', primo_fiore.head
-    print 'numero dominanti primo fiore:\t', primo_fiore.dominance_amount()
+    print('testa primo fiore:\t', primo_fiore.head)
+    print('numero dominanti primo fiore:\t', primo_fiore.dominance_amount())
     primo_gamete = split_geni(primo_fiore)
-    print 'primo gamerete:\t', primo_gamete.fiore_1g
+    print('primo gamerete:\t', primo_gamete.fiore_1g)
 
-    print "=== Secondo Fiore ==="
+    print("=== Secondo Fiore ===")
     secondo_fiore = genera_genotipo()
-    print 'generazione genotipo:\t', secondo_fiore.fiore_2g
+    print('generazione genotipo:\t', secondo_fiore.fiore_2g)
     secondo_fiore.update_head()
-    print 'testa secondo fiore:\t', secondo_fiore.head
-    print 'numero dominanti secondo fiore:\t', secondo_fiore.dominance_amount()
+    print('testa secondo fiore:\t', secondo_fiore.head)
+    print('numero dominanti secondo fiore:\t', secondo_fiore.dominance_amount())
     secondo_gamete = split_geni(secondo_fiore)
-    print 'secondo gamerete:\t', secondo_gamete.fiore_1g
+    print('secondo gamerete:\t', secondo_gamete.fiore_1g)
    
     if verbose:
-        print ">>>>>>>#####"
-        print 'primo gamerete:\t', primo_gamete.fiore_1g
-        print 'primo   genotipo:\t\t', primo_fiore.fiore_2g
-        print 'secondo genotipo:\t\t', secondo_fiore.fiore_2g
-        print ">>>>>>>#####"
+        print(">>>>>>>#####")
+        print('primo gamerete:\t', primo_gamete.fiore_1g)
+        print('primo   genotipo:\t\t', primo_fiore.fiore_2g)
+        print('secondo genotipo:\t\t', secondo_fiore.fiore_2g)
+        print(">>>>>>>#####")
    
    
-    print "=== Fecondazione Fiore ==="
+    print("=== Fecondazione Fiore ===")
     figlio = fecondazione(primo_gamete, secondo_gamete)
     figlio.update_head()
-    print 'genotipo figlio:\t', figlio.fiore_2g
-    print 'testa figlio:\t', figlio.head
+    print('genotipo figlio:\t', figlio.fiore_2g)
+    print('testa figlio:\t', figlio.head)
 
-    print "=== Fecondazione con mutazione su A  ==="
+    print("=== Fecondazione con mutazione su A  ===")
     figlio = fecondazione(primo_gamete, secondo_gamete)
     figlio.mutazione('a')
     figlio.update_head()
-    print 'genotipo figlio:\t', figlio.fiore_2g
-    print 'testa figlio:\t', figlio.head
+    print('genotipo figlio:\t', figlio.fiore_2g)
+    print('testa figlio:\t', figlio.head)
     return False
 
 def test_a_nastro():
     for i in range(1,10000):
         sample = genera_genotipo(rarity=False)
-        print sample.update_head()
+        print(sample.update_head())
    
 
 def test_multi_funzione():
-    print "=== Primo Fiore ==="
+    print("=== Primo Fiore ===")
     primo_fiore = genera_genotipo()
-    print 'generazione genotipo:\t', primo_fiore.fiore_2g, primo_fiore.calice_2g, primo_fiore.sepali_2g, primo_fiore.head_color
-    print 'generazione genotipo:\t', primo_fiore.head
-    print 'generazione genotipo:\t', primo_fiore.calice
-    print 'generazione genotipo:\t', primo_fiore.sepal
-    print 'generazione genotipo:\t', primo_fiore.color
-    print 'generazione genotipo:\t', primo_fiore.flower
+    print('generazione genotipo:\t', primo_fiore.fiore_2g, primo_fiore.calice_2g, primo_fiore.sepali_2g, primo_fiore.head_color)
+    print('generazione genotipo:\t', primo_fiore.head)
+    print('generazione genotipo:\t', primo_fiore.calice)
+    print('generazione genotipo:\t', primo_fiore.sepal)
+    print('generazione genotipo:\t', primo_fiore.color)
+    print('generazione genotipo:\t', primo_fiore.flower)
 
 
 # == ESECUZIONE ===============================================================

@@ -4,6 +4,7 @@
 #= IMPORT ======================================================================
 
 from src.color      import color_first_upper
+from importlib import reload
 from src.command    import get_command_syntax
 from src.config     import config
 from src.enums      import FLAG, OPTION, PART, TO, TRUST
@@ -31,9 +32,9 @@ VERBS = {"infinitive" : "[feldspar]togliere[close]",
 
 def command_remove(entity, argument="", verbs=VERBS, behavioured=False):
     """
-    Permette di vestirsi di entità nelle varie parti del corpo.
+    Permette di vestirsi di entitï¿½ nelle varie parti del corpo.
     """
-    # È possibile se il comando è stato deferrato
+    # ï¿½ possibile se il comando ï¿½ stato deferrato
     if not entity:
         return False
 
@@ -57,7 +58,7 @@ def command_remove(entity, argument="", verbs=VERBS, behavioured=False):
     if argument:
         location = entity.find_entity(argument)
         if not location:
-            entity.send_output("Non è stato trovato nessun %s da cui %s %s." % (argument, verbs["infinitive"], arg))
+            entity.send_output("Non ï¿½ stato trovato nessun %s da cui %s %s." % (argument, verbs["infinitive"], arg))
             return False
         target = entity.find_equipped_entity(arg, location)
     else:
@@ -78,12 +79,12 @@ def command_remove(entity, argument="", verbs=VERBS, behavioured=False):
         return False
 
     if location and location != entity and location.IS_ACTOR:
-        entity.send_output("Non ti è possibile %s %s da %s." % (verbs["infinitive"], targetget_name(looker=entity), location.get_name(looker=entity)))
+        entity.send_output("Non ti ï¿½ possibile %s %s da %s." % (verbs["infinitive"], targetget_name(looker=entity), location.get_name(looker=entity)))
         return False
 
     if FLAG.NO_REMOVE in target.flags:
         if entity.trust > TRUST.MASTER:
-            entity.send_output("{Questa sarebbe in realtà un'entità NO_REMOVE}")
+            entity.send_output("{Questa sarebbe in realtï¿½ un'entitï¿½ NO_REMOVE}")
         else:
             entity.act("Appena cerchi di %s $N ti accorgi di non poterlo fare." % verbs["infinitive"], TO.ENTITY, target)
             entity.act("Appena $n cerca di %s $N si accorge di non poterlo fare." % verbs["infinitive"], TO.OTHERS, target)
@@ -103,7 +104,7 @@ def command_remove(entity, argument="", verbs=VERBS, behavioured=False):
 
     chosen_part = None
     if argument:
-        # (TD) rimuovere un'entità da una parte del corpo precisa
+        # (TD) rimuovere un'entitï¿½ da una parte del corpo precisa
         #chosen_part = search_part(argument)
         pass
 
@@ -165,7 +166,7 @@ def command_remove(entity, argument="", verbs=VERBS, behavioured=False):
     for affect in target.affects:
         affect.remove()
 
-    # Per oggetti rimossi ad altri oggetti li mette per terra, questo perché
+    # Per oggetti rimossi ad altri oggetti li mette per terra, questo perchï¿½
     # forza a raccoglierli, facendo scattare eventuali gamescript o altre flag
     if location:
         target = target.from_location(1, use_repop=False)
@@ -188,7 +189,7 @@ def command_remove(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

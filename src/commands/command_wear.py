@@ -5,6 +5,7 @@
 
 import weakref
 
+from importlib import reload
 from src.color      import color_first_upper
 from src.config     import config
 from src.command    import get_command_syntax
@@ -37,15 +38,15 @@ VERBS = {"infinitive" : "[khaki]indossare[close]",
 
 def command_wear(entity, argument="", verbs=VERBS, behavioured=False):
     """
-    Permette di vestirsi di entità nelle varie parti del corpo.
+    Permette di vestirsi di entitï¿½ nelle varie parti del corpo.
     """
     if not verbs:
-        log.bug("verbs non è un parametro valido: %r" % verbs)
+        log.bug("verbs non ï¿½ un parametro valido: %r" % verbs)
         return False
 
     # -------------------------------------------------------------------------
 
-    # È possibile se il comando è stato deferrato
+    # ï¿½ possibile se il comando ï¿½ stato deferrato
     if not entity:
         return False
 
@@ -88,23 +89,23 @@ def command_wear(entity, argument="", verbs=VERBS, behavioured=False):
         #chosen_part = search_part(argument)
         pass
 
-    # (TD) bisognerà fare il supporto body anche per gli oggetti con le proprie parti
+    # (TD) bisognerï¿½ fare il supporto body anche per gli oggetti con le proprie parti
     body_parts = entity.get_body_parts()
     if not body_parts and not entity.IS_ITEM:
-        log.bug("body_parts non valido per l'entità %s di razza %s" % (entity.code, entity.race))
+        log.bug("body_parts non valido per l'entitï¿½ %s di razza %s" % (entity.code, entity.race))
         return False
 
-    # Ricava la modalità di wear uscendo dal comando se al corpo dell'entità
-    # gli mancano delle parti per poter indossare target oppure se l'entità ha
-    # già indossato qualcosa
+    # Ricava la modalitï¿½ di wear uscendo dal comando se al corpo dell'entitï¿½
+    # gli mancano delle parti per poter indossare target oppure se l'entitï¿½ ha
+    # giï¿½ indossato qualcosa
     chosen_mode = None
     already_used_possession = None
     for cycle in ("free", "layarable"):
         for mode in target.wear_type.modes:
             incompatible_part = None
             already_weared_part = None
-            # Scorre tra le parti della modalità di wear per controllare discrepanze
-            # tra le parti del corpo della razza e quelle dell'entità da indossare
+            # Scorre tra le parti della modalitï¿½ di wear per controllare discrepanze
+            # tra le parti del corpo della razza e quelle dell'entitï¿½ da indossare
             for part in mode:
                 if body_parts and part not in body_parts:
                     incompatible_part = part
@@ -112,22 +113,22 @@ def command_wear(entity, argument="", verbs=VERBS, behavioured=False):
             if incompatible_part:
                 continue
 
-            # Supporto friendly per l'hold e il wield, così si possono impugnare o
-            # tenere entità anche tramite il comando wear
+            # Supporto friendly per l'hold e il wield, cosï¿½ si possono impugnare o
+            # tenere entitï¿½ anche tramite il comando wear
             if PART.HOLD in mode:
                 return command_hold(entity, original_argument)
             if PART.WIELD in mode:
                 return command_wield(entity, original_argument)
 
-            # Qui sotto c'è un altro ciclo uguale a quello sopra per dare
-            # maggiore priorità alle differenze razziali rispetto alle parti
-            # già indossate
+            # Qui sotto c'ï¿½ un altro ciclo uguale a quello sopra per dare
+            # maggiore prioritï¿½ alle differenze razziali rispetto alle parti
+            # giï¿½ indossate
             for part in mode:
                 already_weared_part, already_weared_possession = check_if_part_is_already_weared(entity, part)
                 if already_weared_part:
                     break
-            # Se non ha trovato nessuna parte già indossata allora utilizza
-            # questa modalità di wear ed esce dal ciclo delle modalità
+            # Se non ha trovato nessuna parte giï¿½ indossata allora utilizza
+            # questa modalitï¿½ di wear ed esce dal ciclo delle modalitï¿½
             if not already_weared_possession or (cycle == "layarable" and already_weared_possession.is_layerable()):
                 chosen_mode = mode
                 break
@@ -135,21 +136,21 @@ def command_wear(entity, argument="", verbs=VERBS, behavioured=False):
             break
 
     if incompatible_part:
-        # (TT) è stato deciso per ora di nascondere la parte del corpo per cui
-        # non si può indossare il vestito
-        #entity.act("Il tuo corpo non è adatto a poter indossare $N, ti manca %s." % incompatible_part, TO.ENTITY, target)
-        entity.act("Il tuo corpo non è adatto a poter %s $N." % verbs["infinitive"], TO.ENTITY, target)
-        entity.act("Il corpo di $n non è adatto a poter %s $N." % verbs["infinitive"], TO.OTHERS, target)
+        # (TT) ï¿½ stato deciso per ora di nascondere la parte del corpo per cui
+        # non si puï¿½ indossare il vestito
+        #entity.act("Il tuo corpo non ï¿½ adatto a poter indossare $N, ti manca %s." % incompatible_part, TO.ENTITY, target)
+        entity.act("Il tuo corpo non ï¿½ adatto a poter %s $N." % verbs["infinitive"], TO.ENTITY, target)
+        entity.act("Il corpo di $n non ï¿½ adatto a poter %s $N." % verbs["infinitive"], TO.OTHERS, target)
         return False
 
     if already_weared_possession and not already_weared_possession.is_layerable():
-        entity.act("Cerchi di %s $N %s ma hai già indosso $a." % (verbs["infinitive"], already_weared_part.description), TO.ENTITY, target, already_weared_possession)
-        entity.act("$n cerca di %s $N %s ma ha già indosso $a." % (verbs["infinitive"], already_weared_part.description), TO.OTHERS, target, already_weared_possession)
+        entity.act("Cerchi di %s $N %s ma hai giï¿½ indosso $a." % (verbs["infinitive"], already_weared_part.description), TO.ENTITY, target, already_weared_possession)
+        entity.act("$n cerca di %s $N %s ma ha giï¿½ indosso $a." % (verbs["infinitive"], already_weared_part.description), TO.OTHERS, target, already_weared_possession)
         return False
 
     # (TD) Aggiungere la flag di NO_WEAR (se la location ha la flag NO_WEAR
-    # anche il contenuto non potrà indossare, questo è da fare in vista del
-    # sistema generico entità-stanze)
+    # anche il contenuto non potrï¿½ indossare, questo ï¿½ da fare in vista del
+    # sistema generico entitï¿½-stanze)
     pass
 
     force_return = check_trigger(entity, "before_wear", entity, target, chosen_part, chosen_mode, behavioured)
@@ -174,7 +175,7 @@ def command_wear(entity, argument="", verbs=VERBS, behavioured=False):
     if already_weared_possession:
         target.under_weared = weakref.ref(already_weared_possession)
         # Forza il posizionamento di target prima di already_weared_possession
-        # così che nelle manipolazioni venga prima quella sovrastante
+        # cosï¿½ che nelle manipolazioni venga prima quella sovrastante
         list_of_target = getattr(entity, target.ACCESS_ATTR)
         index = list_of_target.index(already_weared_possession)
         if index != -1:
@@ -184,8 +185,8 @@ def command_wear(entity, argument="", verbs=VERBS, behavioured=False):
     for affect in target.affects:
         affect.apply()
 
-    # Poiché l'entità è stata vestita forse ha un valore nel gioco e non
-    # verrà quindi purificata
+    # Poichï¿½ l'entitï¿½ ï¿½ stata vestita forse ha un valore nel gioco e non
+    # verrï¿½ quindi purificata
     if target.deferred_purification:
         target.stop_purification()
 
@@ -210,7 +211,7 @@ def command_wear(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

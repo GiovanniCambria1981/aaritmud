@@ -8,6 +8,7 @@ Modulo per la gestione del comando che serve ad impugnare.
 #= IMPORT ======================================================================
 
 from src.config import config
+from importlib import reload
 from src.log    import log
 
 if config.reload_commands:
@@ -37,9 +38,9 @@ VERBS = {"infinitive_min" : "tenere",
 def command_hold(entity, argument="", verbs=VERBS, behavioured=False):
     """
     Permette di prendere un oggetto nella mano secondaria o, se quest'ultima
-    è occupata, in quella primaria.
+    ï¿½ occupata, in quella primaria.
     """
-    # È possibile se il comando è stato deferrato
+    # ï¿½ possibile se il comando ï¿½ stato deferrato
     if not entity:
         return False
 
@@ -49,7 +50,7 @@ def command_hold(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

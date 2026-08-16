@@ -7,6 +7,7 @@ Modulo per la gestione del comando give.
 #= IMPORT ======================================================================
 
 from src.config import config
+from importlib import reload
 from src.enums  import FLAG, ROOM
 from src.log    import log
 

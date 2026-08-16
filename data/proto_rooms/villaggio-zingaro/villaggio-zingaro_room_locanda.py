@@ -26,7 +26,7 @@ PROTO_MOB_CODE = "villaggio-zingaro_mob_bimba-tereza"
 #= FUNZIONI ====================================================================
 
 def on_dawn(locanda):
-    print "<<<<< iniezione bimba in 1,60 >>>>>>>>>"
+    print("<<<<< iniezione bimba in 1,60 >>>>>>>>>")
     defer_random_time(1, 60, coming , locanda)
 
 
@@ -38,7 +38,7 @@ def coming(locanda):
     if not locanda:
         return
 
-    for mob in database["mobs"].itervalues():
+    for mob in database["mobs"].values():
         if mob.prototype.code == PROTO_MOB_CODE:
             return
     

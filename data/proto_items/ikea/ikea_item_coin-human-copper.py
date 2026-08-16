@@ -33,7 +33,7 @@ def before_dropped(entity, coin, room, behavioured):
         log.bug("room non è un parametro valido: %r" % room)
         return
 
-    print ">>>>>", coin.quantity, "<<<<<"
+    print(">>>>>", coin.quantity, "<<<<<")
     if coin.quantity > 1:
         return
 

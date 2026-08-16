@@ -45,9 +45,9 @@ class PlayersPage(WebResource):
 
             # (TD) pensare se separare il codice e fare una funzione come la pretty_date
             seconds = (player.seconds_played) % 60
-            minutes = (player.seconds_played / 60) % 60
-            hours   = (player.seconds_played / 3600) % 24
-            days    = (player.seconds_played / 86400)
+            minutes = (player.seconds_played // 60) % 60
+            hours   = (player.seconds_played // 3600) % 24
+            days    = (player.seconds_played // 86400)
             if days == 0:
                 if hours == 0:
                     if minutes == 0:

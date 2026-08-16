@@ -7,10 +7,11 @@ Modulo contenente funzioni di varia utilità.
 
 #= IMPORT ======================================================================
 
-import cgi
+import html as cgi_html
+from importlib import reload
 import copy
 import datetime
-import HTMLParser
+import html.parser as HTMLParser
 import locale
 import math
 import random
@@ -519,7 +520,7 @@ def copy_existing_attributes(from_obj, to_obj, except_these_attrs=None, avoid_vo
         for volatile in from_obj.VOLATILES:
             except_these_attrs.append(volatile)
 
-    for attr_name, attr in from_obj.__dict__.iteritems():
+    for attr_name, attr in from_obj.__dict__.items():
         if attr_name in except_these_attrs:
             continue
         if attr_name not in to_obj.__dict__:
@@ -528,7 +529,7 @@ def copy_existing_attributes(from_obj, to_obj, except_these_attrs=None, avoid_vo
         if attr_name in to_obj.REFERENCES:
             if attr.__class__.__name__ == "dict":
                 copied_attr = {}
-                for key, value in attr.iteritems():
+                for key, value in attr.items():
                     copied_attr[key] = value
             elif attr.__class__.__name__ == "list":
                 copied_attr = []
@@ -540,7 +541,7 @@ def copy_existing_attributes(from_obj, to_obj, except_these_attrs=None, avoid_vo
         elif attr_name in to_obj.WEAKREFS:
             if attr.__class__.__name__ == "dict":
                 copied_attr = {}
-                for key, value in attr.iteritems():
+                for key, value in attr.items():
                     if value and value():
                         copied_attr[key] = weakref.ref(value())
                     else:
@@ -560,7 +561,7 @@ def copy_existing_attributes(from_obj, to_obj, except_these_attrs=None, avoid_vo
             setattr(to_obj, attr_name, copied_attr)
         elif attr.__class__.__name__ == "dict":
             copied_attr = {}
-            for key, value in attr.iteritems():
+            for key, value in attr.items():
                 if hasattr(value, "copy"):
                     copied_value = value.copy()
                 else:
@@ -636,7 +637,7 @@ def get_module_functions(module):
     # -------------------------------------------------------------------------
 
     functions = {}
-    for key, value in module.__dict__.iteritems():
+    for key, value in module.__dict__.items():
         if type(value) is types.FunctionType:
             functions[key] = value
 
@@ -715,7 +716,7 @@ def convert_urls(text, tabstop=4):
     def substitute(match):
         c = match.groupdict()
         if c['htmlchars']:
-            return cgi.escape(c['htmlchars'])
+            return cgi_html.escape(c['htmlchars'])
         if c['lineend']:
             return '<br>'
         elif c['space']:
@@ -781,6 +782,7 @@ def html_escape(text):
 
 class MLStripper(HTMLParser.HTMLParser):
     def __init__(self):
+        HTMLParser.HTMLParser.__init__(self)
         self.reset()
         self.fed = []
     def handle_data(self, d):
@@ -1046,7 +1048,7 @@ def get_weight_descr(weight):
     if weight < 1000:
         return "circa [white]%d[close] gramm%s" % (weight, "o" if weight == 1 else "i")
     elif weight < 1000000:
-        return "circa [white]%d[close] chil%s" % (weight / 1000, "o" if (weight / 1000) == 1 else "i")
+        return "circa [white]%d[close] chil%s" % (weight // 1000, "o" if (weight // 1000) == 1 else "i")
     else:
         return "[red]veramente tanto[close]"
 

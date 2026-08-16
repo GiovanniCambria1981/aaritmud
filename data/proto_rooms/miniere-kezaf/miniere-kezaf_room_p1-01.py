@@ -175,6 +175,6 @@ def gem_code_generator(sum_relative_weight):
             #print "gem code returned from gem_code_generator: ", gem_code
             return gem_code
 
-    print "return None from gem_code_generator"
+    print("return None from gem_code_generator")
     return None
 #- Fine Funzione -

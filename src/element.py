@@ -121,7 +121,7 @@ class EnumElement(object):
 
     def __setattr__(self, name, value):
         if hasattr(self, "code") and hasattr(self, "index") and self.code and self.index >= 0:
-            raise AttributeError, "Non puoi modificare un elemento di enumerazione una volta che è stato finalizzato"
+            raise AttributeError("Non puoi modificare un elemento di enumerazione una volta che è stato finalizzato")
         else:
             self.__dict__[name] = value
     #- Fine Metodo -
@@ -237,7 +237,7 @@ class EnumElementDict(dict):
     #- Fine Metodo -
 
     def __iter__(self):
-        return self.data.iterkeys()
+        return iter(self.data.keys())
     #- Fine Metodo -
 
     # -------------------------------------------------------------------------
@@ -245,11 +245,33 @@ class EnumElementDict(dict):
     def __repr__(self):
         return repr(self.data)
 
-    def __cmp__(self, dictionary):
+    def _cmp_data(self, dictionary):
         if isinstance(dictionary, (EnumElementDict, Flags)):
-            return cmp(self.data, dictionary.data)
-        else:
-            return cmp(self.data, dictionary)
+            return self.data, dictionary.data
+        return self.data, dictionary
+
+    def __eq__(self, dictionary):
+        left, right = self._cmp_data(dictionary)
+        return left == right
+
+    def __ne__(self, dictionary):
+        return not self.__eq__(dictionary)
+
+    def __lt__(self, dictionary):
+        left, right = self._cmp_data(dictionary)
+        return left < right
+
+    def __le__(self, dictionary):
+        left, right = self._cmp_data(dictionary)
+        return left <= right
+
+    def __gt__(self, dictionary):
+        left, right = self._cmp_data(dictionary)
+        return left > right
+
+    def __ge__(self, dictionary):
+        left, right = self._cmp_data(dictionary)
+        return left >= right
 
     def clear(self):
         self.data.clear()
@@ -267,13 +289,13 @@ class EnumElementDict(dict):
         return self.data.items()
 
     def iteritems(self):
-        return self.data.iteritems()
+        return self.data.items()
 
     def iterkeys(self):
-        return self.data.iterkeys()
+        return self.data.keys()
 
     def itervalues(self):
-        return self.data.itervalues()
+        return self.data.values()
 
     def values(self):
         return self.data.values()
@@ -342,7 +364,7 @@ class Element(object):
 
         # ---------------------------------------------------------------------
 
-        if isinstance(enum_element, basestring):
+        if isinstance(enum_element, str):
             enum_element = get_enum_element(enum_element)
 
         self.enum_element = enum_element or None
@@ -616,7 +638,7 @@ class Flags(dict):
             enum_elements = enum_elements[0].values()
         # Se invece la variabile enum_elements è una stringa bisogna prepare la
         # lista di elementi splittandola
-        elif isinstance(enum_elements[0], basestring):
+        elif isinstance(enum_elements[0], str):
             code_strings = enum_elements[0].split()
             enum_elements = []
             for code_string in code_strings:
@@ -672,7 +694,7 @@ class Flags(dict):
     #- Fine Metodo -
 
     def __iter__(self):
-        return self.data.iterkeys()
+        return iter(self.data.keys())
     #- Fine Metodo -
 
     # -------------------------------------------------------------------------
@@ -725,7 +747,7 @@ class Flags(dict):
         Aggiunge un elemento alla flag passandogli il relativo riferimento
         all'elemento d'enumerazione.
         """
-        if isinstance(other, basestring):
+        if isinstance(other, str):
             other = get_enum_element(other)
         else:
             other = other.enum_element
@@ -743,7 +765,7 @@ class Flags(dict):
         Rimuove il riferimento dell'elemento dalla flag relativo al codice
         passato.
         """
-        if isinstance(other, basestring):
+        if isinstance(other, str):
             other = get_enum_element(other)
         else:
             other = other
@@ -753,11 +775,26 @@ class Flags(dict):
         return self
     #- Fine Metodo -
 
-    def __cmp__(self, dictionary):
+    def _cmp_data(self, dictionary):
         if isinstance(dictionary, (EnumElementDict, Flags)):
-            return cmp(self.data, dictionary.data)
-        else:
-            return cmp(self.data, dictionary)
+            return self.data, dictionary.data
+        return self.data, dictionary
+
+    def __lt__(self, dictionary):
+        left, right = self._cmp_data(dictionary)
+        return left < right
+
+    def __le__(self, dictionary):
+        left, right = self._cmp_data(dictionary)
+        return left <= right
+
+    def __gt__(self, dictionary):
+        left, right = self._cmp_data(dictionary)
+        return left > right
+
+    def __ge__(self, dictionary):
+        left, right = self._cmp_data(dictionary)
+        return left >= right
 
     def clear(self):
         self.data.clear()
@@ -775,13 +812,13 @@ class Flags(dict):
         return self.data.items()
 
     def iteritems(self):
-        return self.data.iteritems()
+        return self.data.items()
 
     def iterkeys(self):
-        return self.data.iterkeys()
+        return self.data.keys()
 
     def itervalues(self):
-        return self.data.itervalues()
+        return self.data.values()
 
     def values(self):
         return self.data.values()
@@ -886,7 +923,7 @@ class Flags(dict):
         if not self.enum:
             return "enum non valido per la flag con attributo %s" % attr
 
-        for element in self.data.itervalues():
+        for element in self.data.values():
             msg = element.get_error_message(enum, attr)
             if msg != "":
                 return msg
@@ -1165,7 +1202,7 @@ def create_elements_list_page():
             try:
                 line = line.encode("ascii")
             except UnicodeDecodeError:
-                print "Impossibile encodare in ascii la linea: %s" % line
+                print("Impossibile encodare in ascii la linea: %s" % line)
             lines.append(line)
         lines.append('''</table><br><br>''')
 

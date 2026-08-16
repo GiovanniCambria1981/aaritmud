@@ -8,6 +8,7 @@ Comando per guardarsi intorno o qualcuno o qualche cosa, pure il cielo!
 #= IMPORT ======================================================================
 
 from src.affect       import is_affected
+from importlib import reload
 from src.calendar     import calendar
 from src.color        import color_first_upper, close_color
 from src.config       import config

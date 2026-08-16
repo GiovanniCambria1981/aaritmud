@@ -215,7 +215,7 @@ def send_note(entity, argument, command_name, note_type, note_singular, note_plu
     # Controlla che le altre note non abbiano lo stesso testo, altrimenti ci
     # troviamo davanti ad un possibile spammer, il sistema quindi fa finta
     # di salvarsi la nota e intanto segnala agli Amministratori lo spammer
-    for other_note in database[note_type + "s"].itervalues():
+    for other_note in database[note_type + "s"].values():
         if other_note.text == argument and other_note.code.startswith(code_to_check):
             entity.send_output("%s è stato salvato. Grazie!" % (
                 add_article(note_singular, grammar_genre, GRAMMAR.DETERMINATE, GRAMMAR.SINGULAR, GRAMMAR.POSSESSIVE).capitalize()))

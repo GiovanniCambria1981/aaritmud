@@ -21,7 +21,7 @@ ALFA_ONLY_PATTERN = re.compile("[^a-zA-Zì ]+")
 #= FUNZIONI ====================================================================
 
 def after_looked(player, apprendista, descr, detail, use_examine, behavioured):
-    print " >>> SPECIALS <<<", apprendista.specials      
+    print(" >>> SPECIALS <<<", apprendista.specials)
     if not player.IS_PLAYER:
         return
 
@@ -96,7 +96,7 @@ def reveal_secret(apprendista, speaker):
 
     # Qui è concettualmente meglio utilizzare il comando whisper piuttosto che
     # la act per poter giocare in futuro sulle lingue
-    print ">>> SEGRETO <<<", speaker, apprendista
+    print(">>> SEGRETO <<<", speaker, apprendista)
     to_whisper = "a %s *all'orecchio* Una delle leggende che i tagliapietre si tramandano di maestro in apprendista narra di una pietra, una pietra dalle proprietà eccezionali." % speaker.code
     command_whisper(apprendista, to_whisper)
     to_whisper = "a %s *all'orecchio* Un altro mito, di un altro tempo, racconta di accadimenti prodigiosi... nel centro del villaggio... nel cuore della foresta." % speaker.code
@@ -145,7 +145,7 @@ def del_specials(apprendista):
     if not apprendista:
         return
 
-    print ">>> ELIMINAZIONE SPECIALS <<<"
+    print(">>> ELIMINAZIONE SPECIALS <<<")
     if "apprendista_situation" in apprendista.specials:
         del(apprendista.specials["apprendista_situation"])
     if "apprendista:player_code" in apprendista.specials:
@@ -160,5 +160,5 @@ def del_specials_status(apprendista, status):
 
     if "apprendista_situation" in apprendista.specials and apprendista.specials["apprendista_situation"] == status:
         del_specials(apprendista)
-        print ">>> STATUS <<<", status
+        print(">>> STATUS <<<", status)
 #- Fine Funzione -

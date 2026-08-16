@@ -103,7 +103,7 @@ class Affect(object):
 
         # Infine imposta il valore e si salva il riferimento dell'self
         attr = getattr(target, apply_attr)
-        if isinstance(attr, basestring):
+        if isinstance(attr, str):
             setattr(target, apply_attr, self.modifier)
         else:
             if self.modifier[0] == "+":
@@ -172,7 +172,7 @@ class Affect(object):
         # Infine rimuove il valore eventualmente dall'attributo salvato
         # precedentemente
         attr = getattr(target, apply_attr)
-        if isinstance(attr, basestring):
+        if isinstance(attr, str):
             setattr(target, apply_attr, affect_info[1])
         else:
             if self.modifier[0] == "+":
@@ -245,7 +245,7 @@ def apply_all_affects(obj):
 
     # Aggiunge gli affect delle entità indossate
     for weared_entity in obj.iter_contains():
-        print weared_entity
+        print(weared_entity)
         if len(weared_entity.wear_mode) > 0:
             for affect in weared_entity.affects:
                 affect.apply()

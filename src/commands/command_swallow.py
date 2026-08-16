@@ -8,6 +8,7 @@ Modulo per la gestione del comando swallow.
 #= IMPORT ======================================================================
 
 from src.config import config
+from importlib import reload
 from src.log    import log
 
 if config.reload_commands:
@@ -28,9 +29,9 @@ VERBS = {"infinitive" : "ingoiare",
 
 def command_swallow(entity, argument="", verbs=VERBS, behavioured=False):
     """
-    Comando che serve per mangiare un entità.
+    Comando che serve per mangiare un entitï¿½.
     """
-    # È possibile se il comando è stato deferrato
+    # ï¿½ possibile se il comando ï¿½ stato deferrato
     if not entity:
         return False
 
@@ -40,7 +41,7 @@ def command_swallow(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

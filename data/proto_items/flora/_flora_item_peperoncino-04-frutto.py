@@ -38,7 +38,7 @@ def after_open(player, peperoncino, reverse_target, container_only, behavioured)
 
 
 def after_inject(peperoncino, location):
-    print "peperone on inject"
+    print("peperone on inject")
     defer(TIME_DELAY, seed_refill, peperoncino, location, 'fertile')
     defer(TIME_DELAY, seed_refill, peperoncino, location, 'sterile')
 #- Fine Funzione -
@@ -64,7 +64,7 @@ def seed_refill(peperoncino, location, seme_id):
         return
     else:
         quantity_seed = random.randint(2, 5)
-        print "seed insertion:", seme_id, ":", quantity_seed
+        print("seed insertion:", seme_id, ":", quantity_seed)
         while quantity_seed > 0:
             content = proto_seed.CONSTRUCTOR(proto_seed.code)
             content.inject(peperoncino)

@@ -13,8 +13,20 @@ import os
 import sys
 import traceback
 
-import Image  # PIL
-from twisted._version import version as twisted_version
+try:
+    from PIL import Image
+except ImportError:
+    Image = None
+try:
+    from twisted import version as twisted_version
+except ImportError:
+    try:
+        from twisted._version import version as twisted_version
+    except ImportError:
+        class _UnknownVersion(object):
+            def base(self):
+                return "unknown"
+        twisted_version = _UnknownVersion()
 numpy_version = None
 try:
     from numpy.version import version as numpy_version
@@ -35,11 +47,11 @@ class Log(object):
         """
         from src.enums import LOG
 
-        print 
+        print()
         for element in LOG.elements:
             method_name = element.code.split(".", 1)[1].lower()
             if method_name not in dir(self):
-                print "Il metodo %s non esiste nella singleton log mentre invece esiste nell'enumerazione come %r." % (method_name, element)
+                print("Il metodo %s non esiste nella singleton log mentre invece esiste nell'enumerazione come %r." % (method_name, element))
     #- Fine Inizializzazione -
 
     # Per evitare ricorsioni ovviamente qui viene utilizzata la print invece
@@ -49,16 +61,16 @@ class Log(object):
         Invia un messaggio di log contenente errori o avvisi.
         """
         if not message:
-            print("[log.bug] message non � un parametro valido: %r" % message)
+            print("[log.bug] message non ï¿½ un parametro valido: %r" % message)
             return
 
         # -------------------------------------------------------------------------
 
         from src.enums import LOG
 
-        # Questa extract_stack � un collo di bottiglia prestazionale del Mud,
-        # tuttavia la sua utilit� � indubbia e quindi fino a che Aarit non sar�
-        # maturissimo � inutile anche evitarla con qualche opzione di config.
+        # Questa extract_stack ï¿½ un collo di bottiglia prestazionale del Mud,
+        # tuttavia la sua utilitï¿½ ï¿½ indubbia e quindi fino a che Aarit non sarï¿½
+        # maturissimo ï¿½ inutile anche evitarla con qualche opzione di config.
         # Ho deciso tuttavia di saltare il print della last_function relativa
         # a tutti i messaggi di log reset, che sono quelli maggiormente inviati
         stack = None
@@ -89,7 +101,7 @@ class Log(object):
             from src.database import database
             if "players" in database and log_type.show_on_mud:
                 from src.utility import html_escape
-                for player in database["players"].itervalues():
+                for player in database["players"].values():
                     if not player.game_request:
                         continue
                     if player.trust < log_type.trust and str(log_type.code) not in player.permissions:
@@ -105,7 +117,7 @@ class Log(object):
                         open_span, last_function.lstrip(), html_escape(message), close_span), avoid_log=True)
                     player.send_prompt()
 
-        # Visto che anche gli altri loop sono legati a questo, non c'� bisogno
+        # Visto che anche gli altri loop sono legati a questo, non c'ï¿½ bisogno
         # di controllarle tutti
         from src.loops.aggressiveness import aggressiveness_loop
         from src.loops.blob           import blob_loop
@@ -143,34 +155,34 @@ class Log(object):
             try:
                 log_file = open(log_path, "a")
             except IOError:
-                print "Impossibile aprire il file %s in append" % log_path
+                print("Impossibile aprire il file %s in append" % log_path)
                 log_file = None
             else:
                 log_file.write("%s\n" % message)
 
-        # Questo viene fatto perch� alcune console purtroppo non supportano
-        # i caratteri accentati e simili, viene cos� convertito l'accento
+        # Questo viene fatto perchï¿½ alcune console purtroppo non supportano
+        # i caratteri accentati e simili, viene cosï¿½ convertito l'accento
         # nel famoso e muddoso accento apostrofato, quindi attenzione che
-        # in tal caso il messaggio nello stdout � falsato da quello originale
+        # in tal caso il messaggio nello stdout ï¿½ falsato da quello originale
         # nel qual caso si voglia cercarlo nel codice
         if log_type.print_on_console:
             from src.config import config
             if config.ready and config.log_accents:
-                if "�" in message:
-                    message = message.replace("�", "a'")
-                if "�" in message:
-                    message = message.replace("�", "e'")
-                if "�" in message:
-                    message = message.replace("�", "e'")
-                if "�" in message:
-                    message = message.replace("�", "i'")
-                if "�" in message:
-                    message = message.replace("�", "o'")
-                if "�" in message:
-                    message = message.replace("�", "u'")
+                if "ï¿½" in message:
+                    message = message.replace("ï¿½", "a'")
+                if "ï¿½" in message:
+                    message = message.replace("ï¿½", "e'")
+                if "ï¿½" in message:
+                    message = message.replace("ï¿½", "e'")
+                if "ï¿½" in message:
+                    message = message.replace("ï¿½", "i'")
+                if "ï¿½" in message:
+                    message = message.replace("ï¿½", "o'")
+                if "ï¿½" in message:
+                    message = message.replace("ï¿½", "u'")
             print(message)
 
-        # Se la tipologia di log non � un bug allora evita le informazioni di stack
+        # Se la tipologia di log non ï¿½ un bug allora evita le informazioni di stack
         if log_type != LOG.BUG:
             log_stack = False
 
@@ -179,7 +191,7 @@ class Log(object):
                 traceback.print_stack(file=log_file)
                 traceback.print_stack(file=sys.stdout)
             except IOError:
-                # (TT) non ho capito bene come mai mi fa cos�, ma semplicemente
+                # (TT) non ho capito bene come mai mi fa cosï¿½, ma semplicemente
                 # saltandolo mi evita di fare il traceback, cmq il log avviene
                 pass
 
@@ -356,8 +368,8 @@ class Log(object):
         lines.append("System Name: %s" % platform.system())
         lines.append("System Version: %s" % platform.version())
         lines.append("System Release: %s" % platform.release())
-        if any(platform.dist()):
-            lines.append("Linux Distribution: %s" % str(platform.dist()))
+        if any(getattr(platform, 'dist', lambda: ('', '', ''))()):
+            lines.append("Linux Distribution: %s" % str(getattr(platform, 'dist', lambda: ('', '', ''))()))
         if any(platform.libc_ver()):
             lines.append("Linux Libc Version: %s" % str(platform.libc_ver()))
         lines.append("Python Build: %s" % str(platform.python_build()))
@@ -369,7 +381,10 @@ class Log(object):
             lines.append("Reactor: epoll")
         else:
             lines.append("Reactor: select")
-        lines.append("PIL Version: %s" % Image.VERSION)
+        if Image is not None:
+            lines.append("PIL Version: %s" % getattr(Image, '__version__', getattr(Image, 'VERSION', 'unknown')))
+        else:
+            lines.append("PIL Version: not installed")
         if numpy_version:
             lines.append("Numpy Version: %s" % numpy_version)
         lines.append("\n")
@@ -381,22 +396,22 @@ class Log(object):
             platform_log_file.write(lines + "\n")
             platform_log_file.close()
         except IOError:
-            print "Impossibile aprire il file %s in scrittura" % filename
+            print("Impossibile aprire il file %s in scrittura" % filename)
 
-        print lines
+        print(lines)
     #- Fine Metodo -
 
     # (TD) da spostare nel modulo channel?
     def chat(self, argument):
         if not argument:
-            log.bug("argument non � un parametro valido: %r" % argument)
+            log.bug("argument non ï¿½ un parametro valido: %r" % argument)
             return
 
         # ---------------------------------------------------------------------
 
         chat_messages_path = "log/chat_messages.list"
         try:
-            chat_messages_file = file(chat_messages_path, "a")
+            chat_messages_file = open(chat_messages_path, "a")
         except IOError:
             log.bug("Impossibile aprire il file %s in append" % chat_messages_path)
             return
@@ -405,15 +420,15 @@ class Log(object):
     #- Fine Metodo -
 
     # (TD) da spostare nel modulo connection?
-    # magari s�! visto che c'� il metodo conn.get_user_agent
+    # magari sï¿½! visto che c'ï¿½ il metodo conn.get_user_agent
     def user_agent(self, request):
         """
         Esegue il log su file degli user agent sconosciuti.
-        Poich� va' a scrivere su file esegue un controllo sul contenuto dello stesso
-        a vedere se l'user agent � gi� stato inserito oppure no.
+        Poichï¿½ va' a scrivere su file esegue un controllo sul contenuto dello stesso
+        a vedere se l'user agent ï¿½ giï¿½ stato inserito oppure no.
         """
         if not request:
-            log.bug("request non � una parametro valido")
+            log.bug("request non ï¿½ una parametro valido")
             return
 
         # -------------------------------------------------------------------------
@@ -430,7 +445,7 @@ class Log(object):
             # Se il file non esiste allora lo crea da zero
             if not os.path.exists(user_agent_path):
                 try:
-                    user_agent_file = file(user_agent_path, "w")
+                    user_agent_file = open(user_agent_path, "w")
                 except IOError:
                     log.bug("Impossibile creare il file %s" % user_agent_path)
                     return
@@ -468,11 +483,11 @@ class Log(object):
         Esegue il log dei comandi digitati erroneamente su un file apposito.
         """
         if not entity:
-            log.bug("entity non � un parametro valido: %r" % entity)
+            log.bug("entity non ï¿½ un parametro valido: %r" % entity)
             return
 
         if not wrong_input:
-            log.bug("wrong_input non � un parametro valido: %r" % wrong_input)
+            log.bug("wrong_input non ï¿½ un parametro valido: %r" % wrong_input)
             return
 
         # -------------------------------------------------------------------------
@@ -495,21 +510,21 @@ class Log(object):
         controllare che tutti i tag del codice html generato siano corretti.
         """
         if not html_code:
-            log.bug("html_code non � un parametro valido: %r" % html_code)
+            log.bug("html_code non ï¿½ un parametro valido: %r" % html_code)
             return
 
         if not player:
-            log.bug("player non � un parametro valido: %r" % player)
+            log.bug("player non ï¿½ un parametro valido: %r" % player)
             return
 
         # -------------------------------------------------------------------------
 
         if not hasattr(player, "game_request"):
-            log.bug("Attributo game_request inesistente per %r, qui devono passare solo le entit� player" % player)
+            log.bug("Attributo game_request inesistente per %r, qui devono passare solo le entitï¿½ player" % player)
             return
 
         if not player.game_request:
-            log.bug("game_request non valido per l'entit� %s: %r" % (player.code, player.game_request))
+            log.bug("game_request non valido per l'entitï¿½ %s: %r" % (player.code, player.game_request))
             return
 
         html_log_path = "log/%s %d.html.txt" % (player.code, id(player.game_request))
@@ -529,11 +544,11 @@ class Log(object):
         Esegue il log degli help digitati erroneamente su un file apposito.
         """
         if not entity:
-            log.bug("entity non � un parametro valido: %r" % entity)
+            log.bug("entity non ï¿½ un parametro valido: %r" % entity)
             return
 
         if not wrong_argument:
-            log.bug("wrong_argument non � un parametro valido: %r" % wrong_argument)
+            log.bug("wrong_argument non ï¿½ un parametro valido: %r" % wrong_argument)
             return
 
         # -------------------------------------------------------------------------
@@ -618,7 +633,7 @@ class Log(object):
 
         counter = 0
         players = ""
-        for conn in connections.itervalues():
+        for conn in connections.values():
             if conn.player and conn.player.game_request:
                 counter += 1
                 players += " %s" % conn.player.code

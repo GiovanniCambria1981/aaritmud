@@ -205,7 +205,7 @@ class ProtoRoom(Data, Describable):
             msg = "height è una lunghezza e non può essere minore di 0: %d" % self.height
         elif self.material_percentages.get_error_message(self) != "":
             return self.material_percentages.get_error_message(self)
-        elif self.owner and self.owner() not in (database["players"].values() + database["mobs"].values() + database["items"].values()):
+        elif self.owner and self.owner() not in (list(database["players"].values()) + list(database["mobs"].values()) + list(database["items"].values())):
             msg = "owner non è un codice di entità valido: %s" % self.owner().code
         elif self.mod_temperature < -1000 or self.mod_temperature > 1000:
             msg = "mod_temperature modificatore in percentuale non è tra -1000 e 1000: %d" % self.mod_temperature
@@ -263,7 +263,7 @@ class ProtoRoom(Data, Describable):
         if DIR.NONE in self.exits:
             return "Una delle uscita è DIR.NONE oppure una struttura di label Exits/End è vuota"
 
-        for exit in self.exits.itervalues():
+        for exit in self.exits.values():
             if exit.get_error_message():
                 return exit.get_error_message()
 
@@ -274,7 +274,7 @@ class ProtoRoom(Data, Describable):
         """
         Se c'è un errore nelle mura ne invia il relativo messaggio.
         """
-        for wall in self.walls.itervalues():
+        for wall in self.walls.values():
             if wall.get_error_message():
                 return wall.get_error_message()
         return ""
@@ -850,7 +850,7 @@ class Room(ProtoRoom, BehaviourUpdaterSuperclass, MIMLParserSuperclass, Relative
         if direct_search:
             if direction in self.exits:
                 door = self.exits[direction].door
-                if isinstance(door, basestring):
+                if isinstance(door, str):
                     log.bug("codice di porta %s inserito errato o senza che la relativa proto entity sia stata creata effettivamente" % door)
                     return None
                 if door and door.door_type:
@@ -863,7 +863,7 @@ class Room(ProtoRoom, BehaviourUpdaterSuperclass, MIMLParserSuperclass, Relative
 
             if direction.reverse_dir in destination_room.exits:
                 reverse_door = destination_room.exits[direction.reverse_dir].door
-                if isinstance(reverse_door, basestring):
+                if isinstance(reverse_door, str):
                     log.bug("codice di porta %s inserito errato o senza che la relativa proto entity sia stata creata effettivamente" % reverse_door)
                     return None
                 if reverse_door and reverse_door.door_type:
@@ -875,7 +875,7 @@ class Room(ProtoRoom, BehaviourUpdaterSuperclass, MIMLParserSuperclass, Relative
     def iter_viable_directions(self, closed_doors=False):
         # Qui non ci sono problemi di reversed perchè si lavora tramite la
         # iteritems e non con una lista direttamente
-        for direction, exit in self.exits.iteritems():
+        for direction, exit in self.exits.items():
             if EXIT.NO_LOOK_LIST in exit.flags or EXIT.DIGGABLE in exit.flags:
                 continue
 
@@ -962,7 +962,7 @@ class Destination(object):
 
         # ---------------------------------------------------------------------
 
-        if isinstance(area, basestring):
+        if isinstance(area, str):
             try:
                 area = database["areas"][area]
             except KeyError:

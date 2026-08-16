@@ -31,7 +31,7 @@ def before_readed(entity, target, output, extra, behavioured):
 
 def find_room(PROTO_ROOM_CODE):
     # Ricava la room dal database del mud triamte prototipo.
-    for room in database["rooms"].itervalues():
+    for room in database["rooms"].values():
         if room.prototype.code == PROTO_ROOM_CODE:
             return room
 
@@ -62,7 +62,7 @@ def character_teleports(player, target):
     location = find_room(ROOM_CODE)
     if not location:
         # Se non trova la room stampa a schermo il messaggio e poi esce dallo script
-        print "******* sticazzi, no location found: ", ROOM_CODE
+        print("******* sticazzi, no location found: ", ROOM_CODE)
         return
 
     player.to_location(location, use_look=True)

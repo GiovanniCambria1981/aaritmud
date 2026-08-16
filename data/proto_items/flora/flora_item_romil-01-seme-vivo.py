@@ -81,7 +81,7 @@ class Genotipo:
         lista_dx = dx.get_all_genoma()
         lista_self = self.get_all_genoma()
 
-        for x in xrange(len(lista_sx)):
+        for x in range(len(lista_sx)):
             for key in lista_self[x]:
                 lista_sx[x][key] = lista_self[x][key][0] 
                 lista_dx[x][key] = lista_self[x][key][1]
@@ -90,7 +90,7 @@ class Genotipo:
   
     def fecondazione(self, lista_sx, lista_dx):
         lista_self  = self.get_all_genoma()
-        for x in xrange(len(lista_self)):
+        for x in range(len(lista_self)):
             for key in lista_self[x]:
                 lista_self[x][key][0] = lista_sx[x][key]
                 lista_self[x][key][1] = lista_dx[x][key]
@@ -100,7 +100,7 @@ class Genotipo:
         choosed_dict = ''
         num = 0
         list_genoma = self.get_all_genoma()
-        print ">>>> Genera mutazione, list_genoma", list_genoma
+        print(">>>> Genera mutazione, list_genoma", list_genoma)
         for genomi in list_genoma:
             num += dict_len(genomi)
         dice = random.randint(1,num)
@@ -254,7 +254,7 @@ def ricalcola_genotipo(genoma, popola=False):
 
     genoma.prob = genoma.fiore_prob * genoma.colore_prob * genoma.calice_prob * genoma.colore2_prob * genoma.sepali_prob * genoma.colore3_prob
     genoma.price = int(round((1/genoma.prob) * PRICE_MULTIPLIER * global_cheapest_prob(genoma)))
-    print "ricalcola_genotipo\t", genoma.flower
+    print("ricalcola_genotipo\t", genoma.flower)
     return
 
 def max_prob(dictionary):
@@ -298,16 +298,16 @@ def specials_to_entity(entity):
 
 def on_next_stage(old_entity, new_entity, choised_attr, entities):
     if old_entity.specials and 'ancestors' in old_entity.specials and old_entity.specials['ancestors']:
-        print "#### ROMIL - NEXT STAGE - *** copia pedigree ***"
+        print("#### ROMIL - NEXT STAGE - *** copia pedigree ***")
         for key in old_entity.specials:
             new_entity.specials[key] = old_entity.specials[key]
     else:
-        print "#### ROMIL - NEXT STAGE - *** nessuna copia ***"
+        print("#### ROMIL - NEXT STAGE - *** nessuna copia ***")
     return False
 
 def after_seeded(seminatore, seed, location, ground, behavioured):
     if seed.specials and 'ancestors' in seed.specials and seed.specials['ancestors']:
-        print "#### ROMIL - SEME - *** Si Pedigree ***"
+        print("#### ROMIL - SEME - *** Si Pedigree ***")
         return False
 
     genotipo = Genotipo()
@@ -320,5 +320,5 @@ def after_seeded(seminatore, seed, location, ground, behavioured):
 
     #crea_specials(genotipo, seed)
     genotipo.crea_specials(seed)
-    print "#### ROMIL - SEME - *** No Pedigree, generato nuovo ***"
+    print("#### ROMIL - SEME - *** No Pedigree, generato nuovo ***")
     return False

@@ -23,14 +23,14 @@ class MaterialElement(EnumElement):
 
         # Stato in cui si trova normalmente in natura il materiale
         if state not in ("NONE", "SOLID", "LIQUID", "GASEOUS"):
-            print "Materiale %s senza uno state valido: %r" % (name, state)
+            print("Materiale %s senza uno state valido: %r" % (name, state))
         self.state = state
 
         # Durezza del materialem una durezza di 0 indica che non ha senso la
         # durezza per quel materiale (cosa normale per le cose immateriali)
         # 1 si distrugge subito, 100 non si distrugge (quasi) mai
         if hardness < 0 or hardness > 100:
-            print "Materiale %s senza una hardness valida: %d" % (name, hardness)
+            print("Materiale %s senza una hardness valida: %d" % (name, hardness))
         self.hardness = hardness
     #- Fine Inizializzazione -
 

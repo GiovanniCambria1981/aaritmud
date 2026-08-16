@@ -35,7 +35,7 @@ class MaintenanceLoop(UnstoppableLoop):
         if self.running:
             super(MaintenanceLoop, self).stop()
         else:
-            log.bug("Il MaintenanceLoop non è stato trovato attivo.")
+            log.bug("Il MaintenanceLoop non ï¿½ stato trovato attivo.")
     #- Fine Metodo -
 
     def cycle(self):
@@ -53,7 +53,7 @@ class MaintenanceLoop(UnstoppableLoop):
     #- Fine Metodo -
 
     def check_idle_players(self):
-        for player in database["players"].itervalues():
+        for player in database["players"].values():
             if not player.game_request:
                 continue
             if player.get_conn():

@@ -54,18 +54,18 @@ def before_looked(entity, target, descr, detail, use_examine, behavioured):
 
 
 def popola_mosaico_vuoto():
-    for num in xrange(X*Y):
+    for num in range(X*Y):
         lista_tessere.append(icona_testo_001)
         lista_tessere.append(icona_testo_002)
         if len(lista_tessere) >= X*Y:
             break
-    print "lista delle tessere", lista_tessere
+    print("lista delle tessere", lista_tessere)
 
 
 def show_mosaic(entity):
     result =  '''<br><div>'''
-    for y in xrange(Y):
-        for x in xrange(X):
+    for y in range(Y):
+        for x in range(X):
             # cerca l'ennesimo elemento della lista tesserine
             ennesima = x + (y-1)*X -1
             result += '''<div style="float:left; position:relative">'''

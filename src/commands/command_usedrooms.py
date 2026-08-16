@@ -41,7 +41,7 @@ def command_usedrooms(entity, argument):
                 reset_counter += 1
         proto_room_resets_counter[proto_room_code] = reset_counter
 
-    for proto_room_code, reset_counter in proto_room_resets_counter.iteritems():
+    for proto_room_code, reset_counter in proto_room_resets_counter.items():
         if reset_counter == number_of_resets:
             entity.send_output("%s: %s" % (proto_room_code, database["proto_rooms"][proto_room_code].name))
 

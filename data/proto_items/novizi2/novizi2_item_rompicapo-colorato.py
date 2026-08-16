@@ -50,7 +50,7 @@ def before_touch(player, rompicapo, descr, detail, behavioured):
     nel secondo caso cambia il colore del tassello indicato e del successivo.
     """
     if detail.IS_EXTRA:
-        print "Extra Touched"
+        print("Extra Touched")
         return scramble(rompicapo, player, detail.keywords)
     else:
         scramble(rompicapo, player, "scramble_all")
@@ -58,7 +58,7 @@ def before_touch(player, rompicapo, descr, detail, behavioured):
 
 
 def scramble(rompicapo, player, posizione):
-    print "posizione: ", posizione
+    print("posizione: ", posizione)
     if "completed" not in rompicapo.specials:
         rompicapo.specials["completed"] = False
 
@@ -102,7 +102,7 @@ def scramble(rompicapo, player, posizione):
         rompicapo.specials["sequence"].insert(position+1, COLOR_CODES[previous_color])
 
     sequence = rompicapo.specials["sequence"]
-    print sequence
+    print(sequence)
 
     description = "Un rompicapo con decine di pezzi liberi di ruotare e' l'omaggio ai partecipanti alla [gold]sesta apertura[close]! Per scombinarlo basta toccarlo. Le lettere formano la scritta:<br>"
     nice_things = "[white] ========= [close]"
@@ -127,9 +127,9 @@ def scramble(rompicapo, player, posizione):
                     location = rompicapo.location
                     defer(1, carica_regalo, player, location, rompicapo)
                     rompicapo.specials["completed"] = True
-                    print "STICAZZI! YOU WIN"
+                    print("STICAZZI! YOU WIN")
 
-        print rompicapo.specials["achieved_colors"]
+        print(rompicapo.specials["achieved_colors"])
 
         #if "[red]" in rompicapo.specials["achieved_colors"]:
         #print "c'e' il rosso dentro alla cazzo di special"
@@ -157,5 +157,5 @@ def carica_regalo(player, location, rompicapo):
     player.act("\n[yellow]Hai appena concluso il rompicapo che dal nulla compare un premio![close]\n", TO.ENTITY, rompicapo)
     player.act("\n[yellow]$n fa uno scatto sorpreso all'apparire del premio per $N.[close]\n", TO.OTHERS, rompicapo)
     player.act("Gothcha!.", TO.TARGET, rompicapo)
-    print "novizi2_item_rompicapo-colorato - YOU WIN"
+    print("novizi2_item_rompicapo-colorato - YOU WIN")
 #- Fine Funzione -

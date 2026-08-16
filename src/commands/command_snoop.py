@@ -27,7 +27,7 @@ def command_snoop(entity, argument=""):
         entity.send_output(syntax, break_line=False)
 
         being_watched = []
-        for other in database["players"].values() + database["mobs"].values() + database["items"].values():
+        for other in list(database["players"].values()) + list(database["mobs"].values()) + list(database["items"].values()):
             if entity in other.snoopers:
                 being_watched.append(other)
 
@@ -100,7 +100,7 @@ def remove_and_count_snooped_by(entity):
     # -------------------------------------------------------------------------
 
     counter = 0
-    for other in database["players"].values() + database["mobs"].values() + database["items"].values():
+    for other in list(database["players"].values()) + list(database["mobs"].values()) + list(database["items"].values()):
         if entity in other.snoopers:
             other.snoopers.remove(entity)
             counter += 1

@@ -318,14 +318,14 @@ def get_area_from_argument(argument, only_exact=False):
 
     # -------------------------------------------------------------------------
 
-    for area in database["areas"].itervalues():
+    for area in database["areas"].values():
         if is_same(argument, area.code) or is_same(argument, area.name):
             return area
 
     if only_exact:
         return None
 
-    for area in database["areas"].itervalues():
+    for area in database["areas"].values():
         if is_prefix(argument, area.code) or is_prefix(argument, area.name):
             return area
 

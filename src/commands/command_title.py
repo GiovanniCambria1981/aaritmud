@@ -39,7 +39,7 @@ def command_title(entity, argument=""):
 
     color_qty = count_colors(argument)
     # (TD) In futuro non farlo dipendente dal livello ma da qualche achievement o quest
-    if color_qty > entity.level / 2:
+    if color_qty > entity.level // 2:
         entity.send_output("Devi crescere di livello se vuoi colorare maggiormente il tuo titolo.")
         return False
 

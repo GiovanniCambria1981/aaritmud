@@ -9,6 +9,7 @@ che siano comandi, skill o social.
 #= IMPORT ======================================================================
 
 import random
+from importlib import reload
 import sys
 import time
 
@@ -50,7 +51,7 @@ class ActionInProgress(object):
     """
     Classe che viene utilizzata dopo l'invio di alcuni comandi, come il dig,
     che abbisognano di tempo per essere eseguiti.
-    Vi è poi il pezzo di codice relativo all'action_in_progress che si trova
+    Vi ï¿½ poi il pezzo di codice relativo all'action_in_progress che si trova
     nella funzione interpret serve ad interromperne l'esecuzione.
     """
     def __init__(self, seconds, defer_later_function, stop_function, *args):
@@ -76,21 +77,21 @@ class ActionInProgress(object):
 
 def interpret(entity, argument, use_check_alias=True, force_position=True, show_input=True, show_prompt=True, behavioured=False):
     """
-    Funzione che interpreta gli inputi inviati dalle entità.
+    Funzione che interpreta gli inputi inviati dalle entitï¿½.
     L'argomento use_check_alias a False viene passato dalla find_alias per
     evitare chiamate di alias da altri alias e quindi ricorsioni.
     """
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return
 
     if not argument:
-        log.bug("argument non è un parametro valido: %r" % argument)
+        log.bug("argument non ï¿½ un parametro valido: %r" % argument)
         return
 
     # -------------------------------------------------------------------------
 
-    # Si assicura che colui che esegue l'azione sia un'entità unica e
+    # Si assicura che colui che esegue l'azione sia un'entitï¿½ unica e
     # non un mucchio fisico
     entity = entity.split_entity(1)
 
@@ -102,12 +103,12 @@ def interpret(entity, argument, use_check_alias=True, force_position=True, show_
     arg = arg.lower()
 
     input, huh_input, lang = multiple_search_on_inputs(entity, arg, use_check_alias=use_check_alias, argument=argument)
-    # Utilizzo bislacco di lang per indicare che è stato trovato un alias
-    # e che questo verrà processato tramite un'altra chiamata all'interpret
+    # Utilizzo bislacco di lang per indicare che ï¿½ stato trovato un alias
+    # e che questo verrï¿½ processato tramite un'altra chiamata all'interpret
     if use_check_alias and lang == "alias":
         return
 
-    # Resetta l'inattività di un player se ha inviato un comando
+    # Resetta l'inattivitï¿½ di un player se ha inviato un comando
     if entity.IS_PLAYER:
         entity.inactivity = 0
 
@@ -116,10 +117,10 @@ def interpret(entity, argument, use_check_alias=True, force_position=True, show_
         if show_input:
             entity.send_output(''' <span class="system">%s %s</span>''' % (remove_colors(arg), argument))
         entity.send_output("Huh?")
-        # Se l'input non è stato trovato neanche nell'altra lingua allora
+        # Se l'input non ï¿½ stato trovato neanche nell'altra lingua allora
         # esegue il log dell'input, potrebbero esservene alcuni di sensati
         # da utilizzare in futuro come sinonimi
-        # Scrive anche gli huh input dei mob così da ricavare gamescript o
+        # Scrive anche gli huh input dei mob cosï¿½ da ricavare gamescript o
         # random_do_inputs errati
         if not huh_input:
             log.huh_inputs(entity, arg)
@@ -128,8 +129,8 @@ def interpret(entity, argument, use_check_alias=True, force_position=True, show_
             entity.send_prompt()
         return False
 
-    # Poiché alcune words nello stesso input a volte hanno prefisso differente
-    # tra loro allora cerca quello più simile possibile per farlo visualizzare
+    # Poichï¿½ alcune words nello stesso input a volte hanno prefisso differente
+    # tra loro allora cerca quello piï¿½ simile possibile per farlo visualizzare
     # all'utente
     founded_input = input.findable_words[0]
     for word in input.findable_words:
@@ -137,7 +138,7 @@ def interpret(entity, argument, use_check_alias=True, force_position=True, show_
             founded_input = word
             break
 
-    # Se il giocatore è in stato di wait e l'input è un comando interattivo
+    # Se il giocatore ï¿½ in stato di wait e l'input ï¿½ un comando interattivo
     # allora evita di inviarlo subito ma lo mette in coda
     if entity.deferred_wait and CMDFLAG.INTERACT in input.command.flags:
         entity.waiting_inputs.append("%s %s" % (founded_input, argument))
@@ -147,7 +148,7 @@ def interpret(entity, argument, use_check_alias=True, force_position=True, show_
         if show_input:
             entity.send_output(''' <span class="system">%s %s</span>''' % (founded_input, argument))
 
-    # Se il pg si è scollegato dalla pagina di gioco non esegue il comando
+    # Se il pg si ï¿½ scollegato dalla pagina di gioco non esegue il comando
     if not entity.location:
         return False
 
@@ -175,7 +176,7 @@ def interpret(entity, argument, use_check_alias=True, force_position=True, show_
         entity.send_output("Se vuoi veramente farlo devi scrivere per intero [limegreen]%s[close]." % first_words)
         execution_result = False
     elif not check_position(entity, command.position, force_position):
-        # Se la posizione non è corretta invia il relativo messaggio d'errore
+        # Se la posizione non ï¿½ corretta invia il relativo messaggio d'errore
         vowel_of_genre = grammar_gender(entity)
         if entity.position == POSITION.DEAD:
             entity.send_output("Un po' difficile fino a che rimani MORT%s.." % vowel_of_genre.upper())
@@ -211,8 +212,8 @@ def interpret(entity, argument, use_check_alias=True, force_position=True, show_
                 entity.code,
                 entity.location.get_name()), write_on_file=write_on_file)
 
-        # Per comodità di sviluppo ricarica il modulo relativo al comando ogni
-        # volta che lo si digita, così da poter testare le modifiche al codice
+        # Per comoditï¿½ di sviluppo ricarica il modulo relativo al comando ogni
+        # volta che lo si digita, cosï¿½ da poter testare le modifiche al codice
         # dei comandi senza aver bisogno di riavviare il gioco tutte le volte
         if config.reload_commands:
             reload(command.module)
@@ -229,17 +230,17 @@ def interpret(entity, argument, use_check_alias=True, force_position=True, show_
         starting_time = time.time()
         execution_result = (command.function)(entity, argument)
         if command.fun_name[ : 8] == "command_" and execution_result != True and execution_result != False:
-            log.bug("execution_result non è valido per il comando %s: %r" % (command.fun_name, execution_result))
+            log.bug("execution_result non ï¿½ valido per il comando %s: %r" % (command.fun_name, execution_result))
         if command.fun_name[ : 6] == "skill_" and execution_result != "clumsy" and execution_result != "failure" and execution_result != "success" and execution_result != "magistral":
-            log.bug("execution_result non è valido per la skill %s: %r" % (command.fun_name, execution_result))
+            log.bug("execution_result non ï¿½ valido per la skill %s: %r" % (command.fun_name, execution_result))
         execution_time = time.time() - starting_time
         # Comandi che superano il tempo definito nella max_execution_time
         # possono portare a bachi creati dalla deferred impostata nel metodo
-        # split_entity (nello stesso metodo c'è un commento con più informazioni)
-        # Quindi devono essere il più possibile da evitare, allo stesso tempo
+        # split_entity (nello stesso metodo c'ï¿½ un commento con piï¿½ informazioni)
+        # Quindi devono essere il piï¿½ possibile da evitare, allo stesso tempo
         # sarebbe meglio che il max_execution_time sia relativamente basso.
         if execution_time > config.max_execution_time:
-            log.time("Il comando %s è stato eseguito in troppo tempo: %f secondi" % (command.fun_name, execution_time))
+            log.time("Il comando %s ï¿½ stato eseguito in troppo tempo: %f secondi" % (command.fun_name, execution_time))
         command.timer += execution_time
 
     # Gestisce i comandi da loggare
@@ -253,16 +254,16 @@ def interpret(entity, argument, use_check_alias=True, force_position=True, show_
     if show_prompt:
         entity.send_prompt()
 
-    # Se la lista di input ancora da inviare non è vuota allora crea un
+    # Se la lista di input ancora da inviare non ï¿½ vuota allora crea un
     # "falso wait" per forzarne l'invio. In teoria potrei inviarlo da qui, ma
-    # il codice di ritorno execution_result andrebbe perduto, ecco perché
+    # il codice di ritorno execution_result andrebbe perduto, ecco perchï¿½
     # si fa uso della wait().
     if not entity.deferred_wait and entity.waiting_inputs:
         entity.wait(0.001)
 
-    # Questa parte è da attivare con l'opzione check_references solo nei
-    # server di test perché consuma molta cpu essendo eseguita su migliaia
-    # di dati ad ogni invio di input, è una modalità di diagnostica
+    # Questa parte ï¿½ da attivare con l'opzione check_references solo nei
+    # server di test perchï¿½ consuma molta cpu essendo eseguita su migliaia
+    # di dati ad ogni invio di input, ï¿½ una modalitï¿½ di diagnostica
     # che non bada a spese in termini prestazionali
     if config.check_references and not database.reference_error_found:
         database.check_all_references()
@@ -274,13 +275,13 @@ def interpret(entity, argument, use_check_alias=True, force_position=True, show_
 def multiple_search_on_inputs(entity, arg, exact=False, use_check_alias=False, argument=""):
     """
     Funzione nucleo per la ricerca di un input tra tutti gli input relativi
-    alla lingua dell'entità, oppure a tutte e due se ha configurato l'opzione
+    alla lingua dell'entitï¿½, oppure a tutte e due se ha configurato l'opzione
     apposita.
     """
-    # entity può essere None
+    # entity puï¿½ essere None
 
     if not arg:
-        log.bug("arg non è un parametro valido : %r" % arg)
+        log.bug("arg non ï¿½ un parametro valido : %r" % arg)
         return None, None, ""
 
     # -------------------------------------------------------------------------
@@ -361,14 +362,14 @@ def find_input(arg, inputs, exact, entity=None):
     Cerca l'argomento passato nella lista di input passata.
     """
     if not arg:
-        log.bug("arg non è valido: %s" % arg)
+        log.bug("arg non ï¿½ valido: %s" % arg)
         return None
 
     if not inputs:
-        log.bug("inputs non è valido: %s" % inputs)
+        log.bug("inputs non ï¿½ valido: %s" % inputs)
         return None
 
-    # exact ha valore di verità
+    # exact ha valore di veritï¿½
 
     # -------------------------------------------------------------------------
 
@@ -417,11 +418,11 @@ def find_input(arg, inputs, exact, entity=None):
 
 def interpret_or_echo(entity, argument, looker=None, behavioured=False):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return
 
     if not argument:
-        log.bug("argument non è un parametro valido: %r" % argument)
+        log.bug("argument non ï¿½ un parametro valido: %r" % argument)
         return
 
     # -------------------------------------------------------------------------
@@ -450,20 +451,20 @@ def interpret_or_echo(entity, argument, looker=None, behavioured=False):
 def check_position(entity, position, force_position=True):
     """
     Controlla che la posizione del comando passata sia adatta a quella che
-    l'entità ha in questo momento.
+    l'entitï¿½ ha in questo momento.
     Viene passata force_position a False quando bisogna evitare ricorsioni.
     """
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return False
 
     if not position:
-        log.bug("position non è un parametro valido: %r" % position)
+        log.bug("position non ï¿½ un parametro valido: %r" % position)
         return False
 
     # -------------------------------------------------------------------------
 
-    # Se un mob non può eseguire il comando allora cerca di mettersi
+    # Se un mob non puï¿½ eseguire il comando allora cerca di mettersi
     # nella posizione adatta ad eseguirlo
     if force_position and not entity.IS_PLAYER and entity.position < position:
         if position == POSITION.SLEEP:
@@ -477,7 +478,7 @@ def check_position(entity, position, force_position=True):
         elif position == POSITION.STAND:
             command_stand(entity, argument)
 
-    # Se la posizione dell'entità è corretta allora può eseguire il comando
+    # Se la posizione dell'entitï¿½ ï¿½ corretta allora puï¿½ eseguire il comando
     if entity.position >= position:
         return True
 
@@ -488,16 +489,16 @@ def check_position(entity, position, force_position=True):
 def translate_input(obj, argument, lang="", search_type=None, colorize=False, alert=False):
     """
     Converte l'argomento, relativo ad un input, passato nel linguaggio voluto
-    se la lingua utilizzata dall'entità per inviare input non corrisponde.
-    Quando viene passato l'argomento lang è importante che sia corrispondente
+    se la lingua utilizzata dall'entitï¿½ per inviare input non corrisponde.
+    Quando viene passato l'argomento lang ï¿½ importante che sia corrispondente
     alla lingua dell'input in argument.
     Oltre che essere utilizzata dalla send_input questa funzione serve per
     tradurre il comando negli help.
     """
-    # Se obj non è valido probabilmente il giocatore si trova in una pagina web
+    # Se obj non ï¿½ valido probabilmente il giocatore si trova in una pagina web
 
     if not argument:
-        log.bug("argument non è un parametro valido: %r" % argument)
+        log.bug("argument non ï¿½ un parametro valido: %r" % argument)
         return ""
 
     # -------------------------------------------------------------------------
@@ -515,7 +516,7 @@ def translate_input(obj, argument, lang="", search_type=None, colorize=False, al
         else:
             lang = "en"
 
-    # Controlla la validità del valore lang
+    # Controlla la validitï¿½ del valore lang
     if lang != "it" and lang != "en":
         log.bug("lang passato errato: %s" % lang)
         if colorize:
@@ -569,11 +570,11 @@ def translate_input(obj, argument, lang="", search_type=None, colorize=False, al
             else:
                 return arg
 
-    # Qui è normale che arrivi e non è un errore, questo perché a volte la
+    # Qui ï¿½ normale che arrivi e non ï¿½ un errore, questo perchï¿½ a volte la
     # translate_input viene utilizzata anche su testo inviato dal giocatore.
     # Quindi in questi casi viene inviato l'argument senza modifiche.
     if alert:
-        log.bug("Non è stato trovato nessun input valido da tradurre per %s" % argument)
+        log.bug("Non ï¿½ stato trovato nessun input valido da tradurre per %s" % argument)
     if colorize:
         return "[limegreen]%s[close]" % argument
     else:
@@ -589,23 +590,23 @@ def send_input(entity, argument, lang="", show_input=True, show_prompt=True):
     in argument.
     """
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     if not argument:
-        log.bug("argument non è un parametro valido: %r" % argument)
+        log.bug("argument non ï¿½ un parametro valido: %r" % argument)
         return ""
 
     if lang != "it" and lang != "en" and lang != "":
-        log.bug("lang non è un parametro valido: %r" % lang)
+        log.bug("lang non ï¿½ un parametro valido: %r" % lang)
         return ""
 
     if show_input != True and show_input != False:
-        log.bug("show_input non è un parametro valido: %r" % show_input)
+        log.bug("show_input non ï¿½ un parametro valido: %r" % show_input)
         return ""
 
     if show_prompt != True and show_prompt != False:
-        log.bug("show_prompt non è un parametro valido: %r" % show_prompt)
+        log.bug("show_prompt non ï¿½ un parametro valido: %r" % show_prompt)
         return ""
 
     # -------------------------------------------------------------------------
@@ -626,11 +627,11 @@ def check_social(entity, command, argument="", behavioured=False):
     Invia i messaggi corretti relativamente ad un comando di social.
     """
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return
 
     if not command:
-        log.bug("command non è un parametro valido: %r" % command)
+        log.bug("command non ï¿½ un parametro valido: %r" % command)
         return
 
     # -------------------------------------------------------------------------
@@ -638,13 +639,13 @@ def check_social(entity, command, argument="", behavioured=False):
     try:
         social = database["socials"][command.fun_name]
     except NameError:
-        log.bug("Social %s, inviato dall'entità %s, errato o inesistente nel database dei social." % (entity.code, command.fun_name))
+        log.bug("Social %s, inviato dall'entitï¿½ %s, errato o inesistente nel database dei social." % (entity.code, command.fun_name))
         return
 
     active_trigger_suffix  = "active_" + social.get_input_argument()
     passive_trigger_suffix = "passive_" + social.get_input_argument()
 
-    # Se non è stato passato nessun argomento invia il messaggio di social adatto
+    # Se non ï¿½ stato passato nessun argomento invia il messaggio di social adatto
     if not argument:
         force_return = check_trigger(entity, "before_" + active_trigger_suffix, entity, None, argument, behavioured)
         if force_return:
@@ -652,16 +653,16 @@ def check_social(entity, command, argument="", behavioured=False):
         force_return = check_trigger(entity.location, "before_" + passive_trigger_suffix, entity, None, argument, behavioured)
         if force_return:
             return
-        # Esegue il trigger anche sulle altre entità perché così funziona il
-        # caso in cui per esempio un player ha eseguito un nod e un mob è in
-        # attesa di un sì
+        # Esegue il trigger anche sulle altre entitï¿½ perchï¿½ cosï¿½ funziona il
+        # caso in cui per esempio un player ha eseguito un nod e un mob ï¿½ in
+        # attesa di un sï¿½
         for contain in entity.location.iter_contains(use_reversed=True):
             force_return = check_trigger(contain, "before_" + passive_trigger_suffix, entity, None, argument, behavioured)
             if force_return:
                 continue
 
         entity.act(social.get_racial_message(entity, "entity_no_arg"), TO.ENTITY)
-        # others_no_arg è un messaggio facoltativo
+        # others_no_arg ï¿½ un messaggio facoltativo
         racial_message = social.get_racial_message(entity, "others_no_arg")
         if racial_message:
             entity.act(racial_message, TO.OTHERS)
@@ -678,7 +679,7 @@ def check_social(entity, command, argument="", behavioured=False):
                 continue
         return
 
-    # Se invece è stato passato un argomento trova la vittima
+    # Se invece ï¿½ stato passato un argomento trova la vittima
     target = entity.find_entity_extensively(argument)
     if not target:
         target = entity.find_entity(argument, location=entity)
@@ -686,7 +687,7 @@ def check_social(entity, command, argument="", behavioured=False):
             entity.send_output("Non trovi nessun [white]%s[close] qui intorno." % argument)
             return
 
-    # Se la vittima e l'entità sono uguali cerca il messaggio di sociale _auto
+    # Se la vittima e l'entitï¿½ sono uguali cerca il messaggio di sociale _auto
     # oppure se questo non esiste il no_arg che ne fa le veci
     if target == entity:
         force_return = check_trigger(entity, "before_" + active_trigger_suffix, entity, target, argument, behavioured)
@@ -696,13 +697,13 @@ def check_social(entity, command, argument="", behavioured=False):
         if force_return:
             return
 
-        # Se non c'è il messaggio entity_auto c'è entity_no_arg
+        # Se non c'ï¿½ il messaggio entity_auto c'ï¿½ entity_no_arg
         msg_auto = social.get_racial_message(entity, "entity_auto")
         if not msg_auto:
             msg_auto = social.get_racial_message(entity, "entity_no_arg")
         entity.act(msg_auto, TO.ENTITY, target)
 
-        # Se non c'è il messaggio others_auto c'è others_no_arg
+        # Se non c'ï¿½ il messaggio others_auto c'ï¿½ others_no_arg
         msg_auto = social.get_racial_message(entity, "others_auto")
         if not msg_auto:
             msg_auto = social.get_racial_message(entity, "others_no_arg")
@@ -716,7 +717,7 @@ def check_social(entity, command, argument="", behavioured=False):
             return
         return
 
-    # Se la vittima non è entity provvede ad inviare il messaggio di social adatto
+    # Se la vittima non ï¿½ entity provvede ad inviare il messaggio di social adatto
     force_return = check_trigger(entity, "before_" + active_trigger_suffix, entity, target, argument, behavioured)
     if force_return:
         return
@@ -743,7 +744,7 @@ def check_social(entity, command, argument="", behavioured=False):
     # Invia a caso e dopo un secondo invia un social con la stessa intenzione.
     # Non viene inviata la risposta social automatica se ci sono dei trigger
     # relativi a quel social da qualche parte
-    # (bb) tuttavia la ricerca così dei trigger è fallace e ci vorrebbe una funzione a parte
+    # (bb) tuttavia la ricerca cosï¿½ dei trigger ï¿½ fallace e ci vorrebbe una funzione a parte
     if ("before_" + active_trigger_suffix not in entity.gamescripts and "after_" + active_trigger_suffix not in entity.gamescripts
     and "before_" + active_trigger_suffix not in target.gamescripts and "after_" + active_trigger_suffix not in target.gamescripts
     and "before_" + active_trigger_suffix not in entity.location.gamescripts and "after_" + active_trigger_suffix not in entity.location.gamescripts

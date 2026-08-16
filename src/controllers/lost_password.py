@@ -36,7 +36,7 @@ class LostPasswordPage(WebResource):
             return self.create_page(request, conn, "", False)
 
         # Cerca la mail tra quella degli account
-        for account in database["accounts"].itervalues():
+        for account in database["accounts"].values():
             if account.email == email:
                 break
         else:

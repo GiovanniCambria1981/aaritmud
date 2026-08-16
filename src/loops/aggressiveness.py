@@ -8,6 +8,7 @@ Modulo per la gestione dei combattimenti.
 #= IMPORT ======================================================================
 
 import random
+from importlib import reload
 import weakref
 
 from src.config     import config
@@ -51,18 +52,18 @@ class ExpressAggressiveness(PersistentLoopData):
 
     def fread(self, file, line):
         if not file:
-            log.bug("file non è un parametro valido: %r", file)
+            log.bug("file non ï¿½ un parametro valido: %r", file)
             return
 
         if not line:
-            log.bug("line non è un parametro valido: %r", line)
+            log.bug("line non ï¿½ un parametro valido: %r", line)
             return
 
         # ---------------------------------------------------------------------
 
         aggressor_code, victim_code, timer, remaining_tries = line.split(None, 3)
 
-        # Può essere normale che non vi sia l'aggressore o la vittima a volte
+        # Puï¿½ essere normale che non vi sia l'aggressore o la vittima a volte
         # le persistenze vengono rimosse
         table_name = aggressor_code.split("_", 2)[1] + "s"
         if not table_name in database:
@@ -84,11 +85,11 @@ class ExpressAggressiveness(PersistentLoopData):
         victim = database[table_name][victim_code]
 
         if not is_number(timer):
-            log.bug("timer ricavato per il buyable %s non è un numero: %s" % (line, timer))
+            log.bug("timer ricavato per il buyable %s non ï¿½ un numero: %s" % (line, timer))
             return
 
         if not is_number(remaining_tries):
-            log.bug("remaining_tries ricavato per il buyable %s non è un numero: %s" % (line, remaining_tries))
+            log.bug("remaining_tries ricavato per il buyable %s non ï¿½ un numero: %s" % (line, remaining_tries))
             return
 
         self.aggressor       = weakref.ref(aggressor)
@@ -101,7 +102,7 @@ class ExpressAggressiveness(PersistentLoopData):
 
     def fwrite(self, file):
         if not file:
-            log.bug("file non è un parametro valido: %r", file)
+            log.bug("file non ï¿½ un parametro valido: %r", file)
             return
 
         # ---------------------------------------------------------------------
@@ -121,11 +122,11 @@ class ExpressAggressiveness(PersistentLoopData):
 
     def have_same_purpose(self, aggressor, victim):
         if not aggressor:
-            log.bug("aggressor non è un parametro valido: %r", aggressor)
+            log.bug("aggressor non ï¿½ un parametro valido: %r", aggressor)
             return False
 
         if not victim:
-            log.bug("victim non è un parametro valido: %r", victim)
+            log.bug("victim non ï¿½ un parametro valido: %r", victim)
             return False
 
         # ---------------------------------------------------------------------
@@ -171,7 +172,7 @@ class ExpressAggressiveness(PersistentLoopData):
             command_kill(aggressor, victim.get_numbered_keyword(looker=aggressor))
         else:
             # Se non vi fosse questo check gli oggetti continuerebbero ad inviare
-            # il messaggio di minaccia per sempre, questo perché non possono
+            # il messaggio di minaccia per sempre, questo perchï¿½ non possono
             # uccidere ed entrare nella condizione superiore
             if self.remaining_tries > 0:
                 argument = random.choice(aggressor.aggressivenesses)
@@ -199,20 +200,20 @@ class ExpressAggressiveness(PersistentLoopData):
 
 def check_aggressiveness(aggressor, victim=None):
     """
-    Controlla se un'entità possa attaccarne un'altra se questa ultima viene
+    Controlla se un'entitï¿½ possa attaccarne un'altra se questa ultima viene
     passata come parametro, altrimenti viene cercata una possibile vittima.
     """
     if not aggressor:
-        log.bug("aggressor non è un parametro valido: %r" % aggressor)
+        log.bug("aggressor non ï¿½ un parametro valido: %r" % aggressor)
         return
 
     # -------------------------------------------------------------------------
 
     if FLAG.AGGRESSIVE not in aggressor.flags:
-        log.bug("Inattesa chiamata senza che l'entità sia aggressiva: %s (victim: %s)" % (aggressor.code, victim.code if victim else "None"))
+        log.bug("Inattesa chiamata senza che l'entitï¿½ sia aggressiva: %s (victim: %s)" % (aggressor.code, victim.code if victim else "None"))
         return
 
-    # Se non è stata passata una vittima ne cerca una
+    # Se non ï¿½ stata passata una vittima ne cerca una
     if victim:
         if not aggressor.can_aggress(victim):
             return
@@ -235,16 +236,16 @@ def check_aggressiveness(aggressor, victim=None):
 # (TD) forse anche per l'attacco dei carnivori ci vorrebbe un check sul livello?
 def can_aggress(aggressor, victim):
     """
-    Funzione con le regole di aggressivibilità di un'entità rispetto ad un'altra.
-    I giocatori sono sempre aggredibili, mentre per le altre entità vengono
+    Funzione con le regole di aggressivibilitï¿½ di un'entitï¿½ rispetto ad un'altra.
+    I giocatori sono sempre aggredibili, mentre per le altre entitï¿½ vengono
     utilizzate regole di legge della natura semplificate.
     """
     if not aggressor:
-        log.bug("aggressor non è un parametro valido: %r" % aggressor)
+        log.bug("aggressor non ï¿½ un parametro valido: %r" % aggressor)
         return
 
     if not victim:
-        log.bug("victim non è un parametro valido: %r" % victim)
+        log.bug("victim non ï¿½ un parametro valido: %r" % victim)
         return
 
     # -------------------------------------------------------------------------

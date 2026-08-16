@@ -368,7 +368,7 @@ class Fight(Data):
             return 0.0
 
         # Ogni dieci livelli l'attacco diminuisce di un decimo di secondo, quindi al livello 200 vi sarà una diminuizione di 2 secondi
-        subtracting_level = active_entity.level / 100
+        subtracting_level = active_entity.level // 100
         turn_time -= subtracting_level
         admin_log += " - livello(%d)/100 = %s" % (active_entity.level, turn_time)
 
@@ -558,7 +558,7 @@ class Fight(Data):
                 admin_log += " -> danno_diff_livello(%d)=%d" % (level_difference, damage)
         else:
             # Danno ricavato se l'attaccante è a mani nude
-            damage = random.randint(active_entity.strength / 6, active_entity.strength / 3)
+            damage = random.randint(active_entity.strength // 6, active_entity.strength // 3)
             admin_log += "Mani Nude: danno_casualizzato(forza_attaccante:%d)=%d" % (active_entity.strength, damage)
 
         if   active_entity.IS_PLAYER and passive_entity.IS_PLAYER: dam_vs = config.dam_plr_vs_plr
@@ -797,7 +797,7 @@ def create_damages_page():
     lines.append('''<table class="mud">''')
     lines.append('''<tr><th>Livello</th><th>Danno</th></tr>''')
 
-    for level, damage in DAMAGES.iteritems():
+    for level, damage in DAMAGES.items():
         lines.append('''<tr><td>%d</td><td>%s</td></tr>''' % (level, damage))
 
     lines.append('''</table>''')

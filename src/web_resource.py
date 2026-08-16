@@ -16,11 +16,10 @@ import string
 import sys
 import time
 import types
-import urllib
 
 from twisted.web import resource, server
 
-from act            import replace_act_tags_translate
+from src.act import replace_act_tags_translate
 from src.color      import remove_colors, convert_colors, get_first_color
 from src.connection import connections, Connection
 from src.config     import config
@@ -69,7 +68,7 @@ class WebResource(resource.Resource):
     MENU_TEMPLATE              = string.Template(open("src/views/__menu__.view").read())
     SQUARE_TEMPLATE            = string.Template(open("src/views/__square__.view").read())
     NO_SHOW_SQUARE_TEMPLATE    = string.Template(open("src/views/__no_show_square__.view").read())
-    WEB_MENU_LIST              = map(string.strip, open("data/web_menu.list").readlines())
+    WEB_MENU_LIST              = [_line.strip() for _line in open("data/web_menu.list"].readlines())
 
     NEW_PAGE = False
 
@@ -249,7 +248,7 @@ class WebResource(resource.Resource):
         """
         if config.reload_web_pages:
             self.MENU_TEMPLATE = string.Template(open("src/views/__menu__.view").read())
-            self.WEB_MENU_LIST = map(string.strip, open("data/web_menu.list").readlines())
+            self.WEB_MENU_LIST = [_line.strip() for _line in open("data/web_menu.list"].readlines())
 
         page_url = str(request.URLPath()).rsplit("/", 1)[-1]
         if not page_url:
@@ -283,7 +282,7 @@ class WebResource(resource.Resource):
             # (TD) spostare i link alla fine della lista del menù, così da
             # separare un numero finito di volte e supportare eventuali link
             # con ; all'interno
-            pieces = map(string.strip, line.split("|"))
+            pieces = [_line.strip() for _line in line.split("|"])
             if len(pieces) == 1:
                 log.bug("C'è una linea errata nel file con le voci del menù web: %s" % line)
                 continue
@@ -579,7 +578,7 @@ class EditResource(WebResource):
 
                 if row.set_field_fun == set_checked_flags:
                     set_checked_flags(request, row.attr, value)
-                elif isinstance(attribute, basestring):
+                elif isinstance(attribute, str):
                     value = request.args[row.attr][0]
                     if row.string_action:
                         # (TD) come diamine si chiamava un metodo in maniera pulita? forse con globals o locals
@@ -587,7 +586,7 @@ class EditResource(WebResource):
                 elif type(attribute) in (int, long):
                     value = int(request.args[row.attr][0])
                 elif type(attribute) == list:
-                    value = long(request.args[row.attr][0])
+                    value = int(request.args[row.attr][0])
                 elif type(attribute) == dict:
                     pass
                 elif type(attribute) == Element:

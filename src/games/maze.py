@@ -106,7 +106,7 @@ class Maze(object):
         # ---------------------------------------------------------------------
 
         # Mette il token(none), wall(4 * True) e visited(false) a tutte le room
-        self.cells = [[MazeCell() for r in xrange(self.rows)] for c in xrange(self.columns)]
+        self.cells = [[MazeCell() for r in range(self.rows)] for c in range(self.columns)]
         self.track_counter = 0
 
         # A stack containing coordinates of the current cell and a scrambled
@@ -255,8 +255,8 @@ class Maze(object):
         Esegue il reset del labirinto con le stanze appositamente create per
         l'area.
         """
-        for x in xrange(self.columns):
-            for y in xrange(self.rows):
+        for x in range(self.columns):
+            for y in range(self.rows):
                 wall = self.cells[x][y].wall
                            # [NORTH, SOUTH, WEST,  EAST  ]
                 #print "x:%d y:%d NORTH:%s SOUTH:%s WEST:%s EAST:%s" % (x, y, wall[NORTH], wall[SOUTH], wall[WEST], wall[EAST])
@@ -537,7 +537,7 @@ class MazeDeadEnd(object):
 #= FUNZIONI ====================================================================
 
 def remake_mazes():
-    for area in database["areas"].itervalues():
+    for area in database["areas"].values():
         if AREA.MAZE not in area.flags:
             continue
         if area.maze.remake_hour == -1:

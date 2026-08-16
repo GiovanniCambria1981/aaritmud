@@ -28,17 +28,17 @@ def command_incognito(entity, argument=""):
         entity.send_output(syntax, break_line=False)
 
         players = []
-        for player in database["players"].itervalues():
+        for player in database["players"].values():
             if player.incognito:
                 players.append(player)
 
         mobs = []
-        for mob in database["mobs"].itervalues():
+        for mob in database["mobs"].values():
             if mob.incognito:
                 mobs.append(mob)
 
         items = []
-        for item in database["items"].itervalues():
+        for item in database["items"].values():
             if item.incognito:
                 items.append(item)
 

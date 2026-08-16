@@ -47,7 +47,7 @@ PROTO_CATERPILLAR_AFTER_CODE = "cimitero_mob_bruco-saturnia-quest.dat"
 #= FUNZIONI ====================================================================
 
 def after_touched(player, cadavere, descr, detail, behavioured):
-    print ">>>>>> after touch cadavere Chrysantha <<<<<"
+    print(">>>>>> after touch cadavere Chrysantha <<<<<")
     return turn_to_dust(player, cadavere, cadavere.location)
 #- Fine Funzione -
 
@@ -75,7 +75,7 @@ def turn_to_dust(player, cadavere, location):
 
 def caterpillar_creation():
     room_code = random.choice(PROTO_ROOMS_CODE) 
-    print  room_code
+    print(room_code)
     injection_room = find_room(room_code)
     if not injection_room:
         log.bug("proto code room non valido: %r" % room_code)
@@ -90,7 +90,7 @@ def find_room(room_code):
     """
     Ricava la room dal database del mud triamte prototipo.
     """
-    for room in database["rooms"].itervalues():
+    for room in database["rooms"].values():
         if room.prototype.code == room_code:
             return room
     return None

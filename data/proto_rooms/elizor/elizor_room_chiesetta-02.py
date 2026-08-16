@@ -62,7 +62,7 @@ def cerca_tessere(proto_code):
     Ricava gli item dal database del mud tramite prototipo.
     """
     cugi = []
-    for item in database["items"].itervalues():
+    for item in database["items"].values():
         if item.prototype.code == proto_code:
             cugi.append(item.split_entity(1))
             return cugi

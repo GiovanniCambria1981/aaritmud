@@ -70,9 +70,9 @@ def heads_or_tails(coin):
 
 
 def before_readed(entity, location, output, extra, behavioured):
-    print ">>> entity: ", entity
-    print ">>> location: ", location
-    print ">>> extra: ", extra
-    print ">>> output: ", output
+    print(">>> entity: ", entity)
+    print(">>> location: ", location)
+    print(">>> extra: ", extra)
+    print(">>> output: ", output)
     return
 #- Fine Funzione -

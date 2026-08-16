@@ -34,7 +34,7 @@ class Ban(object):
 def count_bans():
     counter = 0
 
-    for player in database["players"].itervalues():
+    for player in database["players"].values():
         if player.ban:
             counter += 1
 

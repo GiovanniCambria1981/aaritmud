@@ -53,7 +53,7 @@ def after_get(player, unguento, medaglione, behavioured):
     defer(3600, unguento_cleaning, unguento, player)
 
     if medaglione.IS_ITEM:
-        print medaglione.code
+        print(medaglione.code)
         defer(120, medaglione_corruption, medaglione, player)
         return False
 

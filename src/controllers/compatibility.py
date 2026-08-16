@@ -9,7 +9,7 @@ Modulo per la visualizzazione di tutti i topic di help.
 
 import datetime
 import string
-import urllib
+from urllib.parse import quote as _urllib_quote, unquote as _urllib_unquote
 
 from src.config       import config
 from src.web_resource import WebResource
@@ -53,7 +53,7 @@ class CompatibilityPage(WebResource):
             log.bug("messagge non valido: %r" % msg)
             return "Il messaggio è vuoto"
 
-        msg = urllib.unquote(msg)
+        msg = _urllib_unquote(msg)
         if len(msg) > config.max_feedback_len:
             return "Il messaggio è troppo lungo, massimo %d" % config.max_feedback_len
 

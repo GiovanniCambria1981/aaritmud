@@ -79,7 +79,7 @@ class DatabasePage(WebResource):
             total_areas_items_dimension = 0
             total_areas_mobs_dimension = 0
             total_areas_players_dimension = 0
-            for area in database["areas"].itervalues():
+            for area in database["areas"].values():
                 area_rooms_qty = len(area.rooms)
                 area_items_qty = len(area.items)
                 area_mobs_qty = len(area.mobs)

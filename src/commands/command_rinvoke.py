@@ -8,6 +8,7 @@ Comando che permette di invocare un'istanza esistente di room.
 #= IMPORT ======================================================================
 
 from src.config import config
+from importlib import reload
 from src.log    import log
 
 if config.reload_commands:
@@ -19,19 +20,19 @@ from src.commands.command_invoke import invoke_handler
 
 def command_rinvoke(entity, argument=""):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
 
-    entity.send_output("Non ancora funzionante, ma chissà se un giorno...")
+    entity.send_output("Non ancora funzionante, ma chissï¿½ se un giorno...")
     return False
 #- Fine Funzione -
 
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

@@ -41,7 +41,7 @@ from src.entitypes.wear import send_wear_messages
 #    return True
 
 def before_putting(player, target, asciugamano, direction, behavioured):
-    print "asciugamano, before_putted trigger"
+    print("asciugamano, before_putted trigger")
     if PART.BACK in asciugamano.wear_mode:
         player.act("Cerchi di %s $N %s $a, ma quest'ultimo non ti sembra un contenitore." % ("mettere", "in"), TO.ENTITY, target, asciugamano)
         player.act("$n cerca di %s $N %s $a, ma non riesce a trovare modo per farlo non essendo un contenitore." % ("mettere", "in"), TO.OTHERS, target, asciugamano)
@@ -58,7 +58,7 @@ def before_putting(player, target, asciugamano, direction, behavioured):
         return
 
     asciugamano.weapon_type.category = WEAPON.MACE
-    print ">>>asciugamano category: ", asciugamano.weapon_type.category
+    print(">>>asciugamano category: ", asciugamano.weapon_type.category)
     player.act("Pieghi $N formando una saccoccia.", TO.ENTITY, asciugamano)
     player.act("$n ti maltratta conferendoti una forma poco naturale.", TO.TARGET, asciugamano)
     player.act("$n piega $N creando una saccoccia.", TO.OTHERS, asciugamano)
@@ -82,7 +82,7 @@ def after_get_from_location(player, item, asciugamano, behavioured):
         return
 
     asciugamano.weapon_type.category = WEAPON.WHIP    
-    print ">>>asciugamano category: ", asciugamano.weapon_type.category
+    print(">>>asciugamano category: ", asciugamano.weapon_type.category)
 
     player.act("Sciogli $N.", TO.ENTITY, asciugamano)
     player.act("$n ti riporta alla tua forma originaria.", TO.TARGET, asciugamano)
@@ -116,10 +116,10 @@ def after_wielded(player, asciugamano, hands, behavioured):
         return
 
     total_wielded_weight = asciugamano.get_total_weight()
-    print "asciugamano peso: ", total_wielded_weight
+    print("asciugamano peso: ", total_wielded_weight)
     damage = math.log(total_wielded_weight)
-    print "asciugamano danno: ", damage
+    print("asciugamano danno: ", damage)
     damage = random.randint(damage / 1.5, damage * 1.5)
-    print "asciugamano randanno: ", damage
+    print("asciugamano randanno: ", damage)
     asciugamano.weapon_type.damage = damage
-    print "wear_mode", asciugamano.wear_mode
+    print("wear_mode", asciugamano.wear_mode)

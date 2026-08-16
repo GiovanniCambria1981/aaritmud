@@ -82,13 +82,13 @@ def get_help(entity, argument):
 
     # Cerca prima tra gli help della propria lingua in maniera esatta
     if entity.IS_PLAYER or OPTION.ITALIAN in entity.account.options:
-        for help in database["helps"].itervalues():
+        for help in database["helps"].values():
             if not help.text and help.admin_text and entity.trust == TRUST.PLAYER:
                 continue
             if is_same(argument, multiple_arguments(help.italian_keywords)):
                 return help
     else:
-        for help in database["helps"].itervalues():
+        for help in database["helps"].values():
             if not help.text and help.admin_text and entity.trust == TRUST.PLAYER:
                 continue
             if is_same(argument, multiple_arguments(help.english_keywords)):
@@ -96,13 +96,13 @@ def get_help(entity, argument):
 
     # Cerca poi tra gli help della propria lingua in maniera prefissa
     if entity.IS_PLAYER or OPTION.ITALIAN in entity.account.options:
-        for help in database["helps"].itervalues():
+        for help in database["helps"].values():
             if not help.text and help.admin_text and entity.trust == TRUST.PLAYER:
                 continue
             if is_prefix(argument, multiple_arguments(help.italian_keywords)):
                 return help
     else:
-        for help in database["helps"].itervalues():
+        for help in database["helps"].values():
             if not help.text and help.admin_text and entity.trust == TRUST.PLAYER:
                 continue
             if is_prefix(argument, multiple_arguments(help.english_keywords)):
@@ -110,13 +110,13 @@ def get_help(entity, argument):
 
     # Cerca poi tra gli help della lingua secondaria in maniera esatta
     if entity.IS_PLAYER or OPTION.ITALIAN in entity.account.options:
-        for help in database["helps"].itervalues():
+        for help in database["helps"].values():
             if not help.text and help.admin_text and entity.trust == TRUST.PLAYER:
                 continue
             if is_same(argument, multiple_arguments(help.english_keywords)):
                 return help
     else:
-        for help in database["helps"].itervalues():
+        for help in database["helps"].values():
             if not help.text and help.admin_text and entity.trust == TRUST.PLAYER:
                 continue
             if is_same(argument, multiple_arguments(help.italian_keywords)):
@@ -124,13 +124,13 @@ def get_help(entity, argument):
 
     # Cerca poi tra gli help della lingua secondaria in maniera prefissa
     if entity.IS_PLAYER or OPTION.ITALIAN in entity.account.options:
-        for help in database["helps"].itervalues():
+        for help in database["helps"].values():
             if not help.text and help.admin_text and entity.trust == TRUST.PLAYER:
                 continue
             if is_prefix(argument, multiple_arguments(help.english_keywords)):
                 return help
     else:
-        for help in database["helps"].itervalues():
+        for help in database["helps"].values():
             if not help.text and help.admin_text and entity.trust == TRUST.PLAYER:
                 continue
             if is_prefix(argument, multiple_arguments(help.italian_keywords)):

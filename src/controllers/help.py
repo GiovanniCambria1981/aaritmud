@@ -32,7 +32,7 @@ class HelpPage(WebResource):
             or  conn.account and help_element.trust > conn.account.trust
             or  not conn.account and not conn.player and help_element.trust > TRUST.PLAYER):
                 max_help_types -= 1
-        half_help_types = max_help_types / 2 + max_help_types % 2
+        half_help_types = max_help_types // 2 + max_help_types % 2
 
         help_types = []
         help_types.append('''<table class="mud" align="center" width="100%"><tr>''')

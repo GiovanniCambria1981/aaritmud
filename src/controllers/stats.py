@@ -10,6 +10,7 @@ pagine che hanno come tema la visualizzazione delle statistiche relative al gioc
 
 import string
 
+from importlib import reload
 from src.config       import config
 from src.enums        import TRUST
 from src.web_resource import WebResource

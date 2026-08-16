@@ -37,7 +37,7 @@ class StatsSoPage(WebResource):
 
     def render_GET(self, request, conn):
         detailed_systems = {}
-        for account in database["accounts"].itervalues():
+        for account in database["accounts"].values():
             if not account.user_agents:
                 continue
             so = get_os_from_ua(account.user_agents[-1])
@@ -47,7 +47,7 @@ class StatsSoPage(WebResource):
                 detailed_systems[so] = 1
 
         general_systems = {}
-        for so, use in detailed_systems.iteritems():
+        for so, use in detailed_systems.items():
             if "_" in so:
                 code = so.split("_")[0]
             else:

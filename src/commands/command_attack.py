@@ -8,6 +8,7 @@ Comando che inizia un combattimento con un'altra entità.
 #= IMPORT ======================================================================
 
 from src.config import config
+from importlib import reload
 from src.log    import log
 
 

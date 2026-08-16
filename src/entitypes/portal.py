@@ -131,7 +131,7 @@ class Portal(object):
         if self.target_code:
             entities = []
             type = self.target_code.split("_", 2)[1]
-            for entity in database[type + "s"].itervalues():
+            for entity in database[type + "s"].values():
                 if (hasattr(entity, "prototype") and entity.prototype.code == self.target_code
                 or entity.code == self.target_code):
                     entities.append(entity)

@@ -2,8 +2,8 @@
 
 """
 Modulo per la modifica di un'area.
-Preferisco non dare possibilità di creare una nuova area da zero per dare
-maggiore peso al miglioramento di quelle già esistenti.
+Preferisco non dare possibilitï¿½ di creare una nuova area da zero per dare
+maggiore peso al miglioramento di quelle giï¿½ esistenti.
 """
 
 
@@ -63,10 +63,10 @@ class AreaEditorPage(WebResource):
             if "coord_z" in request.args:
                 coord_z = request.args["coord_z"][0]
                 if not coord_z:
-                    error_message = "La coordinata Z non è un valore valido: %r" % coord_z
+                    error_message = "La coordinata Z non ï¿½ un valore valido: %r" % coord_z
                     coord_z = 0
                 if not is_number(coord_z):
-                    error_message = "La coordinata Z non è un valore numerico valido: %s" % coord_z
+                    error_message = "La coordinata Z non ï¿½ un valore numerico valido: %s" % coord_z
                     coord_z = 0
                 coord_z = int(coord_z)
         else:
@@ -131,9 +131,9 @@ class AreaEditorPage(WebResource):
         min_x = area.get_min_coord("x")
         max_x = area.get_max_coord("x")
 
-        for y in reversed(xrange(min_y-2, max_y+3)):
+        for y in reversed(range(min_y-2, max_y+3)):
             cells += '''<tr>'''
-            for x in xrange(min_x-2, max_x+3):
+            for x in range(min_x-2, max_x+3):
                 room_reset = area.get_room_reset(x, y, z)
                 upper_style = ""
                 upper_room_reset = area.get_room_reset(x, y, z+1)
@@ -171,7 +171,7 @@ class AreaEditorPage(WebResource):
 
         legend_icons += '''<table widht="100%%">'''
         line_numbers = len(SECTOR.elements) / 4 + (1 if len(SECTOR.elements) % 4 != 0 else 0)
-        for line_number in xrange(line_numbers):
+        for line_number in range(line_numbers):
             legend_icons += '''<tr>'''
             legend_icons += self.create_icon(line_number, 0)
             legend_icons += self.create_icon(line_number, 1)
@@ -201,7 +201,7 @@ class AreaEditorPage(WebResource):
             area_labels += '''<tr>'''
             area_labels += '''<td valign="top"><span style="color:white;">%s</span>: </td>''' % to_capitalized_words(attr_name)
             attr = getattr(area, attr_name)
-            if isinstance(attr, basestring):
+            if isinstance(attr, str):
                 widget = '''<input type="text" id="%s" value="%s" />''' % (attr_name, attr)
             else:
                 widget = str(attr)
@@ -212,6 +212,6 @@ class AreaEditorPage(WebResource):
         return "".join(area_labels)
     # - Fine Metodo -
 
-# (TD) questo da aggiungere nel POST una volta che si farà:
+# (TD) questo da aggiungere nel POST una volta che si farï¿½:
 #            new_area.creators = conn.account.code
 #            database["areas"][new_code] = new_area

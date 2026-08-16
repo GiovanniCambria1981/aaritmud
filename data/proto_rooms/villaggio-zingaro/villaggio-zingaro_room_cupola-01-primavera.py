@@ -59,12 +59,12 @@ def cleaning(to_room):
     if not to_room:
         return
 
-    print ">>> CLEANING <<<"
+    print(">>> CLEANING <<<")
     for content in to_room.iter_contains(use_reversed=True):
         if content.IS_ACTOR:
             continue
         if content.prototype.code in oggetti.values():
-           print ">>> ITEM <<<", content.code
+           print(">>> ITEM <<<", content.code)
            content.extract(1)
-    print ">>> CLINATO <<<"
+    print(">>> CLINATO <<<")
     to_room.act("\n[mediumturquoise]Un lieve baglio della pietra centrale e tutto sparisce... così com'era venuto[close].")

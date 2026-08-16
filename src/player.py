@@ -9,6 +9,7 @@ Modulo per la gestione dei giocatori.
 
 from twisted.internet import error
 
+from importlib import reload
 import collections
 import datetime
 import math
@@ -45,7 +46,7 @@ from src.commands.command_snoop     import remove_and_count_snooped_by
 # Il calcolo è stato effettuato tramite uno sviluppo di Taylor della funzione
 # esponenziale centrato nel punto exp(6.4)
 experiences = [0]
-for lvl in xrange(1, config.max_level):
+for lvl in range(1, config.max_level):
     exp = int(math.exp(6.4) * (lvl + (lvl ** 2) / (2.0) + (lvl ** 3) / (6.0) + (lvl ** 4) / (5040.0)))
     experiences.append(exp)
 
@@ -218,7 +219,7 @@ class Player(Mob):
         Se vi è un errore negli attributi che salvano la reputazione ritorna
         un messaggio.
         """
-        for race, reputation in self.reputations.iteritems():
+        for race, reputation in self.reputations.items():
             if race not in RACE.elements:
                 return "razza %s non è un elemento di razza valido per la reputazione delle razze" % race
             if reputation < -100 or reputation > 100:
@@ -255,7 +256,7 @@ class Player(Mob):
             # Ripulisce qualsiasi precedente istanza di connessione alla pagina
             # del gioco che non sia quella attuale
             actual_session = self.game_request.getSession()
-            for session, connection in connections.iteritems():
+            for session, connection in connections.items():
                 if session == actual_session:
                     continue
                 if connection.account and OPTION.COMET not in connection.account.options:
@@ -311,7 +312,7 @@ class Player(Mob):
         # Avvisa gli admin via mail se un pg è appena entrato nel Mud
         if self.account and self.account.trust > TRUST.PLAYER:
             send_a_mail = False
-        for player in self.account.players.itervalues():
+        for player in self.account.players.values():
             if player.trust > TRUST.PLAYER:
                 send_a_mail = False
         if send_a_mail and config.mail_on_enter_in_game:
@@ -384,7 +385,7 @@ class Player(Mob):
             self = self.from_location(1, use_iterative_remove=False, use_repop=False)
 
         # Resetta la connessione reinizializzandola
-        for connection in connections.itervalues():
+        for connection in connections.values():
             if connection.player and connection.player.code == self.code:
                 connection.defer_exit_from_game = None
                 connection.player = None
@@ -569,7 +570,7 @@ def search_online_player(argument, only_exact=False):
     di quelli offline per comodità, poiché spesso gli admin inseriscono
     l'abbreviazione di un player correntemente online.
     """
-    for player in database["players"].itervalues():
+    for player in database["players"].values():
         if not player.game_request:
             continue
         if is_same(argument, player.name):
@@ -578,7 +579,7 @@ def search_online_player(argument, only_exact=False):
     if only_exact:
         return None
 
-    for player in database["players"].itervalues():
+    for player in database["players"].values():
         if not player.game_request:
             continue
         if is_prefix(argument, player.name):

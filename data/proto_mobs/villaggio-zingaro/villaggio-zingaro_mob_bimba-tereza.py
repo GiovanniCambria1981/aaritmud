@@ -103,7 +103,7 @@ def change_mob(bimba, num):
 
 
 def find_mob(proto_code):
-    for mob in database["mobs"].itervalues():
+    for mob in database["mobs"].values():
         if mob.prototype and mob.prototype.code == proto_code:
             return mob.split_entity(1)
 

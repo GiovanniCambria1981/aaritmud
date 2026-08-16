@@ -53,7 +53,7 @@ def before_touched(entity, cespuglio, detail, descr, behavioured):
     # Il valore di cespuglio.quantity è ad uno anche se è parte di un gruppo fisico.
 
     if not cespuglio.specials or 'ancestors' not in cespuglio.specials:
-        print "#### ROMIL - TOUCH - specials NON presenti"
+        print("#### ROMIL - TOUCH - specials NON presenti")
         # (TD) da gestire, ricreare i genotipi
         # Se un trust alto icrea il cespuglio accanto agli altri,
         # crasha tutto in fase di fecondazione
@@ -71,7 +71,7 @@ def before_touched(entity, cespuglio, detail, descr, behavioured):
     
     for item in room.iter_contains(use_reversed=True):
         if item.IS_ITEM and item.prototype.code == cespuglio.prototype.code:
-            for x in xrange(item.quantity):
+            for x in range(item.quantity):
                 if 'genotipo' in splitted_cespuglio.__dict__ and splitted_cespuglio.genotipo.gameti_propri != []:
                     # evito inutili ripetizioni nel caso qualcuno tocchi più volte
                     continue
@@ -84,7 +84,7 @@ def before_touched(entity, cespuglio, detail, descr, behavioured):
                 splitted_cespuglio.genotipo.gameti_propri = splitted_cespuglio.genotipo.get_gameti()
                 cespugli.append(splitted_cespuglio)
 
-    print "numero cespugli che han generato i loro gameti: ", len(cespugli)   
+    print("numero cespugli che han generato i loro gameti: ", len(cespugli))
     # per ogni cespuglio metto nell'apposita lista del Genotipo la lista di tutti gli alleli degli altri cespugli
     for item in cespugli:
         for en in cespugli:
@@ -92,10 +92,10 @@ def before_touched(entity, cespuglio, detail, descr, behavioured):
                 if not item.specials and 'already_touched' not in item.specials:
                     item.genotipo.gameti_altrui += en.genotipo.gameti_propri
 
-    print 'cespugli: ',  cespugli
-    print 'cespugli[0]', cespugli[0]
-    print 'cespugli[0].genotipo', cespugli[0].genotipo
-    print 'cespugli[0].genotipo.gameti_propri', cespugli[0].genotipo.gameti_propri
+    print('cespugli: ',  cespugli)
+    print('cespugli[0]', cespugli[0])
+    print('cespugli[0].genotipo', cespugli[0].genotipo)
+    print('cespugli[0].genotipo.gameti_propri', cespugli[0].genotipo.gameti_propri)
     cespuglio.specials['already_touched'] = True
     return True
             
@@ -103,19 +103,19 @@ def before_touched(entity, cespuglio, detail, descr, behavioured):
 def on_next_stage(old_entity, new_entity, choised_attr, entities):
     # (TD) Qui se cade il mud fra un touch e un next stage si perde tutta la fecondazione
 
-    print "Next_Stage cespuglio in fiore"
+    print("Next_Stage cespuglio in fiore")
     if old_entity.specials and 'ancestors' in old_entity.specials and old_entity.specials['ancestors']:
-        print "#### ROMIL - NEXT STAGE - *** copia pedigree ***"
+        print("#### ROMIL - NEXT STAGE - *** copia pedigree ***")
         for key in old_entity.specials:
             new_entity.specials[key] = old_entity.specials[key]
         old_entity.specials['already_touched'] = False
     else:
-        print "#### ROMIL - NEXT STAGE - *** nessuna copia ***"
+        print("#### ROMIL - NEXT STAGE - *** nessuna copia ***")
         # (TD) qui bisogna generare il genotipo con la stessa procedura che nel seed_del_seme 
 
     for item in new_entity.iter_contains(use_reversed=True):
         if item.IS_ITEM and item.prototype.code == PROTO_SEME_CODE:
-            for x in xrange(item.quantity):
+            for x in range(item.quantity):
                 # Splitto i semii e in ciascuno metto un metodo Genotipo in cui
                 # carico il genoma e ricavo i due gameti
                 splitted_seme = item.split_entity(1)

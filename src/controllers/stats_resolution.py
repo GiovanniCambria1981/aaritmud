@@ -36,7 +36,7 @@ class StatsResolutionPage(WebResource):
 
     def render_GET(self, request, conn):
         resolutions = {}
-        for account in database["accounts"].itervalues():
+        for account in database["accounts"].values():
             if account.resolution_width <= 0 or account.resolution_height <= 0:
                 continue
             code = "%d x %d" % (account.resolution_width, account.resolution_height)

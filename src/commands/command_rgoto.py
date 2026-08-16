@@ -9,6 +9,7 @@ da quella in cui si trova l'amministratore del Mud.
 #= IMPORT ======================================================================
 
 from src.command  import get_command_syntax
+from importlib import reload
 from src.config   import config
 from src.database import database
 from src.enums    import AREA, TO

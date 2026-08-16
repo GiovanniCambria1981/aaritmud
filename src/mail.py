@@ -7,7 +7,7 @@ Modulo generico per la gestione dell'invio delle mail.
 
 #= IMPORT ======================================================================
 
-from email import Charset
+from email import charset as Charset
 #from email.mime.text      import MIMEText
 #from email.mime.multipart import MIMEMultipart
 
@@ -73,12 +73,12 @@ class Mail(object):
 
         if show_players:
             footer = ["\n\nGiocatori in gioco:\n"]
-            for player in database["players"].itervalues():
+            for player in database["players"].values():
                 if player.game_request:
                     footer.append(player.code + "\n")
             message += "".join(footer)
 
-        for account in database["accounts"].itervalues():
+        for account in database["accounts"].values():
             if avoid_account and account == avoid_account:
                 continue
             if account.email and account.trust >= trust:

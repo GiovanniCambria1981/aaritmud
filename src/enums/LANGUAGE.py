@@ -1334,8 +1334,8 @@ def compare_words(words1, words2):
 def sort_languages():
     global elements
     for element in elements:
-        element.pre_conversions.sort(cmp=compare_words)
-        element.post_conversions.sort(cmp=compare_words)
+        element.pre_conversions.sort(key=lambda words: -len(words[0]))
+        element.post_conversions.sort(key=lambda words: -len(words[0]))
 
 sort_languages()
 

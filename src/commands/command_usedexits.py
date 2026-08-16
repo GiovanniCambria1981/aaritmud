@@ -32,7 +32,7 @@ def command_usedexits(entity, argument=""):
         return False
 
     counter = 0
-    for room in database["rooms"].itervalues():
+    for room in database["rooms"].values():
         if len(room.exits) == number_of_exits:
             entity.send_output("%s: %s" % (room.code, room.name))
             counter += 1

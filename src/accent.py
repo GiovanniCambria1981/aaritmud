@@ -118,22 +118,22 @@ def dummy_isalpha_accent(argument):
     for n, c in enumerate(argument):
         is_accent = True
 
-        print argument, c, n, len(argument)
+        print(argument, c, n, len(argument))
         if c not in ACCENTS:
             if n == len(argument)-1:
                 return False
-            print "A"
+            print("A")
             is_accent = False
 
         if not is_accent and c + argument[n+1] not in ACCENTS:
-            print "B"
+            print("B")
             is_accent = False
 
         if not is_accent and not c.isalpha():
-            print "C"
+            print("C")
             return False
 
-    print "D"
+    print("D")
     return True
 #- Fine Funzione -
 

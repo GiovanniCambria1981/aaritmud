@@ -114,7 +114,7 @@ def crea_gemma(id_gemma, player, tagliapietre, gemma_grezza, room):
 
     # QUI COMINCIANO LE VARIE SOSTITUZIONI
     gemma_lavorata.name = colored_name + " con taglio a " + GEMME_DATA["brillante ovale"][0] 
-    gemma_lavorata.short = string.lower(gemma_lavorata.name)
+    gemma_lavorata.short = (gemma_lavorata.name).lower()
     gemma_lavorata.keywords_name = create_keywords(gemma_lavorata.name)
     gemma_lavorata.keywords_short = create_keywords(gemma_lavorata.short)
     long_descr = random.choice(LONG)
@@ -129,13 +129,13 @@ def crea_gemma(id_gemma, player, tagliapietre, gemma_grezza, room):
 #    gemma_lavorata.max_vigor = gemma_grezza.max_vigor
 
     if "'" in colored_name:
-        num = string.find(colored_name, "'")
+        num = (colored_name).find("'")
     else:
-        num = string.find(colored_name, " ")
+        num = (colored_name).find(" ")
     colored_name = colored_name[num+1 : ]
-    colored_name_lower = string.lower(colored_name)
+    colored_name_lower = (colored_name).lower()
     descr = GEMME_DATA['brillante ovale'][1] 
-    descr = string.replace(descr,'$ColoredName' , colored_name_lower)
+    descr = (descr).replace('$ColoredName' , colored_name_lower)
     gemma_lavorata.descr = descr
 
     # OBJ INJECTION

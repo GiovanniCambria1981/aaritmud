@@ -4,6 +4,7 @@
 #= IMPORT ======================================================================
 
 from src.config import config
+from importlib import reload
 from src.enums  import TO
 from src.log    import log
 

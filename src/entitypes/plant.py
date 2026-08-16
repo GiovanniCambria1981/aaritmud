@@ -84,7 +84,7 @@ class Plant(object):
     #- Fine Metodo -
 
     def get_contents_error_message(self):
-        for key, value in self.contents.iteritems():
+        for key, value in self.contents.items():
             if not key:
                 return "contents con chiave non valida (%r) per il valore %s" % (key, value)
             if int(value) <= 0:
@@ -152,7 +152,7 @@ class Plant(object):
 
         if len(self.contents) != len(plant2.contents):
             return False
-        for key, value in self.contents.iteritems():
+        for key, value in self.contents.items():
             if key not in plant2.contents:
                 return False
             if value != plant2.contents[key]:
@@ -316,7 +316,7 @@ class Plant(object):
         # altre tipo di entità, ciò serve perché in tal caso i semi vengono
         # inseriti nelle altre tipologie di entità (frutti o fiori chessia)
         seeds = []
-        for proto_code, quantity in entitype.contents.iteritems():
+        for proto_code, quantity in entitype.contents.items():
             prototype = database.get_proto_entity(proto_code)
             if not prototype:
                 continue
@@ -331,7 +331,7 @@ class Plant(object):
             new_entity.plant_type.remaining_life -= 1
 
         # Crea l'eventuale contenuto voluto per la nuova entità
-        for proto_code, quantity in entitype.contents.iteritems():
+        for proto_code, quantity in entitype.contents.items():
             prototype = database.get_proto_entity(proto_code)
             if not prototype:
                 continue
@@ -398,7 +398,7 @@ class Plant(object):
 #= FUNZIONI ====================================================================
 
 def restart_all_planting():
-    for obj in database["rooms"].values() + database["players"].values() + database["items"].values() + database["mobs"].values():
+    for obj in list(database["rooms"].values()) + list(database["players"].values()) + list(database["items"].values()) + list(database["mobs"].values()):
         for entity in obj.iter_contains():
             if FLAG.GROWING not in entity.flags:
                 continue

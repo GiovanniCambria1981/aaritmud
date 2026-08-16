@@ -55,7 +55,7 @@ class Input(object):
         # scatti l'errore durante la funzione fread_input poiché self.command
         # nel caricamento dei dati è ancora una stringa e non un riferimento
         # ad un'istanza di comando
-        elif (not (engine.booting and isinstance(self.command, basestring))
+        elif (not (engine.booting and isinstance(self.command, str))
         and self.command.get_error_message() != ""):
             msg = self.command.get_error_message()
         elif self.counter_use < 0:

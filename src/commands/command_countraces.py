@@ -18,7 +18,7 @@ from src.utility  import one_argument, is_same
 
 def command_countraces(entity, argument=""):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -40,7 +40,7 @@ def command_countraces(entity, argument=""):
 
     counter = {}
     counter["totale"] = EnumElementDict()
-    for area in database["areas"].itervalues():
+    for area in database["areas"].values():
         counter[area] = EnumElementDict()
         targets = getattr(area, attr_suffix)
         for target in targets:
@@ -90,7 +90,7 @@ def command_countraces(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

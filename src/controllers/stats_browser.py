@@ -37,7 +37,7 @@ class StatsBrowserPage(WebResource):
 
     def render_GET(self, request, conn):
         detailed_browsers = {}
-        for account in database["accounts"].itervalues():
+        for account in database["accounts"].values():
             if not account.user_agents:
                 continue
             code = get_browser_from_ua(account.user_agents[-1])
@@ -49,7 +49,7 @@ class StatsBrowserPage(WebResource):
                 detailed_browsers[code] = 1
 
         general_browser = {}
-        for browser, use in detailed_browsers.iteritems():
+        for browser, use in detailed_browsers.items():
             if "_" in browser:
                 code = browser.split("_")[0]
             else:

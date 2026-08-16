@@ -42,7 +42,7 @@ class ConnectionsPage(WebResource):
     def get_connections(self, request, conn):
         rows = []
 
-        for conn in connections.itervalues():
+        for conn in connections.values():
             rows.append('''<tr>''')
 
             rows.append('''<td>%s</td>''' % conn.get_id(conn))

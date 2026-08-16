@@ -7,6 +7,7 @@ Modulo per la gestione del comando put.
 #= IMPORT ======================================================================
 
 from src.config import config
+from importlib import reload
 from src.enums  import FLAG, ROOM
 from src.log    import log
 
@@ -28,10 +29,10 @@ VERBS = {"infinitive" : "[orange]mettere[close]",
 
 def command_put(entity, argument="", verbs=VERBS, behavioured=False):
     """
-    Permette di dare entità, di solito oggetti, ad altre entità, di solito
+    Permette di dare entitï¿½, di solito oggetti, ad altre entitï¿½, di solito
     player.
     """
-    # È possibile se il comando è stato deferrato
+    # ï¿½ possibile se il comando ï¿½ stato deferrato
     if not entity:
         return False
 
@@ -41,7 +42,7 @@ def command_put(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

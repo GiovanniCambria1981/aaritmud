@@ -35,7 +35,7 @@ class CreatePlayer2Page(WebResource):
 
     def render_GET(self, request, conn):
         #if conn.player and conn.player.code in database["players"]:
-        #    return "\nImpossibile creare il personaggio %s perchÈ gi‡ esistente.\n" % conn.player.name
+        #    return "\nImpossibile creare il personaggio %s perchù giù esistente.\n" % conn.player.name
 
         # Se si sta cercando di caricare la seconda pagina di creazione del pg
         # senza aver iniziato a crearlo realmente allora redirecta alla prima
@@ -48,14 +48,14 @@ class CreatePlayer2Page(WebResource):
         # (TD) ci sarebbero da utilizzare dei widget +/-
         age    = random.randint(conn.new_player.race.age_adolescence,   conn.new_player.race.age_old)
         height = random.randint(conn.new_player.race.height_low,        conn.new_player.race.height_high)
-        weight = random.randint(conn.new_player.race.weight_low / 1000, conn.new_player.race.weight_high / 1000)
+        weight = random.randint(conn.new_player.race.weight_low // 1000, conn.new_player.race.weight_high // 1000)
 
         return self.create_page(request, conn, age=age, height=height, weight=weight)
     #- Fine Metodo -
 
     def render_POST(self, request, conn):
         if not conn.new_player:
-            return '''Per qualche errore sul server il personaggio non Ë stato creato, oppure Ë stato gi‡ creato, controlla la pagina con <a href="players.html">i tuoi personaggi</a>.'''
+            return '''Per qualche errore sul server il personaggio non ù stato creato, oppure ù stato giù creato, controlla la pagina con <a href="players.html">i tuoi personaggi</a>.'''
 
         # Ricava gli argomenti del form dalla richiesta
         age = 0
@@ -102,15 +102,15 @@ class CreatePlayer2Page(WebResource):
         if "name" in request.args:
             name = request.args["name"][0]
 
-        # Controlla la validit‡ degli argomenti inseriti nel form
+        # Controlla la validitù degli argomenti inseriti nel form
         err_msg_age = ""
         try:
             age = int(age)
         except ValueError:
-            err_msg_age = "L'et‡ deve essere un numero che indica gli anni vissuti dal tuo personaggio"
+            err_msg_age = "L'etù deve essere un numero che indica gli anni vissuti dal tuo personaggio"
         else:
             if age < conn.new_player.race.age_adolescence or age > conn.new_player.race.age_old:
-                err_msg_age = "I limiti dell'et‡, relativamente alla razza da te scelta, sono tra %d e %d." % (
+                err_msg_age = "I limiti dell'etù, relativamente alla razza da te scelta, sono tra %d e %d." % (
                     conn.new_player.race.age_adolescence, conn.new_player.race.age_old)
 
         err_msg_height = ""
@@ -130,9 +130,9 @@ class CreatePlayer2Page(WebResource):
             except ValueError:
                 err_msg_weight = "Il peso deve essere un numero in chili"
             else:
-                if weight < conn.new_player.race.weight_low / 1000 or weight > conn.new_player.race.weight_high / 1000:
+                if weight < conn.new_player.race.weight_low // 1000 or weight > conn.new_player.race.weight_high // 1000:
                     err_msg_weight = "I limiti del peso, relativamente alla razza da te scelta, sono tra %d e %d" % (
-                        conn.new_player.race.weight_low / 1000, conn.new_player.race.weight_high / 1000)
+                        conn.new_player.race.weight_low // 1000, conn.new_player.race.weight_high // 1000)
 
         err_msg_haircolor = ""
         err_msg_hairtype = ""
@@ -153,7 +153,7 @@ class CreatePlayer2Page(WebResource):
             else:
                 if hair_length < 0 or hair_length >= conn.new_player.race.height_low:
                     err_msg_hairlength = "La lunghezza dei capelli deve essere un numero tra lo 0 e %d" % (
-                        conn.new_player.race.height_low / 2)
+                        conn.new_player.race.height_low // 2)
 
         err_msg_eyecolor = ""
         if not eye_color:
@@ -167,7 +167,7 @@ class CreatePlayer2Page(WebResource):
 
         err_msg_hand = ""
         if not hand:
-            err_msg_hand = "Scegli qual'Ë la %s principale del tuo futuro personaggio" % conn.new_player.race.hand
+            err_msg_hand = "Scegli qual'ù la %s principale del tuo futuro personaggio" % conn.new_player.race.hand
             hand = HAND.NONE
 
         err_msg_name = ""
@@ -215,7 +215,7 @@ class CreatePlayer2Page(WebResource):
             database["players"][conn.new_player.code]  = conn.new_player
             conn.new_player                            = None
 
-            # Se c'Ë solo il nuovo personaggio nel database allora gli dona
+            # Se c'ù solo il nuovo personaggio nel database allora gli dona
             # il massimo dei permessi
             if len(database["players"]) == 1:
                 conn.player.trust = TRUST.IMPLEMENTOR
@@ -241,7 +241,7 @@ class CreatePlayer2Page(WebResource):
         # Prepara il form con i dati per la creazione di un nuovo personaggio
         form = []
         row = create_form_row(form)
-        row.label   = '''Et‡'''
+        row.label   = '''Etù'''
         row.field   = '''<input type="text" name="age" maxlength="3" size="6" value="%s" />''' % age
         row.message = err_msg_age
 

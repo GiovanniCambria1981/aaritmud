@@ -474,7 +474,7 @@ def count_colors(argument):
     position = 0
     while 1:
         bracket_open, bracket_close, style = _find_color(argument, position)
-        print bracket_open, bracket_close, style
+        print(bracket_open, bracket_close, style)
         if bracket_open == -1 and bracket_close == -1:
             break
         if style and style != "close":

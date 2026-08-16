@@ -124,7 +124,7 @@ class Command(Data):
 #= FUNZIONI ====================================================================
 
 def import_modules_and_functions():
-    for command in database["commands"].itervalues():
+    for command in database["commands"].values():
         command.import_module_and_function()
 #- Fine Funzione -
 
@@ -134,7 +134,7 @@ def check_commands_fun_name():
     Controlla che esista almeno e solo una funzione di comando non alternativa
     per ogni lista di inputs.
     """
-    for command in database["commands"].itervalues():
+    for command in database["commands"].values():
         command_type = command.fun_name[ : command.fun_name.find("_")]
 
         # Controlla prima che una funzione di comando non si trovi in una

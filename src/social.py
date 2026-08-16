@@ -73,7 +73,7 @@ class Social(Data):
         """
         Controlla tutti i messaggi di social razziali
         """
-        for racial_message in self.racial_messages.itervalues():
+        for racial_message in self.racial_messages.values():
             msg = racial_message.get_error_message()
             if msg:
                 return msg
@@ -190,7 +190,7 @@ class Social(Data):
 
         # Crea una lista con tutti i social con l'intenzione voluta
         socials = []
-        for social in database["socials"].itervalues():
+        for social in database["socials"].values():
             if social.intention == self.intention:
                 socials.append(social)
 

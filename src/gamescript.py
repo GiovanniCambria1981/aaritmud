@@ -8,6 +8,7 @@ Modulo per la gestione generica dei gamescript.
 #= IMPORT ======================================================================
 
 import datetime
+from importlib import reload
 import os
 import sys
 
@@ -415,7 +416,7 @@ def create_tooltip_specials(conn, obj):
 
     tooltip = ["[royalblue]Specials[close]"]
 
-    for key, value in obj.specials.iteritems():
+    for key, value in obj.specials.items():
         if value:
             tooltip.append("%s = %s" % (key, html_escape(str(value))))
         else:

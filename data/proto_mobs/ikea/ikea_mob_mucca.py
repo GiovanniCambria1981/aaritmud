@@ -18,5 +18,5 @@ def before_killed(entity, target, attack, destroy, behavioured):
 #- Fine Funzione -
 
 def after_touched(player, mucca, descr, detail, behavioured):
-    print "script mukka ikea: ", mucca.position
+    print("script mukka ikea: ", mucca.position)
 #- Fine Funzione -

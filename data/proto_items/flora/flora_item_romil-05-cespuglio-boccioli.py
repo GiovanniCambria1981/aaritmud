@@ -34,11 +34,11 @@ PROTO_ROSA_CODE = "flora_item_romil-10-rosa"
 
 def on_next_stage(old_entity, new_entity, choised_attr, entities):
     if old_entity.specials and 'ancestors' in old_entity.specials and old_entity.specials['ancestors']:
-        print "#### ROMIL - NEXT STAGE - *** copia pedigree ***"
+        print("#### ROMIL - NEXT STAGE - *** copia pedigree ***")
         for key in old_entity.specials:
             new_entity.specials[key] = old_entity.specials[key]
     else:
-        print "#### ROMIL - NEXT STAGE - *** nessuna copia ***"
+        print("#### ROMIL - NEXT STAGE - *** nessuna copia ***")
     # qui mi limito a prendere le rose già caricate nel cespuglio,
     # le scorro applicando genotipo ed esprimendolo in modo ascii
     # applico a n-1 rose una mutazione che è solo visiva e non inficia sulle successive generazioni
@@ -54,7 +54,7 @@ def on_next_stage(old_entity, new_entity, choised_attr, entities):
         for flower_entity in new_entity.iter_contains(use_reversed=True):
             # Qui scorre il gruppo fisico come 1 oggetto unico
             if flower_entity.prototype.code == PROTO_ROSA_CODE:
-                for enne in xrange(flower_entity.quantity):
+                for enne in range(flower_entity.quantity):
 
                     splitted = flower_entity.split_entity(1)
 

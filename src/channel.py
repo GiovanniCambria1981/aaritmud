@@ -188,7 +188,7 @@ def rpg_channel(entity, argument, channel, ask=False, exclaim=False, behavioured
         return False
 
     # Cerca eventuali smiles nella stringa controllando gli ultimi caratteri
-    for social in database["socials"].itervalues():
+    for social in database["socials"].values():
         if not social.smiles:
             continue
         for single_smile in social.smiles.split():
@@ -478,7 +478,7 @@ def talk_channel(entity, channel, argument):
         return False
 
     argument = convert_urls(argument)
-    for player in database["players"].itervalues():
+    for player in database["players"].values():
         if not player.game_request:
             continue
         if player == entity:

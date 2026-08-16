@@ -21,31 +21,30 @@ from twisted.internet import reactor
 #= INSTALL =====================================================================
 
 # Si assicura che il gioco sia avviato con la versione di Python corretta
-if hasattr(sys, "version_info"):
-    if (2, 7) > sys.version_info >= (3, 0):
-        raise RuntimeError("Il gioco ha bisogno della versione di Python tra la 2.7.")
+if sys.version_info < (3, 8):
+    raise RuntimeError("Aarit richiede Python 3.8 o superiore. Trovato: %s" % sys.version)
 
 _use_epoll = False
 try:
     from twisted.internet import epollreactor
     epollreactor.install()
     _use_epoll = True
-    print "Verra' utilizzato l'epoll di Linux, più performante"
+    print("Verra' utilizzato l'epoll di Linux, più performante")
 except AssertionError:
-    print "E' gia' stato trovato installato l'epollreactor di Linux, più' performante"
+    print("E' gia' stato trovato installato l'epollreactor di Linux, più' performante")
     _use_epoll = True
 except:
-    print "Verra' utilizzata la select di default, meno performante"
-    print "(normale se stai utilizzando un OS differente da Linux)\n"
+    print("Verra' utilizzata la select di default, meno performante")
+    print("(normale se stai utilizzando un OS differente da Linux)\n")
 
 try:
     from numpy import random as numpy_random
 except ImportError:
-    print "La libreria opzionale numpy non è installata, alcune funzioni del modulo"
-    print "random risulteranno piu' lente\n"
+    print("La libreria opzionale numpy non è installata, alcune funzioni del modulo")
+    print("random risulteranno piu' lente\n")
 else:
-    print "Verranno utilizzate alcune funzioni random della libreria numpy,"
-    print "piu' performanti, al posto di quelle standard\n"
+    print("Verranno utilizzate alcune funzioni random della libreria numpy,")
+    print("piu' performanti, al posto di quelle standard\n")
     import random
     random.randint   = numpy_random.random_integers
     random.randrange = numpy_random.randint
@@ -58,7 +57,7 @@ class OptionParser(object):
         # Legge le opzioni di riga di comando
         self.options = self.parse_options()
         if not self.options:
-            print "opzioni parsate da riga di comando errate: %r" % self.options
+            print("opzioni parsate da riga di comando errate: %r" % self.options)
             sys.exit(1)
     #- Fine Inizializzazione -
 
@@ -81,14 +80,14 @@ class OptionParser(object):
         try:
             umask = int(options.umask)
         except ValueError:
-            print "Il valore della riga di comando umask e' errato: %s" % options.umask
+            print("Il valore della riga di comando umask e' errato: %s" % options.umask)
             sys.exit(1)
         if umask < 0 or umask > 7777:
-            print "Il valore della riga di comando umask non e' tra 0 e 7777"
+            print("Il valore della riga di comando umask non e' tra 0 e 7777")
             sys.exit(1)
         if umask != 0:
             os.umask(umask)
-            print "umask dei permessi impostata a %s" % umask
+            print("umask dei permessi impostata a %s" % umask)
 
         return options
     #- Fine Metodo -
@@ -144,7 +143,7 @@ class OptionParser(object):
             if config.mail_on_enter_in_game:
                 self.wait_for_the_answer("log_player_output", "Verrà inviata una mail per i personaggi che entreranno nel gioco nonostante questo sia un server di testing.")
         else:
-            print "Opzione di avvio mode non valida: %s" % self.options.mode
+            print("Opzione di avvio mode non valida: %s" % self.options.mode)
     #- Fine Metodo -
 
     def wait_for_the_answer(self, config_option, message):
@@ -152,7 +151,7 @@ class OptionParser(object):
 
         while 1:
             config_option_value = getattr(config, config_option)
-            response = raw_input("%s a %s. %s Vuoi mantenere il valore? S/N > " % (
+            response = input("%s a %s. %s Vuoi mantenere il valore? S/N > " % (
                 config_option, config_option_value, message))
             if response.lower() in ("n", "no"):
                 setattr(config, config_option, not config_option_value)
@@ -160,7 +159,7 @@ class OptionParser(object):
             elif response.lower() in ("s", "sì", "si"):
                 break
             else:
-                print "Risposta non valida, Sì o No? >"
+                print("Risposta non valida, Sì o No? >")
     #- Fine Metodo -
 
 
@@ -198,7 +197,7 @@ class Engine(OptionParser):
 
         log.platform_infos()
 
-        print "Cancella tutti i file compilati per forzarne la ricompilazione"
+        print("Cancella tutti i file compilati per forzarne la ricompilazione")
         remove_compiled_files()
 
         try:
@@ -354,7 +353,7 @@ class Engine(OptionParser):
         log.booting("Il gioco %s è pronto alla porta http %d" % (remove_colors(config.game_name), config.http_port))
 
         if self.options.boot_only:
-            print "Esecuzione del solo boot terminata."
+            print("Esecuzione del solo boot terminata.")
             sys.exit(0)
 
         log.booting("===========================================================================")
@@ -475,7 +474,7 @@ def remove_compiled_files():
                 try:
                     os.remove(path)
                 except OSError:
-                    print "Il tentativo di cancellazione del file è fallito: %s" % path
+                    print("Il tentativo di cancellazione del file è fallito: %s" % path)
 #- Fine Funzione -
 
 

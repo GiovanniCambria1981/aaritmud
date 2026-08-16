@@ -136,24 +136,24 @@ def crea_gemma(id_gemma, player, tagliapietre, gemma_grezza, room):
     colored_name = colored_name[:num]
     # ATTENZIONE MANCANO LE KEYWORDS!! (forse esiste un metodo per crearle automaticamanete)
     gemma_lavorata.name = colored_name + " con taglio a " + GEMME_DATA["brillante ovale"][0] 
-    gemma_lavorata.short = string.lower(gemma_lavorata.name)
+    gemma_lavorata.short = (gemma_lavorata.name).lower()
     if "'" in colored_name:
-        num = string.find(colored_name, "'")
+        num = (colored_name).find("'")
     else:
-        num = string.find(colored_name, " ")
+        num = (colored_name).find(" ")
     colored_name = colored_name[num+1:]
-    colored_name_lower = string.lower(colored_name)
+    colored_name_lower = (colored_name).lower()
      
     # OBJ INJECTION
     gemma_lavorata.inject(room)
     # ---- #
     descr = GEMME_DATA['brillante ovale'][1] 
-    descr = string.replace(descr,'$ColoredName' , colored_name_lower)
+    descr = (descr).replace('$ColoredName' , colored_name_lower)
     gemma_lavorata.descr = descr
-    print ">>>>>>>>>>>>>>>>>>>>>>>>:+", colored_name   
-    print ">>>>>>>>>>>>>>>>>>>>>>>>:+", descr
-    print ">>>>>>>>>>>>>>>>>>>>>>>>:+", gemma_lavorata.sex
-    print ">>>>>>>>>>>>>>>>>>>>>>>>:+", gemma_grezza.sex()
+    print(">>>>>>>>>>>>>>>>>>>>>>>>:+", colored_name)
+    print(">>>>>>>>>>>>>>>>>>>>>>>>:+", descr)
+    print(">>>>>>>>>>>>>>>>>>>>>>>>:+", gemma_lavorata.sex)
+    print(">>>>>>>>>>>>>>>>>>>>>>>>:+", gemma_grezza.sex())
     return False
 
 # Questo serve per debug, se si fa uno shake al mob si resetta la special

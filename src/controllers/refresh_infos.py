@@ -9,6 +9,7 @@ Modulo per la lettura e l'invio dei messaggi sulla Piazzetta.
 
 import pprint
 
+from importlib import reload
 from src.config       import config
 from src.color        import convert_colors
 from src.log          import log
@@ -35,7 +36,7 @@ class RefreshInfosPage(WebResource):
 
     NEW_PAGE = True
 
-    # Il metodo GET non è supportato volutamente
+    # Il metodo GET non ï¿½ supportato volutamente
 
     def render_POST(self, request, conn):
         if not conn:
@@ -60,7 +61,7 @@ class RefreshInfosPage(WebResource):
                 else:
                     response["last_square_message"] = ""
             else:
-                log.bug("last_refresh_id non è un numero: " % request.args["last_refresh_id"][0])
+                log.bug("last_refresh_id non ï¿½ un numero: " % request.args["last_refresh_id"][0])
 
         return pprint.pformat(response, indent=0)
     #- Fine Metodo -

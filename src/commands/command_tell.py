@@ -104,7 +104,7 @@ def search_for_player(entity, argument):
     number, argument = number_argument(argument)
 
     counter = 1
-    for player in database["players"].itervalues():
+    for player in database["players"].values():
         if not player.game_request:
             continue
         if player.incognito and player.trust > entity.trust:
@@ -115,7 +115,7 @@ def search_for_player(entity, argument):
             counter += 1
 
     counter = 1
-    for player in database["players"].itervalues():
+    for player in database["players"].values():
         if not player.game_request:
             continue
         if player.incognito and player.trust > entity.trust:
@@ -127,7 +127,7 @@ def search_for_player(entity, argument):
 
     # Cerca ora tra i giocatori offline, giusto per ritornare un qualcosa
     counter = 1
-    for player in database["players"].itervalues():
+    for player in database["players"].values():
         if player.game_request:
             continue
         if player.incognito and player.trust > entity.trust:
@@ -138,7 +138,7 @@ def search_for_player(entity, argument):
             counter += 1
 
     counter = 1
-    for player in database["players"].itervalues():
+    for player in database["players"].values():
         if player.game_request:
             continue
         if player.incognito and player.trust > entity.trust:

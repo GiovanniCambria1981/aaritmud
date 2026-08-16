@@ -72,11 +72,11 @@ class TestInputsPage(WebResource):
         engine.test_inputs_mode = True
         #time_start = time.time()
 
-        for area in database["areas"].itervalues():
+        for area in database["areas"].values():
             for entity in area.iter_contains():
                 self.test_inputs(entity)
 
-        for player in database["players"].itervalues():
+        for player in database["players"].values():
             if not player.location and (not player.previous_location or not player.previous_location()):
                 player.enter_in_game()
                 self.test_inputs(player)
@@ -101,7 +101,7 @@ class TestInputsPage(WebResource):
 
     def create_test_arguments(self):
         argument = "".join(random.sample(LETTERS, config.min_len_name+2))
-        for len in xrange(1, config.min_len_name+2):
+        for len in range(1, config.min_len_name+2):
             arg = argument[ : len].strip()
             if not arg: 
                 continue

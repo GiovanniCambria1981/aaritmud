@@ -9,6 +9,7 @@ informazioni su certe cose.
 #= IMPORT ======================================================================
 
 from src.command import get_command_syntax
+from importlib import reload
 from src.config  import config
 from src.enums   import OPTION, TO
 from src.log     import log

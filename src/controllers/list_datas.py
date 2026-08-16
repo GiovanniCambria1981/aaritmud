@@ -49,7 +49,7 @@ class ListDatasPage(WebResource):
             if not search_for:
                 continue
             at_least_one_search = True
-            for code, data in database[table_name].iteritems():
+            for code, data in database[table_name].items():
                 data_attr = str(getattr(data, attr))
                 if not data_attr:
                     continue

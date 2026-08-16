@@ -9,6 +9,7 @@ forzato sui soli oggetti di tipologia contenitore.
 #= IMPORT ======================================================================
 
 from src.config     import config
+from importlib import reload
 from src.gamescript import check_trigger
 from src.log        import log
 

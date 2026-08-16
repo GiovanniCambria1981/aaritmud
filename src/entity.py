@@ -1183,7 +1183,7 @@ class ProtoEntity(Describable, Data, Act, MIMLParserSuperclass, FindEntitySuperc
                             conn.get_id(), conn.player.idle_seconds if conn.player else -1, len(conn.buffer))
                         log.write_overbuffer(conn.buffer)
                         if avoid_log:
-                            print message
+                            print(message)
                         else:
                             log.conn(message)
                         conn.buffer = ""
@@ -1703,8 +1703,8 @@ class ProtoEntity(Describable, Data, Act, MIMLParserSuperclass, FindEntitySuperc
 
         # Se c'è un tempo di morte allora lo attiva qui, e solo qui, nell'inject
         if self.extract_timeout:
-            minutes = random.randint(self.extract_timeout.minutes - (self.extract_timeout.minutes / 10),
-                                     self.extract_timeout.minutes + (self.extract_timeout.minutes / 10))
+            minutes = random.randint(self.extract_timeout.minutes - (self.extract_timeout.minutes // 10),
+                                     self.extract_timeout.minutes + (self.extract_timeout.minutes // 10))
             self.extract_timeout.deferred = defer(minutes * config.seconds_in_minute, self.extract_timeout.execute, self)
 
         if not avoid_triggers:
@@ -1944,7 +1944,7 @@ class ProtoEntity(Describable, Data, Act, MIMLParserSuperclass, FindEntitySuperc
                 continue
             if not target.is_empty():
                 continue
-            for attr_name, value in self.__dict__.iteritems():
+            for attr_name, value in self.__dict__.items():
                 if attr_name in except_these_attrs:
                     continue
                 target_value = getattr(target, attr_name)
@@ -2484,7 +2484,7 @@ class ProtoEntity(Describable, Data, Act, MIMLParserSuperclass, FindEntitySuperc
             if value > 1000 or random.randint(0, 100) == 0:
                 area_code = self.area.landfill_code.split("_room", 1)[0]
                 area = database["areas"][area_code]
-                for room in area.rooms.itervalues():
+                for room in area.rooms.values():
                     if room.prototype.code == self.area.landfill_code:
                         # Da notare che ne salva per una quantità di 1
                         to_save = self.from_location(1, use_repop=True)  # (TT) forse ci sono dei casi che richiedereanno che questa riga stia sotto un 'if location:'

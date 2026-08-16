@@ -7,6 +7,7 @@ Modulo per la gestione del comando use.
 #= IMPORT ======================================================================
 
 from src.config     import config
+from importlib import reload
 from src.command    import get_command_syntax
 from src.enums      import CONTAINER, DOOR, ENTITYPE, OPTION, TO
 from src.gamescript import check_trigger
@@ -53,10 +54,10 @@ VERBS = {"infinitive" : "[orange]usare[close]",
 
 def command_use(entity, argument="", verbs=VERBS, behavioured=False):
     """
-    Permette di usare un'entità, tenterà di usare il comando relativo all'entità
+    Permette di usare un'entitï¿½, tenterï¿½ di usare il comando relativo all'entitï¿½
     e al suo stato.
     """
-    # È possibile se il comando è stato deferrato
+    # ï¿½ possibile se il comando ï¿½ stato deferrato
     if not entity:
         return False
 
@@ -84,9 +85,9 @@ def command_use(entity, argument="", verbs=VERBS, behavioured=False):
         entity.act("$n sembra cercare qualcosa che non riesce proprio a trovare.", TO.ENTITY)
         return False
 
-    # È voluto che i trigger di use scattino anche su entità che non hanno una
-    # struttura di entitype valida, questo per dare la possibilità di inserire
-    # trigger su entità qualsiasi in maniera tale da poterle utilizzare per far
+    # ï¿½ voluto che i trigger di use scattino anche su entitï¿½ che non hanno una
+    # struttura di entitype valida, questo per dare la possibilitï¿½ di inserire
+    # trigger su entitï¿½ qualsiasi in maniera tale da poterle utilizzare per far
     # scattare una qualsiasi cosa usandoli.
     # Ricordo che se in un trigger viene ritornato un valore True il normale
     # flusso di codice viene fermato, ecco cosa serve il force_return.
@@ -126,20 +127,20 @@ def command_use(entity, argument="", verbs=VERBS, behavioured=False):
     elif target_for_eat_drink and target_for_eat_drink.entitype == ENTITYPE.FOOD:
         return command_eat(entity, original_argument, behavioured=behavioured)
 
-    # La ricerca del seme nel comando seme è uguale a quella del cibo e delle
-    # bevande, ecco perchè viene utilizzato comunque target_for_eat_drink
+    # La ricerca del seme nel comando seme ï¿½ uguale a quella del cibo e delle
+    # bevande, ecco perchï¿½ viene utilizzato comunque target_for_eat_drink
     elif target_for_eat_drink and target_for_eat_drink.entitype == ENTITYPE.SEED:
         return command_seed(entity, original_argument, behavioured=behavioured)
 
-    # La ricerca della pianta è uguale a quella del seme più sotto
+    # La ricerca della pianta ï¿½ uguale a quella del seme piï¿½ sotto
     elif target_for_eat_drink and target_for_eat_drink.entitype == ENTITYPE.PLANT:
         return command_plant(entity, original_argument, behavioured=behavioured)
 
     elif target_for_enter and target_for_enter.entitype == ENTITYPE.PORTAL:
         return command_enter(entity, original_argument, behavioured=behavioured)
 
-    # C'è da notare relativamente al read che con il comando use non è possibile
-    # leggere entità dentro altre entità, poco male direi...
+    # C'ï¿½ da notare relativamente al read che con il comando use non ï¿½ possibile
+    # leggere entitï¿½ dentro altre entitï¿½, poco male direi...
     elif target_for_read and target_for_read.entitype == ENTITYPE.READABLE:
         return command_read(entity, original_argument, behavioured=behavioured)
 
@@ -171,8 +172,8 @@ def command_use(entity, argument="", verbs=VERBS, behavioured=False):
     entity.act("$n non sa proprio come poter %s $N." % verbs["infinitive"], TO.OTHERS, target)
     entity.act("$n non sa proprio come poter %s." % verbs["you2"], TO.TARGET, target)
 
-    # Per saperne di più sul perché questi trigger si trovato a questo livello
-    # è bene leggersi il commento in alto relativo agli altri trigger che vale
+    # Per saperne di piï¿½ sul perchï¿½ questi trigger si trovato a questo livello
+    # ï¿½ bene leggersi il commento in alto relativo agli altri trigger che vale
     # anche per questa coppia
     force_return = check_trigger(entity, "after_use", entity, target, argument, behavioured)
     if force_return:
@@ -188,7 +189,7 @@ def command_use(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

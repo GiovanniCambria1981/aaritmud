@@ -174,7 +174,7 @@ Notes
 
 '''  #PYCHOK expected
 
-from __future__ import generators  #PYCHOK for yield in Python 2.2
+
 
 from inspect    import (isbuiltin, isclass, iscode, isframe,
                         isfunction, ismethod, ismodule, stack)
@@ -1175,8 +1175,8 @@ try:  # bool has non-zero __itemsize__ in 3.0
 except NameError:  # missing
     pass
 
-try:  # ignore basestring
-    _typedef_both(basestring, leng=None)
+try:  # ignore str
+    _typedef_both(str, leng=None)
 except NameError:  # missing
     pass
 
@@ -1341,7 +1341,7 @@ try:  # reversed list and tuples iterators
 except NameError:  # missing
     pass
 try:  # range iterator
-    s.append(xrange(1))
+    s.append(range(1))
 except NameError:  # missing
     pass
 try:  # callable-iterator

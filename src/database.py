@@ -178,7 +178,7 @@ class Database(dict):
         # in bytes le stringhe di gioco, giusto così, per curiosità
         #total = 0
         #for table_name in ("proto_rooms", "proto_items", "proto_mobs"):
-        #    for data in self[table_name].itervalues():
+        #    for data in self[table_name].values():
         #        for attr_name in data.__dict__:
         #            if attr_name in data.MULTILINES:
         #                total += len(getattr(data, attr_name))
@@ -332,24 +332,24 @@ class Database(dict):
         dal proprio codice.
         """
         for table_name in ("rooms", "items", "mobs"):
-            for data in self[table_name].itervalues():
+            for data in self[table_name].values():
                 data.add_proto_reference()
     #- Fine Metodo -
 
     def add_location_references(self):
         for table_name in ("rooms", "items", "mobs", "players"):
-            for data in self[table_name].itervalues():
+            for data in self[table_name].values():
                 data.add_location_reference()
     #- Fine Metodo -
 
     def add_door_references(self):
-        for room in self["rooms"].itervalues():
+        for room in self["rooms"].values():
             room.add_door_reference()
     #- Fine Metodo -
 
     def check_all_references(self):
         for table_name in ("items", "mobs"):
-            for data in self[table_name].itervalues():
+            for data in self[table_name].values():
                 error_founded = data.check_references()
                 if error_founded:
                     self.reference_error_found = True
@@ -357,7 +357,7 @@ class Database(dict):
 
     def refresh_global_quantities(self):
         for table_name in ("items", "mobs"):
-            for data in self[table_name].itervalues():
+            for data in self[table_name].values():
                 data.refresh_global_quantity()
     #- Fine Metodo -
 
@@ -393,7 +393,7 @@ class Database(dict):
         typos_file = self.load_typos_file()
 
         for table_name in ("proto_rooms", "proto_items", "proto_mobs"):
-            for data in self[table_name].itervalues():
+            for data in self[table_name].values():
                 data.spelling(dictionary=dictionary, typos_file=typos_file)
     #- Fine Metodo -
 
@@ -406,7 +406,7 @@ class Database(dict):
         # questo pezzo di codice è meglio che rimanga
         log.convert("Converte tutti i valori di damage erronei nelle armi")
         for table_name in ("items", "mobs"):
-            for data in self[table_name].itervalues():
+            for data in self[table_name].values():
                 if not data.weapon_type:
                     continue
                 if data.weapon_type.damage == 0 or data.weapon_type.damage == "0":
@@ -441,19 +441,19 @@ class Database(dict):
 
     def check_max_global_quantities(self):
         for table_name in ("proto_mobs", "proto_items"):
-            for data in self[table_name].itervalues():
+            for data in self[table_name].values():
                 data.check_max_global_quantity()
     #- Fine Metodo -
 
     def check_for_all_icon_files(self):
         for table_name in ("proto_mobs", "proto_items", "proto_rooms", "mobs", "items", "rooms", "players"):
-            for data in self[table_name].itervalues():
+            for data in self[table_name].values():
                 data.check_for_icon_files()
     #- Fine Metodo -
 
     def create_randomizable_list(self):
         for table_name in ("proto_mobs", "proto_items"):
-            for data in self[table_name].itervalues():
+            for data in self[table_name].values():
                 if FLAG.RANDOMIZABLE in data.flags:
                     self.randomizable_codes.append(data.code)
     #- Fine Metodo -
@@ -472,7 +472,7 @@ class Database(dict):
 
     def create_seed_list(self):
         for table_name in ("proto_mobs", "proto_items"):
-            for data in self[table_name].itervalues():
+            for data in self[table_name].values():
                 if data.entitype == ENTITYPE.SEED:
                     self.seed_codes.append(data.code)
     #- Fine Metodo -
@@ -590,7 +590,7 @@ class Database(dict):
         # Ora esegue il controllo dal punto di vista delle aree, perché
         # potrebbe essere che alcuni dati si trovino nelle liste delle aree
         # ma non nel database
-        for area in self["areas"].itervalues():
+        for area in self["areas"].values():
             for table_name in ("rooms", "items", "mobs"):
                 if table_name == "rooms":
                     datas = area.rooms.values()
@@ -641,11 +641,11 @@ class Database(dict):
             if not error:
                 error = "Dato %s di tipo %s senza l'attributo area." % (data_code, table_name)
 
-        if isinstance(data.area, basestring):
+        if isinstance(data.area, str):
             if not error:
                 error = "Dato %s di tipo %s con l'attributo area come stringa: %r" % (data_code, table_name, self.area)
 
-        if data.area and not isinstance(data.area, basestring):
+        if data.area and not isinstance(data.area, str):
             # Questo test serve solo ai dati controllati nelle aree, quelli
             # del database è ovvio che si trovino lì vista l'iterazione per
             # passarli tutti
@@ -733,7 +733,7 @@ class Database(dict):
         for table_name in ("rooms", "items", "mobs"):
             log.save("-> %s" % table_name)
             data_counter = 0
-            for data_code, data in self[table_name].iteritems():
+            for data_code, data in self[table_name].items():
                 # Se si è deciso di eseguire uno shutdown salvando solo le
                 # persistenze relative ai giocatori allora esegue il controllo
                 if self.only_player_persistence and table_name != "rooms":
@@ -768,7 +768,7 @@ class Database(dict):
     def save_account_datas(self):
         counter = 0
 
-        for account_code, account in sorted(self["accounts"].iteritems()):
+        for account_code, account in sorted(self["accounts"].items()):
             log.save("-> %s: %d personaggi%s" % (
                 account_code, len(account.players), "" if len(account.players) != 1 else "o"))
             account_path = "persistence/accounts/%s.dat" % account_code
@@ -787,7 +787,7 @@ class Database(dict):
     def save_player_datas(self):
         counter = 0
 
-        for player_code, player in sorted(self["players"].iteritems()):
+        for player_code, player in sorted(self["players"].items()):
             if not player.account:
                 log.bug("player.account non è valido: %r" % player.account)
                 continue
@@ -812,7 +812,7 @@ class Database(dict):
     def save_news_datas(self):
         counter = 0
 
-        for new_code, new in sorted(self["news"].iteritems()):
+        for new_code, new in sorted(self["news"].items()):
             new_path = "persistence/news/%s.dat" % new_code
             try:
                 new_file = open(new_path, "w")
@@ -1304,7 +1304,7 @@ def fread(file, module_name, class_name, indent=0, parent_line="", parent_attr="
                 setattr(data, attr, var)
             # Se la variabile è una stringa ne salva la linea trovata
             # impostando la variabile reading_a_string a True
-            elif isinstance(var, basestring):
+            elif isinstance(var, str):
                 reading_a_string = True
                 # Salva l'attributo letto riguardante la stringa per poi,
                 # eventualmente, aggiungerci altre linee lette
@@ -1514,7 +1514,7 @@ def fread_number(file, word, attr, typology="un numero valido"):
         number = int(word)
     except ValueError:
         try:
-            number = long(word)
+            number = int(word)
         except ValueError:
             log.bug("La parola %s letta dal file %s, relativa all'attributo %s, non è %s" % (
                 word, file.name, attr, typology))
@@ -1860,7 +1860,7 @@ def fwrite(file, data, data_label="", indentation=""):
                             fwrite(file, sub_value, label, "%s\t" % indentation)
                             file.write("%sEnd\n" % indentation[1 : ])
             elif isinstance(attr, dict):
-                for sub_key, sub_value in attr.iteritems():
+                for sub_key, sub_value in attr.items():
                     if sub_class_name == "str":
                         file.write("%s%s %s %s\n" % (indentation, label.strip(), sub_key, sub_value))
                     elif sub_class_name == "int":
@@ -1898,7 +1898,7 @@ def fwrite(file, data, data_label="", indentation=""):
                 file.write("%sEnd\n" % indentation[1 : ])
         elif type(attr) in (int, long):
             fwrite_number(file, attr, attr_name, label, indentation)
-        elif isinstance(attr, basestring):
+        elif isinstance(attr, str):
             fwrite_string(file, attr, attr_name, label, indentation)
         elif type(attr) == bool:
             fwrite_bool(file, attr, attr_name, label, indentation)
@@ -1912,7 +1912,7 @@ def fwrite(file, data, data_label="", indentation=""):
                 file.write("\n")
         # Supporto ai dizionari formati da sole stringhe
         elif isinstance(attr, dict):
-            for key, value in attr.iteritems():
+            for key, value in attr.items():
                 file.write("%s%-14s %s %s\n" % (indentation, label, key, value))
         else:
             log.bug("Tipologia di variabile %s passata tramite l'attributo %s non gestibile dalla fwrite al file %s" % (
@@ -2126,8 +2126,8 @@ def fwrite_measure(file, var, attr, label, indentation=""):
 
     if var > 0:
         cm_value_string = str(var)
-        m_value_string  = str(var / 1000)
-        km_value_string = str(var / 1000000)
+        m_value_string  = str(var // 1000)
+        km_value_string = str(var // 1000000)
 
         lengths = [cm_value_string, m_value_string, km_value_string]
 
@@ -2171,9 +2171,9 @@ def fwrite_weight(file, var, attr, label, indentation=""):
 
     if var > 0:
         g_value_string  = str(var)
-        kg_value_string = str(var / 1000)
-        q_value_string  = str(var / 1000000)
-        t_value_string  = str(var / 1000000000)
+        kg_value_string = str(var // 1000)
+        q_value_string  = str(var // 1000000)
+        t_value_string  = str(var // 1000000000)
 
         weights = [g_value_string, kg_value_string, q_value_string, t_value_string]
 
@@ -2281,7 +2281,7 @@ def _check_all_strings(table_name, data_code, data):
                 _check_all_strings(table_name, data_code, key)
             if data[key]:
                 _check_all_strings(table_name, data_code, data[key])
-    elif isinstance(data, basestring):
+    elif isinstance(data, str):
         # Cicla alla ricerca di caratteri speciali saltando \n e \r
         for c in data:
             if c in UNALLOWED_CHARS:

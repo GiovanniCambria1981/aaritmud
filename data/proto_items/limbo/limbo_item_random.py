@@ -19,7 +19,7 @@ DELAY = 1
 def on_repop(item):
     if not item.specials or not "numero_di_repop" in item.specials:
         item.specials["numero_di_repop"] = 0
-    print "oggetto numero random repopped"
+    print("oggetto numero random repopped")
     defer(DELAY, loop_test, item)
 #- Fine Funzione -
 

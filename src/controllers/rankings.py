@@ -34,7 +34,7 @@ class RankingsPage(WebResource):
 
     def create_page(self, request, conn):
         # Prepara il form con i dati per xxx
-#        form = [["" for y in xrange(3)] for x in xrange()]
+#        form = [["" for y in range(3)] for x in range()]
 #        form[0][0]  = ''''''
 #        form[0][1]  = ''''''
 #        if not correct_:

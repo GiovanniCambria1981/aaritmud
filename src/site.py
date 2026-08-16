@@ -9,6 +9,7 @@ Serve a gestire il sito web del gioco.
 
 import os
 
+from importlib import reload
 from twisted.web import script, server, static
 
 from src.utility import to_capitalized_words

@@ -4,7 +4,7 @@ una immagine wild di settori da cui partire per poi inserirvi il resto: strade,
 fiumi, città, etc etc...
 """
 
-import Image
+from PIL import Image
 
 altitude_colors = (
      ((  0,   0,  68), -15),  # Oceani, mari o laghi

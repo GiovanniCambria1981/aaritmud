@@ -9,7 +9,7 @@ Modulo per la gestione della wilderness.
 
 import math
 
-import Image  # PIL library
+from PIL import Image library
 
 from src.calendar import calendar
 from src.database import database
@@ -149,8 +149,8 @@ def load_wild():
     wild_width = altitudes_image.size[0]
     wild_height = altitudes_image.size[1]
     # Inizializza le liste multidimensionali alla grandezza dell'immagine
-    wild_altitudes = [[0 for y in xrange(wild_height)] for x in xrange(wild_width)]
-    wild_sectors   = [[SECTOR.SEA for y in xrange(wild_height)] for x in xrange(wild_width)]
+    wild_altitudes = [[0 for y in range(wild_height)] for x in range(wild_width)]
+    wild_sectors   = [[SECTOR.SEA for y in range(wild_height)] for x in range(wild_width)]
 
     # Ricava tutte le informazioni dai colori delle immagini
     for pixel in altitudes_image.getdata():
@@ -181,9 +181,9 @@ def get_coords_around(entity, radius):
         yield (entity.location.x, entity.location.y, entity.location.z)
     else:
         # (TD) per i limiti laterali deve calcolare le coordinate dell'altro lato
-        for x in xrange(entity.location.x - radius, entity.location.x + radius + 1):
-            for y in xrange(entity.location.y - radius, entity.location.y + radius + 1):
-                for z in xrange(entity.location.z - radius, entity.location.z + radius + 1):
+        for x in range(entity.location.x - radius, entity.location.x + radius + 1):
+            for y in range(entity.location.y - radius, entity.location.y + radius + 1):
+                for z in range(entity.location.z - radius, entity.location.z + radius + 1):
                     # Salta le coordinate dell'entità stessa.
                     if (x, y, z) == (entity.location.x, entity.location.y, entity.location.z):
                         continue
@@ -365,12 +365,12 @@ def create_wild_to_show(entity):
     last_fore_color = "lightgray"
 
     radius = get_visual_radius(entity)
-    for x in xrange(entity.location.x - radius, entity.location.x + radius):  # (TT) ci vorrà un più uno al max?
+    for x in range(entity.location.x - radius, entity.location.x + radius):  # (TT) ci vorrà un più uno al max?
         if x < 0:
             x = wild_width - x
         if x > wild_width:
             x = x - wild_width
-        for y in xrange(entity.location.y - radius, entity.location.y + radius):
+        for y in range(entity.location.y - radius, entity.location.y + radius):
             if y < 0:
                 y = wild_height - y
             if y > wild_width:
@@ -381,7 +381,7 @@ def create_wild_to_show(entity):
             symbol = " "
 
             actors = []
-            for z in xrange(entity.location.z - radius, entity.location.z + radius):
+            for z in range(entity.location.z - radius, entity.location.z + radius):
                 # Salta le coordinate fuori dal raggio della visuale
                 if (get_distance_3d(entity.location.x, entity.location.y, entity.location.z, x, y, z) > radius
                 and not entity.trust >= TRUST.MASTER):

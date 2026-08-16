@@ -9,7 +9,7 @@ Modulo per la gestione della pagina che serve ad inviare delle note agli admin.
 
 import pprint
 import string
-import urllib
+from urllib.parse import quote as _urllib_quote, unquote as _urllib_unquote
 
 from src.config       import config
 from src.log          import log
@@ -60,13 +60,13 @@ class ContactUsPage(WebResource):
     def render_POST(self, request, conn):
         subject = ""
         if "subject" in request.args:
-            subject = urllib.unquote(request.args["subject"][0])
+            subject = _urllib_unquote(request.args["subject"][0])
         message = ""
         if "message" in request.args:
-            message = urllib.unquote(request.args["message"][0])
+            message = _urllib_unquote(request.args["message"][0])
         email = ""
         if "email" in request.args:
-            email = urllib.unquote(request.args["email"][0])
+            email = _urllib_unquote(request.args["email"][0])
 
         errors = {}
         if not subject:

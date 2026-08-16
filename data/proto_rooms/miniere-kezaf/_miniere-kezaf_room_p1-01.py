@@ -144,16 +144,16 @@ def on_midnight(room):
 def gem_gen(unused_room):
     sum_relative_weight = 0
     for gem_code in GEMS_WEIGHT_DICT:
-        print "--> relative weight sum <--", sum_relative_weight
+        print("--> relative weight sum <--", sum_relative_weight)
         sum_relative_weight += GEMS_WEIGHT_DICT[gem_code]
-    print "--> final reative weight sum <--", sum_relative_weight
+    print("--> final reative weight sum <--", sum_relative_weight)
 
     area = database["areas"]["miniere-kezaf"]
     rooms = area.rooms.values()
     log.bug("start miniere kezaf", log_stack=False)
 
     rooms_to_fill = len(rooms) - 2
-    print "rooms_to_fill ", rooms_to_fill
+    print("rooms_to_fill ", rooms_to_fill)
     for room in random.sample(rooms, rooms_to_fill):
         for content in room.iter_contains():
             if FLAG.BURIED in content.flags:

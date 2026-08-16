@@ -93,7 +93,7 @@ def command_cast(entity, argument="", behavioured=False):
         runes = runes[ : -1]
     # Ricava il potere delle rune a seconda del numero di quelle pronunciate
     negative = False
-    for position in xrange(len(runes)):
+    for position in range(len(runes)):
         # Salta il calcolo del potere delle rune An che servono per invertire il
         # potere della o delle rune sucessive, più rune An
         if rune[position][RUNE_NAME] == "An":

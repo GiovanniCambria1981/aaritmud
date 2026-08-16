@@ -7,6 +7,7 @@ Permette di raccogliere un oggetto o prenderlo da un contenitore.
 #= IMPORT ======================================================================
 
 from src.color      import color_first_upper
+from importlib import reload
 from src.command    import get_command_syntax
 from src.config     import config
 from src.enums      import CONTAINER, DOOR, FLAG, OPTION, ROOM, TO, TRUST

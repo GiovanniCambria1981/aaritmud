@@ -62,10 +62,10 @@ def after_listen_say(mob, player, target, phrase, behavioured):
     phrase = remove_little_words(phrase)
 
     riddle_number = mob.specials["riddle"]
-    print riddle_number
+    print(riddle_number)
     solutions = RIDDLES[riddle_number][1 : ]
     for solution in solutions:
-        print "soluzioni: ", solution, " frasi: ",  phrase
+        print("soluzioni: ", solution, " frasi: ",  phrase)
         # (TD) qui al posto della is_same ci starebbe bene una futura implementazione di soundex
         if is_same(phrase, solution):
             congratulation(mob, player)

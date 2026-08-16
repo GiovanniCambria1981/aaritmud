@@ -9,6 +9,7 @@ forzato sui soli oggetti di tipologia contenitore.
 #= IMPORT ======================================================================
 
 from src.config import config
+from importlib import reload
 from src.log    import log
 
 if config.reload_commands:

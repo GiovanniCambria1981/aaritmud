@@ -79,7 +79,7 @@ def find_room(proto_code):
     """
     Ricava la room dal database del mud tramite prototipo.
     """
-    for room in database["rooms"].itervalues():
+    for room in database["rooms"].values():
         if room.prototype.code == proto_code:
             return room
 

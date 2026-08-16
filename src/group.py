@@ -35,7 +35,7 @@ class Group(Data):
         """
         Utilizzato per inizializzare la formazione o per disperderne una.
         """
-        self.formation = [[None for i in xrange(3)] for i in xrange(3)]
+        self.formation = [[None for i in range(3)] for i in range(3)]
     #- Fine Metodo -
 
     def get_members_here(self, location):

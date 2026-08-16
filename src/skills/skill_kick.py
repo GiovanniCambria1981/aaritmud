@@ -4,6 +4,7 @@
 
 import random
 
+from importlib import reload
 from src.config     import config
 from src.enums      import SKILL, TO
 from src.fight      import start_fight
@@ -61,7 +62,7 @@ def skill_kick(entity, argument="", verbs=VERBS, silent=False):
         entity.skills["kick"] = 0
 
     skill_result = check_skill(entity, target, "kick")
-    print ">>>>>>> skill kick: skill_result: ", skill_result
+    print(">>>>>>> skill kick: skill_result: ", skill_result)
 
     # Ricava quale parte viene colpita
     #arg, argument = one_argument(argument)
@@ -176,13 +177,13 @@ def kick_damage(entity, target, mode_name, skill_result, modifier=1):
         return
 
     if modifier_target_damage != 0:
-        target_damage = int(modifier_target_damage * (random.randint(1, 5) + (entity.strength / 5) * (skill_result / 200 ) * modifier))
+        target_damage = int(modifier_target_damage * (random.randint(1, 5) + (entity.strength // 5) * (skill_result // 200 ) * modifier))
         target.life -= target_damage
         if target.life <= 0:
             fight.defeat(entity, target, "attacker", "defender")
             fight.stop()
     elif modifier_entity_damage != 0:
-        entity_damage = int(modifier_entity_damage * (random.randint(1, 5) + (entity.strength / 5) * (skill_result / 200 ) * modifier))
+        entity_damage = int(modifier_entity_damage * (random.randint(1, 5) + (entity.strength // 5) * (skill_result // 200 ) * modifier))
         entity.life -= entity_damage
         if entity.life <= 0:
             entity.dies(opponent=target)

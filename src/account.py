@@ -161,8 +161,8 @@ class Account(Data):
         """
         Controlla che due o più account non utilizzino lo stesso player.
         """
-        for player in self.players.itervalues():
-            for account in database["accounts"].itervalues():
+        for player in self.players.values():
+            for account in database["accounts"].values():
                 if account.name == self.name:
                     continue
                 if player.code in account.players:
@@ -277,7 +277,7 @@ def load_forbidden_names():
 
 
 def add_players_to_accounts():
-    for player in database["players"].itervalues():
+    for player in database["players"].values():
         if not player.account:
             log.bug("Account non valido per il giocatore %s: %r" % (player.name, player.account))
             continue
@@ -337,7 +337,7 @@ def get_error_message_name(name, already_in_database, table_name="accounts"):
     # Controlla se esiste già il nome nel database passato, bisogna utilizzare
     # is_same() altrimenti nomi simili, ma uno con vocale semplice e l'altro
     # con vocale accentanta, vengono visti come differenti
-    for data in database[table_name].itervalues():
+    for data in database[table_name].values():
         if is_same(data.name, name) or (hasattr(data, "code") and is_same(data.code, name)):
             # Se si sta controllando un nome già esistente nel database
             # quando lo trova per una volta lo salta
@@ -417,7 +417,7 @@ def get_error_message_email(email, already_in_database=False):
         return "Email inserita non valida."
 
     # Controlla che non vi sia già un account con lo stesso email
-    for account in database["accounts"].itervalues():
+    for account in database["accounts"].values():
         if account.email and is_same(account.email, email):
             # Se si sta modificando l'email questo è già in un account e quindi
             # quando la trova per la prima volta lo salta

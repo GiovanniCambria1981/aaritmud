@@ -210,11 +210,11 @@ def fructification(fiore, room, age, fortuna):
 
     fruttificato.inject(location)
     
-    for q in xrange(MAX_FRUIT_QUANTITY + 2 * age + random.randint(1,4) - 2 ):
+    for q in range(MAX_FRUIT_QUANTITY + 2 * age + random.randint(1,4) - 2 ):
         bacca_buona = Item("karpuram_item_mirtillo-rosso-01-frutto")
         bacca_buona.inject(fruttificato) 
 
-    for q in xrange(MAX_FRUIT_QUANTITY + 2 * age + random.randint(1,4) - 2 ):
+    for q in range(MAX_FRUIT_QUANTITY + 2 * age + random.randint(1,4) - 2 ):
         bacca_cattiva = Item("karpuram_item_mirtillo-rosso-00-frutto-sterile")
         bacca_cattiva.inject(fruttificato) 
 

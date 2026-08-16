@@ -12,10 +12,10 @@ from src.log      import log
 
 def command_snoopers(entity, argument=""):
     """
-    Permette di visualizzare tutto l'output di uno o più entità.
+    Permette di visualizzare tutto l'output di uno o piï¿½ entitï¿½.
     """
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -27,7 +27,7 @@ def command_snoopers(entity, argument=""):
             entity.send_output("Non trovi nessun amministratore con argomento [white]%s[close]" % argument)
             return False
         if target.trust < TRUST.MASTER:
-            entity.send_output("Il giocatore %s non è un amministratore." % target.name)
+            entity.send_output("Il giocatore %s non ï¿½ un amministratore." % target.name)
             return False
         syntax = get_command_syntax(entity, "command_snoopers")
         entity.send_output(syntax, break_line=False)
@@ -42,16 +42,16 @@ def command_snoopers(entity, argument=""):
         if target and admin != target:
             continue
         snooped_by[admin] = []
-        for player in players + database["mobs"].values() + database["items"].values():
+        for player in players + list(database["mobs"].values()) + list(database["items"].values()):
             if admin in player.snoopers:
                 snooped_by[admin].append(player)
                 players_founded = True
 
     lines = []
-    for admin, snooped_players in snooped_by.iteritems():
+    for admin, snooped_players in snooped_by.items():
         if not snooped_players:
             continue
-        lines.append("Entità snoopate da %s:" % admin.name)
+        lines.append("Entitï¿½ snoopate da %s:" % admin.name)
         for snooped_player in snooped_players:
             lines.append(snooped_player.name)
 
@@ -66,7 +66,7 @@ def command_snoopers(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non ï¿½ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

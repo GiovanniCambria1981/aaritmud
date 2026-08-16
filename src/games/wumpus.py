@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from importlib import reload
 import sys
 
 from src.database import database
@@ -13,7 +14,7 @@ class Wumpus(object):
 
     def get_related_attr_name(self, obj):
         if not obj:
-            log.bug("obj non è un parametro valido: %r" % obj)
+            log.bug("obj non ï¿½ un parametro valido: %r" % obj)
             return ""
 
         # ---------------------------------------------------------------------
@@ -33,12 +34,12 @@ def import_all_wumpus_gamescripts():
     """
     Cerca nelle aree wumpus i dati che abbisognano dei gamescript appositi
     """
-    for area in database["areas"].itervalues():
+    for area in database["areas"].values():
         if not area.wumpus:
             continue
-        # Per tutto il contenuto dell'area wumpus controlla se una delle entità
-        # è uguale come codice ad una indicata nella istanza della classe Wumpus,
-        # se è così allora importa nel dato relativo al codice tutte le funzioni
+        # Per tutto il contenuto dell'area wumpus controlla se una delle entitï¿½
+        # ï¿½ uguale come codice ad una indicata nella istanza della classe Wumpus,
+        # se ï¿½ cosï¿½ allora importa nel dato relativo al codice tutte le funzioni
         # wumpus generiche adatte
         for obj in area.iter_protos():
             attr_name = area.wumpus.get_related_attr_name(obj)
@@ -49,16 +50,16 @@ def import_all_wumpus_gamescripts():
 
 def get_wumpus_gamescripts_module(obj, attr_name=""):
     """
-    Importa tutti i necessari gamescript relativi ad un'entità di un'area wumpus.
+    Importa tutti i necessari gamescript relativi ad un'entitï¿½ di un'area wumpus.
     """
     if not obj:
-        log.bug("obj non è un parametro valido: %r" % obj)
+        log.bug("obj non ï¿½ un parametro valido: %r" % obj)
         return None
 
     # ---------------------------------------------------------------------
 
-    # Se non è stato passato il nome dell'attributo della classe Wumpus a cui
-    # appartiene l'obj passato allora è normale che obj non sia uno di quelli
+    # Se non ï¿½ stato passato il nome dell'attributo della classe Wumpus a cui
+    # appartiene l'obj passato allora ï¿½ normale che obj non sia uno di quelli
     if not attr_name:
         area_code = obj.code.split("_")[0]
         try:
@@ -78,7 +79,7 @@ def get_wumpus_gamescripts_module(obj, attr_name=""):
 
     filepath = import_path.replace(".", "/") + ".py"
     if not os.path.exists(filepath):
-        log.bug("Non è stato trovato nessun file %s richiesto per i gamescripts di %s" % (filepath, obj.code))
+        log.bug("Non ï¿½ stato trovato nessun file %s richiesto per i gamescripts di %s" % (filepath, obj.code))
         return None
 
     return import_from_anywhere(filepath)

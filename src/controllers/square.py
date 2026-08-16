@@ -9,7 +9,7 @@ Modulo per la lettura e l'invio dei messaggi sulla Piazzetta.
 
 import datetime
 import string
-import urllib
+from urllib.parse import quote as _urllib_quote, unquote as _urllib_unquote
 
 from src.color        import close_color, get_first_color, convert_colors
 from src.config       import config
@@ -37,7 +37,7 @@ class SquarePage(WebResource):
     ACCOUNT_MUST_EXIST_IN_POST = True
 
     PAGE_TEMPLATE        = string.Template(open("src/views/square.view").read())
-    SQUARE_MESSAGES_LIST = map(string.strip, open("persistence/square_messages.list").readlines())
+    SQUARE_MESSAGES_LIST = [_line.strip() for _line in open("persistence/square_messages.list"].readlines())
 
     NEW_PAGE = True
 
@@ -106,7 +106,7 @@ class SquarePage(WebResource):
             log.bug("messagge non valido: %r" % message)
             return "Il messaggio è vuoto"
 
-        message = urllib.unquote(message)
+        message = _urllib_unquote(message)
         if len(message) > config.max_square_msg_len:
             return "Il messaggio è troppo lungo, massimo %d" % config.max_square_msg_len
 
@@ -169,7 +169,7 @@ def create_square_message(line, conn, counter, use_quote=False):
         bg_color = "style='background-color:#222;'"
 
     if use_quote:
-        square_message = urllib.quote(line_pieces[2])
+        square_message = _urllib_quote(line_pieces[2])
     else:
         square_message = line_pieces[2]
 

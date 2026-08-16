@@ -74,7 +74,7 @@ class GameLoop(UnstoppableLoop):
                     if not conn.player or not conn.player.game_request:
                         continue
                     if engine.seconds_to_shutdown > 60:
-                        time_descr = "%d minuti" % engine.seconds_to_shutdown / 60
+                        time_descr = "%d minuti" % (engine.seconds_to_shutdown // 60)
                     elif engine.seconds_to_shutdown == 60:
                         time_descr = "1 minuto"
                     elif engine.seconds_to_shutdown == 1:
@@ -103,7 +103,7 @@ class GameLoop(UnstoppableLoop):
 
             # Aggiorna i punti di vita, mana e movimento dei mob e dei pg
             # (TD) yield iter dei valori del database
-            for entity in database["mobs"].values() + database["players"].values():
+            for entity in list(database["mobs"].values()) + list(database["players"].values()):
                 if not entity.location:
                     continue
                 if entity.location.IS_ROOM:
@@ -116,7 +116,7 @@ class GameLoop(UnstoppableLoop):
                             entity.update_points()
 
             # Aggiorna l'exp e invia le informazioni per il client
-            for player in database["players"].itervalues():
+            for player in database["players"].values():
                 if player.game_request:
                     player.update()
 
@@ -150,7 +150,7 @@ class GameLoop(UnstoppableLoop):
         if self.elapsed_seconds % ((config.seconds_in_minute * config.minutes_in_hour) / 2) == 0:
             # Aggiornamento delle condizioni: fame, sete, sonno... etc etc
             # (TD) fare quel sistema di iter database
-            for entity in database["mobs"].values() + database["players"].values():
+            for entity in list(database["mobs"].values()) + list(database["players"].values()):
                 if not entity.location:
                     continue
                 if entity.location.IS_ROOM:

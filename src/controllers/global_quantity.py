@@ -49,7 +49,7 @@ class GlobalQuantityPage(WebResource):
 
         for table_name in ("proto_mobs", "proto_items"):
             quantities.append('''<table class="mud">''')
-            for proto_code, prototype in database[table_name].iteritems():
+            for proto_code, prototype in database[table_name].items():
                 if prototype.max_global_quantity <= 0:
                     continue
                 quantities.append('''<tr><td>''')
@@ -66,10 +66,10 @@ class GlobalQuantityPage(WebResource):
     def create_instances_list(self, proto_code):
         instances = []
 
-        instances.append('''Istanze di entità con codice di prototipo %s e relativa destinatione:<br><br>''' % proto_code)
+        instances.append('''Istanze di entitï¿½ con codice di prototipo %s e relativa destinatione:<br><br>''' % proto_code)
         instances.append('''<table class="mud">''')
         table_name = proto_code.split("_")[1] + "s"
-        for code, instance in database[table_name].iteritems():
+        for code, instance in database[table_name].items():
             if instance.prototype.code != proto_code:
                 continue
             in_room = instance.get_in_room()
@@ -81,7 +81,7 @@ class GlobalQuantityPage(WebResource):
         instances.append('''</table>''')
 
         if not instances:
-            instances.append('''Se ti attendevi dei risultati probabilmente tra la visualizzazione della pagina precedente e l'arrivo su questa l'istanza precedentemente contata è stata estratta.''')
+            instances.append('''Se ti attendevi dei risultati probabilmente tra la visualizzazione della pagina precedente e l'arrivo su questa l'istanza precedentemente contata ï¿½ stata estratta.''')
 
         return instances
     #- Fine Metodo -
