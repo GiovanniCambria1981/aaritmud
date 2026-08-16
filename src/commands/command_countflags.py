@@ -18,7 +18,7 @@ def command_countflags(entity, argument=""):
     Permette di raggiungere il primo oggetto trovato con la flag passata.
     """
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -54,7 +54,7 @@ def command_countflags(entity, argument=""):
     elif enum_element.enum.name == "WEAPONFLAG":
         path = "weapon_type.flags"
     else:
-        entity.send_output("L'enumerazione %s non � ancora supportata, se serve basta dirlo al coder." % enum_element.enum.name)
+        entity.send_output("L'enumerazione %s non ? ancora supportata, se serve basta dirlo al coder." % enum_element.enum.name)
         return False
 
     output = []
@@ -86,7 +86,7 @@ def command_countflags(entity, argument=""):
             output.append('''</table>''')
             output.append('''Sono stati trovati %s %s con la flag %s\n\n''' % (counter, table_name, enum_element.code))
         else:
-            output.append('''Non � stato trovato nessun %s con la flag %s\n\n''' % (table_name[:-1], enum_element.code))
+            output.append('''Non ? stato trovato nessun %s con la flag %s\n\n''' % (table_name[:-1], enum_element.code))
 
     entity.send_output("".join(output).rstrip())
     return True
@@ -95,7 +95,7 @@ def command_countflags(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

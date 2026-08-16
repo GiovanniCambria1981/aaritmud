@@ -26,13 +26,13 @@ class AttrElement(EnumElement):
 #-------------------------------------------------------------------------------
 
 NONE         = AttrElement("Nessuno")
-STRENGTH     = AttrElement("[red]Forza[close]",              "La forza del tuo personaggio, con essa potrai trasportare di pi˘ ed avrai maggiori punti vita ad ogni passaggio di livello.")
-ENDURANCE    = AttrElement("[darkred]Resistenza[close]",     "La resistenza fisica del tuo personaggio, con essa riuscirai a resistere nelle situazioni pi˘ difficili ed avrai maggiori punti di vigore ad ogni passaggio di livello.")
-AGILITY      = AttrElement("[green]Agilit‡[close]",          "L'agilit‡ del tuo personaggio serve a sgusciare da situazioni pericolose o serve per utilizzare abilit‡ particolari come lo scassinare e molte altre.")
-SPEED        = AttrElement("[lightgreen]Velocit‡[close]",    "La velocit‡ del tuo personaggio serve principalmente a calcolare il tempo dei turni di combattimento.")
-INTELLIGENCE = AttrElement("[royalblue]Intelligenza[close]", "L'intelligenza serve per pronunciare correttamente incantesimi ed a imparare nuove abilit‡.")
-WILLPOWER    = AttrElement("[cyan]Volont‡[close]",           "La volont‡ Ë la resistenza magica e con essa avrai inoltre maggiori punti mana ad ogni passaggio di livello")
-PERSONALITY  = AttrElement("[orange]Personalit‡[close]",     "La personalit‡ Ë la capacit‡ di presentarsi alle persone, Ë un misto di carisma, comando e bellezza, a seconda della situazione.")
+STRENGTH     = AttrElement("[red]Forza[close]",              "La forza del tuo personaggio, con essa potrai trasportare di pi√π ed avrai maggiori punti vita ad ogni passaggio di livello.")
+ENDURANCE    = AttrElement("[darkred]Resistenza[close]",     "La resistenza fisica del tuo personaggio, con essa riuscirai a resistere nelle situazioni pi√π difficili ed avrai maggiori punti di vigore ad ogni passaggio di livello.")
+AGILITY      = AttrElement("[green]Agilit√†[close]",          "L'agilit√† del tuo personaggio serve a sgusciare da situazioni pericolose o serve per utilizzare abilit√† particolari come lo scassinare e molte altre.")
+SPEED        = AttrElement("[lightgreen]Velocit√†[close]",    "La velocit√† del tuo personaggio serve principalmente a calcolare il tempo dei turni di combattimento.")
+INTELLIGENCE = AttrElement("[royalblue]Intelligenza[close]", "L'intelligenza serve per pronunciare correttamente incantesimi ed a imparare nuove abilit√†.")
+WILLPOWER    = AttrElement("[cyan]Volont√†[close]",           "La volont√† √® la resistenza magica e con essa avrai inoltre maggiori punti mana ad ogni passaggio di livello")
+PERSONALITY  = AttrElement("[orange]Personalit√†[close]",     "La personalit√† √® la capacit√† di presentarsi alle persone, √® un misto di carisma, comando e bellezza, a seconda della situazione.")
 LUCK         = AttrElement("[yellow]Fortuna[close]",         "La fortuna governa di un poco tutte le azioni che lo richiedono.")
 
 STRENGTH.attr_name     = "strength"

@@ -20,7 +20,7 @@ from src.commands.command_create import create_handler
 
 def command_icreate(entity, argument=""):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -31,7 +31,7 @@ def command_icreate(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------
@@ -40,8 +40,8 @@ def get_syntax_template(entity):
     syntax += "icreate\n"
     syntax += "icreate <codice oggetto o suo prefisso>\n"
     syntax += "icreate <nome oggetto o suo prefisso>\n"
-    syntax += "icreate <quantit�> <codice oggetto o suo prefisso>\n"
-    syntax += "icreate <quantit�> <nome oggetto o suo prefisso>\n"
+    syntax += "icreate <quantit?> <codice oggetto o suo prefisso>\n"
+    syntax += "icreate <quantit?> <nome oggetto o suo prefisso>\n"
 
     return syntax
 #- Fine Funzione -

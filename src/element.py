@@ -86,6 +86,10 @@ class EnumElement(object):
         return self.code == other.code
     #- Fine Metodo -
 
+    def __hash__(self):
+        return hash(self.code)
+    #- Fine Metodo -
+
     def __ne__(self, other):
         return self.code != other.enum_element.code
     #- Fine Metodo -
@@ -413,6 +417,10 @@ class Element(object):
 
     def __eq__(self, other):
         return self.enum_element.code == other.enum_element.code
+    #- Fine Metodo -
+
+    def __hash__(self):
+        return hash(self.enum_element.code)
     #- Fine Metodo -
 
     def __ne__(self, other):
@@ -1131,7 +1139,7 @@ def get_element_from_name(enum, name):
 
     # -------------------------------------------------------------------------
 
-    from color import remove_colors
+    from src.color import remove_colors
 
     for enum_element in enum.elements:
         enum_element_name = remove_colors(enum_element.name)
@@ -1199,10 +1207,6 @@ def create_elements_list_page():
             line = '''<tr><td>%s</td><td>%s</td><td>%s</td>%s</tr>''' % (
                 enum_element.code, name, description, other_attrs)
             line = accents_escape(line)
-            try:
-                line = line.encode("ascii")
-            except UnicodeDecodeError:
-                print("Impossibile encodare in ascii la linea: %s" % line)
             lines.append(line)
         lines.append('''</table><br><br>''')
 

@@ -16,6 +16,6 @@ $('#square').load(function () {
 function addBackgroundImage() {
 	document.body.ownerDocument.body.style.backgroundImage = "url(${image_path})";
 	document.body.ownerDocument.body.style.backgroundRepeat = "no-repeat";
-	document.body.ownerDocument.body.style.backgroundPosition = "left bottom";
+	document.body.ownerDocument.body.style.backgroundPosition = "center center";
 }
 </script>

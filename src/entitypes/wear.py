@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Modulo per la delle entit‡ indossabili.
+Modulo per la delle entit√† indossabili.
 """
 
 
@@ -25,22 +25,22 @@ class Wear(object):
 
     def __init__(self):
         self.comment               = ""
-        self.modes                 = []  # Sono una lista di flag di parti che rappresentano i differenti modi di indossare un'entit‡
+        self.modes                 = []  # Sono una lista di flag di parti che rappresentano i differenti modi di indossare un'entit√†
         self.flags                 = Flags(WEAR.NONE)  # Flag dei vestiti
         self.affects               = []  # Affect aggiunti quando si indossa l'oggetto
         self.entity_wear_message   = ""  # Messaggio inviato a chi indossa
-        self.target_wear_message   = ""  # Messaggio inviato a chi Ë indossato
+        self.target_wear_message   = ""  # Messaggio inviato a chi √® indossato
         self.others_wear_message   = ""  # Messaggio inviato a tutti gli altri
         self.entity_remove_message = ""  # Messaggio inviato a chi si rimuove l'oggetto indossato
-        self.target_remove_message = ""  # Messaggio inviato a chi Ë stato rimosso
+        self.target_remove_message = ""  # Messaggio inviato a chi √® stato rimosso
         self.others_remove_message = ""  # Messaggio inviato a tutti gli altri che vedono l'azione della rimozione
     #- Fine Inizializzazione -
 
     def get_error_message(self, entity):
         if not self.modes:
-            return "modes non Ë valido: %r" % self.modes
+            return "modes non √® valido: %r" % self.modes
         # (TD) check sugli effetti
-        # L'esistenza dei diversi messaggi Ë slegata tra loro, ovvero possono
+        # L'esistenza dei diversi messaggi √® slegata tra loro, ovvero possono
         # essere inizializzati tutti come solo uno di loro o, ovviamente,
         # nessuno
         return ""
@@ -96,7 +96,7 @@ class Wear(object):
 
     def get_upper_weared(self, target):
         if not target:
-            log.bug("target non Ë un parametro valido: %r" % target)
+            log.bug("target non √® un parametro valido: %r" % target)
             return False
 
         # ---------------------------------------------------------------------
@@ -111,23 +111,23 @@ class Wear(object):
 
 def send_wear_messages(entity, target, verb_you, verb_it, part_descriptions):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not target:
-        log.bug("target non Ë un parametro valido: %r" % target)
+        log.bug("target non √® un parametro valido: %r" % target)
         return
 
     if not verb_you:
-        log.bug("verb_you non Ë un parametro valido: %r" % verb_you)
+        log.bug("verb_you non √® un parametro valido: %r" % verb_you)
         return
 
     if not verb_it:
-        log.bug("verb_it non Ë un parametro valido: %r" % verb_it)
+        log.bug("verb_it non √® un parametro valido: %r" % verb_it)
         return
 
     if not part_descriptions:
-        log.bug("part_descriptions non Ë un parametro valido: %r" % part_descriptions)
+        log.bug("part_descriptions non √® un parametro valido: %r" % part_descriptions)
         return
 
     # ---------------------------------------------------------------------
@@ -171,26 +171,26 @@ def send_wear_messages(entity, target, verb_you, verb_it, part_descriptions):
 
 def send_remove_messages(entity, target, verb_you, verb_it, part_descriptions, force_default):
     """
-    Non puÚ essere un metodo perchÈ a volte target.wear_type puÚ essere None.
+    Non pu√≤ essere un metodo perch√© a volte target.wear_type pu√≤ essere None.
     """
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not target:
-        log.bug("target non Ë un parametro valido: %r" % target)
+        log.bug("target non √® un parametro valido: %r" % target)
         return
 
     if not verb_you:
-        log.bug("verb_you non Ë un parametro valido: %r" % verb_you)
+        log.bug("verb_you non √® un parametro valido: %r" % verb_you)
         return
 
     if not verb_it:
-        log.bug("verb_it non Ë un parametro valido: %r" % verb_it)
+        log.bug("verb_it non √® un parametro valido: %r" % verb_it)
         return
 
     if not part_descriptions:
-        log.bug("part_descriptions non Ë un parametro valido: %r" % part_descriptions)
+        log.bug("part_descriptions non √® un parametro valido: %r" % part_descriptions)
         return
 
     # -------------------------------------------------------------------------

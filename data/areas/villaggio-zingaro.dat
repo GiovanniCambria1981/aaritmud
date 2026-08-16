@@ -388,7 +388,7 @@ RoomResets:
 		EntityResets:
 			Quantity:	1
 			Type:		RESET.PUT
-			ProtoEntity:	villaggio-zingaro_item_sacchetto-castagne-02
+			ProtoEntity:	villaggio-zingaro_item_sacchetto-castagne-02-vuoto
 		End
 		EntityResets:
 			Quantity:	2

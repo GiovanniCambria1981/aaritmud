@@ -30,15 +30,15 @@ VERBS = {"infinitive" : "bere",
 # (TD) aggiungere il check_trigger
 def command_drink(entity, argument="", verbs=VERBS, behavioured=False):
     """
-    Comando che serve per mangiare un entit‡.
+    Comando che serve per mangiare un entit√†.
     """
-    # » possibile se il comando Ë stato deferrato
+    # √à possibile se il comando √® stato deferrato
     if not entity:
         return False
 
     entity = entity.split_entity(1)
 
-    # (TD) controllo sulle posizioni, possibilit‡ di muovere la bocca come
+    # (TD) controllo sulle posizioni, possibilit√† di muovere la bocca come
     # per bere nel sonno
 
     if not argument:
@@ -48,22 +48,22 @@ def command_drink(entity, argument="", verbs=VERBS, behavioured=False):
             entity.send_output(syntax, break_line=False)
         return False
 
-    # (TD) futura ricerca allucinogena, se si Ë pazzi Ë difficile trovare
-    # qualsiasi entit‡, probabilmente il sistema verr‡ integrato nel metodo
+    # (TD) futura ricerca allucinogena, se si √® pazzi √® difficile trovare
+    # qualsiasi entit√†, probabilmente il sistema verr√† integrato nel metodo
     # find_entity
 
-    # Cerca l'entit‡ da bere prima nel proprio inventario e poi utilizza
+    # Cerca l'entit√† da bere prima nel proprio inventario e poi utilizza
     # il comando get per prendere la bevanda da qualsiasi altra parte
     target = entity.find_entity(argument, location=entity)
     if not target:
         # (TD) Manca la ricerca se il cibo si trova dentro o sopra target, da fare
-        # quando ci saranno i contenitori e quando le entit‡ si potranno appoggiare
+        # quando ci saranno i contenitori e quando le entit√† si potranno appoggiare
         entity.act("Non trovi nessun [white]%s[close] da poter %s." % (argument, verbs["infinitive"]), TO.ENTITY)
         entity.act("$n si guarda attorno cercando qualcosa." % verbs["infinitive"], TO.OTHERS)
         return False
 
     # Ricava il peso di un morso in proporzione al proprio, viene ricavato
-    # un peso in grammi. Il pezzo Ë pi˘ grande se si sta divorando
+    # un peso in grammi. Il pezzo √® pi√π grande se si sta divorando
     if devours:
         bite_weight = entity.weight / 50
     else:
@@ -71,10 +71,10 @@ def command_drink(entity, argument="", verbs=VERBS, behavioured=False):
     if target.weight < bite_weight:
         bite_weight = target.weight
 
-    # Ricava il peso di quello che si puÚ ingerire prima di non sentire pi˘ fame
-    # il doppio di questo valore Ë il peso massimo che lo stomaco puÚ sopportare
+    # Ricava il peso di quello che si pu√≤ ingerire prima di non sentire pi√π fame
+    # il doppio di questo valore √® il peso massimo che lo stomaco pu√≤ sopportare
     # In sostanza per ogni 50kg di peso proprio si suppone che prima di non
-    # sentire pi˘ fame bisogna ingerire 1kg, viene ricavato un peso in grammi
+    # sentire pi√π fame bisogna ingerire 1kg, viene ricavato un peso in grammi
     eatable_weight = entity.weight * 1000 / 50000
 
     # Ricava il peso delle cose ingerite
@@ -85,14 +85,14 @@ def command_drink(entity, argument="", verbs=VERBS, behavioured=False):
 
     if eated_weight + bite_weight > eatable_weight * 2:
         if entity.trust >= TRUST.MASTER:
-            entity.send_to_admin("Mangi l'entit‡ nonostante tu abbia la pancia piena")
+            entity.send_to_admin("Mangi l'entit√† nonostante tu abbia la pancia piena")
         else:
             entity.act("Hai la pancia troppo piena per riuscire ad ingurgitare $N.", TO.ENTITY, target)
             entity.act("$n cerca di %s $N, ma sembra che abbia la pancia piena." % verbs["infinitive"], TO.OTHERS, target)
             entity.act("$n cerca di %s, ma sembra che abbia la pancia piena." % verbs["you2"], TO.TARGET, target)
             return False
 
-    # Se l'entit‡ non Ë un cibo allora si comporta in maniera differente a
+    # Se l'entit√† non √® un cibo allora si comporta in maniera differente a
     # seconda della tipologia della stessa
     if not target.food_type:
         if target == entity:
@@ -106,7 +106,7 @@ def command_drink(entity, argument="", verbs=VERBS, behavioured=False):
         else:
             if target.weight > bite_weight:
                 if entity.trust == TRUST.PLAYER :
-                    entity.act("Cerchi di %s $N ma ti rendi conto che Ë troppo grande da ingoiare." % verbs["infinitive"], TO.ENTITY, target)
+                    entity.act("Cerchi di %s $N ma ti rendi conto che √® troppo grande da ingoiare." % verbs["infinitive"], TO.ENTITY, target)
                     entity.act("$n cerca di %s $N ma senza grossi risultati..." % verbs["infinitive"], TO.OTHERS, target)
                     entity.act("$n cerca di %s... Ouch!" % verbs["you2"], TO.TARGET, target)
                     return False
@@ -120,31 +120,31 @@ def command_drink(entity, argument="", verbs=VERBS, behavioured=False):
 
     # (TD) Splitting di un oggetto da un gruppo di oggetti
 
-    # (TD) Probabilit‡ che il cibo cada per terra se si sta combattimento
+    # (TD) Probabilit√† che il cibo cada per terra se si sta combattimento
 
-    # Controlla se l'entit‡ segue la dieta necessaria per mangiare target.
+    # Controlla se l'entit√† segue la dieta necessaria per mangiare target.
     # Se sta divorando non si guarda per il sottile e si mangia un po' di tutto
     if devours:
         acceptability = 50
     else:
         acceptability = 25
     if FLAG.CARNIVOROUS in entity.flags and target.food_type.vegetable >= acceptability:
-        entity.act("Non puoi %s $N, Ë fatto pi˘ d'erba che carne!" % verbs["infinitive"], TO.ENTITY, target)
+        entity.act("Non puoi %s $N, √® fatto pi√π d'erba che carne!" % verbs["infinitive"], TO.ENTITY, target)
         entity.act("$n guarda perpless$o $N, sembra che non $gli vada a genio...", TO.OTHERS, target)
         entity.act("$n ti guarda perpless$o, sembra che non $gli vai a genio...", TO.TARGET, target)
         return False
     elif FLAG.HERBIVORE in entity.flags and target.food_type.animal >= acceptability:
-        entity.act("Non puoi %s $N, Ë fatto pi˘ di sangue che di vegetali!" % verbs["infinitive"], TO.ENTITY, target)
+        entity.act("Non puoi %s $N, √® fatto pi√π di sangue che di vegetali!" % verbs["infinitive"], TO.ENTITY, target)
         entity.act("$n guarda perpless$o $N, sembra che non $gli vada a genio...", TO.OTHERS, target)
         entity.act("$n ti guarda perpless$o, sembra che non $gli vai a genio...", TO.TARGET, target)
         return False
 
     # Diminuisce la fame di una certa percentuale pari al peso mangiato rispetto
     # a quello ingeribile.
-    # (TD) Tutto da rifare, la hunger sar‡ un effetto, verr‡ presa una
+    # (TD) Tutto da rifare, la hunger sar√† un effetto, verr√† presa una
     # percentuale dell'effetto a seconda della grandezza del morso
     # (TD) A seconda delle condizioni e delle ore passate il cibo
-    # ha pi˘ o meno consistenza o Ë pi˘ o meno mangiabile
+    # ha pi√π o meno consistenza o √® pi√π o meno mangiabile
     if entity.IS_ACTOR:
         entity.hunger -= (bite_weight * 100 / eatable_weight) * 2
         if entity.hunger < 0:
@@ -172,14 +172,14 @@ def command_drink(entity, argument="", verbs=VERBS, behavioured=False):
     #if eated_weight + bite_weight == eatable_weight * 2:
         # pass
     if eated_weight + bite_weight > eatable_weight * 1.5:
-        entity.act("Il tuo stomaco Ë scosso da degli spasmi... Sei pien$o!", TO.ENTITY, target)
+        entity.act("Il tuo stomaco √® scosso da degli spasmi... Sei pien$o!", TO.ENTITY, target)
         entity.act("$n si tiene la pancia con una $hand... Che abbia %sto troppo?" % verbs["it"], TO.OTHERS, target)
-        entity.act("Puoi constatare in prima persona che lo stomaco di $n Ë pieno.", TO.TARGET, target)
+        entity.act("Puoi constatare in prima persona che lo stomaco di $n √® pieno.", TO.TARGET, target)
     elif not devours and eated_weight + bite_weight > eatable_weight:
         # Se si sta divorando in fretta non si lascia il tempo di capire che sta arrivando la nausea
         entity.act("Comincia a venirti una certa nausea per il cibo... Sei quasi pien$o!", TO.ENTITY, target)
         entity.act("$n si passa una $hand sullo stomaco... Che sia ormai sazi$o?", TO.OTHERS, target)
-        entity.act("Puoi constatare in prima persona che lo stomaco di $n Ë quasi pieno.", TO.TARGET, target)
+        entity.act("Puoi constatare in prima persona che lo stomaco di $n √® quasi pieno.", TO.TARGET, target)
 
     if entity.IS_PLAYER:
         if target.prototype.code in entity.drinked_entities:
@@ -195,7 +195,7 @@ def command_drink(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

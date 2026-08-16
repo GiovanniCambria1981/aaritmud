@@ -16,7 +16,7 @@ from src.entitypes.money import pretty_money_value
 #= FUNZIONI ====================================================================
 
 def command_money(entity, argument="", behavioured=False):
-    # � possibile se questo comando � stato deferrato
+    # ? possibile se questo comando ? stato deferrato
     if not entity:
         return False
 
@@ -43,7 +43,7 @@ def command_money(entity, argument="", behavioured=False):
         total = 0
         plural = "a" if len(moneys) == 1 else "e"
         output.append('''<table class="mud">''')
-        output.append('''<tr><th>Qt�</th><th>Monet%s</th><th>in Rame</th><th> Accettat%s dalla razza</th><tr>''' % (plural, plural))
+        output.append('''<tr><th>Qt?</th><th>Monet%s</th><th>in Rame</th><th> Accettat%s dalla razza</th><tr>''' % (plural, plural))
         for en in moneys:
             total += en.money_type.copper_value * en.quantity
 
@@ -77,10 +77,10 @@ def command_money(entity, argument="", behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------
 
-    return "money <oggetto o creatura da comprare> (commerciante se pi� di uno nella stanza)\n"
+    return "money <oggetto o creatura da comprare> (commerciante se pi? di uno nella stanza)\n"
 #- Fine Funzione -

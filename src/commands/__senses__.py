@@ -28,29 +28,29 @@ from src.utility    import one_argument, put_final_dot, get_weight_descr
 # intuition / sixth
 def five_senses_handler(entity, argument, behavioured, command_name, gamescript_suffix2, sense_name, has_sense_method_name, messages):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
-    # argument puÚ essere una stringa vuota
+    # argument pu√≤ essere una stringa vuota
 
-    # behavioured ha valore di verit‡
+    # behavioured ha valore di verit√†
 
     if not command_name:
-        log.bug("command_name non Ë un parametro valido: %r" % command_name)
+        log.bug("command_name non √® un parametro valido: %r" % command_name)
         return False
 
     if not gamescript_suffix2:
-        log.bug("gamescript_suffix2 non Ë un parametro valido: %r" % gamescript_suffix2)
+        log.bug("gamescript_suffix2 non √® un parametro valido: %r" % gamescript_suffix2)
         return False
 
-    # sense_name puÚ essere una stringa vuota, per il look
+    # sense_name pu√≤ essere una stringa vuota, per il look
 
     if not has_sense_method_name:
-        log.bug("has_sense_method_name non Ë un parametro valido: %r" % has_sense_method_name)
+        log.bug("has_sense_method_name non √® un parametro valido: %r" % has_sense_method_name)
         return False
 
     if not messages:
-        log.bug("messages non Ë un parametro valido: %r" % messages)
+        log.bug("messages non √® un parametro valido: %r" % messages)
         return False
 
     # -------------------------------------------------------------------------
@@ -71,13 +71,13 @@ def five_senses_handler(entity, argument, behavioured, command_name, gamescript_
             entity.act(messages["not_has_sense_others"], TO.OTHERS)
             return False
 
-    # Se entity Ë una razza che non puÚ annusare sott'acqua allora esce
+    # Se entity √® una razza che non pu√≤ annusare sott'acqua allora esce
     if (sense_name == "smell" and not entity.race.smell_on_water
     and entity.location.IS_ROOM and ROOM.UNDERWATER in entity.location.flags):
         entity.send_output("Stai per annusare quando ti ricordi che qui richieresti di annegare!")
         return False
 
-    # Se non Ë stato passato nessun argomento allora procede alla ricerca della
+    # Se non √® stato passato nessun argomento allora procede alla ricerca della
     # descrizione sensoriale nella stanza
     if not argument:
         descr = entity.location.get_descr(sense_name, looker=entity)
@@ -230,24 +230,24 @@ def five_senses_handler(entity, argument, behavioured, command_name, gamescript_
 
 def sense_an_entity(entity, target, extra_argument, command_name, gamescript_suffix2, sense_name, messages, behavioured):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
     if not target:
-        log.bug("target non Ë un parametro valido: %r" % target)
+        log.bug("target non √® un parametro valido: %r" % target)
         return False
 
-    # extra_argument puÚ essere una stringa vuota
+    # extra_argument pu√≤ essere una stringa vuota
 
     if not command_name:
-        log.bug("command_name non Ë un parametro valido: %r" % command_name)
+        log.bug("command_name non √® un parametro valido: %r" % command_name)
         return False
 
     if not gamescript_suffix2:
-        log.bug("gamescript_suffix2 non Ë un parametro valido: %r" % gamescript_suffix2)
+        log.bug("gamescript_suffix2 non √® un parametro valido: %r" % gamescript_suffix2)
         return False
 
-    # sense_name puÚ essere una stringa vuota, per il look
+    # sense_name pu√≤ essere una stringa vuota, per il look
 
     # -------------------------------------------------------------------------
 
@@ -350,9 +350,9 @@ def sense_an_entity(entity, target, extra_argument, command_name, gamescript_suf
                     return False
                 return False
 
-        # (TD) Qui inoltre dovrÚ cercare tra le parti del corpo
+        # (TD) Qui inoltre dovr√≤ cercare tra le parti del corpo
 
-        # Se la keyword si trova perÚ in un'altro senso allora invia un
+        # Se la keyword si trova per√≤ in un'altro senso allora invia un
         # messaggio leggermente differente, coma a dare per scontato che
         # vi sia effettivamente un'altra keywords
         force_return = check_trigger(entity, "before_" + command_name, entity, target, "", extra, behavioured)
@@ -399,7 +399,7 @@ def sense_an_entity(entity, target, extra_argument, command_name, gamescript_suf
             return False
         return False
     else:
-        # Se si sta toccando un oggetto ne si puÚ ricavare il peso totale invece
+        # Se si sta toccando un oggetto ne si pu√≤ ricavare il peso totale invece
         # della sola tara come avviene invece nel look
         if target.IS_ITEM and sense_name == "touch":
             weight_descr = get_weight_descr(target.get_total_weight())
@@ -467,19 +467,19 @@ def sense_an_entity(entity, target, extra_argument, command_name, gamescript_suf
 
 def sense_messages_to_others(entity, target, messages, behavioured, message_key, arg="", extra=None):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not target:
-        log.bug("target non Ë un parametro valido: %r" % target)
+        log.bug("target non √® un parametro valido: %r" % target)
         return
 
     if not messages:
-        log.bug("messages non Ë un parametro valido: %r" % messages)
+        log.bug("messages non √® un parametro valido: %r" % messages)
         return
 
     if not message_key:
-        log.bug("message_key non Ë un parametro valido: %r" % message_key)
+        log.bug("message_key non √® un parametro valido: %r" % message_key)
         return
 
     # -------------------------------------------------------------------------
@@ -505,23 +505,23 @@ def sense_messages_to_others(entity, target, messages, behavioured, message_key,
 
 def sense_messages_to_others_equipped(entity, target, messages, message_key, equipped_target):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not target:
-        log.bug("target non Ë un parametro valido: %r" % target)
+        log.bug("target non √® un parametro valido: %r" % target)
         return
 
     if not messages:
-        log.bug("messages non Ë un parametro valido: %r" % messages)
+        log.bug("messages non √® un parametro valido: %r" % messages)
         return
 
     if not message_key:
-        log.bug("message_key non Ë un parametro valido: %r" % message_key)
+        log.bug("message_key non √® un parametro valido: %r" % message_key)
         return
 
     if not equipped_target:
-        log.bug("equipped_target non Ë un parametro valido: %r" % equipped_target)
+        log.bug("equipped_target non √® un parametro valido: %r" % equipped_target)
         return
 
     # -------------------------------------------------------------------------
@@ -536,38 +536,38 @@ def sense_messages_to_others_equipped(entity, target, messages, message_key, equ
 
 def sense_at_direction(entity, direction, argument, exact, command_name, gamescript_suffix2, sense_name, messages, behavioured, from_or_to, readable=False):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
     if not direction:
-        log.bug("direction non Ë un parametro valido: %r" % direction)
+        log.bug("direction non √® un parametro valido: %r" % direction)
         return False
 
-    # argument puÚ essere una stringa vuota
+    # argument pu√≤ essere una stringa vuota
 
-    # exact ha valore di verit‡
+    # exact ha valore di verit√†
 
     if not command_name:
-        log.bug("command_name non Ë un parametro valido: %r" % command_name)
+        log.bug("command_name non √® un parametro valido: %r" % command_name)
         return False
 
     if not gamescript_suffix2:
-        log.bug("gamescript_suffix2 non Ë un parametro valido: %r" % gamescript_suffix2)
+        log.bug("gamescript_suffix2 non √® un parametro valido: %r" % gamescript_suffix2)
         return False
 
     if not sense_name and sense_name != "":
-        log.bug("sense_name non Ë un parametro valido: %r" % sense_name)
+        log.bug("sense_name non √® un parametro valido: %r" % sense_name)
         return False
 
     if not messages:
-        log.bug("messages non Ë un parametro valido: %r" % messages)
+        log.bug("messages non √® un parametro valido: %r" % messages)
         return False
 
     if from_or_to not in ("from_dir", "to_dir"):
-        log.bug("from_or_to non Ë un parametro valido: %r" % from_or_to)
+        log.bug("from_or_to non √® un parametro valido: %r" % from_or_to)
         return False
 
-    # readable ha valore di verit‡
+    # readable ha valore di verit√†
 
     # -------------------------------------------------------------------------
 
@@ -598,9 +598,9 @@ def sense_at_direction(entity, direction, argument, exact, command_name, gamescr
             return False
 
     # (TD) dovrebbe far vedere anche altre cose, a seconda della tipologia
-    # dell'uscita (segreta e non) e se l'eventuale porta Ë stata sfondata
+    # dell'uscita (segreta e non) e se l'eventuale porta √® stata sfondata
 
-    # (TD) Se la stanza di arrivo Ë buia le cose cambiano, da pensare, anche
+    # (TD) Se la stanza di arrivo √® buia le cose cambiano, da pensare, anche
     # relativamente alla descr_night
 
     # -------------------------------------------------------------------------
@@ -751,7 +751,7 @@ def sense_at_direction(entity, direction, argument, exact, command_name, gamescr
     # Se c'era una extra da guardare e non ha trovato nulla nell'uscita o nel
     # wall allora prova a guardare tra le extra dell'eventuale porta aperta
     if argument and door and DOOR.CLOSED not in door.door_type.flags:
-        # Qui poichÈ la porta Ë aperta non Ë pi˘ da considerarsi segreta
+        # Qui poich√© la porta √® aperta non √® pi√π da considerarsi segreta
         extra = door.extras.get_extra(argument, exact=exact)
         if readable and EXTRA.READABLE not in extra.flags:
             extra = None
@@ -809,8 +809,8 @@ def sense_at_direction(entity, direction, argument, exact, command_name, gamescr
             return False
 
         # Fa visualizzare il nome della stanza
-        # (TD) non farlo vedere se la stanza non Ë visibile, buia o che
-        # sar‡ bene unire questa ricerca del nome della stanza con la stessa
+        # (TD) non farlo vedere se la stanza non √® visibile, buia o che
+        # sar√† bene unire questa ricerca del nome della stanza con la stessa
         # che viene visualizza nell'elenco delle uscite della stanza
         descr = color_first_upper(put_final_dot(destination_room.get_name(entity)))
 
@@ -839,15 +839,15 @@ def sense_at_direction(entity, direction, argument, exact, command_name, gamescr
 
 def update_sensed_rooms(entity, room, command_name):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not room:
-        log.bug("room non Ë un parametro valido: %r" % room)
+        log.bug("room non √® un parametro valido: %r" % room)
         return
 
     if not command_name:
-        log.bug("command_name non Ë un parametro valido: %r" % command_name)
+        log.bug("command_name non √® un parametro valido: %r" % command_name)
         return
 
     # -------------------------------------------------------------------------
@@ -878,15 +878,15 @@ def update_sensed_rooms(entity, room, command_name):
 
 def update_sensed_entities(entity, target, command_name):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not target:
-        log.bug("target non Ë un parametro valido: %r" % target)
+        log.bug("target non √® un parametro valido: %r" % target)
         return
 
     if not command_name:
-        log.bug("command_name non Ë un parametro valido: %r" % command_name)
+        log.bug("command_name non √® un parametro valido: %r" % command_name)
         return
 
     # -------------------------------------------------------------------------

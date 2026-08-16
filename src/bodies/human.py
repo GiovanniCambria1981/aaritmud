@@ -128,7 +128,7 @@ parts[PART.RIGHT_FOOT]          = Part(PART.RIGHT_FOOT,       PART.RIGHT_LOWER_L
 #l'alluce     toe
 
 # Struttura particolare per i destri e i mancini, le parti sono flaggate come
-# da non visualizzare perché vengono gestite in maniera particolare:
+# da non visualizzare perchÃ© vengono gestite in maniera particolare:
 parts_right_handed = parts.copy()
 parts_right_handed[PART.WIELD] = Part(PART.WIELD, PART.RIGHT_HAND, None, [PARTFLAG.RIGHT, PARTFLAG.NO_EQUIP_LIST])
 parts_right_handed[PART.HOLD]  = Part(PART.HOLD,  PART.LEFT_HAND,  None, [PARTFLAG.LEFT, PARTFLAG.NO_EQUIP_LIST])

@@ -25,11 +25,11 @@ class ToElement(EnumElement):
 #-------------------------------------------------------------------------------
 
 NONE     = ToElement("Nessuno")
-ENTITY   = ToElement("Entity", "Il messaggio di act viene inviato alla entit‡ soggetto")
+ENTITY   = ToElement("Entity", "Il messaggio di act viene inviato alla entit√† soggetto")
 TARGET   = ToElement("Target", "Il messaggio di act viene inviato al bersaglio dell'azione")
-OTHERS   = ToElement("Others", "Il messaggio di act viene inviato a tutti tranne all'entit‡ soggetto")
+OTHERS   = ToElement("Others", "Il messaggio di act viene inviato a tutti tranne all'entit√† soggetto")
 ADMINS   = ToElement("Admins", "Il messaggio di act viene inviato a tutti gli amministratori nella stanza, tranne il soggetto")
-AREA     = ToElement("Area",   "Il messaggio di act viene inviato a tutti nell'area tranne l'entit‡ soggetto")
+AREA     = ToElement("Area",   "Il messaggio di act viene inviato a tutti nell'area tranne l'entit√† soggetto")
 
 
 #-------------------------------------------------------------------------------

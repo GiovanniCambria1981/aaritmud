@@ -20,7 +20,7 @@ from src.commands.command_invoke import invoke_handler
 
 def command_minvoke(entity, argument=""):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -31,7 +31,7 @@ def command_minvoke(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Modulo per la tipologie di entit‡ fodero.
+Modulo per la tipologie di entit√† fodero.
 """
 
 #= IMPORT ======================================================================

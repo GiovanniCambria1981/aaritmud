@@ -250,7 +250,7 @@ class Config(ConfigParser.ConfigParser):
     def finalize(self):
         # Converte la stringa ricavata per la prima destinazione in
         # oggetto-destinazione vero e proprio
-        from room import Destination
+        from src.room import Destination
         destination = Destination()
         destination.fread_the_line(None, self.initial_destination, "self.initial_destination")
         from src.database import database

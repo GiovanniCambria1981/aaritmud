@@ -23,7 +23,6 @@ def after_inject(seme, room):
     # ORCOCAN!
     # Se passo alla defer seme e poi faccio un seme.location dice che non esiste quando invece
     # non crea problemi se lo faccio qui. PERCHE'?
-    print(">>> inserimento seme via inject ()")
     if seme.location.IS_ITEM and seme.location.prototype.code == PROTO_CESPUGLIO_CODE:
         cespuglio = seme.location
     else:
@@ -32,22 +31,18 @@ def after_inject(seme, room):
     return False
 
 def after_inject_deferred(seme, cespuglio):
-    print(">>> inserimento seme via inject (after defer)")
     #if seme.location.IS_ITEM and seme.location.prototype.code == PROTO_CESPUGLIO_CODE:
     #    cespuglio = seme.location
         # qui stampa un dict vuoto come se l'inject avvenisse prima che la next stage precedente abbia messo i valori di specials
     if cespuglio and cespuglio.specials:
-        print(" <<<<----CESPUGLIO SPECIALS----->>>>")
         try:
-            print(cespuglio.specials)
             for key in cespuglio.specials:
                 seme.specials[key] = cespuglio.specials[key]
         except AttributeError:
-            print("nessuna special a 'sto cacchio di cespuglio", cespuglio)
+            pass
     # funziona su icreate
     # funziona su reboot all'atto del reset del file area 
     else:
-        print("no inside cespuglio or cespuglio special cespuglio ")
         seme.specials['ancestors'] = False
         #set_ancestors(seme)
     return False

@@ -31,7 +31,7 @@ MIML_SEPARATOR = "#"
 class MIMLParserSuperclass(object):
     def parse_miml(self, descr, looker=None):
         if not descr:
-            log.bug("descr non Ë un parametro valido: " % descr)
+            log.bug("descr non √® un parametro valido: " % descr)
             return ""
 
         # ---------------------------------------------------------------------
@@ -60,11 +60,11 @@ class MIMLParserSuperclass(object):
             entity_found = None
             # Concettualmente sarebbe errato cercare la previous_location di
             # self visto che magari si vorrebbe quella di looker o della location
-            # stessa ma va bene lo stesso, visto che esister‡ il sistema alternativo
+            # stessa ma va bene lo stesso, visto che esister√† il sistema alternativo
             # dei miml come script python inline
             if check[0 : 4] == "self" or check[0 : 8] == "location" or check[0 : 17] == "previous_location" or check[0 : 6] == "looker":
                 use_if_branch = self.parse_miml_check(check, looker)
-            # Questo Ë il caso in cui la condizione check Ë un codice di entit‡
+            # Questo √® il caso in cui la condizione check √® un codice di entit√†
             # o un codice di un giocatore
             elif ("_" in check and check.split("_")[1] in ("mob", "item")) or check in database["players"]:
                 for entity in self.iter_contains():
@@ -74,8 +74,8 @@ class MIMLParserSuperclass(object):
                             continue
                         entity_found = entity
                         break
-            # Questo Ë in tutti gli altri casi, ovvero quando il carattere #
-            # non Ë un separatore di miml e quindi l'output deve essere ripristinato
+            # Questo √® in tutti gli altri casi, ovvero quando il carattere #
+            # non √® un separatore di miml e quindi l'output deve essere ripristinato
             else:
                 result.append("#" + original_check)
                 continue
@@ -102,7 +102,7 @@ class MIMLParserSuperclass(object):
 
     def parse_miml_check(self, check, looker=None):
         if not check:
-            log.bug("check non Ë un parametro valido: %r" % check)
+            log.bug("check non √® un parametro valido: %r" % check)
             return False
 
         # ---------------------------------------------------------------------
@@ -141,14 +141,14 @@ class MIMLParserSuperclass(object):
                 log.bug("Operatore di check sconosciuto: %s per l'elemento con codice %s" % (check_parts[1], check_parts[2]))
                 return False
         else:
-            log.bug("entit‡ da utilizzare per i check Ë sconosciuta: %s" % check_parts[0])
+            log.bug("entit√† da utilizzare per i check √® sconosciuta: %s" % check_parts[0])
             return False
 
-        # (TD) no, dovrÚ splittare con or o and ed utilizzare le builtin any o all
+        # (TD) no, dovr√≤ splittare con or o and ed utilizzare le builtin any o all
         #for element_code in check_parts[2].split("|"):
         #    pass
 
-        # Miml relativo alla razza dell'entit‡ controllata
+        # Miml relativo alla razza dell'entit√† controllata
         if check_parts[2][0 : 5] == "RACE.":
             if check_entity.IS_ROOM:
                 return False
@@ -166,7 +166,7 @@ class MIMLParserSuperclass(object):
             else:
                 log.bug("Operatore di check sconosciuto: %s per l'elemento con codice %s" % (check_parts[1], check_parts[2]))
                 return False
-        # Miml relativo alla sessualit‡ dell'entit‡ controllata
+        # Miml relativo alla sessualit√† dell'entit√† controllata
         elif check_parts[2][0 : 4] == "SEX.":
             if check_entity.IS_ROOM:
                 return False
@@ -244,7 +244,7 @@ class MIMLParserSuperclass(object):
             if is_number(check_parts[2]):
                 check_qty = int(check_parts[2])
             else:
-                log.bug("la parte destra dell'opeartore del check miml %s non Ë un numbero valido" % (check))
+                log.bug("la parte destra dell'opeartore del check miml %s non √® un numbero valido" % (check))
 
             qty = 0
             for content in check_entity.iter_contains():
@@ -271,7 +271,7 @@ class MIMLParserSuperclass(object):
             if is_number(check_parts[2]):
                 check_qty = int(check_parts[2])
             else:
-                log.bug("la parte destra dell'opeartore del check miml %s non Ë un numbero valido" % check)
+                log.bug("la parte destra dell'opeartore del check miml %s non √® un numbero valido" % check)
 
             qty = 0
             for content in check_entity.iter_contains():
@@ -303,7 +303,7 @@ class MIMLParserSuperclass(object):
                     if check_parts[2] == "Exit":
                         return True
                     elif check_parts[2] == "Wall":
-                        # Il check qui ci vuole comunque perchÈ una direzione puÚ
+                        # Il check qui ci vuole comunque perch√© una direzione pu√≤
                         # avere sia uscita che muro, idem per il ramo 'is not'
                         if direction in check_entity.walls:
                             return True

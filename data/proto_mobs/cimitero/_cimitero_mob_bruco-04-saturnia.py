@@ -48,18 +48,18 @@ def look_for_dust(caterpillar):
     else:
         return
 
-   # Prima di mangiare viene trasformato in un altro bruco in modo che
-   # non venga killato dallo script delle farfalle oppure che non si
-   # trasformi in una crisalide canonica
-   location = caterpillar.location
-   caterpillar.extract(1)
-   caterpillar2 = Mob(PROTO_CATERPILLAR2_CODE)
-   caterpillar2.inject(location)
+    # Prima di mangiare viene trasformato in un altro bruco in modo che
+    # non venga killato dallo script delle farfalle oppure che non si
+    # trasformi in una crisalide canonica
+    location = caterpillar.location
+    caterpillar.extract(1)
+    caterpillar2 = Mob(PROTO_CATERPILLAR2_CODE)
+    caterpillar2.inject(location)
 
-   # Ora il bruco mangia la polverina, dopo che l'ha mangiata facciamo
-   # passare un po di tempo e gli facciamo cambiare colore
-   command_eat(caterpillar2, polverina.get_numbered_keyword(looker=caterpillar2))
-   defer(10, change_color, caterpillar2)
+    # Ora il bruco mangia la polverina, dopo che l'ha mangiata facciamo
+    # passare un po di tempo e gli facciamo cambiare colore
+    command_eat(caterpillar2, polverina.get_numbered_keyword(looker=caterpillar2))
+    defer(10, change_color, caterpillar2)
 #- Fine Funzione -
 
 

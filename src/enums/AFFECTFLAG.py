@@ -25,9 +25,9 @@ class AffectFlagElement(EnumElement):
 #-------------------------------------------------------------------------------
 
 NONE       = AffectFlagElement("Nessuna")
-POSSESSION = AffectFlagElement("Possession", "Non serve indossare l'entit‡ per far scattare gli affects, basta possederlo")  # (TD) da implementare
-LAST_WIN   = AffectFlagElement("LastWin",    "L'ultimo affect dello stesso tipo 'uccide' gli altri che devono essere 'chiusi' prima che questo affect venga.")  # (TD) il last win Ë meglio che vi sia per tutti gli affect con valore di modifier assoluto
-CUMULATIVE = AffectFlagElement("Cumulative", "Affect dello stesso tipo si accumulano nella durata anche se il valore utile Ë l'ultimo")
+POSSESSION = AffectFlagElement("Possession", "Non serve indossare l'entit√† per far scattare gli affects, basta possederlo")  # (TD) da implementare
+LAST_WIN   = AffectFlagElement("LastWin",    "L'ultimo affect dello stesso tipo 'uccide' gli altri che devono essere 'chiusi' prima che questo affect venga.")  # (TD) il last win √® meglio che vi sia per tutti gli affect con valore di modifier assoluto
+CUMULATIVE = AffectFlagElement("Cumulative", "Affect dello stesso tipo si accumulano nella durata anche se il valore utile √® l'ultimo")
 
 
 #-------------------------------------------------------------------------------

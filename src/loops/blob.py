@@ -20,8 +20,8 @@ class BlobLoop(UnstoppableLoop):
     def cycle(self):
         """
         Aggiorna tutti i file dei dati di prototipo, i file di modulo python e
-        i file di view relative alle pagine web modificati dopo che il gioco è
-        stato avviato (cioè dopo che è stato lanciato questo loop, quindi le
+        i file di view relative alle pagine web modificati dopo che il gioco Ã¨
+        stato avviato (cioÃ¨ dopo che Ã¨ stato lanciato questo loop, quindi le
         modifiche inserite tra la lettura del dato e l'esecuzione di questo
         loop non verrebbero carpite).
         """

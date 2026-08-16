@@ -29,7 +29,7 @@ class BelowMenuPage(WebResource):
     ACCOUNT_MUST_EXIST_IN_GET  = False
     ACCOUNT_MUST_EXIST_IN_POST = True
 
-    PAGE_TEMPLATE = string.Template(open("src/views/below_menu.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/below_menu.view", encoding="utf-8-sig").read())
 
     NEW_PAGE = True
 

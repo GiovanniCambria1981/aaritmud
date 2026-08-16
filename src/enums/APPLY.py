@@ -28,9 +28,9 @@ NONE      = ApplyElement("Nessuno",   "Apply temporaneo")
 RACE      = ApplyElement("Race",      "Apply che uno ha dalla nascita grazie alla sua razza")
 WAY       = ApplyElement("Way",       "Apply che uno possiede grazia alla scelta della classe")
 KNOWLEDGE = ApplyElement("Knowledge", "Apply a skill e spell e simili, mi sa che qui va bene il temporaneo, ma no.. mettiamo il nome della skill o spell che ha dato gli affect")
-ROOM      = ApplyElement("Room",      "Apply donato dalla stanza in cui si trova attualmente l'entit‡")
+ROOM      = ApplyElement("Room",      "Apply donato dalla stanza in cui si trova attualmente l'entit√†")
 MORPH     = ApplyElement("Morph",     "Apply relativo alle metamorfosi, ci saranno skill apprendibili solo dai morpher")
-DISEASE   = ApplyElement("Disease",   "Apply relativo a malattie, il type qui Ë il nome della malattia")
+DISEASE   = ApplyElement("Disease",   "Apply relativo a malattie, il type qui √® il nome della malattia")
 
 
 #-------------------------------------------------------------------------------

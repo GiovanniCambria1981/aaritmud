@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Modulo per la gestione del comando che serve a uccidere un'entit� sconfitta.
+Modulo per la gestione del comando che serve a uccidere un'entit? sconfitta.
 """
 
 #= IMPORT ======================================================================
@@ -40,12 +40,12 @@ VERBS = {"infinitive" : "[red]uccidere[close]",
 
 def command_kill(entity, argument="", verbs=VERBS, behavioured=False):
     if not verbs:
-        log.bug("verbs non � un parametro valido: %r" % verbs)
+        log.bug("verbs non ? un parametro valido: %r" % verbs)
         return False
 
     # -------------------------------------------------------------------------
 
-    # � possibile se il comando � stato deferrato
+    # ? possibile se il comando ? stato deferrato
     if not entity:
         return False
 
@@ -87,8 +87,8 @@ def command_kill(entity, argument="", verbs=VERBS, behavioured=False):
             return True
 
         entity.act("Dai il [red]colpo di grazia[close] a $N!", TO.ENTITY, target)
-        entity.act("$n d� il [red]colpo di grazia[close] a $N!", TO.OTHERS, target)
-        entity.act("$n ti d� il [red]colpo di grazia[close]!", TO.TARGET, target)
+        entity.act("$n d? il [red]colpo di grazia[close] a $N!", TO.OTHERS, target)
+        entity.act("$n ti d? il [red]colpo di grazia[close]!", TO.TARGET, target)
         target.dies(opponent=entity)
         entity.player_killed_counter += 1
         target.death_from_player_counter += 1
@@ -103,9 +103,9 @@ def command_kill(entity, argument="", verbs=VERBS, behavioured=False):
 
     # Se non sta combattendo procede all'attacco o alla distruzione della vittima
     if entity.is_fighting(with_him=target):
-        entity.act("Non � ancora giusto il momento di dare il colpo di grazia a $N.", TO.ENTITY, target)
-        entity.act("$n vorrebbe dare il colpo di grazia a $N, ma non � ancora giunto il suo momento...", TO.OTHERS, target)
-        entity.act("$n vorrebbe darti il colpo di grazia, ma non � ancora giunto il tuo momento...", TO.TARGET, target)
+        entity.act("Non ? ancora giusto il momento di dare il colpo di grazia a $N.", TO.ENTITY, target)
+        entity.act("$n vorrebbe dare il colpo di grazia a $N, ma non ? ancora giunto il suo momento...", TO.OTHERS, target)
+        entity.act("$n vorrebbe darti il colpo di grazia, ma non ? ancora giunto il tuo momento...", TO.TARGET, target)
         return False
 
     if target.IS_ITEM:
@@ -118,18 +118,18 @@ def command_kill(entity, argument="", verbs=VERBS, behavioured=False):
 
 def kill_handler(entity, argument, command_name, entity_tables, attack=False, destroy=False, verbs=VERBS, behavioured=False):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return False
 
     if not verbs:
-        log.bug("verbs non � un parametro valido: %r" % verbs)
+        log.bug("verbs non ? un parametro valido: %r" % verbs)
         return False
 
     if not entity_tables:
-        log.bug("entity_tables non � un parametro valido: %r" % entity_tables)
+        log.bug("entity_tables non ? un parametro valido: %r" % entity_tables)
         return False
 
-    # behavioured ha valore di verit�
+    # behavioured ha valore di verit?
 
     # -------------------------------------------------------------------------
 
@@ -152,9 +152,9 @@ def kill_handler(entity, argument, command_name, entity_tables, attack=False, de
         return False
 
     if entity.IS_ITEM:
-        entity.act("Non ti � possibile %s perch� sei un oggetto inanimato." % verbs["infinitive"], TO.ENTITY, target)
-        entity.act("Non � possibile per $n poter %s $N %s perch� � un oggetto inanimato." % verbs["infinitive"], TO.OTHERS, target)
-        entity.act("Non � possibile per $n poterti %s perch� � un oggetto inanimato." % verbs["infinitive"], TO.TARGET, target)
+        entity.act("Non ti ? possibile %s perch? sei un oggetto inanimato." % verbs["infinitive"], TO.ENTITY, target)
+        entity.act("Non ? possibile per $n poter %s $N %s perch? ? un oggetto inanimato." % verbs["infinitive"], TO.OTHERS, target)
+        entity.act("Non ? possibile per $n poterti %s perch? ? un oggetto inanimato." % verbs["infinitive"], TO.TARGET, target)
         return False
 
     if target == entity:
@@ -167,16 +167,16 @@ def kill_handler(entity, argument, command_name, entity_tables, attack=False, de
         return False
 
     if entity.is_fighting(with_him=target):
-        entity.act("Stai gi� %s $N!" % verbs["gerund"], TO.ENTITY, target)
-        entity.act("$n non riesce a %s $N pi� di cos�!" % verbs["infinitive"], TO.OTHERS, target)
-        entity.act("$n non riesce a %s pi� di cos�!" % verbs["infinitive"], TO.TARGET, target)
+        entity.act("Stai gi? %s $N!" % verbs["gerund"], TO.ENTITY, target)
+        entity.act("$n non riesce a %s $N pi? di cos?!" % verbs["infinitive"], TO.OTHERS, target)
+        entity.act("$n non riesce a %s pi? di cos?!" % verbs["infinitive"], TO.TARGET, target)
         return False
 
     if target.IS_ITEM and target.life <= 0:
         from src.commands import command_destroy
-        entity.act("Non puoi %s $N pi� di cos�." % command_destroy.VERBS["infinitive"], TO.ENTITY, target)
-        entity.act("$n non riesce a %s $N pi� di cos�." % command_destroy.VERBS["infinitive"], TO.OTHERS, target)
-        entity.act("$n non riesce a %s pi� di cos�." % command_destroy.VERBS["you2"], TO.TARGET, target)
+        entity.act("Non puoi %s $N pi? di cos?." % command_destroy.VERBS["infinitive"], TO.ENTITY, target)
+        entity.act("$n non riesce a %s $N pi? di cos?." % command_destroy.VERBS["infinitive"], TO.OTHERS, target)
+        entity.act("$n non riesce a %s pi? di cos?." % command_destroy.VERBS["you2"], TO.TARGET, target)
         return False
 
     force_return = check_trigger(entity, "before_kill", entity, target, attack, destroy, behavioured)
@@ -205,7 +205,7 @@ def kill_handler(entity, argument, command_name, entity_tables, attack=False, de
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

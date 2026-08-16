@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Comando che permette di modificare la razza di un'entit‡.
+Comando che permette di modificare la razza di un'entit√†.
 """
 
 
@@ -18,7 +18,7 @@ from src.utility import one_argument
 
 def command_setrace(entity, argument=""):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -31,7 +31,7 @@ def command_setrace(entity, argument=""):
     arg, argument = one_argument(argument)
     target = entity.find_entity_extensively(arg)
     if not target:
-        entity.send_output("Nessuna entit‡ trovata con argomento [white]%s[close]" % arg)
+        entity.send_output("Nessuna entit√† trovata con argomento [white]%s[close]" % arg)
         return False
 
     if not argument:
@@ -49,15 +49,15 @@ def command_setrace(entity, argument=""):
 
     if target.race == new_race:
         if target == entity:
-            entity.send_output("La tua razza Ë gi‡ %s" % new_race)
+            entity.send_output("La tua razza √® gi√† %s" % new_race)
         else:
-            entity.send_output("La razza di %s Ë gi‡ %s" % (target.get_name(looker), new_race))
+            entity.send_output("La razza di %s √® gi√† %s" % (target.get_name(looker), new_race))
         return False
 
     if target == entity:
         entity.send_output("Cambi la tua razza da %s in %s." % (target.race, new_race))
     else:
-        entity.send_output("Cambi la razza dell'entit‡ %s da %s in %s." %(target.get_name(entity), target.race, new_race))
+        entity.send_output("Cambi la razza dell'entit√† %s da %s in %s." %(target.get_name(entity), target.race, new_race))
     target.race = new_race
     return True
 #- Fine Funzione -
@@ -65,7 +65,7 @@ def command_setrace(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------
@@ -73,7 +73,7 @@ def get_syntax_template(entity):
     syntax = ""
 
     syntax += "setrace\n"
-    syntax += "setrace <nome o codice entit‡> <razza>\n"
+    syntax += "setrace <nome o codice entit√†> <razza>\n"
 
     return syntax
 #- Fine Funzione -

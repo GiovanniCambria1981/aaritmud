@@ -17,7 +17,7 @@ def command_help(entity, argument=""):
     Comando che serve a trovare e visualizzare un argomento di help.
     """
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non Ã¨ un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -39,7 +39,7 @@ def command_help(entity, argument=""):
             return False
 
     output = ""
-    # Se si è Admin fa visualizzare anche le parole chiave
+    # Se si Ã¨ Admin fa visualizzare anche le parole chiave
     if entity.trust > TRUST.PLAYER:
         if is_same(help.italian_keywords, help.english_keywords):
             output += format_for_admin("Italian/EnlighKeywords: %s" % help.italian_keywords) + "\n"
@@ -65,11 +65,11 @@ def command_help(entity, argument=""):
 
 def get_similar_helps(entity, argument):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non Ã¨ un parametro valido: %r" % entity)
         return ""
 
     if not argument:
-        log.bug("argument non è un parametro valido: %r" % argument)
+        log.bug("argument non Ã¨ un parametro valido: %r" % argument)
         return ""
 
     # -------------------------------------------------------------------------
@@ -82,11 +82,11 @@ def get_similar_helps(entity, argument):
 
 def get_see_also_links(entity, see_also):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non Ã¨ un parametro valido: %r" % entity)
         return ""
 
     if not see_also:
-        log.bug("see_also non è un parametro valido: %r" % see_also)
+        log.bug("see_also non Ã¨ un parametro valido: %r" % see_also)
         return ""
 
     # -------------------------------------------------------------------------
@@ -122,7 +122,7 @@ def get_see_also_links(entity, see_also):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non Ã¨ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

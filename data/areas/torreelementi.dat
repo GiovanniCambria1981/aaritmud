@@ -411,9 +411,7 @@ End
 	End
   End
   EntityResets:
-	ProtoEntity: torreelementi_item_book_001
-  End
-  EntityResets:
+	Quantity: 2
 	ProtoEntity: torreelementi_item_book_001
   End
   EntityResets:

@@ -30,9 +30,9 @@ class SaveTheWorldPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.MASTER
     MINIMUM_TRUST_ON_POST = TRUST.MASTER
 
-    PAGE_TEMPLATE         = string.Template(open("src/views/save_the_world.view").read())
-    not_template          = string.Template(open("src/views/save_the_world_not.view").read())
-    after_submit_template = string.Template(open("src/views/save_the_world_after_submit.view").read())
+    PAGE_TEMPLATE         = string.Template(open("src/views/save_the_world.view", encoding="utf-8-sig").read())
+    not_template          = string.Template(open("src/views/save_the_world_not.view", encoding="utf-8-sig").read())
+    after_submit_template = string.Template(open("src/views/save_the_world_after_submit.view", encoding="utf-8-sig").read())
 
     def render_GET(self, request, conn):
         if not config.save_persistence:

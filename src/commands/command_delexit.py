@@ -17,7 +17,7 @@ from src.utility import one_argument
 
 def command_delexit(entity, argument=""):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non Ã¨ un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -40,7 +40,7 @@ def command_delexit(entity, argument=""):
         return False
 
     if direction not in room.exits:
-        entity.send_output("Non c'è nessuna uscita %s da distruggere." % direction.to_dir)
+        entity.send_output("Non c'Ã¨ nessuna uscita %s da distruggere." % direction.to_dir)
         return False
 
     del(room.exits[direction])
@@ -51,7 +51,7 @@ def command_delexit(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non Ã¨ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

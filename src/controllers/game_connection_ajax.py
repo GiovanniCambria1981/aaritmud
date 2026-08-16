@@ -2,7 +2,7 @@
 
 """
 Modulo per la gestione della connessione alla pagina di gioco di output
-tramite ajax, questa � la tipologia di connessione al gioco standard.
+tramite ajax, questa ? la tipologia di connessione al gioco standard.
 """
 
 

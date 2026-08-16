@@ -29,7 +29,7 @@ class GlobalQuantityPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.BUILDER
     MINIMUM_TRUST_ON_POST = TRUST.BUILDER
 
-    PAGE_TEMPLATE = string.Template(open("src/views/global_quantity.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/global_quantity.view", encoding="utf-8-sig").read())
 
     def render_GET(self, request, conn):
         if "proto_code" in request.args:
@@ -66,7 +66,7 @@ class GlobalQuantityPage(WebResource):
     def create_instances_list(self, proto_code):
         instances = []
 
-        instances.append('''Istanze di entit� con codice di prototipo %s e relativa destinatione:<br><br>''' % proto_code)
+        instances.append('''Istanze di entit? con codice di prototipo %s e relativa destinatione:<br><br>''' % proto_code)
         instances.append('''<table class="mud">''')
         table_name = proto_code.split("_")[1] + "s"
         for code, instance in database[table_name].items():
@@ -81,7 +81,7 @@ class GlobalQuantityPage(WebResource):
         instances.append('''</table>''')
 
         if not instances:
-            instances.append('''Se ti attendevi dei risultati probabilmente tra la visualizzazione della pagina precedente e l'arrivo su questa l'istanza precedentemente contata � stata estratta.''')
+            instances.append('''Se ti attendevi dei risultati probabilmente tra la visualizzazione della pagina precedente e l'arrivo su questa l'istanza precedentemente contata ? stata estratta.''')
 
         return instances
     #- Fine Metodo -

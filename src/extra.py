@@ -114,7 +114,9 @@ class ExtraDescription(MIMLParserSuperclass):
                    "descr_smell", "descr_smell_night", "descr_touch", "descr_touch_night",
                    "descr_taste", "descr_taste_night", "descr_sixth", "descr_sixth_night"]
     SCHEMA      = {}
-    REFERENCES  = {"author" : ["players", "proto_mobs", "proto_items"]}
+    # L'autore è un'attribuzione testuale persistente, non un riferimento
+    # obbligatorio: molti contenuti storici sopravvivono al relativo player.
+    REFERENCES  = {}
     WEAKREFS    = {}
 
     IS_AREA   = False
@@ -151,7 +153,7 @@ class ExtraDescription(MIMLParserSuperclass):
         self.descr_sixth         = ""  # Descrizione del sesto senso
         self.descr_sixth_night   = ""  # Descrizione del sesto senso notturna
         self.flags               = Flags(EXTRA.NONE)  # Flag per indicare la tipologia di extra e altre proprietà particolari
-        self.author              = None  # Entità che ha scritto, o disegnato, l'extra
+        self.author              = ""  # Nome di chi ha scritto o disegnato l'extra
     #- Fine Inizializzazione -
 
     def get_error_message(self):

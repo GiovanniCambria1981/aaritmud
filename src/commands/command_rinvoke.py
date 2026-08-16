@@ -20,19 +20,19 @@ from src.commands.command_invoke import invoke_handler
 
 def command_rinvoke(entity, argument=""):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
 
-    entity.send_output("Non ancora funzionante, ma chiss� se un giorno...")
+    entity.send_output("Non ancora funzionante, ma chiss? se un giorno...")
     return False
 #- Fine Funzione -
 
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

@@ -36,8 +36,10 @@ class SquarePage(WebResource):
     ACCOUNT_MUST_EXIST_IN_GET  = False
     ACCOUNT_MUST_EXIST_IN_POST = True
 
-    PAGE_TEMPLATE        = string.Template(open("src/views/square.view").read())
-    SQUARE_MESSAGES_LIST = [_line.strip() for _line in open("persistence/square_messages.list"].readlines())
+    PAGE_TEMPLATE        = string.Template(open("src/views/square.view", encoding="utf-8-sig").read())
+    SQUARE_MESSAGES_LIST = [
+        line.strip() for line in open("persistence/square_messages.list").readlines()
+    ]
 
     NEW_PAGE = True
 

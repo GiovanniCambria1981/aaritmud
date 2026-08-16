@@ -17,7 +17,7 @@ from src.web_resource import WebResource
 class RaceGnomePage(WebResource):
     TITLE = "Gnome"
 
-    PAGE_TEMPLATE = string.Template(open("src/views/race_gnome.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/race_gnome.view", encoding="utf-8-sig").read())
 
     def render_GET(self, request, conn):
         mapping = {}

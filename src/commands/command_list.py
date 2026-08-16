@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Modulo del comando list, che serve a visualizzare la lista delle entit‡
+Modulo del comando list, che serve a visualizzare la lista delle entit√†
 comprabili di un negoziante.
 """
 
@@ -24,9 +24,9 @@ from src.entitypes.money import pretty_money_icons, pretty_money_value
 
 def command_list(entity, argument="", behavioured=False):
     """
-    Permette di comprare entit‡ da un commerciante.
+    Permette di comprare entit√† da un commerciante.
     """
-    # PuÚ essere normale se il comando Ë stato deferrato
+    # Pu√≤ essere normale se il comando √® stato deferrato
     if not entity:
         return False
 
@@ -55,12 +55,12 @@ def command_list(entity, argument="", behavioured=False):
 
     in_location = dealer.shop.in_location(dealer)
     if not in_location and SHOP.DISPENSER not in dealer.shop.types:
-        entity.act("$N non ti mostra la merce perchÈ non si trova nel suo negozio.", TO.ENTITY, dealer)
-        entity.act("$N non mostra la merce a $n perchÈ non si trova nel suo negozio.", TO.OTHERS, dealer)
-        entity.act("Non mostri la tua merce a $n perchÈ non ti trovi nel tuo negozio.", TO.TARGET, dealer)
+        entity.act("$N non ti mostra la merce perch√© non si trova nel suo negozio.", TO.ENTITY, dealer)
+        entity.act("$N non mostra la merce a $n perch√© non si trova nel suo negozio.", TO.OTHERS, dealer)
+        entity.act("Non mostri la tua merce a $n perch√© non ti trovi nel tuo negozio.", TO.TARGET, dealer)
         return False
 
-    # Indica che un'entit‡ vuole interagire con il dealer
+    # Indica che un'entit√† vuole interagire con il dealer
     if entity not in dealer.interactions:
         dealer.interactions.append(entity)
 
@@ -70,19 +70,19 @@ def command_list(entity, argument="", behavioured=False):
             from_where = "da chi"
         else:
             from_where = "da dove"
-        entity.act("Non puoi avere la lista da $N perchÈ non ha %s prendere la mercanzia!" % from_where, TO.ENTITY, dealer)
-        entity.act("$n non puÚ avere la lista da $N perchÈ non ha %s prendere la mercanzia!" % from_where, TO.OTHERS, dealer)
-        entity.act("$n non puÚ avere la lista perchÈ non hai %s prendere la mercanzia!" % from_where, TO.TARGET, dealer)
+        entity.act("Non puoi avere la lista da $N perch√© non ha %s prendere la mercanzia!" % from_where, TO.ENTITY, dealer)
+        entity.act("$n non pu√≤ avere la lista da $N perch√© non ha %s prendere la mercanzia!" % from_where, TO.OTHERS, dealer)
+        entity.act("$n non pu√≤ avere la lista perch√© non hai %s prendere la mercanzia!" % from_where, TO.TARGET, dealer)
         return False
 
     if not dealer.shop.buyables:
         entity.send_output("%s non possiede nessuna mercanzia" % dealer.get_name(looker=entity))
-        log.bug("Non Ë stato trovato nessun buyable impostato per %s" % dealer.code)
+        log.bug("Non √® stato trovato nessun buyable impostato per %s" % dealer.code)
         return False
 
     # Controlla se il magazzino contiene almeno un oggetto comprabile dall'utente
     if dealer.shop.storage_is_empty(storage):
-        entity.act("Ti accorgi che il negozio non possiede mercanzia, meglio tornare pi˘ tardi, dopo il rifornimento.", TO.ENTITY, dealer)
+        entity.act("Ti accorgi che il negozio non possiede mercanzia, meglio tornare pi√π tardi, dopo il rifornimento.", TO.ENTITY, dealer)
         entity.act("$n si accorge che il negozio non possiede mercanzia.", TO.OTHERS, dealer)
         entity.act("$n si accorge che il tuo negozio non possiede mercanzia.", TO.TARGET, dealer)
         return False
@@ -131,9 +131,9 @@ def command_list(entity, argument="", behavioured=False):
             if en.prototype != buyable.proto_entity:
                 continue
 
-            # Purtroppo perÚ il sistema di mucchio visivo non permetter‡ di
-            # visualizzare quantit‡ superiori ad 1 per oggetti di long uguali
-            # tra loro, la quantit‡ si deve per forza basare sul mucchio fisico
+            # Purtroppo per√≤ il sistema di mucchio visivo non permetter√† di
+            # visualizzare quantit√† superiori ad 1 per oggetti di long uguali
+            # tra loro, la quantit√† si deve per forza basare sul mucchio fisico
             quantity = 10
             if buyable.has_discount():
                 quantity = buyable.discount_quantity
@@ -157,7 +157,7 @@ def command_list(entity, argument="", behavioured=False):
                 en.get_numbered_keyword(looker=entity),
                 remove_colors(name),
                 remove_colors(pretty_money_value(single_price))))
-            rows.append('''<td><input type="submit" value="%s x %d" onclick="sendInput('%s %d %s')" title="Comprerai %d unit‡ di %s per un prezzo di %s"/></td>''' % (
+            rows.append('''<td><input type="submit" value="%s x %d" onclick="sendInput('%s %d %s')" title="Comprerai %d unit√† di %s per un prezzo di %s"/></td>''' % (
                 buy_translation.capitalize(),
                 quantity,
                 buy_translation,
@@ -168,7 +168,7 @@ def command_list(entity, argument="", behavioured=False):
                 remove_colors(pretty_money_value(block_price))))
             if discount_exist:
                 if buyable.has_discount():
-                    rows.append('''<td align="center">%d%% per quantit‡ maggiori di %d</td>''' % (buyable.discount_percent, buyable.discount_quantity))
+                    rows.append('''<td align="center">%d%% per quantit√† maggiori di %d</td>''' % (buyable.discount_percent, buyable.discount_quantity))
                 else:
                     rows.append('''<td align="center">Nessuno</td>''')
             rows.append('''</tr>''')
@@ -188,13 +188,13 @@ def command_list(entity, argument="", behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------
 
     syntax  = "list\n"
-    syntax += "list <commerciante se pi˘ di uno nella stanza>\n"
+    syntax += "list <commerciante se pi√π di uno nella stanza>\n"
 
     return syntax
 #- Fine Funzione -

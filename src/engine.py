@@ -266,7 +266,10 @@ class Engine(OptionParser):
 
         from src.site import site
         log.booting("Prepara il web server del gioco")
-        reactor.listenTCP(config.http_port, site)
+        # Il boot di verifica deve caricare e validare anche controller e view,
+        # senza però occupare la porta del server eventualmente già avviato.
+        if not self.options.boot_only:
+            reactor.listenTCP(config.http_port, site)
 
         from src.forum_db import forum_db
         log.booting("Carica il Forum")

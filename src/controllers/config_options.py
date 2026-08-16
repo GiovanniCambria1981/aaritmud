@@ -29,7 +29,7 @@ class ConfigOptionsPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.MASTER
     MINIMUM_TRUST_ON_POST = TRUST.MASTER
 
-    PAGE_TEMPLATE = string.Template(open("src/views/config_options.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/config_options.view", encoding="utf-8-sig").read())
 
     NEW_PAGE = True
 
@@ -106,14 +106,14 @@ class ConfigOptionsPage(WebResource):
 
     def render_POST(self, request, conn):
         if conn.account.trust == TRUST.MASTER:
-            message = ["Non è possibile modificare le opzioni di config da parte di Amministratori con trust %s" % conn.account.trust]
+            message = ["Non Ã¨ possibile modificare le opzioni di config da parte di Amministratori con trust %s" % conn.account.trust]
             return json.dumps(message, separators=(',',':'))
 
         write_config = False
         if "write_config" in request.args and request.args["write_config"][0] == "1":
             write_config = True
 
-        # Si copia gli attributi del config attuale, cosicché se quelli nuovi
+        # Si copia gli attributi del config attuale, cosicchÃ© se quelli nuovi
         # sono stati impostati erroneamente dal client verranno sostituiti
         # da questi qui
         original_config_attrs = copy.copy(config.__dict__)

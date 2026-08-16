@@ -9,7 +9,7 @@ from src.log import log
 
 def command_talents(entity, argument=""):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non Ã¨ un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -21,7 +21,7 @@ def command_talents(entity, argument=""):
     if entity.talents > 0:
         entity.send_output('''<script>$("#talents_title").parent().show(); $("#game_tabs").tabs({selected: 2});</script>''', break_line=False)
     else:
-        entity.send_output("Attualmente non possiedi nessun talento in particolare, hai bisogno di più esperienza!")
+        entity.send_output("Attualmente non possiedi nessun talento in particolare, hai bisogno di piÃ¹ esperienza!")
 
     return True
 #- Fine Funzione -

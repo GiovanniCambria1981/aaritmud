@@ -29,9 +29,9 @@ VERBS = {"infinitive" : "ingoiare",
 
 def command_swallow(entity, argument="", verbs=VERBS, behavioured=False):
     """
-    Comando che serve per mangiare un entit�.
+    Comando che serve per mangiare un entit?.
     """
-    # � possibile se il comando � stato deferrato
+    # ? possibile se il comando ? stato deferrato
     if not entity:
         return False
 
@@ -41,7 +41,7 @@ def command_swallow(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

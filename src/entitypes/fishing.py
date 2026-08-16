@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Modulo per tipologie d'entit‡ utilizzabili per pescare.
+Modulo per tipologie d'entit√† utilizzabili per pescare.
 """
 
 #= IMPORT ======================================================================

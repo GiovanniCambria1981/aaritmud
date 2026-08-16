@@ -9,7 +9,7 @@ Modulo per la gestione della wilderness.
 
 import math
 
-from PIL import Image library
+from PIL import Image
 
 from src.calendar import calendar
 from src.database import database

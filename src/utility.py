@@ -578,7 +578,10 @@ def copy_existing_attributes(from_obj, to_obj, except_these_attrs=None, avoid_vo
                 copied_attr.append(copied_value)
             setattr(to_obj, attr_name, copied_attr)
         elif hasattr(attr, "copy"):
-            copied_attr = attr.copy(avoid_volatiles=avoid_volatiles)
+            try:
+                copied_attr = attr.copy(avoid_volatiles=avoid_volatiles)
+            except TypeError:
+                copied_attr = attr.copy()
             setattr(to_obj, attr_name, copied_attr)
         else:
             copied_attr = copy.copy(attr)
@@ -1000,7 +1003,7 @@ def commafy(number):
     delle migliaia di cifre.
     """
     locale.setlocale(locale.LC_ALL, "")
-    return locale.format("%d", number, True)
+    return locale.format_string("%d", number, grouping=True)
 #- Fine Funzione -
 
 

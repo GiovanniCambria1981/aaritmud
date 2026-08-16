@@ -20,12 +20,12 @@ from src.log    import log
 #= VARIABILI ===================================================================
 
 # Dizionario di liste contenenti tutti i parametri passati alle deferred e che
-# di volta in volta vendono aggiornati con altre entit� perch� i valori vecchi
+# di volta in volta vendono aggiornati con altre entit? perch? i valori vecchi
 # vengono estratti dal sistema di raggruppamento fisico
 all_deferred_function_params = {}
 
 # Id incrementale per identificare ogni deferred nel momento in cui non servono
-# pi� e bisogna distruggerle
+# pi? e bisogna distruggerle
 incremental_key = 0
 
 
@@ -44,7 +44,7 @@ def defer(time, function, *args):
     un certo tot di tempo.
     """
     if time < 0:
-        log.bug("time non � un parametro valido perch� minore di 0: %d" % time)
+        log.bug("time non ? un parametro valido perch? minore di 0: %d" % time)
         return
 
     # -------------------------------------------------------------------------
@@ -65,11 +65,11 @@ def defer_random_time(min_time, max_time, function, *args):
     un certo tot di tempo.
     """
     if min_time < 0:
-        log.bug("min_time non � un parametro valido perch� minore di 0: %d" % min_time)
+        log.bug("min_time non ? un parametro valido perch? minore di 0: %d" % min_time)
         return
 
     if max_time < min_time:
-        log.bug("max_time non � un parametro valido perch� minore di min_time %d: %d" % (min_time, max_time))
+        log.bug("max_time non ? un parametro valido perch? minore di min_time %d: %d" % (min_time, max_time))
         return
 
     # -------------------------------------------------------------------------
@@ -91,28 +91,28 @@ def defer_random_time(min_time, max_time, function, *args):
 def defer_if_possible(min_time, max_time, entity, target, function, *args):
     """
     Versione della defer che prima di tale esecuzione ci si vuole assicurare
-    che le due entit� non siano state estratte e che si trovino nella stessa
+    che le due entit? non siano state estratte e che si trovino nella stessa
     locazione e che entity veda target.
-    Di solito la funzione passata � una funzione di comando.
+    Di solito la funzione passata ? una funzione di comando.
     """
     if min_time < 0:
-        log.bug("min_time non � un parametro valido perch� minore di 0: %d" % min_time)
+        log.bug("min_time non ? un parametro valido perch? minore di 0: %d" % min_time)
         return
 
     if max_time < min_time:
-        log.bug("max_time non � un parametro valido perch� minore di min_time %d: %d" % (min_time, max_time))
+        log.bug("max_time non ? un parametro valido perch? minore di min_time %d: %d" % (min_time, max_time))
         return
 
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return
 
     if not target:
-        log.bug("target non � un parametro valido: %r" % target)
+        log.bug("target non ? un parametro valido: %r" % target)
         return
 
     if not function:
-        log.bug("function non � un parametro valido: %r" % function)
+        log.bug("function non ? un parametro valido: %r" % function)
         return
 
     # --------------------------------------------------------------------------
@@ -137,19 +137,19 @@ def _execute_if_possible(entity, target, key, function, *args):
     utilizzare quest'ultima.
     """
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return
 
     if not target:
-        log.bug("target non � un parametro valido: %r" % target)
+        log.bug("target non ? un parametro valido: %r" % target)
         return
 
     if 0 > key >= 1:
-        log.bug("key non � un parametro valido: %s" % key)
+        log.bug("key non ? un parametro valido: %s" % key)
         return
 
     if not function:
-        log.bug("function non � un parametro valido: %r" % function)
+        log.bug("function non ? un parametro valido: %r" % function)
         return
 
     # --------------------------------------------------------------------------
@@ -174,30 +174,30 @@ def _execute_if_possible(entity, target, key, function, *args):
 
 def _before_defer(key, function, *args):
     """
-    Inserendo delle liste di entit� in all_deferred_function_params queste
+    Inserendo delle liste di entit? in all_deferred_function_params queste
     verranno inserite in coda durante la group_entity del modulo entity
-    (quando vengono estratte le entit� originali del gruppo), in maniera tale
+    (quando vengono estratte le entit? originali del gruppo), in maniera tale
     che quando la defer scatta i riferimenti andranno a cercare e a puntare
-    alla nuova entit� raggruppata e non pi� a quella precedente, ormai inutile.
+    alla nuova entit? raggruppata e non pi? a quella precedente, ormai inutile.
     """
     if 0 > key >= 1:
-        log.bug("key non � un parametro valido: %s" % key)
+        log.bug("key non ? un parametro valido: %s" % key)
         return
 
     if not function:
-        log.bug("function non � un parametro valido: %r" % function)
+        log.bug("function non ? un parametro valido: %r" % function)
         return
 
     #--------------------------------------------------------------------------
 
     global all_deferred_function_params
 
-    # Se c'� almeno un parametro-entit� allora inizializza la all_deferred_function_params
+    # Se c'? almeno un parametro-entit? allora inizializza la all_deferred_function_params
     # con la key passata
     for arg in args:
         if arg.__class__.__name__ in ("Mob", "Item"):
             if key in all_deferred_function_params:
-                log.bug("key %r gi� esistente in all_deferred_function_params" % key)
+                log.bug("key %r gi? esistente in all_deferred_function_params" % key)
             all_deferred_function_params[key] = []
             break
 
@@ -226,11 +226,11 @@ def _before_defer(key, function, *args):
 
 def _search_already_deferred_arg(deferred_params, arg):
     if deferred_params is None:
-        log.bug("deferred_params non � un parametro valido: %r" % deferred_params)
+        log.bug("deferred_params non ? un parametro valido: %r" % deferred_params)
         return False
 
     if not arg:
-        log.bug("arg non � un parametro valido: %r" % arg)
+        log.bug("arg non ? un parametro valido: %r" % arg)
         return False
 
     # -------------------------------------------------------------------------
@@ -238,15 +238,15 @@ def _search_already_deferred_arg(deferred_params, arg):
     for deferred_entities in deferred_params:
         for deferred_entity in deferred_entities:
             if deferred_entity() == arg:
-                # Se l'entit� � estratta e non � stato trovato nessuna entit�
+                # Se l'entit? ? estratta e non ? stato trovato nessuna entit?
                 # adatta a sostituirla allora non serve neppure far partire la
-                # deferred: c'� un baco che dev'essere corretto a priori
+                # deferred: c'? un baco che dev'essere corretto a priori
                 if arg.is_extracted():
-                    log.bug("arg trovato gi� estratto in partenza: %r" % arg)
+                    log.bug("arg trovato gi? estratto in partenza: %r" % arg)
                     return False
                 #if arg.prototype.code == "ikea_item_uovo-gallina":
                 #    f = open("gallina.txt", "a")
-                #    buf = "gi� inserita alla _before_defer: %r, %r, %d, %r, %r\n" % (
+                #    buf = "gi? inserita alla _before_defer: %r, %r, %d, %r, %r\n" % (
                 #        arg.code, arg.location, arg.quantity, FLAG.EXTRACTED in arg.flags, FLAG.WEAKLY_EXTRACTED in arg.flags)
                 #    f.write(buf)
                 #    print buf
@@ -265,20 +265,20 @@ def _after_defer(key, function, *args):
     di deferred siano ancora valido una volta che quest'ultima debba scattare.
     Se non lo sono allora pesca dalla lista delle deferred salvata a parte, ed
     impostata durante il raggruppamento fisico (group_entity), l'ultima
-    della lista che � l'ultimo residuo dei vari raggruppamenti fisici.
-    Se l'ultimo della lista � stato estratto non c'� problema, potrebbe aver
-    terminato il suo ciclo vitale (mob � stato ucciso ed estratto) e quindi
-    viene passato cos� com'�, sar� poi la funzione a cui vengono passati i
+    della lista che ? l'ultimo residuo dei vari raggruppamenti fisici.
+    Se l'ultimo della lista ? stato estratto non c'? problema, potrebbe aver
+    terminato il suo ciclo vitale (mob ? stato ucciso ed estratto) e quindi
+    viene passato cos? com'?, sar? poi la funzione a cui vengono passati i
     parametri a doversi gestire questo caso particolare.
-    Oltre a tutto ci� ogni volta che trover� un'entit� estratta provveder� a
-    sostituirla con un None, ci� per semplificare la stesura dei gamescripts.
+    Oltre a tutto ci? ogni volta che trover? un'entit? estratta provveder? a
+    sostituirla con un None, ci? per semplificare la stesura dei gamescripts.
     """
     if 0 > key >= 1:
-        log.bug("key non � un parametro valido: %s" % key)
+        log.bug("key non ? un parametro valido: %s" % key)
         return
 
     if not function:
-        log.bug("function non � un parametro valido: %r" % function)
+        log.bug("function non ? un parametro valido: %r" % function)
         return
 
     #--------------------------------------------------------------------------
@@ -302,8 +302,8 @@ def _after_defer(key, function, *args):
         else:
             new_args.append(arg)
 
-    # E' normale che non tutte le key vengano trovate, questo perch� nella
-    # _befor_defer non tutti i parametri sono delle entit�, e quindi non tutte
+    # E' normale che non tutte le key vengano trovate, questo perch? nella
+    # _befor_defer non tutti i parametri sono delle entit?, e quindi non tutte
     # le key vengono inizializzate
     if key in all_deferred_function_params:
         del(all_deferred_function_params[key])
@@ -314,11 +314,11 @@ def _after_defer(key, function, *args):
 
 def _get_already_deferred_arg(deferred_params, arg):
     if not deferred_params:
-        log.bug("deferred_params non � un parametro valido: %r" % deferred_params)
+        log.bug("deferred_params non ? un parametro valido: %r" % deferred_params)
         return False, None
 
     if not arg:
-        log.bug("arg non � un parametro valido: %r" % arg)
+        log.bug("arg non ? un parametro valido: %r" % arg)
         return False, None
 
     # -------------------------------------------------------------------------
@@ -346,17 +346,17 @@ def _get_already_deferred_arg(deferred_params, arg):
 
 def set_deferred_args(from_entity, to_entity):
     """
-    Imposta, durante l'ammucchiamento fisico, la nuova entit� in coda a quella
+    Imposta, durante l'ammucchiamento fisico, la nuova entit? in coda a quella
     precedente in maniera tale che quest'ultima, venendo estratta, non venga
     presa dalla _after_defer come parametro valido ma utilizzi invece l'ultimo
     della lista.
     """
     if not from_entity:
-        log.bug("from_entity non � un parametro valido: %r" % from_entity)
+        log.bug("from_entity non ? un parametro valido: %r" % from_entity)
         return
 
     if not to_entity:
-        log.bug("to_entity non � un parametro valido: %r" % to_entity)
+        log.bug("to_entity non ? un parametro valido: %r" % to_entity)
         return
 
     #--------------------------------------------------------------------------
@@ -379,7 +379,7 @@ def set_deferred_args(from_entity, to_entity):
                     #    traceback.print_stack(file=f)
                     #    f.close()
                     if deferred_entity != deferred_entities[-1]:
-                        log.bug("deferred_entity %s non � l'ultimo della lista: %s" % (deferred_entity, deferred_entities))
+                        log.bug("deferred_entity %s non ? l'ultimo della lista: %s" % (deferred_entity, deferred_entities))
                     deferred_entities.append(weakref.ref(to_entity))
                     discovered = True
                     break
@@ -388,6 +388,6 @@ def set_deferred_args(from_entity, to_entity):
         if discovered:
             break
 
-    # � normale che from_entity non venga trovata, ci� significa che � stata
+    # ? normale che from_entity non venga trovata, ci? significa che ? stata
     # raggruppata prima di essere utilizzata come parametro in una deferred
 #- Fine Funzione -

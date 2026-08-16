@@ -22,10 +22,10 @@ class SectorElement(EnumElement):
 
     def __init__(self, name, description=""):
         super(SectorElement, self).__init__(name, description)
-        self.genre          = GRAMMAR.FEMININE  # Indica se il nome del settore Ë maschile
-        self.number         = GRAMMAR.MASCULINE # Indica se il nome del settore Ë singolare
-        self.fertile        = False             # Indica se il settore Ë fertile e vi si puÚ seminare
-        self.dig_difficulty = 0                 # Indica la facilit‡ con cui si scava nel terreno (da 0 a 100, 100 impossibile)
+        self.genre          = GRAMMAR.FEMININE  # Indica se il nome del settore √® maschile
+        self.number         = GRAMMAR.MASCULINE # Indica se il nome del settore √® singolare
+        self.fertile        = False             # Indica se il settore √® fertile e vi si pu√≤ seminare
+        self.dig_difficulty = 0                 # Indica la facilit√† con cui si scava nel terreno (da 0 a 100, 100 impossibile)
         self.tile           = ""                # Tile grafico relativo alla wild
     # - Fine Inizializzazione -
 
@@ -37,14 +37,14 @@ NONE = SectorElement("Nessuno")
 
 # Settori che indicano un'altitudine
 PLAIN        = SectorElement("[lightgreen]pianura[close]",  "Settore della pianura")
-SAVANNA      = SectorElement("[yellow]savana[close]",       "Settore per la savana: ampie distese erbose, pi˘ o meno alte, in zone tropicali, dove le temperature sono elevate e le pioggie hanno un andamento stagionale")
+SAVANNA      = SectorElement("[yellow]savana[close]",       "Settore per la savana: ampie distese erbose, pi√π o meno alte, in zone tropicali, dove le temperature sono elevate e le pioggie hanno un andamento stagionale")
 HILL         = SectorElement("[green]collina[close]",       "Settore per la collina")
 MOUNTAIN     = SectorElement("[lightgray]montagna[close]",  "Settore per la montagna")
 PLATEAU      = SectorElement("altopiano",                   "Settore per gli altopiani")
 HIGHMOUNTAIN = SectorElement("[gray]alta montagna[close]",  "Settore per l'alta montagna")
 PEAK         = SectorElement("[darkgray]picco[close]",      "Settore per i picchi, alte montagne con pareti sempre verticali e corpo della montagna stretto")
 
-# Settori che indicano un certo tipo di vegetazione o di densit‡ di vegetazione:
+# Settori che indicano un certo tipo di vegetazione o di densit√† di vegetazione:
 SHRUB  = SectorElement("[darkgreen]macchia[close]",    "Settore per la macchia")
 WOOD   = SectorElement("[green]bosco[close]",          "Settore per il bosco")
 FOREST = SectorElement("[forestgreen]foresta[close]",  "Settore per la foresta")
@@ -53,19 +53,19 @@ JUNGLE = SectorElement("[green]giungla[close]",        "Settore per la giungla")
 # Altri:
 DESERT      = SectorElement("[darkgoldenrod]deserto[close]",       "Settore per i deserti")
 DUNNO       = SectorElement("[darkgoldenrod]duna[close]",          "Settore per le colline nei deserti")
-QUICKSAND   = SectorElement("[darkgoldenrod]sabbie mobili[close]", "Settore in cui la probabilit‡ di trovarsi invischiati in questa trappola Ë alta")
+QUICKSAND   = SectorElement("[darkgoldenrod]sabbie mobili[close]", "Settore in cui la probabilit√† di trovarsi invischiati in questa trappola √® alta")
 CAVERN      = SectorElement("[gray]caverna[close]",                "Settore per caverne piene di stallatiti e stalagmiti")
 UNDERGROUND = SectorElement("[darkgray]sottoterra[close]",         "Settore per tutte le zone sottoterra non simili a caverne o a dungeon")
 VOLCANO     = SectorElement("[red]vulcano[close]",                 "Settore per i vulcani")
 LAVA        = SectorElement("[red]lava[close]",                    "Settore per la lava vulcanica")
-HEATH       = SectorElement("[darkgreen]brughiera[close]",         "Settore per la brughiera: temperature mediamente pi˘ basse e maggiore umidit‡ che porta anche alla formazione di stagni, paludi e torbiere.")
+HEATH       = SectorElement("[darkgreen]brughiera[close]",         "Settore per la brughiera: temperature mediamente pi√π basse e maggiore umidit√† che porta anche alla formazione di stagni, paludi e torbiere.")
 SWAMP       = SectorElement("palude",                              "Settore per le paludi e fanghiglia simile")
-TAIGA       = SectorElement("taiga",                               "Settore per la Taiga: La vegetazione Ë formata da abeti, larici e pini, con foglie aghiformi presenti tutto l'anno, possono raggiungere 40-50 metri di altezza, tuttavia con il calare della temperatura anche l'altezza degli alberi diminuisce; Ë spesso presente anche la betulla. Nella taiga si alternano alla foresta zone umide che formano acquitrini, paludi e torbiere.")
-TUNDRA      = SectorElement("tundra",                              "Settore per le tundre: dove la crescita degli alberi Ë ostacolata dalle basse temperature e dalla breve stagione estiva. Vegetazione tipica: muschi e licheni e pochi arbusti. A volte arbusti nani sempreverdi.")
+TAIGA       = SectorElement("taiga",                               "Settore per la Taiga: La vegetazione √® formata da abeti, larici e pini, con foglie aghiformi presenti tutto l'anno, possono raggiungere 40-50 metri di altezza, tuttavia con il calare della temperatura anche l'altezza degli alberi diminuisce; √® spesso presente anche la betulla. Nella taiga si alternano alla foresta zone umide che formano acquitrini, paludi e torbiere.")
+TUNDRA      = SectorElement("tundra",                              "Settore per le tundre: dove la crescita degli alberi √® ostacolata dalle basse temperature e dalla breve stagione estiva. Vegetazione tipica: muschi e licheni e pochi arbusti. A volte arbusti nani sempreverdi.")
 SNOW        = SectorElement("[white]neve[close]",                  "Settore per luoghi innevati")
 ICE         = SectorElement("[white]ghiaccio[close]",              "Settore per ghiacciai, laghi ghiacciati e simili")
-STEPPE      = SectorElement("steppa",                              "Settore per la steppa: La steppa Ë un paesaggio naturale, caratterizzato dalla pressochÈ totale assenza di alberi. La vegetazione Ë costituita unicamente da erba. Estati calde ed inverni freddi.")
-ROCKY       = SectorElement("[gray]terreno roccioso[close]",       "Settore pieno di pietre, puÚ essere una pianura pietrosa come un deserto..")
+STEPPE      = SectorElement("steppa",                              "Settore per la steppa: La steppa √® un paesaggio naturale, caratterizzato dalla pressoch√© totale assenza di alberi. La vegetazione √® costituita unicamente da erba. Estati calde ed inverni freddi.")
+ROCKY       = SectorElement("[gray]terreno roccioso[close]",       "Settore pieno di pietre, pu√≤ essere una pianura pietrosa come un deserto..")
 
 # Settori relativi all'acqua
 RIVER      = SectorElement("[cyan]fiume[close]",              "Settore per i fiumi")
@@ -73,7 +73,7 @@ RAPIDS     = SectorElement("[cyan]rapide[close]",             "Settore per le ra
 WATERFALL  = SectorElement("[cyan]cascata[close]",            "Settore per una cascata")
 LAKE       = SectorElement("[darkcyan]lago[close]",           "Settore per i laghi")
 SEA        = SectorElement("[lightblue]mare[close]",          "Settore del mare o dell'oceano")
-OCEANFLOOR = SectorElement("[darkslategray]fondale[close]",   "Il settore pi˘ in basso di una serie di stanze con settori underwater")
+OCEANFLOOR = SectorElement("[darkslategray]fondale[close]",   "Il settore pi√π in basso di una serie di stanze con settori underwater")
 REEF       = SectorElement("[darkslategray]scogliera[close]", "Settore per scogliere")
 SHORE      = SectorElement("[orange]spiaggia[close]",         "Settore per le spiagge")
 
@@ -83,11 +83,11 @@ SHOP       = SectorElement("negozio",                         "Settore per i neg
 BLACKSMITH = SectorElement("fabbro",                          "Settore per i fabbri e gli armaioli")
 TAVERN     = SectorElement("taverna",                         "Settore per le taverne, ristoranti e alberghi")
 VILLA      = SectorElement("villa",                           "Settore per le ville")
-ESTATE     = SectorElement("propriet‡",                       "Settore per le grosse case o ville signorili")
+ESTATE     = SectorElement("propriet√†",                       "Settore per le grosse case o ville signorili")
 CASTLE     = SectorElement("castello",                        "Settore per i castelli")
 VILLAGE    = SectorElement("villaggio",                       "Settore per i villaggi")
-CITY       = SectorElement("citt‡",                           "Settore per le aree di citt‡")
-WALL       = SectorElement("muro",                            "Mura difensive di una citt‡ o di un villaggio su cui camminare")
+CITY       = SectorElement("citt√†",                           "Settore per le aree di citt√†")
+WALL       = SectorElement("muro",                            "Mura difensive di una citt√† o di un villaggio su cui camminare")
 BRIDGE     = SectorElement("ponte",                           "Settore per un qualsiasi tipo di ponte")
 TERRACE    = SectorElement("gradinata",                       "Settore per le gradinate degli spalti dell'arena")
 PATH       = SectorElement("sentiero",                        "Settore per i sentiero")
@@ -96,7 +96,7 @@ FARMLAND   = SectorElement("[green]terreno coltivato[close]", "Settore che indic
 PORT       = SectorElement("porto",                           "Settore per i porti")
 DOCK       = SectorElement("attracco",                        "Settore che indica dove le barche possono attraccare senza pericolo")
 PASTURE    = SectorElement("[green]pascolo[close]",           "Settore in cui gli animali erbivori vengono attirati")
-RUIN       = SectorElement("[darkgray]rovine[close]",         "Rovine di qualsiasi tipo, di una casa, di una citt‡..")
+RUIN       = SectorElement("[darkgray]rovine[close]",         "Rovine di qualsiasi tipo, di una casa, di una citt√†..")
 
 # Settori che non hanno una consistenza fisica
 AIR  = SectorElement("[lightcyan]Aria[close]", "Tutte le stanze virtualmente create su quelle dove ci si mette i piedi sono nell'aria")
@@ -160,7 +160,7 @@ AIR.genre, AIR.number                   = GRAMMAR.FEMININE,  GRAMMAR.SINGULAR
 VOID.genre, VOID.number                 = GRAMMAR.MASCULINE, GRAMMAR.SINGULAR
 
 
-# Indicatore di fertilit‡ del terreno  (TD) da convertire in percentuale come il dig difficulty
+# Indicatore di fertilit√† del terreno  (TD) da convertire in percentuale come il dig difficulty
 PLAIN.fertile    = True
 SAVANNA.fertile  = True
 HILL.fertile     = True
@@ -181,7 +181,7 @@ FARMLAND.fertile = True
 PASTURE.fertile  = True
 
 
-# Difficolt‡ nello scavare il settore
+# Difficolt√† nello scavare il settore
 PLAIN.dig_difficulty        = 0
 SAVANNA.dig_difficulty      = 0
 HILL.dig_difficulty         = 0

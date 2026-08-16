@@ -32,23 +32,23 @@ class Part(object):
 
 def get_part_descriptions(weared_entity, command_name, wearer, looker):
     """
-    Crea i 3 messaggi di act per tutte le parti di corpo coperte dall'entit‡
+    Crea i 3 messaggi di act per tutte le parti di corpo coperte dall'entit√†
     scelta.
     """
     if not weared_entity:
-        log.bug("weared_entity non Ë un parametro valido: %r" % weared_entity)
+        log.bug("weared_entity non √® un parametro valido: %r" % weared_entity)
         return ""
 
     if command_name not in ("equip", "wear", "remove"):
-        log.bug("command_name non Ë un parametro valido: %r" % command_name)
+        log.bug("command_name non √® un parametro valido: %r" % command_name)
         return ""
 
     if not wearer:
-        log.bug("wearer non Ë un parametro valido: %r" % wearer)
+        log.bug("wearer non √® un parametro valido: %r" % wearer)
         return ""
 
     if not looker:
-        log.bug("looker non Ë un parametro valido: %r" % looker)
+        log.bug("looker non √® un parametro valido: %r" % looker)
         return ""
 
     # -------------------------------------------------------------------------
@@ -84,8 +84,8 @@ def get_part_descriptions(weared_entity, command_name, wearer, looker):
             part_descriptions[to] = part_descriptions[to] + sorted_elements[-1].description
 
         if weared_entity.under_weared and weared_entity.under_weared():
-            # (bb) commentato, ma scommetto per qualche entit‡ ci vorr‡, quindi
-            # bisogner‡ fare un check sulle little words
+            # (bb) commentato, ma scommetto per qualche entit√† ci vorr√†, quindi
+            # bisogner√† fare un check sulle little words
             #name = add_article(weared_entity.under_weared().get_name(looker=looker), GRAMMAR.INDETERMINATE)
             name = weared_entity.under_weared().get_name(looker=looker)
             part_descriptions[to] = ("sopra %s " % name) + part_descriptions[to]
@@ -96,7 +96,7 @@ def get_part_descriptions(weared_entity, command_name, wearer, looker):
 
 def use_two_handed(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     # -------------------------------------------------------------------------
@@ -118,17 +118,17 @@ def use_two_handed(entity):
 
 def check_if_part_is_already_weared(entity, part):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return None, None
 
     if not part:
-        log.bug("part non Ë un parametro valido: %r" % part)
+        log.bug("part non √® un parametro valido: %r" % part)
         return None, None
 
     # -------------------------------------------------------------------------
 
-    # D‡ prima la precedenza alle entit‡ layerate cosÏ da ritornare l'entit‡
-    # pi˘ esterna nella stratificazione dei vestiti
+    # D√† prima la precedenza alle entit√† layerate cos√¨ da ritornare l'entit√†
+    # pi√π esterna nella stratificazione dei vestiti
     for possession in entity.iter_contains():
         if not possession.under_weared or not possession.under_weared():
             continue

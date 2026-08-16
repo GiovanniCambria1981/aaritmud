@@ -35,7 +35,7 @@ DIG_PROBABILITY = 10
 #= FUNZIONI ====================================================================
 
 def command_dig(entity, argument="", verbs=VERBS, behavioured=False):
-    # » possibile se il comando Ë stato deferrato
+    # √à possibile se il comando √® stato deferrato
     if not entity:
         return False
 
@@ -43,7 +43,7 @@ def command_dig(entity, argument="", verbs=VERBS, behavioured=False):
 
     # (TD) resistenza al comando se charmati
 
-    # (TD) non si puÚ scavare se si sta mondando a cavallo o altra posizione strana
+    # (TD) non si pu√≤ scavare se si sta mondando a cavallo o altra posizione strana
 
     # (TD) fare la skill di scavo basata sulla forza e il wait per poterla riutilizzare
 
@@ -56,18 +56,18 @@ def command_dig(entity, argument="", verbs=VERBS, behavioured=False):
 
 def dig_an_exit(entity, argument, verbs, behavioured):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
     if not argument:
-        log.bug("argument non Ë un parametro valido: %r" % argument)
+        log.bug("argument non √® un parametro valido: %r" % argument)
         return False
 
     if not verbs:
-        log.bug("verbs non Ë un parametro valido: %r" % verbs)
+        log.bug("verbs non √® un parametro valido: %r" % verbs)
         return False
 
-    # behavioured ha valore di verit‡
+    # behavioured ha valore di verit√†
 
     # -------------------------------------------------------------------------
 
@@ -97,9 +97,9 @@ def dig_an_exit(entity, argument, verbs, behavioured):
             has_secret_door = True
 
     if exit and EXIT.DIGGABLE not in exit.flags and not has_secret_door:
-        entity.act("Non sapresti proprio come %s %s: c'Ë gi‡ un'uscita!" % (verbs["infinitive"], direction.to_dir), TO.ENTITY, location)
-        entity.act("$n sembra voler %s %s: ma c'Ë gi‡ un'uscita!" % (verbs["infinitive"], direction.to_dir), TO.OTHERS, location)
-        entity.act("$n sembra voler %s %s: ma li hai gi‡ un'uscita!" % (verbs["infinitive"], direction.to_dir), TO.TARGET, location)
+        entity.act("Non sapresti proprio come %s %s: c'√® gi√† un'uscita!" % (verbs["infinitive"], direction.to_dir), TO.ENTITY, location)
+        entity.act("$n sembra voler %s %s: ma c'√® gi√† un'uscita!" % (verbs["infinitive"], direction.to_dir), TO.OTHERS, location)
+        entity.act("$n sembra voler %s %s: ma li hai gi√† un'uscita!" % (verbs["infinitive"], direction.to_dir), TO.TARGET, location)
         return False
 
     entity.act("Cominci a %s %s." % (verbs["infinitive"], direction.to_dir), TO.ENTITY, location)
@@ -125,14 +125,14 @@ def dig_an_exit(entity, argument, verbs, behavioured):
 
 def dig_a_location(entity, verbs, behavioured):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
     if not verbs:
-        log.bug("verbs non Ë un parametro valido: %r" % verbs)
+        log.bug("verbs non √® un parametro valido: %r" % verbs)
         return False
 
-    # behavioured ha valore di verit‡
+    # behavioured ha valore di verit√†
 
     # -------------------------------------------------------------------------
 
@@ -141,19 +141,19 @@ def dig_a_location(entity, verbs, behavioured):
     if location.IS_ROOM:
         sector = add_article(str(location.sector), location.sector.genre, location.sector.number, GRAMMAR.PREPOSITION_IN)
         if location.sector.dig_difficulty >= 100:
-            entity.act("Ti Ë impossibile poter %s %s." % (verbs["infinitive"], sector), TO.ENTITY, location)
-            entity.act("$n cerca di %s %s ma gli Ë impossibile." % (verbs["infinitive"], sector), TO.OTHERS, location)
-            entity.act("$n cerca di %s ma gli Ë impossibile." % verbs["you2"], TO.TARGET, location)
+            entity.act("Ti √® impossibile poter %s %s." % (verbs["infinitive"], sector), TO.ENTITY, location)
+            entity.act("$n cerca di %s %s ma gli √® impossibile." % (verbs["infinitive"], sector), TO.OTHERS, location)
+            entity.act("$n cerca di %s ma gli √® impossibile." % verbs["you2"], TO.TARGET, location)
             return False
         elif location.sector.dig_difficulty >= 80:
-            entity.act("Cominci a %s con molta difficolt‡ %s." % (verbs["infinitive"], sector), TO.ENTITY, location)
-            entity.act("$n comincia a %s con molta difficolt‡ %s." % (verbs["infinitive"], sector), TO.OTHERS, location)
-            entity.act("$n comincia a %s con molta difficolt‡." % verbs["you"], TO.TARGET, location)
+            entity.act("Cominci a %s con molta difficolt√† %s." % (verbs["infinitive"], sector), TO.ENTITY, location)
+            entity.act("$n comincia a %s con molta difficolt√† %s." % (verbs["infinitive"], sector), TO.OTHERS, location)
+            entity.act("$n comincia a %s con molta difficolt√†." % verbs["you"], TO.TARGET, location)
             seconds = DIG_SECONDS + 2
         elif location.sector.dig_difficulty >= 60:
-            entity.act("Cominci a %s con difficolt‡ %s." % (verbs["infinitive"], sector), TO.ENTITY, location)
-            entity.act("$n comincia a %s con difficolt‡ %s." % (verbs["infinitive"], sector), TO.OTHERS, location)
-            entity.act("$n comincia a %s con difficolt‡." % verbs["you"], TO.TARGET, location)
+            entity.act("Cominci a %s con difficolt√† %s." % (verbs["infinitive"], sector), TO.ENTITY, location)
+            entity.act("$n comincia a %s con difficolt√† %s." % (verbs["infinitive"], sector), TO.OTHERS, location)
+            entity.act("$n comincia a %s con difficolt√†." % verbs["you"], TO.TARGET, location)
             seconds = DIG_SECONDS + 1
         elif location.sector.dig_difficulty >= 40:
             entity.act("Cominci a %s con fatica %s." % (verbs["infinitive"], sector), TO.ENTITY, location)
@@ -193,22 +193,22 @@ def dig_a_location(entity, verbs, behavioured):
 def stop_digging_on_exit(entity, location, direction, verbs, behavioured):
     """
     Funzione chiamata nel qual caso le deferLater vengano interrotte da un'altra
-    azione interattiva dell'entit‡.
+    azione interattiva dell'entit√†.
     """
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not location:
-        log.bug("location non Ë un parametro valido: %r" % location)
+        log.bug("location non √® un parametro valido: %r" % location)
         return
 
     if not direction or direction == DIR.NONE:
-        log.bug("direction non Ë un paramtro valido: %r" % direction)
+        log.bug("direction non √® un paramtro valido: %r" % direction)
         return
 
     if not verbs:
-        log.bug("verbs non Ë un parametro valido: %r" % verbs)
+        log.bug("verbs non √® un parametro valido: %r" % verbs)
         return
 
     # -------------------------------------------------------------------------
@@ -221,15 +221,15 @@ def stop_digging_on_exit(entity, location, direction, verbs, behavioured):
 
 def stop_digging_on_location(entity, location, verbs, behavioured):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not location:
-        log.bug("location non Ë un parametro valido: %r" % location)
+        log.bug("location non √® un parametro valido: %r" % location)
         return
 
     if not verbs:
-        log.bug("verbs non Ë un parametro valido: %r" % verbs)
+        log.bug("verbs non √® un parametro valido: %r" % verbs)
         return
 
     # -------------------------------------------------------------------------
@@ -249,20 +249,20 @@ def stop_digging_on_location(entity, location, verbs, behavioured):
 
 def digging_an_inexistent_exit_1(entity, location, direction, verbs, behavioured):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
 
     if not location:
-        log.bug("location non Ë un parametro valido: %r" % location)
+        log.bug("location non √® un parametro valido: %r" % location)
         return
 
     if not direction or direction == DIR.NONE:
-        log.bug("direction non Ë un paramtro valido: %r" % direction)
+        log.bug("direction non √® un paramtro valido: %r" % direction)
         return
 
     if not verbs:
-        log.bug("verbs non Ë un parametro valido: %r" % verbs)
+        log.bug("verbs non √® un parametro valido: %r" % verbs)
         return
 
     # -------------------------------------------------------------------------
@@ -278,19 +278,19 @@ def digging_an_inexistent_exit_1(entity, location, direction, verbs, behavioured
 
 def digging_an_inexistent_exit_2(entity, location, direction, verbs, behavioured):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not location:
-        log.bug("location non Ë un parametro valido: %r" % location)
+        log.bug("location non √® un parametro valido: %r" % location)
         return
 
     if not direction or direction == DIR.NONE:
-        log.bug("direction non Ë un paramtro valido: %r" % direction)
+        log.bug("direction non √® un paramtro valido: %r" % direction)
         return
 
     if not verbs:
-        log.bug("verbs non Ë un parametro valido: %r" % verbs)
+        log.bug("verbs non √® un parametro valido: %r" % verbs)
         return
 
     # -------------------------------------------------------------------------
@@ -317,19 +317,19 @@ def digging_an_inexistent_exit_2(entity, location, direction, verbs, behavioured
 
 def digging_a_diggable_exit_1(entity, location, direction, verbs, behavioured):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not location:
-        log.bug("location non Ë un parametro valido: %r" % location)
+        log.bug("location non √® un parametro valido: %r" % location)
         return
 
     if not direction or direction == DIR.NONE:
-        log.bug("direction non Ë un paramtro valido: %r" % direction)
+        log.bug("direction non √® un paramtro valido: %r" % direction)
         return
 
     if not verbs:
-        log.bug("verbs non Ë un parametro valido: %r" % verbs)
+        log.bug("verbs non √® un parametro valido: %r" % verbs)
         return
 
     # -------------------------------------------------------------------------
@@ -345,24 +345,24 @@ def digging_a_diggable_exit_1(entity, location, direction, verbs, behavioured):
 
 def digging_a_diggable_exit_2(entity, location, direction, verbs, behavioured):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not location:
-        log.bug("location non Ë un parametro valido: %r" % location)
+        log.bug("location non √® un parametro valido: %r" % location)
         return
 
     if not direction or direction == DIR.NONE:
-        log.bug("direction non Ë un paramtro valido: %r" % direction)
+        log.bug("direction non √® un paramtro valido: %r" % direction)
         return
 
     if not verbs:
-        log.bug("verbs non Ë un parametro valido: %r" % verbs)
+        log.bug("verbs non √® un parametro valido: %r" % verbs)
         return
 
     # -------------------------------------------------------------------------
 
-    # (TD) Bisogner‡ fare i check se l'uscita esista ancora
+    # (TD) Bisogner√† fare i check se l'uscita esista ancora
 
     entity.action_in_progress = None
 
@@ -399,15 +399,15 @@ def digging_a_diggable_exit_2(entity, location, direction, verbs, behavioured):
 
 def digging_a_location_1(entity, location, verbs, behavioured):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not location:
-        log.bug("location non Ë un parametro valido: %r" % location)
+        log.bug("location non √® un parametro valido: %r" % location)
         return
 
     if not verbs:
-        log.bug("verbs non Ë un parametro valido: %r" % verbs)
+        log.bug("verbs non √® un parametro valido: %r" % verbs)
         return
 
     # -------------------------------------------------------------------------
@@ -425,15 +425,15 @@ def digging_a_location_1(entity, location, verbs, behavioured):
 
 def digging_a_location_2(entity, location, verbs, behavioured):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not location:
-        log.bug("location non Ë un parametro valido: %r" % location)
+        log.bug("location non √® un parametro valido: %r" % location)
         return
 
     if not verbs:
-        log.bug("verbs non Ë un parametro valido: %r" % verbs)
+        log.bug("verbs non √® un parametro valido: %r" % verbs)
         return
 
     # -------------------------------------------------------------------------
@@ -443,8 +443,8 @@ def digging_a_location_2(entity, location, verbs, behavioured):
         if FLAG.BURIED in target.flags:
             targets.append(target)
 
-    # C'Ë una possibilit‡ su cento che venga trovato qualcosa di interessante
-    # (TD) magari la probabilit‡ aumentarla facendola sulla base della skill scava
+    # C'√® una possibilit√† su cento che venga trovato qualcosa di interessante
+    # (TD) magari la probabilit√† aumentarla facendola sulla base della skill scava
     # (TD) magari aggiungere un affect per invalidare tentativi robotizzati di scavaggio continuo
     if not targets and random.randint(1, 100) < DIG_PROBABILITY:
         codes = database["areas"]["rip"].proto_items.keys()
@@ -458,7 +458,7 @@ def digging_a_location_2(entity, location, verbs, behavioured):
         else:
             targets = [Mob(code)]
 
-        # Per le monete viene impostata anche una quantit‡ casuale.
+        # Per le monete viene impostata anche una quantit√† casuale.
         # Qui in sostanza viene detto che si possono trovare da 1 a 1000 monete
         # di rame e al massimo solo 1 moneta di mithril, valori intermedi sono
         # inversamente proporzionali al valore della moneta stessa
@@ -467,11 +467,11 @@ def digging_a_location_2(entity, location, verbs, behavioured):
             targets[0].quantity = random.randint(1, int(1000 / copper_value))
 
         # (TD) Bisognerebbe inserire un affect nella locazione che impedisca di
-        # scavare ancora lÏ per tot tempo
+        # scavare ancora l√¨ per tot tempo
         targets[0].inject(location)
 
     # L'esperienza per aver scavato la prima volta nella stanza viene data
-    # a prescindere che sia stato trovata un'entit‡ o meno
+    # a prescindere che sia stato trovata un'entit√† o meno
     if entity.IS_PLAYER and location.IS_ROOM:
         if location.prototype.code in entity.digged_rooms:
             entity.digged_rooms[location.prototype.code] += 1
@@ -519,7 +519,7 @@ def digging_a_location_2(entity, location, verbs, behavioured):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

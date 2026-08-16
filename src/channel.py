@@ -44,7 +44,7 @@ offrpg_words = ("tv", "maradona", "berlusconi", "jackson")
 
 # regex pattern per la sostituzione di tutti i caratteri non alfanumerici
 # della stringa nel controllo delle parolacce e della parole offrpg
-ONLY_WORDS_PATTERN = re.compile("[\W_]+")
+ONLY_WORDS_PATTERN = re.compile(r"[\W_]+")
 
 
 #= FUNZIONI ====================================================================

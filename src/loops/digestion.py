@@ -34,8 +34,8 @@ class DigestionLoop(PersistentLoop):
 class Digestion(PersistentLoopData):
     def __init__(self, entity=None, ingested=None):
         if not entity:
-            self.entity   = None # Entit‡ che sta digerendo qualche cosa
-            self.ingested = None # Entit‡ da digerire
+            self.entity   = None # Entit√† che sta digerendo qualche cosa
+            self.ingested = None # Entit√† da digerire
             self.timer    = 0    # Minuti reali prima che la digestione termini
         else:
             four_rpg_hour_in_minutes = (config.seconds_in_minute * config.minutes_in_hour * 4) / 60
@@ -47,18 +47,18 @@ class Digestion(PersistentLoopData):
 
     def fread(self, file, line):
         if not file:
-            log.bug("file non Ë un parametro valido: %r", file)
+            log.bug("file non √® un parametro valido: %r", file)
             return
 
         if not line:
-            log.bug("line non Ë un parametro valido: %r", line)
+            log.bug("line non √® un parametro valido: %r", line)
             return
 
         # ---------------------------------------------------------------------
 
         entity_code, ingested_code, timer = line.split(None, 2)
 
-        # PuÚ essere normale che non vi sia l'entit‡, a volte le persistenze vengono rimosse
+        # Pu√≤ essere normale che non vi sia l'entit√†, a volte le persistenze vengono rimosse
         if "_" in entity_code:
             table_name = entity_code.split("_", 2)[1] + "s"
         else:
@@ -79,7 +79,7 @@ class Digestion(PersistentLoopData):
         ingested = database[table_name][ingested_code]
 
         if not is_number(timer):
-            log.bug("timer ricavato per il supply %s non Ë un numero: %s" % (line, timer))
+            log.bug("timer ricavato per il supply %s non √® un numero: %s" % (line, timer))
             return
 
         self.entity   = weakref.ref(entity)
@@ -91,7 +91,7 @@ class Digestion(PersistentLoopData):
 
     def fwrite(self, file):
         if not file:
-            log.bug("file non Ë un parametro valido: %r", file)
+            log.bug("file non √® un parametro valido: %r", file)
             return
 
         # ---------------------------------------------------------------------
@@ -111,7 +111,7 @@ class Digestion(PersistentLoopData):
 
     def have_same_purpose(self, entity, ingested):
         if not entity:
-            log.bug("entity non Ë un parametro valido: %r", entity)
+            log.bug("entity non √® un parametro valido: %r", entity)
             return False
 
         # ---------------------------------------------------------------------
@@ -146,7 +146,7 @@ class Digestion(PersistentLoopData):
         # Per galanteria viene inviato solo una volta ogni tanto
         if random.randint(0, 100) == 0:
             entity.act("A $n scappa un rutto! Sembra che abbia appena digerito qualcosa.", TO.OTHERS, ingested)
-        entity.act("Sembra che $n ti abbia appena digerito, Ë giunto il momento di andare sempre pi˘ gi˘...", TO.TARGET, ingested)
+        entity.act("Sembra che $n ti abbia appena digerito, √® giunto il momento di andare sempre pi√π gi√π...", TO.TARGET, ingested)
         ingested.extract(ingested.quantity, use_repop=True)
 
         force_return = check_trigger(entity, "after_digestion", self)
@@ -162,7 +162,7 @@ class Digestion(PersistentLoopData):
 
 def stop_digestion(ingested, remove_flag=True):
     if not ingested:
-        log.bug("ingested non Ë un parametro valido: %r" % ingested)
+        log.bug("ingested non √® un parametro valido: %r" % ingested)
         return
 
     # -------------------------------------------------------------------------

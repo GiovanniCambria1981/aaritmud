@@ -15,13 +15,13 @@ class Describable(object):
     # e di un mob invece che ad ogni esecuzione di un comando sensoriale
     def convert_asciiart_linefeeds(self, descr):
         if not descr:
-            log.bug("descr non è un parametro valido: %r" % descr)
+            log.bug("descr non Ã¨ un parametro valido: %r" % descr)
             return ""
 
         # ---------------------------------------------------------------------
 
         if self.ASCIIART_TAG_OPEN not in descr:
-            log.bug("Non è bene chiamare tale funzione se non possiede il tag caratteristico delle asciiart.")
+            log.bug("Non Ã¨ bene chiamare tale funzione se non possiede il tag caratteristico delle asciiart.")
             return ""
 
         new_descr = ""

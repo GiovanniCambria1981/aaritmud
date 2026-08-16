@@ -28,7 +28,7 @@ class TrustsPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.MASTER
     MINIMUM_TRUST_ON_POST = TRUST.MASTER
 
-    PAGE_TEMPLATE = string.Template(open("src/views/trusts.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/trusts.view", encoding="utf-8-sig").read())
 
     def render_GET(self, request, conn):
         mapping = {"trusted_accounts" : self.get_account_trusts(),

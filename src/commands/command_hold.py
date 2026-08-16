@@ -38,9 +38,9 @@ VERBS = {"infinitive_min" : "tenere",
 def command_hold(entity, argument="", verbs=VERBS, behavioured=False):
     """
     Permette di prendere un oggetto nella mano secondaria o, se quest'ultima
-    � occupata, in quella primaria.
+    ? occupata, in quella primaria.
     """
-    # � possibile se il comando � stato deferrato
+    # ? possibile se il comando ? stato deferrato
     if not entity:
         return False
 
@@ -50,7 +50,7 @@ def command_hold(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

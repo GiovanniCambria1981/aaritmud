@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Modulo per tipologie d'entit‡ utilizzabili per pescare o per attirare prede
+Modulo per tipologie d'entit√† utilizzabili per pescare o per attirare prede
 in trappola.
 """
 
@@ -14,10 +14,10 @@ class BaitableGenericType(object):
     """
     def __init__(self):
         self.minutes   = 1     # Minuti reali di attesa media per avere un pesce sull'esca
-        self.quantity  = 1     # Quantit‡ media di pesci pescata per volta, se il valore Ë 1 pescher‡ sempre 1 e non pi˘
+        self.quantity  = 1     # Quantit√† media di pesci pescata per volta, se il valore √® 1 pescher√† sempre 1 e non pi√π
         self.two_hands = False # Indica se l'oggetto bisogna utilizzarlo ad una o due mani  # (TD) spostarlo come flag di oggetto?
-        self.charged   = False # Indica se la trappola Ë stata caricata
-        #self.bait      = None  # Esca inseribile per migliorarne tempo e quantit‡ # (TD) farla tipo contenitore
+        self.charged   = False # Indica se la trappola √® stata caricata
+        #self.bait      = None  # Esca inseribile per migliorarne tempo e quantit√† # (TD) farla tipo contenitore
         #self.catches   = []    # Prede catturate  # (TD) farli tipo contenitore
     #- Fine Inizializzazione -
 

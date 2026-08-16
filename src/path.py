@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Algoritmo di path finding di Aarit: è un A-star.
+Algoritmo di path finding di Aarit: Ã¨ un A-star.
 http://it.wikipedia.org/wiki/A*
 """
 

@@ -26,7 +26,7 @@ class SupportUsPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.PLAYER
     MINIMUM_TRUST_ON_POST = TRUST.PLAYER
 
-    PAGE_TEMPLATE = string.Template(open("src/views/support_us.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/support_us.view", encoding="utf-8-sig").read())
 
     NEW_PAGE = True
 

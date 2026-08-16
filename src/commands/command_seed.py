@@ -29,12 +29,12 @@ VERBS = {"infinitive" : "[greenyellow]seminare[close]",
 
 def command_seed(entity, argument="", verbs=VERBS, behavioured=False):
     if not verbs:
-        log.bug("verbs non � un parametro valido: %r" % verbs)
+        log.bug("verbs non ? un parametro valido: %r" % verbs)
         return False
 
     # -------------------------------------------------------------------------
 
-    # � possibile se il comando � stato deferrato
+    # ? possibile se il comando ? stato deferrato
     if not entity:
         return False
 
@@ -44,7 +44,7 @@ def command_seed(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

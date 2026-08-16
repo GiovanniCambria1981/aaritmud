@@ -46,8 +46,8 @@ class TestInputsPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.MASTER
     MINIMUM_TRUST_ON_POST = TRUST.MASTER
 
-    PAGE_TEMPLATE         = string.Template(open("src/views/test_inputs.view").read())
-    #AFTER_SUBMIT_TEMPLATE = string.Template(open("src/views/test_inputs_submit.view").read())
+    PAGE_TEMPLATE         = string.Template(open("src/views/test_inputs.view", encoding="utf-8-sig").read())
+    #AFTER_SUBMIT_TEMPLATE = string.Template(open("src/views/test_inputs_submit.view", encoding="utf-8-sig").read())
 
     NEW_PAGE = True
 

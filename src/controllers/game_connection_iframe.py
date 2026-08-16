@@ -30,7 +30,7 @@ class GameConnectionIframePage(WebResource):
     PLAYER_MUST_EXIST_IN_GET   = True
     PLAYER_MUST_EXIST_IN_POST  = True
 
-    CONNECTION_IFRAME_TEMPLATE = string.Template(open("src/views/game_connection_iframe.view").read())
+    CONNECTION_IFRAME_TEMPLATE = string.Template(open("src/views/game_connection_iframe.view", encoding="utf-8-sig").read())
 
     def create_header(self, request, conn):
         return ""
@@ -54,7 +54,7 @@ class GameConnectionIframePage(WebResource):
 
         # Si prepara la deferred relativa alla terminazione della richiesta
         conn.defer_exit_from_game = request.notifyFinish()
-        # La callback normale non capita perché quando un pg chiude la pagina
+        # La callback normale non capita perchÃ© quando un pg chiude la pagina
         # questo evento genera un'eccezione che fa scatenare invece la errback
         # per questo sono tutte e due uguali
         conn.defer_exit_from_game.addCallback(conn.player.exit_from_game)
@@ -64,7 +64,7 @@ class GameConnectionIframePage(WebResource):
         mapping = {"game_name" : config.game_name}
         page = self.CONNECTION_IFRAME_TEMPLATE.safe_substitute(mapping)
 
-        # Invia tramite il metodo send_output così da convertire i colori
+        # Invia tramite il metodo send_output cosÃ¬ da convertire i colori
         conn.player.send_output(page, True, False)
         conn.player.enter_in_game()
         conn.player.send_prompt()

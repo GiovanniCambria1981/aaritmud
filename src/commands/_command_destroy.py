@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Comando che inizia un combattimento con un'altra entit�.
+Comando che inizia un combattimento con un'altra entit?.
 """
 
 
@@ -24,7 +24,7 @@ VERBS = {"infinitive" : "[red]distruggere[close]",
 #= FUNZIONI ====================================================================
 
 def command_destroy(entity, argument="", verbs=VERBS, behavioured=False):
-    # � possibile se il comando � stato deferrato
+    # ? possibile se il comando ? stato deferrato
     if not entity:
         return False
 
@@ -39,7 +39,7 @@ def command_destroy(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

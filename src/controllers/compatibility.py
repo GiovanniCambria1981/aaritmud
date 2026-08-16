@@ -12,6 +12,7 @@ import string
 from urllib.parse import quote as _urllib_quote, unquote as _urllib_unquote
 
 from src.config       import config
+from src.log          import log
 from src.web_resource import WebResource
 
 
@@ -26,7 +27,7 @@ class CompatibilityPage(WebResource):
     ACCOUNT_MUST_EXIST_IN_GET  = False
     ACCOUNT_MUST_EXIST_IN_POST = True
 
-    PAGE_TEMPLATE = string.Template(open("src/views/compatibility.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/compatibility.view", encoding="utf-8-sig").read())
 
     def render_GET(self, request, conn):
         mapping = {"max_feedback_len" : config.max_feedback_len,
@@ -59,12 +60,12 @@ class CompatibilityPage(WebResource):
 
         compatibility_path = "persistence/compatibility.feedbacks"
         try:
-            compatibility_file = open(compatibility_path, "a")
+            compatibility_file = open(compatibility_path, "a", encoding="utf-8")
         except IOError:
             log.bug("Impossibile aprire il file %s in append: %r" % compatibility_path)
             return "Errore nell'apertura del database dei messaggi"
 
-        feedback = "%s\%s\n%s\n%s\n\n" % (datetime.datetime.now(), conn.account.name, request.received_headers["user-agent"], msg)
+        feedback = "%s\\%s\n%s\n%s\n\n" % (datetime.datetime.now(), conn.account.name, request.received_headers["user-agent"], msg)
         compatibility_file.write(feedback)
         compatibility_file.close()
 

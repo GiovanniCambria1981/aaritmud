@@ -27,7 +27,7 @@ class ForumThreadsPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.PLAYER
     MINIMUM_TRUST_ON_POST = TRUST.PLAYER
 
-    PAGE_TEMPLATE = string.Template(open("src/views/forum_threads.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/forum_threads.view", encoding="utf-8-sig").read())
 
     def create_square(self, request, conn):
         return ""

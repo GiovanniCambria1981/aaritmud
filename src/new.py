@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Modulo per la gestione delle novit‡ da visualizza sulla homepage del sito.
+Modulo per la gestione delle novit√† da visualizza sulla homepage del sito.
 """
 
 
@@ -25,17 +25,17 @@ class Comment(object):
 
     def __init__(self):
         self.author      = ""       # Autore/i
-        self.date        = ""       # Quando Ë stata scritta
+        self.date        = ""       # Quando √® stata scritta
         self.text        = ""       # Testo
     #- Fine Inizializzazione -
 
     def get_error_message(self):
         if not self.author:
-            return "author non Ë valido: %r" % self.author
+            return "author non √® valido: %r" % self.author
         elif not self.date:
-            return "date non Ë valido: %r" % self.date
+            return "date non √® valido: %r" % self.date
         elif not self.text:
-            return "text non Ë valido: %r" % self.text
+            return "text non √® valido: %r" % self.text
         else:
             return ""
 
@@ -59,7 +59,7 @@ class New(Comment, Data):
         
         self.code        = code     # Codice identificativo
         self.title       = ""       # Titolo
-        self.type        = NEW.NONE # Tipologia di novit‡
+        self.type        = NEW.NONE # Tipologia di novit√†
         self.thumbs_up   = ""       # Nomi degli account che hanno espresso parere positivo
         self.thumbs_down = ""       # Nomi degli account che hanno espresso parere negativo
         self.comments    = []       # Commenti al commento
@@ -71,9 +71,9 @@ class New(Comment, Data):
         if msg:
             pass
         elif not self.code:
-            msg = "code non Ë valido: %r" % self.code
+            msg = "code non √® valido: %r" % self.code
         elif not self.title:
-            msg = "title non Ë valido: %r" % self.title
+            msg = "title non √® valido: %r" % self.title
         elif self.type.get_error_message(NEW, "type") != "":
             msg = self.type.get_error_message(NEW, "type")
         elif self.get_error_message_thumbs() != "":

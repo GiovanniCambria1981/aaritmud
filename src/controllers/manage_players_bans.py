@@ -28,7 +28,7 @@ class ManagePlayersBansPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.IMPLEMENTOR
     MINIMUM_TRUST_ON_POST = TRUST.IMPLEMENTOR
 
-    PAGE_TEMPLATE = string.Template(open("src/views/manage_players_bans.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/manage_players_bans.view", encoding="utf-8-sig").read())
 
     NEW_PAGE = True
 
@@ -47,9 +47,9 @@ class ManagePlayersBansPage(WebResource):
         for day in range(1, 31):
             day_options.append('''<option>%d</option>''' % day)
 
-        reason_tooltip = create_tooltip(conn, "Questo testo verr‡ letto dal giocatore come motivazione della punizione")
+        reason_tooltip = create_tooltip(conn, "Questo testo verr√† letto dal giocatore come motivazione della punizione")
 
-        comment_tooltip = create_tooltip(conn, "Questo commento verr‡ letto solo dagli amministratori, utile per aggiungere delle note per una gestione interna della punizione")
+        comment_tooltip = create_tooltip(conn, "Questo commento verr√† letto solo dagli amministratori, utile per aggiungere delle note per una gestione interna della punizione")
 
         mapping = {"player_options"  : "".join(player_options),
                    "day_options"     : "".join(day_options),

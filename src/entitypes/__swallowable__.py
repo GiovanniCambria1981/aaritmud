@@ -29,28 +29,28 @@ class SwallowableGenericType(object):
 
     def __init__(self):
         self.comment        = ""
-        # Se la somma degli attributi vegetable e animal non è uguale a 100
-        # significa che il resto del cibo è formato da liquido dissetante,
+        # Se la somma degli attributi vegetable e animal non Ã¨ uguale a 100
+        # significa che il resto del cibo Ã¨ formato da liquido dissetante,
         # acqua o sangue chessia.
-        self.animal         =  0  # Indica in percentuale quanto il cibo è di origine animale
-        self.vegetable      =  0  # Indica in percentuale quanto il cibo è di origine vegetale
+        self.animal         =  0  # Indica in percentuale quanto il cibo Ã¨ di origine animale
+        self.vegetable      =  0  # Indica in percentuale quanto il cibo Ã¨ di origine vegetale
         self.cooking_damage =  0  # Danni inflitti da un'impropria preparazione del cibo
         self.hours          =  0  # Ore dalla preparazione del cibo
         self.entity_message = ""  # Messaggio inviato a chi mangia
-        self.target_message = ""  # Messaggio inviato a chi è mangiato
+        self.target_message = ""  # Messaggio inviato a chi Ã¨ mangiato
         self.others_message = ""  # Messaggio inviato a tutti gli altri
         self.affects        = []  # Lista degli effetti che si attivano mangiando
     #- Fine Inizializzazione -
 
     def get_error_message(self, entity):
         if self.vegetable < 0 or self.vegetable > 100:
-            return "vegetable non è un valore tra 0 e 100: %d" % self.vegetable
+            return "vegetable non Ã¨ un valore tra 0 e 100: %d" % self.vegetable
         elif self.animal < 0 or self.animal > 100:
-            return "animal non è un valore tra 0 e 100: %d" % self.animal
+            return "animal non Ã¨ un valore tra 0 e 100: %d" % self.animal
         elif self.animal + self.vegetable > 100:
             return "animal e vegetable superano il 100%%. animal: %d vegetable: %d" % (self.animal, self.vegetable)
         # (TD) check sugli effetti
-        # L'esistenza dei diversi messaggi è slegata tra loro, ovvero possono
+        # L'esistenza dei diversi messaggi Ã¨ slegata tra loro, ovvero possono
         # essere inizializzati tutti come solo uno di loro o, ovviamente,
         # nessuno
         return ""
@@ -100,15 +100,15 @@ class SwallowableGenericType(object):
 
     def send_messages(self, entity, target, verbs):
         if not entity:
-            log.bug("entity non è un parametro valido: %r" % entity)
+            log.bug("entity non Ã¨ un parametro valido: %r" % entity)
             return
 
         if not target:
-            log.bug("target non è un parametro valido: %r" % target)
+            log.bug("target non Ã¨ un parametro valido: %r" % target)
             return
 
         if not verbs:
-            log.bug("verbs non è un parametro valido: %r" % verbs)
+            log.bug("verbs non Ã¨ un parametro valido: %r" % verbs)
             return
 
         # ---------------------------------------------------------------------

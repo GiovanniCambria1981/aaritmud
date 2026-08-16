@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Modulo per la gestione di un dato, cio� di una classe generica di informazioni
+Modulo per la gestione di un dato, cio? di una classe generica di informazioni
 caricate da file testuale caricato e gestita dal database.
 """
 
@@ -27,7 +27,7 @@ class Data(object):
         from src.database import database
 
         if not self.PRIMARY_KEY in self.__dict__:
-            log.bug("Non � stato potuto ricavare la chiave primaria %r del dato %r." % (
+            log.bug("Non ? stato potuto ricavare la chiave primaria %r del dato %r." % (
                 self.PRIMARY_KEY, self))
 
         primary_key = self.__dict__[self.PRIMARY_KEY]
@@ -37,13 +37,13 @@ class Data(object):
 
         sharp_position = primary_key.rfind("#")
         if sharp_position <= -1:
-            log.bug("sharp_position non � valido: %r per il dato %r con primary_key %r" % (
+            log.bug("sharp_position non ? valido: %r per il dato %r con primary_key %r" % (
                 sharp_position, self, primary_key))
             return
 
         proto_code = primary_key[0 : sharp_position]
         if not proto_code:
-            log.bug("proto_code non � valido: %r" % proto_code)
+            log.bug("proto_code non ? valido: %r" % proto_code)
             return
 
         table_name = "proto_%ss" % self.__class__.__name__.lower()
@@ -58,7 +58,7 @@ class Data(object):
 
         proto_data = database[table_name][proto_code]
         if not proto_data:
-            log.bug("proto_data non � valido: %r con il codice %r" % (proto_data, proto_code))
+            log.bug("proto_data non ? valido: %r con il codice %r" % (proto_data, proto_code))
             return
 
         setattr(self, "prototype", proto_data)
@@ -77,11 +77,11 @@ class Data(object):
             if not exit.door:
                 continue
             # Caso particolare per l'inserimento on the fly di porte non
-            # prototipo, cio� quelle gi� resettate
+            # prototipo, cio? quelle gi? resettate
             door_code = exit.door
             exit.door = _search_the_reference("exits[%s]" % exit.direction, exit.door, ["items", "mobs", "players"], "exit.door")
             if not exit.door:
-                log.bug("Non � stato possibile trovare il riferimento alla porta %s per la stanza %s all'uscita %s" % (door_code, self.code, exit.direction))
+                log.bug("Non ? stato possibile trovare il riferimento alla porta %s per la stanza %s all'uscita %s" % (door_code, self.code, exit.direction))
                 continue
             exit.door.area = self.area
             getattr(self.area, exit.door.ACCESS_ATTR).append(exit.door)
@@ -92,7 +92,7 @@ class Data(object):
             return True
 
         if self.location and self not in getattr(self.location, self.ACCESS_ATTR):
-            log.bug("(%s) ERRORE DI RIFERIMENTO LOCATION %s MA %s NON SI TROVA L� DENTRO (ultimo comando inviato da %s: %s)" % (
+            log.bug("(%s) ERRORE DI RIFERIMENTO LOCATION %s MA %s NON SI TROVA L? DENTRO (ultimo comando inviato da %s: %s)" % (
                 self.ACCESS_ATTR, self.location.code, self.code, engine.last_input_sender.code, engine.last_input_sended))
             return True
 
@@ -185,11 +185,11 @@ def link_the_references(obj, path):
     ricavare i riferimenti ad altri dati in maniera corretta.
     """
     if not obj:
-        log.bug("obj non � un parametro valido: %s" % obj)
+        log.bug("obj non ? un parametro valido: %s" % obj)
         return
 
     if not path:
-        log.bug("path non � un parametro valido: %s" % path)
+        log.bug("path non ? un parametro valido: %s" % path)
         return
 
     # -------------------------------------------------------------------------
@@ -214,12 +214,12 @@ def link_the_references(obj, path):
                 link_the_references(attr_value, "%s.%s" % (path, attr_name))
 
         # Se la variabile si trova nel dizionario REFERENCES della classe
-        # allora probabilmente � un dato precedentemente acquisito come
+        # allora probabilmente ? un dato precedentemente acquisito come
         # stringa ma che deve essere convertito al riferimento di dato
         elif attr_name in obj.REFERENCES or attr_name in obj.WEAKREFS:
-            # La variabile di riferimento pu� benissimo essere None, gi� di
-            # default � cos�, significa che non ha trovato nessuna etichetta
-            # relativa nel file del dato, questo � normale per etichette
+            # La variabile di riferimento pu? benissimo essere None, gi? di
+            # default ? cos?, significa che non ha trovato nessuna etichetta
+            # relativa nel file del dato, questo ? normale per etichette
             # facoltative
             if attr_value is None:
                 continue
@@ -228,30 +228,43 @@ def link_the_references(obj, path):
             # si comporta come una variabile relativa alle REFERENCES
             # tuttavia se questa viene rimossa dal gioco il riferimento
             # debole va a mancare automaticamente
-            if attr_name in obj.WEAKREFS:
+            is_weak_reference = attr_name in obj.WEAKREFS
+            if is_weak_reference:
                 table_names = obj.WEAKREFS[attr_name]
             else:
-                # Le tabelle per la ricerca del riferimento possono essere pi�
-                # d'una, ognuna delle quali per� deve possere delle chiavi
+                # Le tabelle per la ricerca del riferimento possono essere pi?
+                # d'una, ognuna delle quali per? deve possere delle chiavi
                 # differenti tra loro (come per esempio il database dei mob
                 # e quello degli oggetti)
                 table_names = obj.REFERENCES[attr_name]
 
-            # Se var � una stringa allora cerca il riferimento tra le tabelle
+            # Se var ? una stringa allora cerca il riferimento tra le tabelle
             if isinstance(attr_value, str):
-                var = _search_the_reference(attr_name, attr_value, table_names, path)
-                if var and attr_name in obj.WEAKREFS:
+                var = _search_the_reference(
+                    attr_name,
+                    attr_value,
+                    table_names,
+                    path,
+                    required=not is_weak_reference,
+                )
+                if var and is_weak_reference:
                     setattr(obj, attr_name, weakref.ref(var or None))
                 else:
                     setattr(obj, attr_name, var or None)
-            # Se var � una lista allora deve trovare tutti i riferimenti di
+            # Se var ? una lista allora deve trovare tutti i riferimenti di
             # ogni elemento che sono identificati da un codice-stringa
             elif type(attr_value) == list:
                 new_list = []
                 for v in attr_value:
-                    value = _search_the_reference(attr_name, v, table_names, path)
+                    value = _search_the_reference(
+                        attr_name,
+                        v,
+                        table_names,
+                        path,
+                        required=not is_weak_reference,
+                    )
                     if value:
-                        if attr_name in obj.WEAKREFS:
+                        if is_weak_reference:
                             new_list.append(weakref.ref(value))
                         else:
                             new_list.append(value)
@@ -261,21 +274,21 @@ def link_the_references(obj, path):
                 raise NotImplementedError
 #- Fine Funzione -
 
-def _search_the_reference(attr_name, attr_value, table_names, path):
+def _search_the_reference(attr_name, attr_value, table_names, path, required=True):
     if not attr_name:
-        log.bug("attr_name non � un parametro valido: %r" % attr_name)
+        log.bug("attr_name non ? un parametro valido: %r" % attr_name)
         return None
 
     if not attr_value:
-        log.bug("attr_value non � un parametro valido: %r" % attr_value)
+        log.bug("attr_value non ? un parametro valido: %r" % attr_value)
         return None
 
     if not table_names:
-        log.bug("table_names non � un parametro valido: %r" % table_names)
+        log.bug("table_names non ? un parametro valido: %r" % table_names)
         return None
 
     if not path:
-        log.bug("path non � un parametro valido: %r" % path)
+        log.bug("path non ? un parametro valido: %r" % path)
         return None
 
     # -------------------------------------------------------------------------
@@ -283,7 +296,7 @@ def _search_the_reference(attr_name, attr_value, table_names, path):
     from src.database import database
 
     if not isinstance(table_names, list):
-        log.bug("table_names, con attr_name %s, attr_value %r e path %s, dev'essere una lista ed invece �: %r" % (
+        log.bug("table_names, con attr_name %s, attr_value %r e path %s, dev'essere una lista ed invece ?: %r" % (
             attr_name, attr_value, path, table_names))
         return None
 
@@ -292,7 +305,7 @@ def _search_the_reference(attr_name, attr_value, table_names, path):
             return database[table_name][attr_value]
 
     # (bb) qui, nella lettura dei riferimenti per le liste e le tuple,
-    # vengono passati a volte delle entit� gi� referenziate e non delle
+    # vengono passati a volte delle entit? gi? referenziate e non delle
     # stringhe.. E' come se il link_the_references al tal dato venga
     # effettuato due volte tuttavia non ho ancora trovato come e dove..
     # quindi per ora vengono effettuati dei controlli aggiuntivi per
@@ -306,7 +319,13 @@ def _search_the_reference(attr_name, attr_value, table_names, path):
     else:
         primary_key = getattr(attr_value, attr_value.PRIMARY_KEY)
 
-    log.bug("Non � stato trovato nessun riferimento a %r per l'attributo %s, con primary_key %r, %s database %r alla path %r. *ERRORE CRITICO*" % (
+    # I WEAKREFS sono riferimenti facoltativi: dati legacy come stanze create
+    # da personaggi poi rimossi devono restare caricabili senza rendere il boot
+    # critico. I riferimenti forti continuano invece a essere obbligatori.
+    if not required:
+        return None
+
+    log.bug("Non ? stato trovato nessun riferimento a %r per l'attributo %s, con primary_key %r, %s database %r alla path %r. *ERRORE CRITICO*" % (
         attr_value, attr_name, primary_key, "nel" if len(table_names) == 1 else "nei", table_names, path))
     engine.critical_errors += 1
     return None

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Modulo riguardante la composizione di materiale e percentuale delle entit‡ e
+Modulo riguardante la composizione di materiale e percentuale delle entit√† e
 delle stanze.
 """
 
@@ -148,15 +148,15 @@ class MaterialPercentage(object):
 
     def fread_the_line(self, file, line, attr):
         if not file:
-            log.bug("file non Ë un parametro valido: %r" % file)
+            log.bug("file non √® un parametro valido: %r" % file)
             return
 
         if not line:
-            log.bug("line non Ë un parametro valido: %r" % line)
+            log.bug("line non √® un parametro valido: %r" % line)
             return
 
         if not attr:
-            log.bug("attr non Ë un parametro valido: %r" % attr)
+            log.bug("attr non √® un parametro valido: %r" % attr)
             return
 
         # ---------------------------------------------------------------------
@@ -178,11 +178,11 @@ class MaterialPercentage(object):
         Scrive su file un elemento sinonimo.
         """
         if not file:
-            log.bug("file non Ë un parametro valido: %r" % file)
+            log.bug("file non √® un parametro valido: %r" % file)
             return
 
         if not label:
-            log.bug("label non Ë un parametro valido: %r" % label)
+            log.bug("label non √® un parametro valido: %r" % label)
             return
 
         # -------------------------------------------------------------------------

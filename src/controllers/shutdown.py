@@ -31,7 +31,7 @@ class ShutdownPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.IMPLEMENTOR
     MINIMUM_TRUST_ON_POST = TRUST.IMPLEMENTOR
 
-    PAGE_TEMPLATE = string.Template(open("src/views/shutdown.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/shutdown.view", encoding="utf-8-sig").read())
 
     NEW_PAGE = True
 

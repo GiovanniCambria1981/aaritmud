@@ -20,7 +20,7 @@ class LibraryPage(WebResource):
     """
     TITLE = "Library"
 
-    PAGE_TEMPLATE = string.Template(open("src/views/library.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/library.view", encoding="utf-8-sig").read())
 
     def render_GET(self, request, conn):
         mapping = {}

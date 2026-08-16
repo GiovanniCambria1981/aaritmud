@@ -16,7 +16,7 @@ from src.log     import log
 
 def command_restore(entity, argument=""):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -31,14 +31,14 @@ def command_restore(entity, argument=""):
 
     target = entity.find_entity_extensively(argument)
     if not target:
-        entity.send_output("Nessuna entit‡ trovata con argomento [white]%s[close]." % argument)
+        entity.send_output("Nessuna entit√† trovata con argomento [white]%s[close]." % argument)
         return False
 
     if target.IS_PLAYER and entity.trust < TRUST.IMPLEMENTOR:
-        entity.send_output("Non ti Ë possibile ripristinare i punti dei personaggi.")
+        entity.send_output("Non ti √® possibile ripristinare i punti dei personaggi.")
         return False
 
-    # Ripristino prima di inviare il messaggio cosicchÈ il prompt visualizza
+    # Ripristino prima di inviare il messaggio cosicch√© il prompt visualizza
     # correttamente il tutto
     target.life = target.max_life
     target.mana = target.max_mana
@@ -67,7 +67,7 @@ def command_restore(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

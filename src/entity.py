@@ -910,7 +910,7 @@ class ProtoEntity(Describable, Data, Act, MIMLParserSuperclass, FindEntitySuperc
     #- Fine Metodo -
 
     def get_body_parts(self):
-        import bodies.human as human_body
+        import src.bodies.human as human_body
 
         if self.IS_ITEM:
             return human_body.parts_left_handed
@@ -2767,7 +2767,7 @@ def create_keywords(argument, entity):
 
     global remove_colors
     if not remove_colors:
-        from color import remove_colors
+        from src.color import remove_colors
     argument = remove_colors(argument)
     if not argument:
         log.bug("argument dopo remove_colors non è valido: %r" % argument)

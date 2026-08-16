@@ -2,7 +2,7 @@
 
 """
 Modulo di gestione generica dei loop, in particolar modo serve a evitare che
-i loop crashino bloccando funzionalit‡ del gioco.
+i loop crashino bloccando funzionalit√† del gioco.
 """
 
 
@@ -24,20 +24,20 @@ from src.utility  import create_folders, create_file, from_capitalized_words
 
 class UnstoppableLoop(task.LoopingCall):
     """
-    Questa Ë la classe madre per tutti i loop del gioco.
-    Viene chiamata unstoppable perchÈ un'eccezione alzata dal codice eseguito
+    Questa √® la classe madre per tutti i loop del gioco.
+    Viene chiamata unstoppable perch√© un'eccezione alzata dal codice eseguito
     tramite cycle non ferma il relativo loop, cosa che accade nei normali
     LoopingCall di twisted, questo permette di mantenere funzionante il gioco
     al 100%.
     L'eccezione viene stampata sulla stdout, attenzione quindi nel qual caso
     stiate redirezionando l'output relativo su file, utilizzate un logrotate
-    cosÏ da evitare intasamenti dello spazio fisico nel qual caso il loop
+    cos√¨ da evitare intasamenti dello spazio fisico nel qual caso il loop
     invii eccezioni ad ogni ciclo (che nel caso di alcuni loop potrebbero essere
-    pi˘ di uno al secondo)
+    pi√π di uno al secondo)
     """
     def __init__(self):
         super(UnstoppableLoop, self).__init__(self.unstoppable_cycle)
-        self.paused = False  # Indica se il loop Ë stato messo in pausa o meno
+        self.paused = False  # Indica se il loop √® stato messo in pausa o meno
     #- Fine Inizializzazione -
 
     def start(self, seconds=0):
@@ -53,7 +53,7 @@ class UnstoppableLoop(task.LoopingCall):
         if self.running:
             super(UnstoppableLoop, self).stop()
         else:
-            log.bug("Il loop %s non Ë stato trovato attivo." % self.__class__.__name__)
+            log.bug("Il loop %s non √® stato trovato attivo." % self.__class__.__name__)
     #- Fine Metodo -
 
     def unstoppable_cycle(self):
@@ -88,7 +88,7 @@ class PersistentLoop(UnstoppableLoop):
             super(PersistentLoop, self).stop()
             self.save()
         else:
-            log.bug("Il loop %s non Ë stato trovato attivo." % self.__class__.__name__)
+            log.bug("Il loop %s non √® stato trovato attivo." % self.__class__.__name__)
     #- Fine Metodo -
 
     def read(self):
@@ -141,14 +141,14 @@ class PersistentLoop(UnstoppableLoop):
         Crea ed inserisce nel ciclo un nuovo supply.
         """
         # Evita di inserire un nuovo supply nel loop se ne trova un'altro
-        # con la stessa funzione gi‡ in atto
+        # con la stessa funzione gi√† in atto
         for data in self.datas:
             if data.have_same_purpose(*args):
                 return
 
         data = self.constructor(*args)
-        # Se il timer Ë stato impostato a 0 significa che si vuole l'esecuzione
-        # subito quindi non vi Ë neppure la necessit‡ di inserirlo nel loop
+        # Se il timer √® stato impostato a 0 significa che si vuole l'esecuzione
+        # subito quindi non vi √® neppure la necessit√† di inserirlo nel loop
         if data.timer == 0:
             data.execute()
         else:
@@ -160,7 +160,7 @@ class PersistentLoop(UnstoppableLoop):
             return
 
         for data in self.datas:
-            # Coglie l'occasione per rimuovere eventuali supply non pi˘ validi
+            # Coglie l'occasione per rimuovere eventuali supply non pi√π validi
             if not data.is_valid():
                 self.datas.remove(data)
                 continue
@@ -176,10 +176,10 @@ class PersistentLoop(UnstoppableLoop):
 
 class PersistentLoopData(object):
     """
-    » sempre meglio che dati dei loop persistenti posseggano, laddove possibile,
+    √à sempre meglio che dati dei loop persistenti posseggano, laddove possibile,
     degli attributi inizializzati tramite il modulo weakref in maniera tale che
     la natura asincrona dei loop non obblighi determinati oggetti a rimanere in
-    memoria inficiando sulla quantit‡ della stessa.
+    memoria inficiando sulla quantit√† della stessa.
     """
     def __init__(self):
         self.timer = 0  # Serve a tenere conto del tempo trascorso tramite il loop

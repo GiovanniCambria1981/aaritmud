@@ -18,7 +18,7 @@ from src.utility  import one_argument, is_same
 
 def command_countraces(entity, argument=""):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -90,7 +90,7 @@ def command_countraces(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

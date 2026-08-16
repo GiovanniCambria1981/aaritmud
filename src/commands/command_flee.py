@@ -38,12 +38,12 @@ FLEE_WAIT = 1.5
 # (TD) convertirla in skill
 def command_flee(entity, argument="", verbs=VERBS, behavioured=False):
     if not verbs:
-        log.bug("verbs non � un parametro valido: %r" % verbs)
+        log.bug("verbs non ? un parametro valido: %r" % verbs)
         return False
 
     # -------------------------------------------------------------------------
 
-    # � possibile se il comando � stato deferrato
+    # ? possibile se il comando ? stato deferrato
     if not entity:
         return False
 
@@ -59,15 +59,15 @@ def command_flee(entity, argument="", verbs=VERBS, behavioured=False):
             entity.send_output("Non stai combattendo contro nessuno e nessuno ti sta seguendo!")
             return False
 
-    # (TD) se l'adrenalina � al massimo o si � in berserker non si pu� fuggire
+    # (TD) se l'adrenalina ? al massimo o si ? in berserker non si pu? fuggire
 
     if entity.vigour <= 0:
         entity.act("Sei troppo stanc$o per poter %s!" % verbs["infinitive"], TO.ENTITY)
-        entity.act("$n � troppo stanco per poter %s!" % verbs["infinitive"], TO.OTHERS)
+        entity.act("$n ? troppo stanco per poter %s!" % verbs["infinitive"], TO.OTHERS)
         return False
 
     # (TD) magari in futuro fare la fuga anche tramite comando exit se
-    # location � un contenitore aperto
+    # location ? un contenitore aperto
     if not entity.location.IS_ROOM:
         message = {}
         messages["entity"] = "Non trovi nessuna via di %s qui dentro!" % verbs["noun"]
@@ -75,7 +75,7 @@ def command_flee(entity, argument="", verbs=VERBS, behavioured=False):
         return flee_with_portal(entity, messages)
 
     # Se non ci sono uscite praticabili allora prova a cercare dei portali,
-    # da cui � facile fuggire, per� non si sa mai dove possano portare...
+    # da cui ? facile fuggire, per? non si sa mai dove possano portare...
     directions = list(entity.location.iter_viable_directions(closed_doors=True))
     if not directions:
         message = {}
@@ -87,7 +87,7 @@ def command_flee(entity, argument="", verbs=VERBS, behavioured=False):
     if not opponent:
         opponent = random.choice(followers)
     if not opponent:
-        log.bug("Inaspettato: opponent non � valido: %r (entit� in fuga: %s)" % (opponent, entity.code))
+        log.bug("Inaspettato: opponent non ? valido: %r (entit? in fuga: %s)" % (opponent, entity.code))
         return False
 
     for direction in reversed(directions):
@@ -105,7 +105,7 @@ def command_flee(entity, argument="", verbs=VERBS, behavioured=False):
         messages["target"] = "Blocchi a $n l'unica via di %s disponibile!" % verbs["noun"]
         return flee_with_portal(entity, messages, opponent)
 
-    # (TD) fino a che il flee non � una skill la fallacit� � casuale e
+    # (TD) fino a che il flee non ? una skill la fallacit? ? casuale e
     # proporzionale al numero di uscite praticabili della stanza
     if random.randint(1, 6) > len(directions):
         entity.act("Nella foga non riesci ad orientarti e trovare una via di %s!" % verbs["noun"], TO.ENTITY)
@@ -113,32 +113,32 @@ def command_flee(entity, argument="", verbs=VERBS, behavioured=False):
         entity.wait(FLEE_WAIT)
         return False
 
-    # Tramite queste righe � possibile scegliere dove fuggire, oppure se fugge
+    # Tramite queste righe ? possibile scegliere dove fuggire, oppure se fugge
     # in una direzione a caso
     if argument:
         direction = get_direction(argument)
     else:
         direction = random.choice(directions)
 
-    # (TD) bisogner� ricordarsi di far fuggire tramite porte se si ha il
+    # (TD) bisogner? ricordarsi di far fuggire tramite porte se si ha il
     # pass door (anche se penso che come effetto costante ai player non lo
-    # vorr�) per� come incantesimo s�, e quindi anche come flag di
+    # vorr?) per? come incantesimo s?, e quindi anche come flag di
     exit = entity.location.exits[direction]
     if EXIT.NO_FLEE in exit.flags:
-        entity.act("Stai per %s verso %s ma ti rendi conto che ti � impossibile!" % (verbs["infinitive"], direction), TO.ENTITY)
-        entity.act("$n sta per %s verso %s ma si rendi conto che � impossibile..." % (verbs["infinitive"], direction), TO.OTHERS)
+        entity.act("Stai per %s verso %s ma ti rendi conto che ti ? impossibile!" % (verbs["infinitive"], direction), TO.ENTITY)
+        entity.act("$n sta per %s verso %s ma si rendi conto che ? impossibile..." % (verbs["infinitive"], direction), TO.OTHERS)
         entity.wait(FLEE_WAIT)
         return False
 
     if exit.door and exit.door.door_type:
         # Le uscite con le porte chiuse a chiave sono bloccate alla fuga
         if DOOR.LOCKED in exit.door.door_type.flags:
-            entity.act("Sbatti contro $N chiusa a chiave, non si pu� %s da qui!" % (verbs["infinitive"]), TO.ENTITY, exit.door)
-            entity.act("$n sbatte contro $N chiusa a chiave, non si pu� %s da l�!" % (verbs["infinitive"]), TO.OTHERS, exit.door)
+            entity.act("Sbatti contro $N chiusa a chiave, non si pu? %s da qui!" % (verbs["infinitive"]), TO.ENTITY, exit.door)
+            entity.act("$n sbatte contro $N chiusa a chiave, non si pu? %s da l?!" % (verbs["infinitive"]), TO.OTHERS, exit.door)
             entity.wait(FLEE_WAIT)
             return False
 
-        # Mentre per le porte semplicemente chiuse c'� la possibilit� di entrarvi e fuggire
+        # Mentre per le porte semplicemente chiuse c'? la possibilit? di entrarvi e fuggire
         if DOOR.CLOSED in exit.door.door_type.flags:
             if random.randint(0, 1) == 0:
                 # (TD) e magari chiudergliela in faccia
@@ -147,7 +147,7 @@ def command_flee(entity, argument="", verbs=VERBS, behavioured=False):
                     return False
             else:
                 entity.act("Sbatti contro $N chiusa, non riesci a %s da qui!" % (verbs["infinitive"]), TO.ENTITY, exit.door)
-                entity.act("$n sbatte contro $N chiusa, non riesce a %s da l�!" % (verbs["infinitive"]), TO.OTHERS, exit.door)
+                entity.act("$n sbatte contro $N chiusa, non riesce a %s da l?!" % (verbs["infinitive"]), TO.OTHERS, exit.door)
                 entity.wait(FLEE_WAIT)
                 return False
 
@@ -184,11 +184,11 @@ def command_flee(entity, argument="", verbs=VERBS, behavioured=False):
 
 def flee_with_portal(entity, messages, opponent=None):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return False
 
     if not messages:
-        log.bug("messages non � un parametro valido: %r" % messages)
+        log.bug("messages non ? un parametro valido: %r" % messages)
         return False
 
     # -------------------------------------------------------------------------
@@ -233,22 +233,22 @@ def flee_with_portal(entity, messages, opponent=None):
 
 def xp_loss_and_stop_fight(entity, opponent, verbs):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return
 
     if not opponent:
-        log.bug("opponent non � un parametro valido: %r" % opponent)
+        log.bug("opponent non ? un parametro valido: %r" % opponent)
         return
 
     if not verbs:
-        log.bug("verbs non � un parametro valido: %r" % verbs)
+        log.bug("verbs non ? un parametro valido: %r" % verbs)
         return
 
     # -------------------------------------------------------------------------
 
     fight = entity.get_fight(with_him=opponent)
     if not fight:
-        log.bug("Inatteso che l'entit� %s stia eseguendo un flee senza che stia combattendo" % entity.code)
+        log.bug("Inatteso che l'entit? %s stia eseguendo un flee senza che stia combattendo" % entity.code)
         entity.act("Ti rendi improvvisamente conto che non hai bisogno di %s." % verbs["infinitive"], TO.ENTITY)
         entity.act("$n si rende improvvisamente conto che non ha bisogno di %s." % verbs["infinitive"], TO.ENTITY)
         return
@@ -264,7 +264,7 @@ def xp_loss_and_stop_fight(entity, opponent, verbs):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------
@@ -275,7 +275,7 @@ def get_syntax_template(entity):
     return syntax
 #- Fine Funzione -
 
-# (TD) servir� volendo anche ad evitare di essere seguiti
+# (TD) servir? volendo anche ad evitare di essere seguiti
 #        elif self.followers:
 #            followers = [follower.get_name(entity) for follower in self.followers]
 #            followers = pretty_list(followers)

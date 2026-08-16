@@ -20,12 +20,12 @@ from src.utility import copy_existing_attributes, quantity_argument
 
 def command_create(entity, argument=""):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
 
-    entity.send_output("Il comando che crea un mob partendo da un personaggio Ë disabilitato per problematiche tecniche.")
+    entity.send_output("Il comando che crea un mob partendo da un personaggio √® disabilitato per problematiche tecniche.")
     return True
 
     #return create_handler(entity, argument, "command_create", "players", can_create_multiple=True)
@@ -34,15 +34,15 @@ def command_create(entity, argument=""):
 
 def create_handler(entity, argument, command_name, table_name, can_create_multiple=False):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
     if not command_name:
-        log.bug("command_name non Ë un parametro valido: %r" % command_name)
+        log.bug("command_name non √® un parametro valido: %r" % command_name)
         return False
 
     if not table_name:
-        log.bug("table_name non Ë un parametro valido: %r" % table_name)
+        log.bug("table_name non √® un parametro valido: %r" % table_name)
         return False
 
     # -------------------------------------------------------------------------
@@ -64,7 +64,7 @@ def create_handler(entity, argument, command_name, table_name, can_create_multip
     if not target:
         target = entity.find_proto(argument, entity_tables=[table_name])
         if not target:
-            entity.send_output("Non Ë stato trovato nessun %s con argomento [green]%s[close]." % (table_name, argument))
+            entity.send_output("Non √® stato trovato nessun %s con argomento [green]%s[close]." % (table_name, argument))
             return False
 
     if quantity == 0:
@@ -72,10 +72,10 @@ def create_handler(entity, argument, command_name, table_name, can_create_multip
 
     if not target.IS_PLAYER and target.max_global_quantity > 0 and target.current_global_quantity + quantity > target.max_global_quantity:
         if entity.trust == TRUST.IMPLEMENTOR:
-            entity.send_to_admin("Ti Ë possibile iniettare in gioco %s nonostante questo raggiunger‡ il suo MaxGlobalQuantity di %d" % (
+            entity.send_to_admin("Ti √® possibile iniettare in gioco %s nonostante questo raggiunger√† il suo MaxGlobalQuantity di %d" % (
                 target.get_name(looker=entity), target.max_global_quantity))
         else:
-            entity.send_output("Non ti Ë possibile iniettare in gioco questa entit‡ perchÈ ha gi‡ raggiunto il suo MaxGlobalQuantity di %d" % target.max_global_quantity)
+            entity.send_output("Non ti √® possibile iniettare in gioco questa entit√† perch√© ha gi√† raggiunto il suo MaxGlobalQuantity di %d" % target.max_global_quantity)
             return False
 
     if target.IS_PLAYER:
@@ -88,11 +88,11 @@ def create_handler(entity, argument, command_name, table_name, can_create_multip
     elif target.IS_ITEM:
         result = Item(target.code)
     else:
-        log.bug("Entit‡ base non valida: %s" % target.code)
-        entity.send_output("C'Ë stato un'errore nell'esecuzione del comando.")
+        log.bug("Entit√† base non valida: %s" % target.code)
+        entity.send_output("C'√® stato un'errore nell'esecuzione del comando.")
         return False
 
-    # Se l'oggetto Ë uno dell'area rip avr‡ il tag %material da dover sostituire
+    # Se l'oggetto √® uno dell'area rip avr√† il tag %material da dover sostituire
     if "%material" in result.short:
         result.short.replace("%material", "qualcosa")
     if "%material" in result.short_night:
@@ -108,7 +108,7 @@ def create_handler(entity, argument, command_name, table_name, can_create_multip
         entity.act("$n crea dal nulla una copia di se stess$O.", TO.OTHERS, target)
     elif entity.location == target.location:
         entity.act("Crei dal nulla una copia di $N.", TO.ENTITY, target)
-        entity.act("$n crea dal nulla una copia di $N, ma ora qual'Ë quello vero?", TO.OTHERS, target)
+        entity.act("$n crea dal nulla una copia di $N, ma ora qual'√® quello vero?", TO.OTHERS, target)
         entity.act("$n crea dal nulla una copia di te stess$O!", TO.TARGET, target)
     else:
         entity.act("Crei dal nulla una copia di $N.", TO.ENTITY, target)
@@ -120,7 +120,7 @@ def create_handler(entity, argument, command_name, table_name, can_create_multip
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------
@@ -129,8 +129,8 @@ def get_syntax_template(entity):
     syntax += "create\n"
     syntax += "create <codice personaggio o suo prefisso>\n"
     syntax += "create <nome personaggio o suo prefisso>\n"
-    syntax += "create <quantit‡> <codice personaggio o suo prefisso>\n"
-    syntax += "create <quantit‡> <nome personaggio o suo prefisso>\n"
+    syntax += "create <quantit√†> <codice personaggio o suo prefisso>\n"
+    syntax += "create <quantit√†> <nome personaggio o suo prefisso>\n"
 
     return syntax
 #- Fine Funzione -

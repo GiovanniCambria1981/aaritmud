@@ -86,8 +86,8 @@ class DatatreePage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.BUILDER
     MINIMUM_TRUST_ON_POST = TRUST.BUILDER
 
-    ADDITIONAL_TEMPLATE = string.Template(open("src/views/datatree_additional_header.view").read())
-    PAGE_TEMPLATE       = string.Template(open("src/views/datatree.view").read())
+    ADDITIONAL_TEMPLATE = string.Template(open("src/views/datatree_additional_header.view", encoding="utf-8-sig").read())
+    PAGE_TEMPLATE       = string.Template(open("src/views/datatree.view", encoding="utf-8-sig").read())
 
     NEW_PAGE = True
 

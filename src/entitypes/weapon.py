@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Modulo per le entit‡ di tipo arma.
+Modulo per le entit√† di tipo arma.
 """
 
 

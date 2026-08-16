@@ -35,7 +35,7 @@ class MaintenanceLoop(UnstoppableLoop):
         if self.running:
             super(MaintenanceLoop, self).stop()
         else:
-            log.bug("Il MaintenanceLoop non � stato trovato attivo.")
+            log.bug("Il MaintenanceLoop non ? stato trovato attivo.")
     #- Fine Metodo -
 
     def cycle(self):

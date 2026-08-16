@@ -62,7 +62,7 @@ Public Classes [2]
    Call methods  exclude_refs and/or  exclude_types to exclude
    references to or instances or types of certain objects.
 
-   Use one of the  print\_... methods to report the statistics.
+   Use one of the print_... methods to report the statistics.
 
 Duplicate Objects
 
@@ -235,13 +235,7 @@ except NameError:  # no long in Python 3.0
 if _sizeof_Cdigit < 2:
     raise AssertionError('sizeof(%s) bad: %d' % ('digit', _sizeof_Cdigit))
 
-try:  # sizeof(unicode_char)
-    u = unicode('\0')
-except NameError:  # no unicode() in Python 3.0
-    u = '\0'
-u = u.encode('unicode-internal')  # see .../Lib/test/test_sys.py
-_sizeof_Cunicode = len(u)
-del u
+_sizeof_Cunicode = 4 if sys.maxunicode > 0xFFFF else 2
 if (1 << (_sizeof_Cunicode << 3)) <= sys.maxunicode:
     raise AssertionError('sizeof(%s) bad: %d' % ('unicode', _sizeof_Cunicode))
 

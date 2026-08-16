@@ -19,7 +19,7 @@ from src.log    import log
 #= VARIABILI ===================================================================
 
 # (TD) al posto di utilizzare le connessioni usare le sessions,
-# attributi ereditato in questa classe, forse cosÏ risolto il problema
+# attributi ereditato in questa classe, forse cos√¨ risolto il problema
 # delle connessioni
 connections = {}  # Connessioni al sito
 
@@ -40,8 +40,8 @@ class Connection(protocol.Protocol):
         self.request              = None   # Twisted Request
         self.ip                   = "None" # Ip del Client
         self.buffer               = ""     # Buffer con tutti l'output del gioco da inviare al client ad ogni richiesta ajax
-        self.stop_buffering       = False  # Se impostato a valore di verit‡ terminer‡ l'invio del buffer con una chiusura della sessione
-        self.already_closed       = False  # Indica se Ë gi‡ stata chiusa la connessione
+        self.stop_buffering       = False  # Se impostato a valore di verit√† terminer√† l'invio del buffer con una chiusura della sessione
+        self.already_closed       = False  # Indica se √® gi√† stata chiusa la connessione
         self.defer_exit_from_game = None   # Deferred che si attiva quando il giocatore esce dal gioco
         self.logged_on            = datetime.datetime.now()  # Data e ora del login
     #- Fine Inizializzazione -
@@ -112,7 +112,7 @@ class Connection(protocol.Protocol):
         operating_system = get_os_from_ua(user_agent)
         # Non vengono loggati solamente gli user agent sconosciuti ma anche
         # quelli generici, per veder se si riesce a carpire migliori
-        # informazioni oppure semplicemente per curiosit‡
+        # informazioni oppure semplicemente per curiosit√†
         if operating_system in ("???", "WINDOWS", "LINUX", "MAC", "MOBILE"):
             log.user_agent(self.request)
 
@@ -168,7 +168,7 @@ def close_all_connections():
 
 def get_browser_from_ua(user_agent):
     if not user_agent:
-        log.bug("user_agent non Ë un parametro valido: r" % user_agent)
+        log.bug("user_agent non √® un parametro valido: r" % user_agent)
         return ""
 
     # -------------------------------------------------------------------------
@@ -205,7 +205,7 @@ def get_browser_from_ua(user_agent):
 
 def get_os_from_ua(user_agent):
     if not user_agent:
-        log.bug("user_agent non Ë un parametro valido: r" % user_agent)
+        log.bug("user_agent non √® un parametro valido: r" % user_agent)
         return ""
 
     # -------------------------------------------------------------------------

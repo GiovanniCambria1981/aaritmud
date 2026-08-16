@@ -51,7 +51,7 @@ class Exit(Describable):
 
     def __init__(self, direction=DIR.NONE):
         if not direction:
-            log.bug("direction non Ë un parametro valido: %r" % direction)
+            log.bug("direction non √® un parametro valido: %r" % direction)
             return
 
         # ---------------------------------------------------------------------
@@ -75,7 +75,7 @@ class Exit(Describable):
         self.extras              = Extras()  # Descrizioni extra dell'uscita
         self.flags               = Flags(EXIT.NONE)  # Flags dell'uscita
         self.destination         = None # Stanza a cui l'uscita porta se questa differente rispetto alla direzione presa
-        self.door                = None # Oggetto porta se serve aprirla (se non viene indicata questa viene caricata dal limbo una porta di default)  (TD) qui vorrei aggiungere anche una variabile finestra.. ma poi come gestire finestre e porte multiple? e il key_code nel qual caso una finestra sia chiudibile (cmq per ora continuo cosÏ.. in effetti potrei considerare il fatto di voler inserire pi˘ porte o finestre in una uscita come una eccezione e gestirla tramite gamescripts)
+        self.door                = None # Oggetto porta se serve aprirla (se non viene indicata questa viene caricata dal limbo una porta di default)  (TD) qui vorrei aggiungere anche una variabile finestra.. ma poi come gestire finestre e porte multiple? e il key_code nel qual caso una finestra sia chiudibile (cmq per ora continuo cos√¨.. in effetti potrei considerare il fatto di voler inserire pi√π porte o finestre in una uscita come una eccezione e gestirla tramite gamescripts)
         self.entity_message      = ""   # Messaggio di movimento per colui che si sta spostando
         self.others_in_message   = ""   # Messaggio di movimento per gli altri della stanza di partenza
         self.others_out_message  = ""   # Messaggio di movimento per gli altri della stanza di arrivo
@@ -83,7 +83,7 @@ class Exit(Describable):
 
     def get_error_message(self):
         """
-        Se c'Ë un errore nell'uscita ne ritorna il messaggio appropriato.
+        Se c'√® un errore nell'uscita ne ritorna il messaggio appropriato.
         """
         if self.direction.get_error_message(DIR, "direction", allow_none=False) != "":
             msg = self.direction.get_error_message(DIR, "direction", allow_none=False)
@@ -91,7 +91,7 @@ class Exit(Describable):
             msg = self.flags.get_error_message(EXIT, "flags")
 #        elif (self.door and self.door.code not in database["items"]
 #        and   self.door and self.door.code not in database["mobs"]):
-#            msg = "door dell'uscita non Ë un oggetto valido: %s" % self.door.code
+#            msg = "door dell'uscita non √® un oggetto valido: %s" % self.door.code
         elif self.destination and self.destination.get_error_message() != "":
             msg = self.destination.get_error_message()
         elif self.extras.get_error_message():
@@ -124,7 +124,7 @@ class Exit(Describable):
 
         icon = ""
         if door and door.door_type and DOOR.CLOSED in door.door_type.flags and DOOR.SECRET not in door.door_type.flags:
-            # L'icone dell'entit‡ porta Ë intesa come chiusa
+            # L'icone dell'entit√† porta √® intesa come chiusa
             icon = door.get_icon()
             if not icon:
                 icon = "icons/door/default-door.png"
@@ -208,7 +208,7 @@ class Wall(Describable):
 
     def __init__(self, direction=DIR.NONE):
         if not direction:
-            log.bug("direction non Ë un parametro valido: %r" % direction)
+            log.bug("direction non √® un parametro valido: %r" % direction)
             return
 
         # ---------------------------------------------------------------------
@@ -216,7 +216,7 @@ class Wall(Describable):
         self.comment             = ""  # Eventuale commento al muro
         self.direction           = Element(direction)  # Tipologia della direzione
         self.maked_by            = None  # Oggetto di base utilizzato nella costruzione del muro (di solito un mattone o una pietra)
-        self.depth               = 0   # Profondit‡ della parete, assieme al tipo di materiale in quella direzione ne fanno la forza, che serve nel caso si voglia romperlo, picconarlo, sfondarlo o farlo saltare in aria!
+        self.depth               = 0   # Profondit√† della parete, assieme al tipo di materiale in quella direzione ne fanno la forza, che serve nel caso si voglia romperlo, picconarlo, sfondarlo o farlo saltare in aria!
         self.height              = 0   # Altezza del muro, se differente dall'altezza della stanza
         self.descr               = ""  # Descrizione dell'uscita che viene a formarsi quando il muro viene sfondato
         self.descr_night         = ""  # Descrizione notturna dell'uscita che viene a formarsi quando il muro viene sfondato
@@ -235,18 +235,18 @@ class Wall(Describable):
 
     def get_error_message(self):
         """
-        Se nell'instanza del muro c'Ë un errore ritorna il relativo messaggio.
+        Se nell'instanza del muro c'√® un errore ritorna il relativo messaggio.
         """
         if self.direction.get_error_message(DIR, "direction", allow_none=False) != "":
             msg = self.direction.get_error_message(DIR, "direction", allow_none=False)
         elif not self.maked_by:
-            msg = "non esiste nessuna entit‡ legata a maked_by"
+            msg = "non esiste nessuna entit√† legata a maked_by"
         elif self.maked_by and self.maked_by.code not in database["proto_items"]:
             msg = "non esiste nessun oggetto prototipo dal codice %s" % self.maked_by.code
         elif self.depth <= 0:
-            msg = "depth Ë una lunghezza e quindi non deve essere minore e uguale a 0: %d" % self.depth
+            msg = "depth √® una lunghezza e quindi non deve essere minore e uguale a 0: %d" % self.depth
         elif self.height <= 0:
-            msg = "height Ë una lunghezza e quindi non deve essere minore e uguale a 0: %d" % self.height
+            msg = "height √® una lunghezza e quindi non deve essere minore e uguale a 0: %d" % self.height
         elif self.extras.get_error_message():
             msg = self.extras.get_error_message()
         else:
@@ -310,7 +310,7 @@ def get_direction(arg, exact=False):
     Passato un argomento ne ritorna la direzione corrispondente.
     """
     if not arg:
-        log.bug("arg non Ë un parametro valido: %r con exact a %s" % (arg, exact))
+        log.bug("arg non √® un parametro valido: %r con exact a %s" % (arg, exact))
         return DIR.NONE
 
     # -------------------------------------------------------------------------
@@ -327,7 +327,7 @@ def get_direction(arg, exact=False):
     elif arg == "southeast" or arg == "sudest"    or arg == "se":                 return DIR.SOUTHEAST
     elif arg == "southwest" or arg == "sudovest"  or arg == "sw" or arg == "so":  return DIR.SOUTHWEST
 
-    # Ora esegue una ricerca relativa al prefisso, se cosÏ Ë stato voluto
+    # Ora esegue una ricerca relativa al prefisso, se cos√¨ √® stato voluto
     if not exact:
         if   is_prefix(arg, "north"    ) or is_prefix(arg, "nord"     ):  return DIR.NORTH
         elif is_prefix(arg, "east"     ) or is_prefix(arg, "est"      ):  return DIR.EAST
@@ -352,11 +352,11 @@ def get_destination_room_from_door(entity, door):
     si trova entity.
     """
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return None, None
 
     if not door:
-        log.bug("door non Ë un parametro valido: %r" % door)
+        log.bug("door non √® un parametro valido: %r" % door)
         return None, None
 
     # -------------------------------------------------------------------------

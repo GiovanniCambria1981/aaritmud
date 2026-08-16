@@ -32,7 +32,7 @@ class StatsConnectionPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.MASTER
     MINIMUM_TRUST_ON_POST = TRUST.MASTER
 
-    PAGE_TEMPLATE = string.Template(open("src/views/stats_connection.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/stats_connection.view", encoding="utf-8-sig").read())
 
     def render_GET(self, request, conn):
         local_data  = []
@@ -67,22 +67,22 @@ class StatsConnectionPage(WebResource):
             local_cpu  = local_cpu.strip()
             server_cpu = server_cpu.strip()
 
-            # Controlla la validit‡ dei valori ricavati
+            # Controlla la validit√† dei valori ricavati
             tm = time.strptime(date, "%Y-%m-%d %H:%M:%S")
             if not tm:
-                log.bug("date ricavata dalla linea %s del file %s non Ë valida: %s" % (line, connections_path, date))
+                log.bug("date ricavata dalla linea %s del file %s non √® valida: %s" % (line, connections_path, date))
                 continue
 
             try:
                 local_cpu = float(local_cpu)
             except ValueError:
-                log.bug("local_cpu ricavato dalla linea %s del file %s non Ë valida: %s" % (line, connections_path, local_cpu))
+                log.bug("local_cpu ricavato dalla linea %s del file %s non √® valida: %s" % (line, connections_path, local_cpu))
                 continue
 
             try:
                 server_cpu = float(server_cpu)
             except ValueError:
-                log.bug("server_cpu ricavato dalla linea %s del file %s non Ë valida: %s" % (line, connections_path, server_cpu))
+                log.bug("server_cpu ricavato dalla linea %s del file %s non √® valida: %s" % (line, connections_path, server_cpu))
                 continue
 
             # (TD) inserire delle linee verticali che indicano nel grafico

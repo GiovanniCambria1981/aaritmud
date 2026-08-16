@@ -35,12 +35,12 @@ RoomResets:
 		EntityResets:
 			Quantity:	4
 			Type:		RESET.PUT
-			ProtoEntity:	carrozzone-zingaro_item_cavigliera
+			ProtoEntity:	carrozzone-zingaro_item_cavigliera-scorta
 		End
 		EntityResets:
 			Quantity:	4
 			Type:		RESET.PUT
-			ProtoEntity:	carrozzone-zingaro_item_gonna
+			ProtoEntity:	carrozzone-zingaro_item_gonna-scorta
 		End
 		EntityResets:
 			Quantity:	4

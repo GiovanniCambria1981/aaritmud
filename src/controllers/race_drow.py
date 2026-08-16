@@ -17,7 +17,7 @@ from src.web_resource import WebResource
 class RaceDrowPage(WebResource):
     TITLE = "Drow"
 
-    PAGE_TEMPLATE = string.Template(open("src/views/race_drow.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/race_drow.view", encoding="utf-8-sig").read())
 
     def render_GET(self, request, conn):
         mapping = {}

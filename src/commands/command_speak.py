@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Modulo per la gestione del comando che serve a risparmiare un'entit‡ sconfitta.
+Modulo per la gestione del comando che serve a risparmiare un'entit√† sconfitta.
 """
 
 #= IMPORT ======================================================================
@@ -20,7 +20,7 @@ VERBS = {"infinitive" : "[lightwood]parlare[close]"}
 #= FUNZIONI ====================================================================
 
 def command_speak(entity, argument="", verbs=VERBS):
-    # » possibile se il comando Ë stato deferrato
+    # √à possibile se il comando √® stato deferrato
     if not entity:
         return False
 
@@ -33,7 +33,7 @@ def command_speak(entity, argument="", verbs=VERBS):
 
     target = entity.find_entity_extensively(argument)
     if not target:
-        entity.act("Non c'Ë nessuno [white]%s[close] qui attorno con cui puoi %s." % (argument, verbs["infinitive"]))
+        entity.act("Non c'√® nessuno [white]%s[close] qui attorno con cui puoi %s." % (argument, verbs["infinitive"]))
         entity.act("$n sembra stia cercando qualcuno qui attorno senza trovarlo.", TO.OTHERS)
         return False
 
@@ -57,7 +57,7 @@ def command_speak(entity, argument="", verbs=VERBS):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

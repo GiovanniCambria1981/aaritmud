@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Modulo riguardante la tipologia di entit‡ seme, che Ë uguale a quello
+Modulo riguardante la tipologia di entit√† seme, che √® uguale a quello
 delle piante.
 """
 

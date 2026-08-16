@@ -78,7 +78,7 @@ class PlayersPage(WebResource):
                 logout_time,
                 time_played)
         if config.max_account_players == 0:
-            page += '''  <tr><td colspan="7">La creazione di nuovi personaggi Ë disattiva.</td></tr>'''
+            page += '''  <tr><td colspan="7">La creazione di nuovi personaggi √® disattiva.</td></tr>'''
         elif len(conn.account.players) < config.max_account_players:
             page += '''  <tr><td colspan="7"><a href="create_player1.html">Un Nuovo Personaggio</a></td></tr>'''
         else:
@@ -87,7 +87,7 @@ class PlayersPage(WebResource):
         page += '''%s personaggi creati su %s.<br>''' % (len(conn.account.players), config.max_account_players)
         page += '''<br>'''
 
-        page += '''<br>» inevitabile per i personaggi creati durante questa apertura finiscano lentamente con l'acquisire vantaggi, oggetti ed abilit‡ troppo potenti per poter essere conservati quando si passer‡ dalla beta alla versione definitiva; Ë altrettanto inevitabile che sia una sofferenza indicibile rinunciarvi... pertanto concerteremo assieme una via che consenta ai partecipanti di mantenere almeno una parte dello status e dei privilegi acquisiti anche come segno virtuale-tangibile della nostra riconoscenza per aver contribuito alla crescita di Aarit.'''
+        page += '''<br>√à inevitabile per i personaggi creati durante questa apertura finiscano lentamente con l'acquisire vantaggi, oggetti ed abilit√† troppo potenti per poter essere conservati quando si passer√† dalla beta alla versione definitiva; √® altrettanto inevitabile che sia una sofferenza indicibile rinunciarvi... pertanto concerteremo assieme una via che consenta ai partecipanti di mantenere almeno una parte dello status e dei privilegi acquisiti anche come segno virtuale-tangibile della nostra riconoscenza per aver contribuito alla crescita di Aarit.'''
 
         page += '''<script>$.post("players.html", {width:screen.width, height:screen.height});</script>'''
 
@@ -101,7 +101,7 @@ class PlayersPage(WebResource):
             if is_number(width):
                 width = int(width)
             else:
-                log.bug("resolution width passato dal client con account %s non Ë un numero valido: %s" % (conn.account.code, width))
+                log.bug("resolution width passato dal client con account %s non √® un numero valido: %s" % (conn.account.code, width))
                 return "0"
 
         height = 0
@@ -110,7 +110,7 @@ class PlayersPage(WebResource):
             if is_number(height):
                 height = int(height)
             else:
-                log.bug("resolution height passato dal client con account %s non Ë un numero valido: %s" % (conn.account.code, height))
+                log.bug("resolution height passato dal client con account %s non √® un numero valido: %s" % (conn.account.code, height))
                 return "0"
 
         if width != height and (width == 0 or height == 0):

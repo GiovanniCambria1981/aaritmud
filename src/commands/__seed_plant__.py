@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Modulo per la gestione del comando per seminare o piantare un'entit‡.
+Modulo per la gestione del comando per seminare o piantare un'entit√†.
 """
 
 #= IMPORT ======================================================================
@@ -21,20 +21,20 @@ from src.entitypes.container import Container
 
 #= FUNZIONI ====================================================================
 
-# Questo comando Ë concettualmente uguale ai comandi di give e put, quindi
+# Questo comando √® concettualmente uguale ai comandi di give e put, quindi
 # per ogni fix che avviene nel primo bisognerebbe passare anche qui a dare
 # una controllatina.
 def seed_or_plant(entity, argument, verbs, behavioured, command_name):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
     if not verbs:
-        log.bug("verbs non Ë un parametro valido: %r" % verbs)
+        log.bug("verbs non √® un parametro valido: %r" % verbs)
         return False
 
     if command_name not in ("command_seed", "command_plant"):
-        log.bug("command_name non Ë un parametro valido: %r" % command_name)
+        log.bug("command_name non √® un parametro valido: %r" % command_name)
         return False
 
     # -------------------------------------------------------------------------
@@ -53,7 +53,7 @@ def seed_or_plant(entity, argument, verbs, behavioured, command_name):
 
     # (TD) Controllo del mental state deviato
 
-    # Ricerca le entit‡ da seminare o piantare nell'inventario
+    # Ricerca le entit√† da seminare o piantare nell'inventario
     arg1, argument = one_argument(argument)
     target = entity.find_entity(arg1, location=entity)
     if not target:
@@ -68,7 +68,7 @@ def seed_or_plant(entity, argument, verbs, behavioured, command_name):
         # Rimuove eventuali argomenti facoltativi
         if argument and arg == "in":
             arg2, argument = one_argument(argument)
-        # Ricerca dell'entit‡ bersaglio a cui dare l'entit‡ target
+        # Ricerca dell'entit√† bersaglio a cui dare l'entit√† target
         location = entity.find_entity_extensively(arg2)
         if not location:
             entity.act("Non hai trovato nessun [white]%s[close] ove %s $N." % (arg2, verbs["infinitive"]), TO.ENTITY, target)
@@ -79,26 +79,26 @@ def seed_or_plant(entity, argument, verbs, behavioured, command_name):
     if not arg2:
         arg2 = "da qualche parte"
 
-    # Se l'entit‡ a cui dare si trova nell'inventario allora lo indica
+    # Se l'entit√† a cui dare si trova nell'inventario allora lo indica
     inventory_message_you = ""
     inventory_message_it = ""
     if location and not location.IS_ROOM and location.location and location.location == entity:
         inventory_message_you = ", nel tuo [yellow]inventario[close],"
         inventory_message_it  = ", nel suo [yellow]inventario[close],"
 
-    # Qui vengono gestite i due casi particolari in cui una delle due entit‡
-    # Ë stata trovata mentre l'altra no, e quella trovata corrisponde all'entit‡
+    # Qui vengono gestite i due casi particolari in cui una delle due entit√†
+    # √® stata trovata mentre l'altra no, e quella trovata corrisponde all'entit√†
     # che ha inviato il comando
     if target and not location and target == entity:
         entity.act("Cerchi di %s [white]te stess$o[close] a [white]%s[close] che non trovi da [gray]nessuna parte[close]." % (verbs["infinitive"], arg2), TO.ENTITY, target)
-        entity.act("$n cerca di %s [white]sÈ stess$o[close] a [white]qualcuno[close] che non sembra trovare da [gray]nessuna parte[close]." % verbs["infinitive"], TO.OTHERS, target)
+        entity.act("$n cerca di %s [white]s√© stess$o[close] a [white]qualcuno[close] che non sembra trovare da [gray]nessuna parte[close]." % verbs["infinitive"], TO.OTHERS, target)
         return False
     elif not target and location and location == entity:
         entity.act("Cerchi di [orange]passarti[close] da una $hand all'altra [white]%s[close], ma non trovi [gray]nulla del genere[close]." % arg1, TO.ENTITY, location)
         entity.act("$n cerca di [orange]passarsi[close] da una $hand all'altra [white]qualcosa[close] che [gray]non sembra trovare[close].", TO.OTHERS, location)
         return False
 
-    # Gestisce le tre combinazioni di entit‡ non trovate
+    # Gestisce le tre combinazioni di entit√† non trovate
     if target:
         if not location:
             entity.act("Cerchi di %s $N a [white]%s[close] che non trovi da [gray]nessuna parte[close]." % (verbs["infinitive"], arg2), TO.ENTITY, target)
@@ -115,16 +115,16 @@ def seed_or_plant(entity, argument, verbs, behavioured, command_name):
             entity.act("$n cerca di %s [white]qualcosa[close] a [white]quacuno[close], ma [gray]senza molti risultati[close]." % verbs["infinitive"], TO.OTHERS)
         return False
 
-    # Gestisce i tre casi in cui le entit‡ trovate siano uguali a quella che ha
+    # Gestisce i tre casi in cui le entit√† trovate siano uguali a quella che ha
     # inviato il comando
     if target == entity:
         if location == entity:
             entity.act("Cerchi di %s tutt$o [white]te stess$o[close] a... te stess$o!" % verbs["infinitive"], TO.ENTITY)
-            entity.act("$n cerca di %s tutt$o [white]sÈ stess$o[close] a... sÈ stess$o!" % verbs["infinitive"], TO.OTHERS)
+            entity.act("$n cerca di %s tutt$o [white]s√© stess$o[close] a... s√© stess$o!" % verbs["infinitive"], TO.OTHERS)
         else:
             entity.act("Cerchi di %s tutt$o [white]te stess$o[close] a $N..." % verbs["infinitive"], TO.ENTITY, location)
-            entity.act("$n cerca di %s tutt$o [white]sÈ stess$o[close] a $N..." % verbs["infinitive"], TO.OTHERS, location)
-            entity.act("$n cerca di %s tutt$o [white]sÈ stess$o[close] a te..." % verbs["infinitive"], TO.TARGET, location)
+            entity.act("$n cerca di %s tutt$o [white]s√© stess$o[close] a $N..." % verbs["infinitive"], TO.OTHERS, location)
+            entity.act("$n cerca di %s tutt$o [white]s√© stess$o[close] a te..." % verbs["infinitive"], TO.TARGET, location)
         return False
     else:
         if location == entity:
@@ -133,7 +133,7 @@ def seed_or_plant(entity, argument, verbs, behavioured, command_name):
             entity.act("$n ti [orange]passa[close] da una $hand all'altra.", TO.TARGET, target)
             return False
 
-    # Non si puÚ seminare l'entit‡ in sÈ stessa
+    # Non si pu√≤ seminare l'entit√† in s√© stessa
     if target == location:
         entity.act("Cerchi di %s $N a [white]$LUI stess$O[close] senza molti risultati..." % verbs["infinitive"], TO.ENTITY, target)
         entity.act("$n cerca di %s $N a [white]$LUI stess$O[close] senza molti risultati..." % verbs["infinitive"], TO.OTHERS, target)
@@ -142,7 +142,7 @@ def seed_or_plant(entity, argument, verbs, behavioured, command_name):
 
     target_entitype = getattr(target, type_attr_name)
 
-    # Se l'entit‡ Ë una pianta avvisa che Ë il caso di utilizzare il comando apposito
+    # Se l'entit√† √® una pianta avvisa che √® il caso di utilizzare il comando apposito
     if command_name == "command_seed" and target.plant_type:
         from src.commands.command_plant import VERBS as PLANT_VERBS
         entity.act("Cerchi di %s $N ma faresti prima a %s." % (verbs["infinitive"], PLANT_VERBS["it2"]), TO.ENTITY, target)
@@ -150,11 +150,11 @@ def seed_or_plant(entity, argument, verbs, behavioured, command_name):
         entity.act("$n cerca di %s ma farebbe prima a %s." % (verbs["you2"], PLANT_VERBS["you2"]), TO.TARGET, target)
         return False
 
-    # Come si puÚ denotare invece Ë possibile seminare anche se l'entitype
-    # non Ë valido interrando successivamente cosÏ l'entit‡
+    # Come si pu√≤ denotare invece √® possibile seminare anche se l'entitype
+    # non √® valido interrando successivamente cos√¨ l'entit√†
     if command_name == "command_plant" and not target_entitype:
-        entity.act("Cerchi di %s $N che perÚ non sembra essera affatto una pianta." % verbs["infinitive"], TO.ENTITY, target)
-        entity.act("$n cerca di %s $N che perÚ non sembra affatto essere una pianta." % verbs["infinitive"], TO.OTHERS, target)
+        entity.act("Cerchi di %s $N che per√≤ non sembra essera affatto una pianta." % verbs["infinitive"], TO.ENTITY, target)
+        entity.act("$n cerca di %s $N che per√≤ non sembra affatto essere una pianta." % verbs["infinitive"], TO.OTHERS, target)
         entity.act("$n cerca di %s, ma tu sai di non essere una pianta." % verbs["you2"], TO.TARGET, target)
         return False
 
@@ -185,26 +185,26 @@ def seed_or_plant(entity, argument, verbs, behavioured, command_name):
         return False
 
     if ground:
-        # Evita di far attecchire piante in un  terreno se questo ha gi‡ un seme
+        # Evita di far attecchire piante in un  terreno se questo ha gi√† un seme
         # o una pianta in crescita
         for contains in ground.iter_contains():
-            # E' voluto che vi siano potenzialmente pi˘ plant_type in uno
-            # stesso terreno, ma non pi˘ ENTITYPE.PLANT; stesso discorso
+            # E' voluto che vi siano potenzialmente pi√π plant_type in uno
+            # stesso terreno, ma non pi√π ENTITYPE.PLANT; stesso discorso
             # con l'ENTITYPE.SEED
             if contains.entitype == ENTITYPE.PLANT:
-                entity.act("Cerchi di %s $N tuttavia vi Ë gi‡ $a e non riuscirebbe ad attecchire in $A." % verbs["infinitive"], TO.ENTITY, target, contains, ground)
-                entity.act("$n cerca di %s $N tuttavia vi Ë gi‡ $a e non riuscirebbe ad attecchire in $A." % verbs["infinitive"], TO.OTHERS, target, contains, ground)
-                entity.act("$n cerca di %s, tuttavia vi Ë gi‡ $a e non riuscirebbe ad attecchire in $A." % verbs["you2"], TO.TARGET, target, contains, ground)
+                entity.act("Cerchi di %s $N tuttavia vi √® gi√† $a e non riuscirebbe ad attecchire in $A." % verbs["infinitive"], TO.ENTITY, target, contains, ground)
+                entity.act("$n cerca di %s $N tuttavia vi √® gi√† $a e non riuscirebbe ad attecchire in $A." % verbs["infinitive"], TO.OTHERS, target, contains, ground)
+                entity.act("$n cerca di %s, tuttavia vi √® gi√† $a e non riuscirebbe ad attecchire in $A." % verbs["you2"], TO.TARGET, target, contains, ground)
                 return False
             elif contains.entitype == ENTITYPE.SEED:
-                entity.act("Cerchi di %s $N tuttavia noti che qui Ë gi‡ stato %s qualcosa." % (verbs["infinitive"], verbs["infinitive"]), TO.ENTITY, target)
-                entity.act("$n cerca di %s $N tuttavia nota che qui Ë gi‡ stato %s qualcosa." % (verbs["infinitive"], verbs["infinitive"]), TO.OTHERS, target)
-                entity.act("$n cerca di %s, tuttavia nota che qui Ë gi‡ stato %s qualcosa." % (verbs["you2"], verbs["infinitive"]), TO.TARGET, target)
+                entity.act("Cerchi di %s $N tuttavia noti che qui √® gi√† stato %s qualcosa." % (verbs["infinitive"], verbs["infinitive"]), TO.ENTITY, target)
+                entity.act("$n cerca di %s $N tuttavia nota che qui √® gi√† stato %s qualcosa." % (verbs["infinitive"], verbs["infinitive"]), TO.OTHERS, target)
+                entity.act("$n cerca di %s, tuttavia nota che qui √® gi√† stato %s qualcosa." % (verbs["you2"], verbs["infinitive"]), TO.TARGET, target)
                 return False
     else:
-        # Per le staze invece il massimo piantabile Ë il numero i metri quadri
-        # della stanza meno il numero di oggetti gi‡ contenuti (visivamente,
-        # quindi mucchi di pi˘ oggetti valgono uno)
+        # Per le staze invece il massimo piantabile √® il numero i metri quadri
+        # della stanza meno il numero di oggetti gi√† contenuti (visivamente,
+        # quindi mucchi di pi√π oggetti valgono uno)
         measured_area = (location.width * location.depth) / 100
         if len(location.get_list_of_entities(entity)) >= measured_area:
             entity.act("Cerchi di %s $N ma non hai spazio ove metterla." % verbs["infinitive"], TO.ENTITY, target)
@@ -237,8 +237,8 @@ def seed_or_plant(entity, argument, verbs, behavioured, command_name):
     if ground:
         # Se esiste del ground per la pianta questa attecchisce in esso
         if not ground.container_type:
-            # (TD) scelta tecnica di dubbia qualit‡, da ripensare forse, Ë certo
-            # che se viene cambiata Ë da rivedere il check nell'iter_variant
+            # (TD) scelta tecnica di dubbia qualit√†, da ripensare forse, √® certo
+            # che se viene cambiata √® da rivedere il check nell'iter_variant
             container = Container()
             container.max_weight = target.get_total_weight() * 2
             ground.container_type = container
@@ -251,7 +251,7 @@ def seed_or_plant(entity, argument, verbs, behavioured, command_name):
         target_entitype.start_growth(target, type_attr_name)
 
     # Dona un po' di esperienza ai giocatori che hanno piantato o seminato
-    # la prima volta l'entit‡
+    # la prima volta l'entit√†
     if entity.IS_PLAYER:
         if target.prototype.code in entity.interred_entities:
             entity.interred_entities[target.prototype.code] += 1

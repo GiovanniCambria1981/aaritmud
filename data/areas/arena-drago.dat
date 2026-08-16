@@ -613,6 +613,7 @@ RoomResets:
 	ProtoRoom:	arena-drago_room_76-arena-sotterranea
 	Destination:	7 5 -1 arena-drago
 	EntityResets:
+		Quantity: 2
 		ProtoEntity:	arena-drago_mob_apprendista-cavaliere
 		EntityResets:
 			WearMode:	PART.BODY
@@ -623,32 +624,12 @@ RoomResets:
 	End
 
 	EntityResets:
-		Quantity: 1
+		Quantity: 2
 		Type: RESET.PUT
 		ProtoEntity:	arena-drago_item_scudo-cavalieri
 	End
 	EntityResets:
-		Quantity: 1
-		Type: RESET.PUT
-		ProtoEntity:	arena-drago_item_spada-ordinanza
-	End
-	EntityResets:
-		ProtoEntity:	arena-drago_mob_apprendista-cavaliere
-		EntityResets:
-			WearMode:	PART.BODY
-			Quantity: 1
-			Type: RESET.PUT
-			ProtoEntity:	arena-drago_item_armatura-addestramento
-		End
-	End
-
-	EntityResets:
-		Quantity: 1
-		Type: RESET.PUT
-		ProtoEntity:	arena-drago_item_scudo-cavalieri
-	End
-	EntityResets:
-		Quantity: 1
+		Quantity: 2
 		Type: RESET.PUT
 		ProtoEntity:	arena-drago_item_spada-ordinanza
 	End

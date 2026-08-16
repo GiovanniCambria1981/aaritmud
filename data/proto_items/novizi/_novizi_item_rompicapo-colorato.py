@@ -44,14 +44,14 @@ def scramble(rompicapo, player, posizione):
                 "[darkviolet]"]
 
     if posizione == "scramble_all":
-	color_1 = random.choice(color_db)
-	color_2 = random.choice(color_db)
-	color_3 = random.choice(color_db)
-	color_4 = random.choice(color_db)
-	color_5 = random.choice(color_db)
-	
-	sequence = [ color_1, color_2, color_3, color_4, color_5 ]
-	rompicapo.specials["sequence"] = sequence
+        color_1 = random.choice(color_db)
+        color_2 = random.choice(color_db)
+        color_3 = random.choice(color_db)
+        color_4 = random.choice(color_db)
+        color_5 = random.choice(color_db)
+
+        sequence = [color_1, color_2, color_3, color_4, color_5]
+        rompicapo.specials["sequence"] = sequence
     else:
         if posizione == "prima":
             position = 0

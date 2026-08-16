@@ -35,10 +35,10 @@ class Shop(object):
     def __init__(self):
         self.comment                      = ""  # Commento relativo la struttura
         self.types                        = Flags(SHOP.NONE)  # Tipologia/e di shop, se non impostata viene considerato un negozio qualsiasi
-        self.proto_locations              = []  # Prototipo delle locazioni in cui l'entit‡ negozier‡, se non ne viene indicata nessuna il negoziante Ë un venditore ambulante
-        self.proto_storages               = []  # Prototipo delle locazioni da cui l'entit‡ prender‡ la mercanzia da vendere
-        self.buyables                     = []  # Entit‡ comprabili da parte di un giocatore e relative informazioni di magazzino
-        self.sellables                    = []  # Tipologie di entit‡ vendibili da parte del giocatore, se non viene impostata allora si potr‡ vendere qualsiasi cosa
+        self.proto_locations              = []  # Prototipo delle locazioni in cui l'entit√† negozier√†, se non ne viene indicata nessuna il negoziante √® un venditore ambulante
+        self.proto_storages               = []  # Prototipo delle locazioni da cui l'entit√† prender√† la mercanzia da vendere
+        self.buyables                     = []  # Entit√† comprabili da parte di un giocatore e relative informazioni di magazzino
+        self.sellables                    = []  # Tipologie di entit√† vendibili da parte del giocatore, se non viene impostata allora si potr√† vendere qualsiasi cosa
         self.entity_buy_message           = ""  # Messaggi di act relativi al comando buy avvenuto, sono messaggi facoltativi
         self.others_buy_message           = ""
         self.target_buy_message           = ""
@@ -55,7 +55,7 @@ class Shop(object):
         self.others_offer_message         = ""
         self.target_offer_message         = ""
         self.dealer_offer_message         = ""
-        self.entity_uninterested_message  = ""  # Messaggi di act relativi al disinteresse del mercante per un determinata entit‡ offerta o venduta, sono messaggi facoltativi
+        self.entity_uninterested_message  = ""  # Messaggi di act relativi al disinteresse del mercante per un determinata entit√† offerta o venduta, sono messaggi facoltativi
         self.others_uninterested_message  = ""
         self.target_uninterested_message  = ""
         self.dealer_uninterested_message  = ""
@@ -74,7 +74,7 @@ class Shop(object):
 
     def get_error_message_buyables(self):
         if not self.buyables:
-            return "buyables non Ë stata impostata"
+            return "buyables non √® stata impostata"
 
         for buyable in self.buyables:
             if buyable.get_error_message() != "":
@@ -173,7 +173,7 @@ class Shop(object):
         Controlla se possa interagire nel luogo in cui si trova.
         """
         if not dealer:
-            log.bug("dealer non Ë un parametro valido: %s" % dealer)
+            log.bug("dealer non √® un parametro valido: %s" % dealer)
             return 0
 
         # ---------------------------------------------------------------------
@@ -192,7 +192,7 @@ class Shop(object):
         Ritorna il luogo in cui vengono inserite le cose da vendere, il magazzino.
         """
         if not dealer:
-            log.bug("dealer non Ë un parametro valido: %s" % dealer)
+            log.bug("dealer non √® un parametro valido: %s" % dealer)
             return 0
 
         # ---------------------------------------------------------------------
@@ -200,8 +200,8 @@ class Shop(object):
         if not self.proto_storages:
             return dealer
 
-        # Da priorit‡ al dealer e alla locazione nel qual caso vi siano
-        # pi˘ storages tutti nella stessa stanza
+        # Da priorit√† al dealer e alla locazione nel qual caso vi siano
+        # pi√π storages tutti nella stessa stanza
         if dealer.prototype in self.proto_storages:
             return dealer
         if dealer.location.prototype in self.proto_storages:
@@ -232,7 +232,7 @@ class Shop(object):
         Ritorna la struttura di buyable relativa alla mercanzia passata.
         """
         if not purchase:
-            log.bug("purchase non Ë un parametro valido: %s" % purchase)
+            log.bug("purchase non √® un parametro valido: %s" % purchase)
             return None
 
         # ---------------------------------------------------------------------
@@ -246,7 +246,7 @@ class Shop(object):
 
     def get_sellable(self, target):
         """
-        Ritorna il sellable del negoziante relativo all'entit‡ passata, se
+        Ritorna il sellable del negoziante relativo all'entit√† passata, se
         possibile.
         """
         if not self.sellables:
@@ -270,7 +270,7 @@ class Shop(object):
         Ritorna verso se il magazzino passato non ha mercanzia da vendere.
         """
         if not storage:
-            log.bug("storage non Ë un parametro valido: %r" % storage)
+            log.bug("storage non √® un parametro valido: %r" % storage)
             return False
 
         # ---------------------------------------------------------------------
@@ -285,28 +285,28 @@ class Shop(object):
 
     def add_buyable(self, dealer, target, sellable, quantity):
         """
-        Aggiunge una nuova entit‡ comprabile al negoziante ma senza che questa
-        abbia futura possibilit‡ di aggiornare il proprio magazzino.
+        Aggiunge una nuova entit√† comprabile al negoziante ma senza che questa
+        abbia futura possibilit√† di aggiornare il proprio magazzino.
         """
         if not dealer:
-            log.bug("dealer non Ë un parametro valido: %s" % dealer)
+            log.bug("dealer non √® un parametro valido: %s" % dealer)
             return
 
         if not target:
-            log.bug("target non Ë un parametro valido: %s" % target)
+            log.bug("target non √® un parametro valido: %s" % target)
             return
 
         if not sellable:
-            log.bug("sellable non Ë un parametro valido: %s" % sellable)
+            log.bug("sellable non √® un parametro valido: %s" % sellable)
             return
 
         if quantity <= 0:
-            log.bug("quantity non puÚ essere minore o uguale a 0: %d" % quantity)
+            log.bug("quantity non pu√≤ essere minore o uguale a 0: %d" % quantity)
             return
 
         # ---------------------------------------------------------------------
 
-        # Se non c'Ë nessun magazzino in cui inserire l'entit‡ allora esce
+        # Se non c'√® nessun magazzino in cui inserire l'entit√† allora esce
         storage = self.get_storage(dealer)
         if not storage:
             target.extract()
@@ -326,31 +326,31 @@ class Shop(object):
 
     def send_buy_messages(self, entity, purchase, dealer, verbs, quantity, pretty_price, discount):
         if not entity:
-            log.bug("entity non Ë un parametro valido: %r" % entity)
+            log.bug("entity non √® un parametro valido: %r" % entity)
             return
 
         if not purchase:
-            log.bug("purchase non Ë un parametro valido: %r" % purchase)
+            log.bug("purchase non √® un parametro valido: %r" % purchase)
             return
 
         if not dealer:
-            log.bug("dealer non Ë un parametro valido: %r" % dealer)
+            log.bug("dealer non √® un parametro valido: %r" % dealer)
             return
 
         if not verbs:
-            log.bug("verbs non Ë un parametro valido: %r" % verbs)
+            log.bug("verbs non √® un parametro valido: %r" % verbs)
             return
 
         if quantity < 0:
-            log.bug("quantity non Ë un parametro valido: %d" % quantity)
+            log.bug("quantity non √® un parametro valido: %d" % quantity)
             return
 
         if not pretty_price:
-            log.bug("pretty_price non Ë un parametro valido: %r" % pretty_price)
+            log.bug("pretty_price non √® un parametro valido: %r" % pretty_price)
             return
 
         if discount < 0:
-            log.bug("discount non Ë un parametro valido: %d" % discount)
+            log.bug("discount non √® un parametro valido: %d" % discount)
             return
 
         # ---------------------------------------------------------------------
@@ -440,27 +440,27 @@ class Shop(object):
 
     def send_cannot_afford_messages(self, entity, purchase, dealer, verbs, quantity, pretty_price):
         if not entity:
-            log.bug("entity non Ë un parametro valido: %r" % entity)
+            log.bug("entity non √® un parametro valido: %r" % entity)
             return
 
         if not purchase:
-            log.bug("purchase non Ë un parametro valido: %r" % purchase)
+            log.bug("purchase non √® un parametro valido: %r" % purchase)
             return
 
         if not dealer:
-            log.bug("dealer non Ë un parametro valido: %r" % dealer)
+            log.bug("dealer non √® un parametro valido: %r" % dealer)
             return
 
         if not verbs:
-            log.bug("verbs non Ë un parametro valido: %r" % verbs)
+            log.bug("verbs non √® un parametro valido: %r" % verbs)
             return
 
         if quantity < 0:
-            log.bug("quantity non Ë un parametro valido: %d" % quantity)
+            log.bug("quantity non √® un parametro valido: %d" % quantity)
             return
 
         if not pretty_price:
-            log.bug("pretty_price non Ë un parametro valido: %r" % pretty_price)
+            log.bug("pretty_price non √® un parametro valido: %r" % pretty_price)
             return
 
         # ---------------------------------------------------------------------
@@ -532,27 +532,27 @@ class Shop(object):
 
     def send_sell_messages(self, entity, target, dealer, verbs, quantity, pretty_price):
         if not entity:
-            log.bug("entity non Ë un parametro valido: %r", entity)
+            log.bug("entity non √® un parametro valido: %r", entity)
             return
 
         if not target:
-            log.bug("target non Ë un parametro valido: %r", target)
+            log.bug("target non √® un parametro valido: %r", target)
             return
 
         if not dealer:
-            log.bug("dealer non Ë un parametro valido: %r", dealer)
+            log.bug("dealer non √® un parametro valido: %r", dealer)
             return
 
         if not verbs:
-            log.bug("verbs non Ë un parametro valido: %r", verbs)
+            log.bug("verbs non √® un parametro valido: %r", verbs)
             return
 
         if quantity < 0:
-            log.bug("quantity non Ë un parametro valido: %d" % quantity)
+            log.bug("quantity non √® un parametro valido: %d" % quantity)
             return
 
         if not pretty_price:
-            log.bug("pretty_price non Ë un parametro valido: %r", pretty_price)
+            log.bug("pretty_price non √® un parametro valido: %r", pretty_price)
             return
 
         # ---------------------------------------------------------------------
@@ -575,7 +575,7 @@ class Shop(object):
         elif quantity <= 1:
             message = "%s $a a $N per %s." % (color_first_upper(verbs["you"]), pretty_price)
         else:
-            message = "%s $N, in %d unit‡, a $a per %s." % (color_first_upper(verbs["you"]))
+            message = "%s $N, in %d unit√†, a $a per %s." % (color_first_upper(verbs["you"]))
         entity.act(message, TO.ENTITY, target, dealer)
 
         if self.others_sell_message:
@@ -592,7 +592,7 @@ class Shop(object):
         elif quantity <= 1:
             message = "$n %s $N a $a per %s." % (verbs["it"], pretty_price)
         else:
-            message = "$n %s $N, in %d unit‡, a $a per %s." % (verbs["it"], quantity, pretty_price)
+            message = "$n %s $N, in %d unit√†, a $a per %s." % (verbs["it"], quantity, pretty_price)
         entity.act(message, TO.OTHERS, target, dealer)
 
         if target != entity:
@@ -610,7 +610,7 @@ class Shop(object):
             elif quantity <= 1:
                 message = "$n ti %s $N per %s." % (verbs["it"], pretty_price)
             else:
-                message = "$n ti %s $N, in %d unit‡, per %s." % (verbs["it"], quantity, pretty_price)
+                message = "$n ti %s $N, in %d unit√†, per %s." % (verbs["it"], quantity, pretty_price)
             entity.act(message, TO.TARGET, target, dealer)
 
         if dealer != entity:
@@ -628,33 +628,33 @@ class Shop(object):
             elif quantity <= 1:
                 message = "$n ti %s a $N per %s." % (verbs["it"], pretty_price)
             else:
-                message = "$n ti %s a $N, in %d unit‡, per %s." % (verbs["it"], quantity, pretty_price)
+                message = "$n ti %s a $N, in %d unit√†, per %s." % (verbs["it"], quantity, pretty_price)
             entity.act(message, TO.TARGET, dealer, target)
     #- Fine Metodo -
 
     def send_offer_messages(self, entity, target, dealer, verbs, quantity, pretty_price):
         if not entity:
-            log.bug("entity non Ë un parametro valido: %r", entity)
+            log.bug("entity non √® un parametro valido: %r", entity)
             return
 
         if not target:
-            log.bug("target non Ë un parametro valido: %r", target)
+            log.bug("target non √® un parametro valido: %r", target)
             return
 
         if not dealer:
-            log.bug("dealer non Ë un parametro valido: %r", dealer)
+            log.bug("dealer non √® un parametro valido: %r", dealer)
             return
 
         if not verbs:
-            log.bug("verbs non Ë un parametro valido: %r", verbs)
+            log.bug("verbs non √® un parametro valido: %r", verbs)
             return
 
         if quantity < 0:
-            log.bug("quantity non Ë un parametro valido: %d" % quantity)
+            log.bug("quantity non √® un parametro valido: %d" % quantity)
             return
 
         if not pretty_price:
-            log.bug("pretty_price non Ë un parametro valido: %r", pretty_price)
+            log.bug("pretty_price non √® un parametro valido: %r", pretty_price)
             return
 
         # ---------------------------------------------------------------------
@@ -677,7 +677,7 @@ class Shop(object):
         elif quantity <= 1:
             message = "$N ti %s %s per $N." % (verbs["it"], pretty_price)
         else:
-            message = "$N ti %s %s per %d unit‡ di $N." % (verbs["it"], pretty_price, quantity)
+            message = "$N ti %s %s per %d unit√† di $N." % (verbs["it"], pretty_price, quantity)
         entity.act(message, TO.ENTITY, target, dealer)
 
         if self.others_offer_message:
@@ -694,7 +694,7 @@ class Shop(object):
         elif quantity <= 1:
             message = "$N %s %s a $n per $N." % (verbs["it"], pretty_price)
         else:
-            message = "$N %s %s a $n per %d unit‡ di $N." % (verbs["it"], pretty_price, quantity)
+            message = "$N %s %s a $n per %d unit√† di $N." % (verbs["it"], pretty_price, quantity)
         entity.act(message, TO.OTHERS, target, dealer)
 
         if target != entity:
@@ -712,7 +712,7 @@ class Shop(object):
             elif quantity <= 1:
                 message = "%s a $n %s per $N." % (color_first_upper(verbs["you"]), pretty_price)
             else:
-                message = "%s a $n %s per %d unit‡ di $N." % (color_first_upper(verbs["you"], quantity), pretty_price)
+                message = "%s a $n %s per %d unit√† di $N." % (color_first_upper(verbs["you"], quantity), pretty_price)
             entity.act(message, TO.TARGET, target, dealer)
 
         if dealer != entity:
@@ -730,21 +730,21 @@ class Shop(object):
             elif quantity <= 1:
                 message = "$a %s a $n %s per te." % (verbs["it"], pretty_price)
             else:
-                message = "$a %s a $n %s per %d unit‡ di te." % (verbs["it"], pretty_price, quantity)
+                message = "$a %s a $n %s per %d unit√† di te." % (verbs["it"], pretty_price, quantity)
             entity.act(message, TO.TARGET, dealer, target)
     #- Fine Metodo -
 
     def send_uninterested_messages(self, entity, target, dealer):
         if not entity:
-            log.bug("entity non Ë un parametro valido: %r", entity)
+            log.bug("entity non √® un parametro valido: %r", entity)
             return
 
         if not target:
-            log.bug("target non Ë un parametro valido: %r", target)
+            log.bug("target non √® un parametro valido: %r", target)
             return
 
         if not dealer:
-            log.bug("dealer non Ë un parametro valido: %r", dealer)
+            log.bug("dealer non √® un parametro valido: %r", dealer)
             return
 
         # ---------------------------------------------------------------------
@@ -752,12 +752,12 @@ class Shop(object):
         if self.entity_uninterested_message:
             entity.act(self.entity_uninterested_message, TO.ENTITY, target, dealer)
         else:
-            entity.act("$N non Ë una tipologia che a $a possa interessare.", TO.ENTITY, target, dealer)
+            entity.act("$N non √® una tipologia che a $a possa interessare.", TO.ENTITY, target, dealer)
 
         if self.others_uninterested_message:
             entity.act(self.others_uninterested_message, TO.OTHERS, target, dealer)
         else:
-            entity.act("$N di $n non Ë una tipologia che a $a possa interessare.", TO.OTHERS, target, dealer)
+            entity.act("$N di $n non √® una tipologia che a $a possa interessare.", TO.OTHERS, target, dealer)
 
         if self.target_uninterested_message:
             entity.act(self.target_uninterested_message, TO.TARGET, target, dealer)
@@ -767,14 +767,14 @@ class Shop(object):
         if self.dealer_uninterested_message:
             entity.act(self.dealer_uninterested_message, TO.TARGET, dealer, target)
         else:
-            entity.act("Non sei interessato a $a di $n, non Ë simile alla tua mercanzia.", TO.TARGET, dealer, target)
+            entity.act("Non sei interessato a $a di $n, non √® simile alla tua mercanzia.", TO.TARGET, dealer, target)
     #- Fine Metodo -
 
 
 class Buyable(object):
     """
-    Classe che gestisce tutte le entit‡ vendute da parte di un negoziante,
-    le relative quantit‡ in magazzino e il tempo di rifornimento delle stesse.
+    Classe che gestisce tutte le entit√† vendute da parte di un negoziante,
+    le relative quantit√† in magazzino e il tempo di rifornimento delle stesse.
     """
     PRIMARY_KEY = ""
     VOLATILES   = []
@@ -784,24 +784,24 @@ class Buyable(object):
     WEAKREFS    = {}
 
     def __init__(self):
-        self.proto_entity      = ""  # Codice prototipo dell'entit‡ messa in commercio
+        self.proto_entity      = ""  # Codice prototipo dell'entit√† messa in commercio
         self.percent           = 100 # 
         self.supply_minutes    = 0   # Minuti reali prima di rinnovare il magazzino, se 0 non rifornisce il proprio magazzino, se -1 imposta come valore il repop_time dell'area
         self.discount_percent  = 0   # Sconto eventualmente applicato (opzionale)
-        self.discount_quantity = 0   # Se l'entit‡ compra almeno questo quantitativo verr‡ applicato uno sconto (opzionale)
+        self.discount_quantity = 0   # Se l'entit√† compra almeno questo quantitativo verr√† applicato uno sconto (opzionale)
     #- Fine Metodo -
 
     def get_error_message(self):
         if not self.proto_entity:
-            return "proto_entity non Ë un valore valido: %r" % self.proto_entity
+            return "proto_entity non √® un valore valido: %r" % self.proto_entity
         elif self.percent < 10 and self.percent > 1000:
             return "percent dev'essere un valore tra 10 e 1000 compresi: %d" % self.percent
         elif self.supply_minutes < -1:
-            return "supply_minutes non puÚ essere un valore minore di -1: %d" % self.supply_minutes
+            return "supply_minutes non pu√≤ essere un valore minore di -1: %d" % self.supply_minutes
         elif self.discount_percent != 0 and (self.discount_percent < 1 or self.discount_percent > 100):
             return "discount_percent dev'essere un valore tra 1 e 100 compresi e non %d" % self.discount_percent
         elif self.discount_quantity != 0 and self.discount_quantity < 2:
-            return "discount_quantity non puÚ essere un valore minore di 2: %d" % self.discount_quantity
+            return "discount_quantity non pu√≤ essere un valore minore di 2: %d" % self.discount_quantity
 
         return ""
     #- Fine Metodo -
@@ -833,15 +833,15 @@ class Buyable(object):
 
     def fread_the_line(self, file, line, attr):
         if not file:
-            log.bug("file non Ë un parametro valido: %r" % file)
+            log.bug("file non √® un parametro valido: %r" % file)
             return
 
         if not line:
-            log.bug("line non Ë un parametro valido: %r" % line)
+            log.bug("line non √® un parametro valido: %r" % line)
             return
 
         if not attr:
-            log.bug("attr non Ë un parametro valido: %r" % attr)
+            log.bug("attr non √® un parametro valido: %r" % attr)
             return
 
         # ---------------------------------------------------------------------
@@ -871,11 +871,11 @@ class Buyable(object):
 
     def fwrite_the_line(self, file, label, indentation=""):
         if not file:
-            log.bug("file non Ë un parametro valido: %r" % file)
+            log.bug("file non √® un parametro valido: %r" % file)
             return
 
         if not label:
-            log.bug("label non Ë un parametro valido: %r" % label)
+            log.bug("label non √® un parametro valido: %r" % label)
             return
 
         # -------------------------------------------------------------------------
@@ -898,17 +898,17 @@ class Buyable(object):
 
     def get_price(self, purchase, quantity=1):
         if not purchase:
-            log.bug("purchase non Ë un parametro valido: %r" % purchase)
+            log.bug("purchase non √® un parametro valido: %r" % purchase)
             return 0, 0
 
         if quantity < 1:
-            log.bug("quantity passato non Ë un parametro valido: %d" % quantity)
+            log.bug("quantity passato non √® un parametro valido: %d" % quantity)
             return 0, 0
 
         # ---------------------------------------------------------------------
 
         total = purchase.value
-        # Un'entit‡ costa anche per un totale di tutte quelle che contiene
+        # Un'entit√† costa anche per un totale di tutte quelle che contiene
         for en in purchase.iter_all_entities():
             total += en.value * en.quantity
 
@@ -929,7 +929,7 @@ class Buyable(object):
 
 class Sellable(object):
     """
-    Classe che gestisce le differenti tipologie di entit‡ vendute e comprate
+    Classe che gestisce le differenti tipologie di entit√† vendute e comprate
     dal negoziante.
     """
     PRIMARY_KEY = ""
@@ -941,9 +941,9 @@ class Sellable(object):
     WEAKREFS    = {}
 
     def __init__(self):
-        self.entitype        = Element(ENTITYPE.NONE)  # Tipologia di entit‡ che possono essere venduta al negoziante
-        self.percent         =  50 # Percentuale sul costo per le entit‡ vendute al negoziante
-        self.buyback_percent = 100 # Percentuale sul costo per le entit‡ comprate dal negoziante e precedentemente vendutegli
+        self.entitype        = Element(ENTITYPE.NONE)  # Tipologia di entit√† che possono essere venduta al negoziante
+        self.percent         =  50 # Percentuale sul costo per le entit√† vendute al negoziante
+        self.buyback_percent = 100 # Percentuale sul costo per le entit√† comprate dal negoziante e precedentemente vendutegli
     #- Fine Metodo -
 
     def get_error_message(self):
@@ -980,15 +980,15 @@ class Sellable(object):
 
     def fread_the_line(self, file, line, attr):
         if not file:
-            log.bug("file non Ë un parametro valido: %r" % file)
+            log.bug("file non √® un parametro valido: %r" % file)
             return
 
         if not line:
-            log.bug("line non Ë un parametro valido: %r" % line)
+            log.bug("line non √® un parametro valido: %r" % line)
             return
 
         if not attr:
-            log.bug("attr non Ë un parametro valido: %r" % attr)
+            log.bug("attr non √® un parametro valido: %r" % attr)
             return
 
         # ---------------------------------------------------------------------
@@ -1007,11 +1007,11 @@ class Sellable(object):
 
     def fwrite_the_line(self, file, label, indentation=""):
         if not file:
-            log.bug("file non Ë un parametro valido: %r" % file)
+            log.bug("file non √® un parametro valido: %r" % file)
             return
 
         if not label:
-            log.bug("label non Ë un parametro valido: %r" % label)
+            log.bug("label non √® un parametro valido: %r" % label)
             return
 
         # -------------------------------------------------------------------------

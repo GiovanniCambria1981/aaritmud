@@ -25,7 +25,7 @@ class WearElement(EnumElement):
 #-------------------------------------------------------------------------------
 
 NONE       = WearElement("nessuna")
-LAYERABLE  = WearElement("Layerable", "Indumento collocabile in uno slot gi‡ occupato")
+LAYERABLE  = WearElement("Layerable", "Indumento collocabile in uno slot gi√† occupato")
 
 
 #-------------------------------------------------------------------------------

@@ -11,7 +11,7 @@ from src.utility    import put_final_mark
 #= FUNZIONI ====================================================================
 
 def command_ask(entity, argument="", behavioured=False):
-    # È possibile se il comando è stato deferrato
+    # Ãˆ possibile se il comando Ã¨ stato deferrato
     if not entity:
         return False
 
@@ -24,7 +24,7 @@ def command_ask(entity, argument="", behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non Ã¨ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

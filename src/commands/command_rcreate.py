@@ -20,12 +20,12 @@ from src.commands.command_create import create_handler
 
 def command_rcreate(entity, argument=""):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
 
-    entity.send_output("Il comando per ora non � ancora stato definito, ma forse un giorno...")
+    entity.send_output("Il comando per ora non ? ancora stato definito, ma forse un giorno...")
     return False
 
     # (TD)
@@ -35,7 +35,7 @@ def command_rcreate(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

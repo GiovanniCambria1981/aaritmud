@@ -54,10 +54,10 @@ VERBS = {"infinitive" : "[orange]usare[close]",
 
 def command_use(entity, argument="", verbs=VERBS, behavioured=False):
     """
-    Permette di usare un'entit�, tenter� di usare il comando relativo all'entit�
+    Permette di usare un'entit?, tenter? di usare il comando relativo all'entit?
     e al suo stato.
     """
-    # � possibile se il comando � stato deferrato
+    # ? possibile se il comando ? stato deferrato
     if not entity:
         return False
 
@@ -85,9 +85,9 @@ def command_use(entity, argument="", verbs=VERBS, behavioured=False):
         entity.act("$n sembra cercare qualcosa che non riesce proprio a trovare.", TO.ENTITY)
         return False
 
-    # � voluto che i trigger di use scattino anche su entit� che non hanno una
-    # struttura di entitype valida, questo per dare la possibilit� di inserire
-    # trigger su entit� qualsiasi in maniera tale da poterle utilizzare per far
+    # ? voluto che i trigger di use scattino anche su entit? che non hanno una
+    # struttura di entitype valida, questo per dare la possibilit? di inserire
+    # trigger su entit? qualsiasi in maniera tale da poterle utilizzare per far
     # scattare una qualsiasi cosa usandoli.
     # Ricordo che se in un trigger viene ritornato un valore True il normale
     # flusso di codice viene fermato, ecco cosa serve il force_return.
@@ -127,20 +127,20 @@ def command_use(entity, argument="", verbs=VERBS, behavioured=False):
     elif target_for_eat_drink and target_for_eat_drink.entitype == ENTITYPE.FOOD:
         return command_eat(entity, original_argument, behavioured=behavioured)
 
-    # La ricerca del seme nel comando seme � uguale a quella del cibo e delle
-    # bevande, ecco perch� viene utilizzato comunque target_for_eat_drink
+    # La ricerca del seme nel comando seme ? uguale a quella del cibo e delle
+    # bevande, ecco perch? viene utilizzato comunque target_for_eat_drink
     elif target_for_eat_drink and target_for_eat_drink.entitype == ENTITYPE.SEED:
         return command_seed(entity, original_argument, behavioured=behavioured)
 
-    # La ricerca della pianta � uguale a quella del seme pi� sotto
+    # La ricerca della pianta ? uguale a quella del seme pi? sotto
     elif target_for_eat_drink and target_for_eat_drink.entitype == ENTITYPE.PLANT:
         return command_plant(entity, original_argument, behavioured=behavioured)
 
     elif target_for_enter and target_for_enter.entitype == ENTITYPE.PORTAL:
         return command_enter(entity, original_argument, behavioured=behavioured)
 
-    # C'� da notare relativamente al read che con il comando use non � possibile
-    # leggere entit� dentro altre entit�, poco male direi...
+    # C'? da notare relativamente al read che con il comando use non ? possibile
+    # leggere entit? dentro altre entit?, poco male direi...
     elif target_for_read and target_for_read.entitype == ENTITYPE.READABLE:
         return command_read(entity, original_argument, behavioured=behavioured)
 
@@ -172,8 +172,8 @@ def command_use(entity, argument="", verbs=VERBS, behavioured=False):
     entity.act("$n non sa proprio come poter %s $N." % verbs["infinitive"], TO.OTHERS, target)
     entity.act("$n non sa proprio come poter %s." % verbs["you2"], TO.TARGET, target)
 
-    # Per saperne di pi� sul perch� questi trigger si trovato a questo livello
-    # � bene leggersi il commento in alto relativo agli altri trigger che vale
+    # Per saperne di pi? sul perch? questi trigger si trovato a questo livello
+    # ? bene leggersi il commento in alto relativo agli altri trigger che vale
     # anche per questa coppia
     force_return = check_trigger(entity, "after_use", entity, target, argument, behavioured)
     if force_return:
@@ -189,7 +189,7 @@ def command_use(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

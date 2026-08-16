@@ -56,7 +56,7 @@ class _Note(Data):
             msg = ""
 
         if msg:
-            return "[%d] %s" (self.code, msg)
+            return "[%d] %s" % (self.code, msg)
         else:
             return ""
     #- Fine Metodo -

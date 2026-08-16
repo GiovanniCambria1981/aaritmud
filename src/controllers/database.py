@@ -9,12 +9,17 @@ e del numero dei suoi dati.
 #= IMPORT ======================================================================
 
 import string
+import sys
 
-from src.asizeof      import asizeof
 from src.database     import database
 from src.enums        import TRUST
 from src.utility      import commafy
 from src.web_resource import WebResource
+
+
+def asizeof(*objects):
+    """Lightweight Python 3 replacement for the bundled Python 2 profiler."""
+    return sum(sys.getsizeof(obj) for obj in objects)
 
 
 #= CLASSI ======================================================================
@@ -32,7 +37,7 @@ class DatabasePage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.MASTER
     MINIMUM_TRUST_ON_POST = TRUST.MASTER
 
-    PAGE_TEMPLATE = string.Template(open("src/views/database.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/database.view", encoding="utf-8-sig").read())
 
     def render_GET(self, request, conn):
         database_rows = []

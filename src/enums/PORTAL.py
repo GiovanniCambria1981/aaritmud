@@ -25,10 +25,10 @@ class PortalElement(EnumElement):
 #-------------------------------------------------------------------------------
 
 NONE             = PortalElement("Nessuna")
-NO_MOB           = PortalElement("NoMob",           "Il portale non Ë praticabile dai mob")
-NO_ITEM          = PortalElement("NoItem",          "Il portale non Ë praticabile dagli oggetti")
-NO_ROOM          = PortalElement("NoRoom",          "Il portale non Ë praticabile dalle stanze")
-NO_PLAYER        = PortalElement("NoPlayer",        "Il portale non Ë praticabile dai giocatori, neppure da quelli che seguono un'altro tipo di entit‡.")
+NO_MOB           = PortalElement("NoMob",           "Il portale non √® praticabile dai mob")
+NO_ITEM          = PortalElement("NoItem",          "Il portale non √® praticabile dagli oggetti")
+NO_ROOM          = PortalElement("NoRoom",          "Il portale non √® praticabile dalle stanze")
+NO_PLAYER        = PortalElement("NoPlayer",        "Il portale non √® praticabile dai giocatori, neppure da quelli che seguono un'altro tipo di entit√†.")
 
 
 #-------------------------------------------------------------------------------

@@ -15,7 +15,7 @@ from src.log   import log
 
 def command_afk(entity, argument=""):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non Ã¨ un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -25,8 +25,8 @@ def command_afk(entity, argument=""):
 
     if FLAG.AFK in entity.flags:
         entity.flags -= FLAG.AFK
-        entity.send_output("Avverti i giocatori attorno a te che non sei più lontano dalla tastiera.")
-        entity.act("$n sembra essere [cyan]tornato in sé[close].", TO.OTHERS)
+        entity.send_output("Avverti i giocatori attorno a te che non sei piÃ¹ lontano dalla tastiera.")
+        entity.act("$n sembra essere [cyan]tornato in sÃ©[close].", TO.OTHERS)
     else:
         entity.flags += FLAG.AFK
         entity.send_output("Ora tutti i giocatori che verranno in contattato con te sapranno che sei lontano dalla tastiera.")

@@ -27,12 +27,12 @@ class Table(object):
 
 
 class ForumDB(object):
-    tables = [Table("player_help",      "Richieste di aiuto",            "Qui si puÚ chiedere informazioni d'ogni tipo"),
-              Table("player_mud",       "Riguardo Aarit e i Mud",        "Qui Ë possibile parlare di Aarit e dei Mud in generale"),
-              Table("player_fantasy",   "Fantasy all'Opera",             "Qui i giocatori hanno la possibilit‡ di narrare le loro avventure o raccontare il loro passato"),
+    tables = [Table("player_help",      "Richieste di aiuto",            "Qui si pu√≤ chiedere informazioni d'ogni tipo"),
+              Table("player_mud",       "Riguardo Aarit e i Mud",        "Qui √® possibile parlare di Aarit e dei Mud in generale"),
+              Table("player_fantasy",   "Fantasy all'Opera",             "Qui i giocatori hanno la possibilit√† di narrare le loro avventure o raccontare il loro passato"),
               Table("player_quests",    "Quests",                        "Organizzazione, partecipazione e considerazioni a riguardo"),
-              Table("player_idea",      "Idee, Proposte o Suggerimenti", "Qui Ë possibile suggerire alla Ciurma di Aarit modifiche utili"),
-              Table("player_bug",       "Bug o Typo",                    "Qui Ë possibile segnalare errori riscontrati in Aarit"),
+              Table("player_idea",      "Idee, Proposte o Suggerimenti", "Qui √® possibile suggerire alla Ciurma di Aarit modifiche utili"),
+              Table("player_bug",       "Bug o Typo",                    "Qui √® possibile segnalare errori riscontrati in Aarit"),
               Table("player_technical", "L'Angolo Tecnico",              "Discussioni aperte relative l'area building e il codice di Aarit"),
               Table("player_other",     "Parliamo d'Altro",              "Discussioni non inerenti Aarit e i Mud"),
              #Table("clan_",            "",                              ""),
@@ -65,7 +65,7 @@ class ForumDB(object):
         Crea le tabelle dei forum non ancora esistenti nel database.
         """
         for forum_table in self.tables:
-            # (bb) ma qui non bisognerebbe utilizzare forse l'operatore ? invece, oppure Ë giusto cosÏ?
+            # (bb) ma qui non bisognerebbe utilizzare forse l'operatore ? invece, oppure √® giusto cos√¨?
             query = '''CREATE TABLE IF NOT EXISTS %s(subject TEXT, author TEXT, date TEXT, visits INTEGER, important INTEGER, closed INTEGER)''' % forum_table.code
             self.cursor.execute(query)
         self.conn.commit()

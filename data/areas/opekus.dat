@@ -681,7 +681,7 @@ RoomResets:
 	EntityResets:
 		Quantity:	1
 		Type:		RESET.PUT
-		ProtoEntity:	opekus_item_asse-giaciglio
+		ProtoEntity:	opekus_item_asse-giaciglio-segreta
 		EntityResets:
 			Quantity:	1
 			Type:		RESET.PUT

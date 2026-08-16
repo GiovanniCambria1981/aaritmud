@@ -153,7 +153,7 @@ class Log(object):
         if write_on_file and log_type.write_on_file:
             log_path = "log/%d-%02d-%02d.log" % (now.year, now.month, now.day)
             try:
-                log_file = open(log_path, "a")
+                log_file = open(log_path, "a", encoding="utf-8")
             except IOError:
                 print("Impossibile aprire il file %s in append" % log_path)
                 log_file = None
@@ -392,7 +392,7 @@ class Log(object):
 
         filename = "log/platform_infos.txt"
         try:
-            platform_log_file = open(filename, "a")
+            platform_log_file = open(filename, "a", encoding="utf-8")
             platform_log_file.write(lines + "\n")
             platform_log_file.close()
         except IOError:
@@ -411,7 +411,7 @@ class Log(object):
 
         chat_messages_path = "log/chat_messages.list"
         try:
-            chat_messages_file = open(chat_messages_path, "a")
+            chat_messages_file = open(chat_messages_path, "a", encoding="utf-8")
         except IOError:
             log.bug("Impossibile aprire il file %s in append" % chat_messages_path)
             return
@@ -445,7 +445,7 @@ class Log(object):
             # Se il file non esiste allora lo crea da zero
             if not os.path.exists(user_agent_path):
                 try:
-                    user_agent_file = open(user_agent_path, "w")
+                    user_agent_file = open(user_agent_path, "w", encoding="utf-8")
                 except IOError:
                     log.bug("Impossibile creare il file %s" % user_agent_path)
                     return
@@ -453,7 +453,7 @@ class Log(object):
 
             # Ora invece legge il file per ricavare la lista di user agent
             try:
-                user_agent_file = open(user_agent_path, "r")
+                user_agent_file = open(user_agent_path, "r", encoding="utf-8")
             except IOError:
                 log.bug("Impossibile aprire il file %s in lettura" % user_agent_path)
                 return
@@ -468,7 +468,7 @@ class Log(object):
         # allora lo aggiunge al file di log apposito e alla stessa lista
         if request.received_headers["user-agent"] not in self.user_agents:
             try:
-                user_agent_file = open(user_agent_path, "a")
+                user_agent_file = open(user_agent_path, "a", encoding="utf-8")
             except IOError:
                 log.bug("Impossibile aprire il file %s in append" % user_agent_path)
                 return
@@ -494,12 +494,12 @@ class Log(object):
 
         huh_inputs_path = "log/huh_inputs.list"
         try:
-            huh_inputs_file = open(huh_inputs_path, "a")
+            huh_inputs_file = open(huh_inputs_path, "a", encoding="utf-8")
         except IOError:
             log.bug("Impossibile aprire il file %s in append" % huh_inputs_path)
             return
 
-        huh_inputs_file = open(huh_inputs_path, "a")
+        huh_inputs_file = open(huh_inputs_path, "a", encoding="utf-8")
         huh_inputs_file.write("(%s) %s: %s\n" % (datetime.datetime.now(), entity.code, wrong_input))
         huh_inputs_file.close()
     #- Fine Metodo -
@@ -529,7 +529,7 @@ class Log(object):
 
         html_log_path = "log/%s %d.html.txt" % (player.code, id(player.game_request))
         try:
-            html_log_file = open(html_log_path, "a")
+            html_log_file = open(html_log_path, "a", encoding="utf-8")
         except IOError:
             log.bug("Impossibile aprire il file %s in append" % html_log_path)
             return
@@ -555,7 +555,7 @@ class Log(object):
 
         huh_helps_path = "log/huh_helps.list"
         try:
-            huh_helps_file = open(huh_helps_path, "a")
+            huh_helps_file = open(huh_helps_path, "a", encoding="utf-8")
         except IOError:
             log.bug("Impossibile aprire il file %s in append" % huh_helps_path)
             return
@@ -586,7 +586,7 @@ class Log(object):
             is_empty = True
 
         try:
-            cpu_time_file = open(cpu_time_path, "a")
+            cpu_time_file = open(cpu_time_path, "a", encoding="utf-8")
         except IOError:
             log.bug("Impossibile aprire il file %s in append" % cpu_time_path)
             return
@@ -623,7 +623,7 @@ class Log(object):
             is_empty = True
 
         try:
-            connections_file = open(connections_path, "a")
+            connections_file = open(connections_path, "a", encoding="utf-8")
         except IOError:
             log.bug("Impossibile aprire il file %s in append" % connections_path)
             return
@@ -653,7 +653,7 @@ class Log(object):
         overbuffer_path = "log/overbuffer.log"
 
         try:
-            overbuffer_file = open(overbuffer_path, "w")
+            overbuffer_file = open(overbuffer_path, "w", encoding="utf-8")
         except IOError:
             log.bug("Impossibile aprire il file %s in scrittura" % overbuffer_path)
             return

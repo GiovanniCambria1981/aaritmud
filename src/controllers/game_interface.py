@@ -24,12 +24,12 @@ class GameInterfacePage(WebResource):
     """
     TITLE = "Game Interface"
 
-    TALENTS_HEADER_TEMPLATE    = string.Template(open("src/views/game_interface_talents_header.view").read())
-    NO_GAMING_ALLOWED_TEMPLATE = string.Template(open("src/views/game_no_gaming_allowed.view").read())
-    NO_SUPPORT_TEMPLATE        = string.Template(open("src/views/game_no_support.view").read())
-    NO_NAME_FOUND_TEMPLATE     = string.Template(open("src/views/game_no_name_found.view").read())
-    SUGGESTED_TEMPLATE         = string.Template(open("src/views/game_suggested.view").read())
-    GAME_TEMPLATE              = string.Template(open("src/views/game_interface.view").read())
+    TALENTS_HEADER_TEMPLATE    = string.Template(open("src/views/game_interface_talents_header.view", encoding="utf-8-sig").read())
+    NO_GAMING_ALLOWED_TEMPLATE = string.Template(open("src/views/game_no_gaming_allowed.view", encoding="utf-8-sig").read())
+    NO_SUPPORT_TEMPLATE        = string.Template(open("src/views/game_no_support.view", encoding="utf-8-sig").read())
+    NO_NAME_FOUND_TEMPLATE     = string.Template(open("src/views/game_no_name_found.view", encoding="utf-8-sig").read())
+    SUGGESTED_TEMPLATE         = string.Template(open("src/views/game_suggested.view", encoding="utf-8-sig").read())
+    GAME_TEMPLATE              = string.Template(open("src/views/game_interface.view", encoding="utf-8-sig").read())
 
     ACCOUNT_MUST_EXIST_IN_GET  = True
     ACCOUNT_MUST_EXIST_IN_POST = True

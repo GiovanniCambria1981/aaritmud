@@ -29,10 +29,10 @@ VERBS = {"infinitive" : "[orange]mettere[close]",
 
 def command_put(entity, argument="", verbs=VERBS, behavioured=False):
     """
-    Permette di dare entit�, di solito oggetti, ad altre entit�, di solito
+    Permette di dare entit?, di solito oggetti, ad altre entit?, di solito
     player.
     """
-    # � possibile se il comando � stato deferrato
+    # ? possibile se il comando ? stato deferrato
     if not entity:
         return False
 
@@ -42,7 +42,7 @@ def command_put(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

@@ -33,9 +33,9 @@ VERBS = {"infinitive" : "[yellow]vendere[close]",
 
 def command_sell(entity, argument="", verbs=VERBS, behavioured=False):
     """
-    Permette di vendere entit‡ ai commercianti.
+    Permette di vendere entit√† ai commercianti.
     """
-    # » possibile se il comando Ë stato deferrato
+    # √à possibile se il comando √® stato deferrato
     if not entity:
         return False
 
@@ -44,9 +44,9 @@ def command_sell(entity, argument="", verbs=VERBS, behavioured=False):
     if not argument:
         for dealer in entity.location.iter_contains():
             if dealer.shop and SHOP.DISPENSER in dealer.shop.types:
-                entity.act("Cerchi di %s qualcosa a $N ma ciÚ non Ë possibile perchÈ quest'ultim$O Ë un distributore." % verbs["infinitive"], TO.ENTITY, dealer)
-                entity.act("$n cerca di %s qualcosa a $N ma ciÚ non Ë possibile perchÈ quest'ultim$O Ë un distributore." % verbs["infinitive"], TO.OTHERS, dealer)
-                entity.act("$n cerca di %s qualcosa ma ciÚ non Ë possibile perchÈ sei un distributore." % verbs["you2"], TO.TARGET, dealer, target)
+                entity.act("Cerchi di %s qualcosa a $N ma ci√≤ non √® possibile perch√© quest'ultim$O √® un distributore." % verbs["infinitive"], TO.ENTITY, dealer)
+                entity.act("$n cerca di %s qualcosa a $N ma ci√≤ non √® possibile perch√© quest'ultim$O √® un distributore." % verbs["infinitive"], TO.OTHERS, dealer)
+                entity.act("$n cerca di %s qualcosa ma ci√≤ non √® possibile perch√© sei un distributore." % verbs["you2"], TO.TARGET, dealer, target)
                 return False
 
         entity.send_output("Cosa vorresti %s?" % verbs["infinitive"])
@@ -55,7 +55,7 @@ def command_sell(entity, argument="", verbs=VERBS, behavioured=False):
             entity.send_output(syntax, break_line=False)
         return False
 
-    # Ricava la quantit‡ da vendere e poi l'eventuale valore facoltativo del negoziante
+    # Ricava la quantit√† da vendere e poi l'eventuale valore facoltativo del negoziante
     quantity, argument = quantity_argument(argument)
     arg, argument = one_argument(argument)
 
@@ -65,11 +65,11 @@ def command_sell(entity, argument="", verbs=VERBS, behavioured=False):
         entity.act("$n sta cercando qualcosa senza trovarla", TO.OTHERS)
         return False
 
-    # Controlla se la quantit‡ da vendere sia sufficente rispetto a quello che si possiede
+    # Controlla se la quantit√† da vendere sia sufficente rispetto a quello che si possiede
     if quantity == 0:
         quantity = target.quantity
     elif target.quantity < quantity:
-        entity.act("Non puoi %s $N perchÈ ne possiedi solo %d e non %d." % (verbs["infinitive"], target.quantity, quantity), TO.ENTITY, target)
+        entity.act("Non puoi %s $N perch√© ne possiedi solo %d e non %d." % (verbs["infinitive"], target.quantity, quantity), TO.ENTITY, target)
         entity.act("$n sta cercando di ammucchiare un quantitativo voluto di $N per poterlo %s" % verbs["infinitive"], TO.OTHERS, target)
         entity.act("$n sta cercando di ammucchiarti per un quantitativo voluto per poterti %s" % verbs["infinitive"], TO.TARGET, target)
         return False
@@ -97,17 +97,17 @@ def command_sell(entity, argument="", verbs=VERBS, behavioured=False):
     # Controlla se il negoziante si trova in una locazione che fa, per lui, da negozio
     if not dealer.shop.in_location(dealer):
         entity.act("Non puoi %s nulla da $N se non si trova nel suo negozio." % verbs["infinitive"], TO.ENTITY, dealer)
-        entity.act("$n non puÚ %s nulla da $N se non si trova nel suo negozio." % verbs["infinitive"], TO.OTHERS, dealer)
-        entity.act("$n non puÚ %s nulla da te se non ti trovi nel tuo negozio." % verbs["infinitive"], TO.TARGET, dealer)
+        entity.act("$n non pu√≤ %s nulla da $N se non si trova nel suo negozio." % verbs["infinitive"], TO.OTHERS, dealer)
+        entity.act("$n non pu√≤ %s nulla da te se non ti trovi nel tuo negozio." % verbs["infinitive"], TO.TARGET, dealer)
         return False
 
-    # Indica che un'entit‡ vuole interagire con il dealer
+    # Indica che un'entit√† vuole interagire con il dealer
     if entity not in dealer.interactions:
         dealer.interactions.append(entity)
 
     if FLAG.NO_DROP in target.flags:
         if entity.trust > TRUST.MASTER:
-            entity.send_output("{Questa sarebbe in realt‡ un'entit‡ NO_DROP e potresti venderla}")
+            entity.send_output("{Questa sarebbe in realt√† un'entit√† NO_DROP e potresti venderla}")
         else:
             entity.act("Appena cerchi di %s $a a $N te lo ritrovi, con un balzo, in $hand." % verbs["infinitive"], TO.ENTITY, target, dealer)
             entity.act("Appena $n cerca di %s $a a $N se lo ritrova, con un balzo, in $hand." % verbs["infinitive"], TO.OTHERS, target, dealer)
@@ -116,17 +116,17 @@ def command_sell(entity, argument="", verbs=VERBS, behavioured=False):
             return False
 
     if not target.is_empty():
-        entity.act("Non puoi %s $N a $a perchÈ contiene qualcosa." % verbs["infinitive"], TO.ENTITY, target, dealer)
-        entity.act("$n non puÚ %s $N a $a perchÈ contiene qualcosa." % verbs["infinitive"], TO.OTHERS, target, dealer)
-        entity.act("$n non puÚ %s a $a perchÈ contieni qualcosa." % verbs["you2"], TO.TARGET, target, dealer)
-        entity.act("$n non puÚ %s $a perchÈ contiene qualcosa." % verbs["you2"], TO.TARGET, dealer, target)
+        entity.act("Non puoi %s $N a $a perch√© contiene qualcosa." % verbs["infinitive"], TO.ENTITY, target, dealer)
+        entity.act("$n non pu√≤ %s $N a $a perch√© contiene qualcosa." % verbs["infinitive"], TO.OTHERS, target, dealer)
+        entity.act("$n non pu√≤ %s a $a perch√© contieni qualcosa." % verbs["you2"], TO.TARGET, target, dealer)
+        entity.act("$n non pu√≤ %s $a perch√© contiene qualcosa." % verbs["you2"], TO.TARGET, dealer, target)
         return False
 
     if SHOP.DISPENSER in dealer.shop.types:
-        entity.act("Cerchi di %s $a a $N ma ciÚ non Ë possibile perchÈ quest'ultim$O Ë un distributore." % verbs["infinitive"], TO.ENTITY, dealer, target)
-        entity.act("$n cerca di %s $a a $N ma ciÚ non Ë possibile perchÈ quest'ultim$O Ë un distributore." % verbs["infinitive"], TO.OTHERS, dealer, target)
-        entity.act("$n cerca di %s $a ma ciÚ non Ë possibile perchÈ sei un distributore." % verbs["you2"], TO.TARGET, dealer, target)
-        entity.act("$n cerca di %s a $N ma ciÚ non Ë possibile perchÈ Ë un distributore." % verbs["you2"], TO.TARGET, target, dealer)
+        entity.act("Cerchi di %s $a a $N ma ci√≤ non √® possibile perch√© quest'ultim$O √® un distributore." % verbs["infinitive"], TO.ENTITY, dealer, target)
+        entity.act("$n cerca di %s $a a $N ma ci√≤ non √® possibile perch√© quest'ultim$O √® un distributore." % verbs["infinitive"], TO.OTHERS, dealer, target)
+        entity.act("$n cerca di %s $a ma ci√≤ non √® possibile perch√© sei un distributore." % verbs["you2"], TO.TARGET, dealer, target)
+        entity.act("$n cerca di %s a $N ma ci√≤ non √® possibile perch√© √® un distributore." % verbs["you2"], TO.TARGET, target, dealer)
         return False
 
     sellable = dealer.shop.get_sellable(target)
@@ -135,18 +135,18 @@ def command_sell(entity, argument="", verbs=VERBS, behavioured=False):
         return False
 
     if target.value <= 0:
-        entity.act("$N guarda senza molto interesse $a: Ë senza valore!", TO.ENTITY, dealer, target)
-        entity.act("$N guarda senza molto interesse $a mostrato da $n: Ë senza valore.", TO.OTHERS, dealer, target)
-        entity.act("Guardi senza molto interesse $a mostrato da $n: Ë senza valore...", TO.TARGET, dealer, target)
+        entity.act("$N guarda senza molto interesse $a: √® senza valore!", TO.ENTITY, dealer, target)
+        entity.act("$N guarda senza molto interesse $a mostrato da $n: √® senza valore.", TO.OTHERS, dealer, target)
+        entity.act("Guardi senza molto interesse $a mostrato da $n: √® senza valore...", TO.TARGET, dealer, target)
         entity.act("$a ti guarda senza molto interesse: sei senza valore...", TO.TARGET, target, dealer)
         return False
 
     # I negozianti ora pagano con denaro virtuale, in questa maniera non devono averne apposta addosso
     #if not can_afford(target.value * quantity, dealer):
-    #    entity.act("$a vale pi˘ di quanto $N possa permettersi di pagarti.", TO.ENTITY, dealer, target)
-    #    entity.act("$a vale pi˘ di quanto $N possa permettersi di pagare $n.", TO.OTHERS, dealer, target)
-    #    entity.act("$a vale pi˘ di quanto tu possa permetterti di pagare $n.", TO.TARGET, dealer, target)
-    #    entity.act("Vale pi˘ di quanto $N possa permettersi di pagare $n.", TO.TARGET, target, dealer)
+    #    entity.act("$a vale pi√π di quanto $N possa permettersi di pagarti.", TO.ENTITY, dealer, target)
+    #    entity.act("$a vale pi√π di quanto $N possa permettersi di pagare $n.", TO.OTHERS, dealer, target)
+    #    entity.act("$a vale pi√π di quanto tu possa permetterti di pagare $n.", TO.TARGET, dealer, target)
+    #    entity.act("Vale pi√π di quanto $N possa permettersi di pagare $n.", TO.TARGET, target, dealer)
     #    return False
 
     storage = dealer.shop.get_storage(dealer)
@@ -155,12 +155,12 @@ def command_sell(entity, argument="", verbs=VERBS, behavioured=False):
             from_where = "a chi dare"
         else:
             from_where = "ove mettere"
-        entity.act("Non puoi %s nulla a $N perchÈ non ha %s la mercanzia!" % (verbs["infinitive"], from_where), TO.ENTITY, dealer)
-        entity.act("$n non puÚ %s nulla a $N perchÈ non ha %s la mercanzia!" % (verbs["infinitive"], from_where), TO.OTHERS, dealer)
-        entity.act("$n non puÚ %s nulla perchÈ non hai %s la mercanzia!" % (verbs["you2"], from_where), TO.TARGET, dealer)
+        entity.act("Non puoi %s nulla a $N perch√© non ha %s la mercanzia!" % (verbs["infinitive"], from_where), TO.ENTITY, dealer)
+        entity.act("$n non pu√≤ %s nulla a $N perch√© non ha %s la mercanzia!" % (verbs["infinitive"], from_where), TO.OTHERS, dealer)
+        entity.act("$n non pu√≤ %s nulla perch√© non hai %s la mercanzia!" % (verbs["you2"], from_where), TO.TARGET, dealer)
         return False
 
-    # Attenzione che qui target non Ë ancora la quantit‡ giusta
+    # Attenzione che qui target non √® ancora la quantit√† giusta
     force_return = check_trigger(entity, "before_sell", entity, dealer, target, quantity, behavioured)
     if force_return:
         return True
@@ -181,7 +181,7 @@ def command_sell(entity, argument="", verbs=VERBS, behavioured=False):
     give_moneys(dealer, entity, price)
 
     # Dona un po' di esperienza ai giocatori che hanno venduto per la prima
-    # volta l'entit‡
+    # volta l'entit√†
     if entity.IS_PLAYER:
         if target.prototype.code in entity.selled_entities:
             entity.selled_entities[target.prototype.code] += 1
@@ -206,14 +206,14 @@ def command_sell(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------
 
     syntax  = ""
     syntax += "sell <oggetto o creatura da comprare>\n"
-    syntax += "sell <oggetto o creatura da comprare> (nome commerciante se pi˘ di uno nella stanza)\n"
+    syntax += "sell <oggetto o creatura da comprare> (nome commerciante se pi√π di uno nella stanza)\n"
 
     return syntax
 #- Fine Funzione -

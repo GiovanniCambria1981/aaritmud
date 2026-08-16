@@ -47,7 +47,7 @@ class Money(object):
 
     def get_error_message(self, entity):
         if self.copper_value <= 0:
-            return "copper_value non Ë un valore valido: %d" % self.copper_value
+            return "copper_value non √® un valore valido: %d" % self.copper_value
         elif self.races.get_error_message(RACE, "races") != "":
             return self.races.get_error_message(RACE, "races")
 
@@ -80,12 +80,12 @@ class Money(object):
 
 def pretty_money_icons(value, race=RACE.HUMAN, entity=None):
     if value < 0:
-        log.bug("Il parametro value non Ë una quantit‡ valida: %r" % value)
+        log.bug("Il parametro value non √® una quantit√† valida: %r" % value)
         return "", "", "", ""
 
     # -------------------------------------------------------------------------
 
-    # Se entity Ë stato passato allora fa vedere con che monete paga il negoziante
+    # Se entity √® stato passato allora fa vedere con che monete paga il negoziante
     if entity:
         # (TD)
         return "", "", "", ""
@@ -103,12 +103,12 @@ def pretty_money_icons(value, race=RACE.HUMAN, entity=None):
 
 def pretty_money_value(value, extended=False, entity=None):
     if value < 0:
-        log.bug("Il parametro value non Ë una quantit‡ valida: %r" % value)
+        log.bug("Il parametro value non √® una quantit√† valida: %r" % value)
         return ""
 
     # -------------------------------------------------------------------------
 
-    # (TD) Se entity Ë stato passato allora fa vedere con che monete paga il negoziante
+    # (TD) Se entity √® stato passato allora fa vedere con che monete paga il negoziante
     if entity:
         return ""
 
@@ -163,20 +163,20 @@ def pretty_money_value(value, extended=False, entity=None):
 
 
 # (TD) fare una lista di tuple (copper_value, entity) in maniera tale da
-# riordinarle dalla minore alla maggiore cosÏ ritornando il minimo di monete
+# riordinarle dalla minore alla maggiore cos√¨ ritornando il minimo di monete
 # possibili da dare per pagare senza avere un resto eccessivo
 def can_afford(value, entity, race=RACE.NONE):
     if value < 0:
-        log.bug("Il parametro value non Ë una quantit‡ valida: %d" % value)
+        log.bug("Il parametro value non √® una quantit√† valida: %d" % value)
         return []
 
     if not entity:
-        log.bug("Il parametro entity non Ë valido: %r" % entity)
+        log.bug("Il parametro entity non √® valido: %r" % entity)
         return []
 
     # -------------------------------------------------------------------------
 
-    # C'Ë da notare che il ciclo controlla solo le entitype money e non anche
+    # C'√® da notare che il ciclo controlla solo le entitype money e non anche
     # le strutture money_type che vengono lasciare ad altri check, per esempio
     # da parte di mob che effettuano conversioni di valuta o cose simili
     total = 0
@@ -206,27 +206,27 @@ def can_afford(value, entity, race=RACE.NONE):
 
 def give_moneys(entity, target, value, race=RACE.NONE):
     if not entity:
-        log.bug("Il parametro entity non Ë valido: %r" % entity)
+        log.bug("Il parametro entity non √® valido: %r" % entity)
         return
 
     if not target:
-        log.bug("Il parametro target non Ë valido: %r" % target)
+        log.bug("Il parametro target non √® valido: %r" % target)
         return
 
     if value < 0:
-        log.bug("Il parametro value non Ë una quantit‡ valida: %d" % value)
+        log.bug("Il parametro value non √® una quantit√† valida: %d" % value)
         return
 
     # -------------------------------------------------------------------------
 
     moneys = can_afford(value, entity, race=RACE.NONE)
     if not moneys:
-        log.bug("Inaspettato: non Ë stato eseguito un check can_afford in precedenza")
+        log.bug("Inaspettato: non √® stato eseguito un check can_afford in precedenza")
         return
 
     total = 0
     for money in moneys:
-        # (TD) Cerca di evitare di dare il resto il pi˘ possibile
+        # (TD) Cerca di evitare di dare il resto il pi√π possibile
         #if money == moneys[-1]:
         #    diff = value - total
         total += money.quantity * money.money_type.copper_value
@@ -243,8 +243,8 @@ def give_moneys(entity, target, value, race=RACE.NONE):
     mithril, gold, silver, copper = compute_currencies(change)
 
     # Da il resto in monete sonanti
-    # Attenzione che il resto crea moneta dal nulla, non Ë come il sell che
-    # da moneta solo se esistente, c'Ë da tenerne conto se si vuole creare
+    # Attenzione che il resto crea moneta dal nulla, non √® come il sell che
+    # da moneta solo se esistente, c'√® da tenerne conto se si vuole creare
     # un'economia realistica
     if race == RACE.NONE:
         race = RACE.HUMAN
@@ -260,16 +260,16 @@ def give_moneys(entity, target, value, race=RACE.NONE):
 
 def random_moneys(value, race=RACE.HUMAN):
     """
-    Ritorna una lista casuale di entit‡ moneta pari al valore passato.
-    Parte sempre a creare quelle di valuta pi˘ grande, cosÏ da creare meno
-    monete diminuendo cosÏ il peso totale delle monete.
+    Ritorna una lista casuale di entit√† moneta pari al valore passato.
+    Parte sempre a creare quelle di valuta pi√π grande, cos√¨ da creare meno
+    monete diminuendo cos√¨ il peso totale delle monete.
     """
     if value < 0:
-        log.bug("value non Ë un parametro valido: %d" % value)
+        log.bug("value non √® un parametro valido: %d" % value)
         return []
 
     if not race:
-        log.bug("race non Ë un parametro valido: %r" % race)
+        log.bug("race non √® un parametro valido: %r" % race)
         return []
 
     # -------------------------------------------------------------------------
@@ -283,17 +283,20 @@ def random_moneys(value, race=RACE.HUMAN):
                                          (  10 * config.currency_jump, "silver",  random.randint),
                                          (   1,                        "copper",  max)):
         if value >= limit:
-            quantity = (value / limit) * get_percent(0, 100) / 100
+            # In Python 2 queste erano divisioni intere. Con "/" in Python 3
+            # si generavano quantit√† float e residui infinitesimali (stampati
+            # poi come 0), facendo fallire il controllo finale.
+            quantity = (value // limit) * get_percent(0, 100) // 100
             if quantity > 0:
                 money = _create_money(race, currency, quantity)
                 if money:
                     moneys.append(money)
                 else:
-                    log.bug("La moneta di %s non Ë stata creata con successo con razza %r e quantit‡ %d" % (currency, race, quantity))
+                    log.bug("La moneta di %s non √® stata creata con successo con razza %r e quantit√† %d" % (currency, race, quantity))
                 value -= quantity * limit
 
     if value != 0:
-        log.bug("Inatteso, value non Ë 0 ma %d per original_value %d, race %r" % (
+        log.bug("Inatteso, value non √® 0 ma %d per original_value %d, race %r" % (
             value, original_value, race))
         return []
 
@@ -303,15 +306,15 @@ def random_moneys(value, race=RACE.HUMAN):
 
 def _create_money(race, currency, quantity):
     if not race:
-        log.bug("race non Ë un parametro valido: %r" % race)
+        log.bug("race non √® un parametro valido: %r" % race)
         return None
 
     if currency not in ("copper", "silver", "gold", "mithril"):
-        log.bug("currency non Ë un parametro valido: %s" % currency)
+        log.bug("currency non √® un parametro valido: %s" % currency)
         return None
 
     if not quantity:
-        log.bug("quantity non Ë un parametro valido: %d" % quantity)
+        log.bug("quantity non √® un parametro valido: %d" % quantity)
         return None
 
     # -------------------------------------------------------------------------
@@ -335,15 +338,15 @@ def _create_money(race, currency, quantity):
 
 def compute_currencies(value):
     if value < 0:
-        log.bug("value non Ë un parametro valido: %d" % value)
+        log.bug("value non √® un parametro valido: %d" % value)
         return -1, -1, -1, -1
 
     # -------------------------------------------------------------------------
 
-    mithril = math.trunc(value * config.currency_jump / 1000)
-    gold    = math.trunc(value * config.currency_jump /  100) % 10
-    silver  = math.trunc(value * config.currency_jump /   10) % 10
-    copper  =           (value                        /    1) % 10
+    mithril = value * config.currency_jump // 1000
+    gold    = value * config.currency_jump //  100 % 10
+    silver  = value * config.currency_jump //   10 % 10
+    copper  = value                         //    1 % 10
 
     return mithril, gold, silver, copper
 #- Fine Funzione -

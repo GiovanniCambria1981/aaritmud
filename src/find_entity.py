@@ -34,28 +34,28 @@ ENTITIES     = 8
 
 #= CLASSI ======================================================================
 
-# (TD) c'� da pensare se in realt� non sarebbe meglio se fa estendere quella
+# (TD) c'? da pensare se in realt? non sarebbe meglio se fa estendere quella
 # classe alla sola Entity, ovvero passare la location al posto del looker se ne
-# guadagnerebbe in semplicit� di intrecci di import
+# guadagnerebbe in semplicit? di intrecci di import
 class RelativePointSuperclass(object):
     """
-    Classe che contiene i metodi necessari a creare e formattare liste d'entit�,
+    Classe che contiene i metodi necessari a creare e formattare liste d'entit?,
     relative ad una determinata locazione, come vengono viste da un'altra
-    entit�, il looker.
+    entit?, il looker.
     Tale lista deve essere utilizzata sia nella visualizzazione ma anche nella
-    ricerca, cos� da mantenere una corrispondenza corretta nel qual caso il
-    looker esegua comandi con il contatore (get 3.pomodoro) essendo le entit�
-    gi� ordinate secondo il suo punto di vista.
+    ricerca, cos? da mantenere una corrispondenza corretta nel qual caso il
+    looker esegua comandi con il contatore (get 3.pomodoro) essendo le entit?
+    gi? ordinate secondo il suo punto di vista.
     Questa classe estende le classi Room e Entity.
     """
     def get_list_of_entities(self, looker, entity_tables=None, include_looker=False, avoid_inventory=False, avoid_equipment=True, avoid_doors=False, admin_descrs=False, use_number_argument=True):
         """
-        Ritorna una stringa con tutte le entit� relative ad una stanza.
+        Ritorna una stringa con tutte le entit? relative ad una stanza.
         Il parametro no_number_argument serve ad evitare ricorsioni della
         get_long.
         """
         if not looker:
-            log.bug("looker non � un parametro valido: %r" % looker)
+            log.bug("looker non ? un parametro valido: %r" % looker)
             return
 
         # ---------------------------------------------------------------------
@@ -64,12 +64,12 @@ class RelativePointSuperclass(object):
 
         look_translation = translate_input(looker, "look", "en")
         if not look_translation:
-            log.bug("look_translation non � valida: %r" % look_translation)
+            log.bug("look_translation non ? valida: %r" % look_translation)
             look_translation = "guarda"
 
         is_admin = looker.trust >= TRUST.MASTER
 
-        # Ricava la lista di entit� da visualizzare
+        # Ricava la lista di entit? da visualizzare
         entities = []
         for entity in list(self.iter_contains(entity_tables=entity_tables)) + list(self.iter_only_interactable_entities(entity_tables=entity_tables, use_can_see=True)):
             if not include_looker and entity == looker:
@@ -96,7 +96,7 @@ class RelativePointSuperclass(object):
             # per tutta questa lista appendata
             entities.append([entity, create_icon(entity.get_icon()), long_descr, entity.quantity, "", "", "", "", []])
 
-        # Raggruppa eventuali entit� che si visualizzerebbero in maniera identica
+        # Raggruppa eventuali entit? che si visualizzerebbero in maniera identica
         if config.use_visual_grouping:
             for entity1 in entities:
                 for entity2 in entities:
@@ -116,17 +116,17 @@ class RelativePointSuperclass(object):
                             entity2[COUNTER] += entity1[INSTANCE].quantity
                             entity2[ENTITIES].append(entity1[INSTANCE])
 
-        # Ripulisce le entit� che hanno ora counter minore o uguale a zero
+        # Ripulisce le entit? che hanno ora counter minore o uguale a zero
         for entity in reversed(entities):
             if entity[COUNTER] <= 0:
                 entities.remove(entity)
 
-        # Inserisce per ultimi nella lista relativa a ENTITIES le entit� che
+        # Inserisce per ultimi nella lista relativa a ENTITIES le entit? che
         # possiedono la flag NO_LOOK_LIST, in maniera da mantenere l'ordinamento
         # della visualizzazione con quello della ricerca nel qual caso alcune
-        # entit� visualizzabili abbiano lo stesso nome di quelle con tale flag
+        # entit? visualizzabili abbiano lo stesso nome di quelle con tale flag
         # In pratica tutto questo per evitare che qualcuno tramite, ad esempio,
-        # get 2.pomodoro non raccolga per sbaglio l'entit� NO_LOOK_LIST invece
+        # get 2.pomodoro non raccolga per sbaglio l'entit? NO_LOOK_LIST invece
         # di quella visualizzata, come invece sarebbe voluto
         for entity in entities:
             no_look_list_entities = []
@@ -194,20 +194,20 @@ class FindEntitySuperclass(object):
 
     def find_entity(self, argument, quantity=1, location=None, entity_tables=None, compare_functions=None, avoid_inventory=False, avoid_equipment=True, avoid_doors=True):
         """
-        Cerca e ritorna una entit� corrispondente con l'argomento passato alla
+        Cerca e ritorna una entit? corrispondente con l'argomento passato alla
         locazione voluta.
-        entity_tables � una lista di stringhe, tali stringhe possono essere al
-        massimo tre: players, mobs e items, l'entit� viene cercata tra le varie
-        tipologie di entit� a seconda dell'ordine passato in questa lista.
-        Il parametro location � un'entit� o room dove cercare oppure None per
+        entity_tables ? una lista di stringhe, tali stringhe possono essere al
+        massimo tre: players, mobs e items, l'entit? viene cercata tra le varie
+        tipologie di entit? a seconda dell'ordine passato in questa lista.
+        Il parametro location ? un'entit? o room dove cercare oppure None per
         cercare in tutto il mondo del gioco.
         """
         if not argument:
-            log.bug("argument non � un parametro valido: %r" % argument)
+            log.bug("argument non ? un parametro valido: %r" % argument)
             return None
 
         if quantity < 0:
-            log.bug("quantity non � un parametro valido: %d" % quantity)
+            log.bug("quantity non ? un parametro valido: %d" % quantity)
             return
 
         # -------------------------------------------------------------------------
@@ -218,7 +218,7 @@ class FindEntitySuperclass(object):
         if not compare_functions:
             compare_functions = [is_same, is_prefix]
 
-        # Permette la ricerca numerica di una entit�. Per intenderci con
+        # Permette la ricerca numerica di una entit?. Per intenderci con
         # 3.spada verrebbe raccolta la terza spada trovata
         original_argument = argument
         number, argument = number_argument(argument)
@@ -237,8 +237,8 @@ class FindEntitySuperclass(object):
 
         # Esegue la ricerca tramite le funzioni di compare volute
         for compare_function in compare_functions:
-            # Se la locazione � una stanza, area o mud cerca prima di tutto
-            # nella stanza in cui si trova l'entit� e poi nell'eventuale resto
+            # Se la locazione ? una stanza, area o mud cerca prima di tutto
+            # nella stanza in cui si trova l'entit? e poi nell'eventuale resto
             if (not location and not number_used) or (location and location.IS_AREA and self.location.area == location):
                 entities = []
                 for en in self.location.get_list_of_entities(self, entity_tables, include_looker=True, avoid_inventory=avoid_inventory, avoid_equipment=avoid_equipment, avoid_doors=avoid_doors):
@@ -257,9 +257,9 @@ class FindEntitySuperclass(object):
                     entities.append(en[INSTANCE])
                     entities.extend(en[ENTITIES])
             else:
-                # Cerca tutte le tipologie di entit� nell'ordine passato
+                # Cerca tutte le tipologie di entit? nell'ordine passato
                 for entity_table in entity_tables:
-                    # Vengono ordinate per rendere pi� friendly il goto, che
+                    # Vengono ordinate per rendere pi? friendly il goto, che
                     # altrimenti riceve risultati differenti ogni volta che
                     # si riavvia il gioco
                     entities = sorted(database[entity_table].values(), key=lambda en: en.code)
@@ -277,13 +277,13 @@ class FindEntitySuperclass(object):
 
     def find_entity_extensively(self, argument, quantity=1, entity_tables=None, inventory_pos="", direct_search=True, reverse_search=True, avoid_inventory=False, avoid_equipment=False, avoid_doors=False):
         """
-        Esegue una ricerca standard, di una entit� corrispondente all'argomento
-        passato, il pi� estensivamente possibile.
+        Esegue una ricerca standard, di una entit? corrispondente all'argomento
+        passato, il pi? estensivamente possibile.
         reverse_search serve a indicare se cercare anche le porte dall'altra
         parte o meno.
         """
         if quantity < 0:
-            log.bug("quantity non � un parametro valido: %d" % quantity)
+            log.bug("quantity non ? un parametro valido: %d" % quantity)
             return
 
         # ---------------------------------------------------------------------
@@ -301,7 +301,7 @@ class FindEntitySuperclass(object):
                 else:
                     return target.split_entity(quantity)
 
-        # Prima esegue una ricerca esatta di tutte le entit� attorno
+        # Prima esegue una ricerca esatta di tutte le entit? attorno
         target = self.find_entity(argument, quantity, self.location, entity_tables, [is_same, ], avoid_inventory, avoid_equipment, avoid_doors)
         if target:
             if quantity == 0:
@@ -325,7 +325,7 @@ class FindEntitySuperclass(object):
         if not avoid_doors:
             doors = []
             if self.location.IS_ROOM:
-                # (TD) se ci sar� il sistema di pi� uscite per stanza qui bisogner�
+                # (TD) se ci sar? il sistema di pi? uscite per stanza qui bisogner?
                 # utilizzare una get_exit, per supportare i vari 1.nord 2.nord, al
                 # posto della get_direction (idem per il codice simile sottostante)
                 direction = get_direction(argument, exact=True)
@@ -353,7 +353,7 @@ class FindEntitySuperclass(object):
                 else:
                     return target.split_entity(quantity)
 
-        # Poi esegue una ricerca prefissa delle entit� attorno
+        # Poi esegue una ricerca prefissa delle entit? attorno
         argument = original_argument
 
         if inventory_pos == "first":
@@ -380,7 +380,7 @@ class FindEntitySuperclass(object):
                     return target.split_entity(quantity)
 
         if not avoid_doors:
-            # find_entity_handler_function e doors le deve aver gi� ricavate
+            # find_entity_handler_function e doors le deve aver gi? ricavate
             # precedentemente
             if self.location.IS_ROOM:
                 direction = get_direction(argument, exact=False)
@@ -408,23 +408,23 @@ class FindEntitySuperclass(object):
 
     def find_entity_from_args(self, arg, argument, quantity=1, location=None, entity_tables=None):
         """
-        Serve a trovare un'entit� nell'inventario di self a seconda degli
+        Serve a trovare un'entit? nell'inventario di self a seconda degli
         argomenti passati.
-        Se vi � un solo argomento allora prende quello (look target).
+        Se vi ? un solo argomento allora prende quello (look target).
         Se ve ne sono due allora prende il secondo (look extra target).
         Se si passa il parametro location allora viene utilizzata la find_entity
         e non la find_entity_extensively.
         """
         if not arg:
-            log.bug("arg non � un parametro valido: %r" % arg)
+            log.bug("arg non ? un parametro valido: %r" % arg)
             return None, "", ""
 
         if not argument and argument != "":
-            log.bug("argument non � un parametro valido: %r" % argument)
+            log.bug("argument non ? un parametro valido: %r" % argument)
             return None, "", ""
 
         if quantity < 0:
-            log.bug("quantity non � un parametro valido: %d" % quantity)
+            log.bug("quantity non ? un parametro valido: %d" % quantity)
             return
 
         # -------------------------------------------------------------------------
@@ -451,8 +451,8 @@ class FindEntitySuperclass(object):
         #if not get_direction:
         #    from src.room import get_direction
 
-        # Se il target � una porta aperta ricavata tramite una direzione allora
-        # d� la precedenza all'uscita e non alla porta
+        # Se il target ? una porta aperta ricavata tramite una direzione allora
+        # d? la precedenza all'uscita e non alla porta
         if (target and target.door_type and DOOR.CLOSED not in target.door_type.flags
         and get_direction(target_argument, exact=False) != DIR.NONE):
             return None, target_argument, extra_argument
@@ -465,15 +465,15 @@ class FindEntitySuperclass(object):
 
     def find_equipped_entity(self, argument, location, entity_tables=None, compare_functions=None):
         """
-        Cerca e ritorna una entit� corrispondente con l'argomento passato al
+        Cerca e ritorna una entit? corrispondente con l'argomento passato al
         l'equipaggiamento della locazione voluta.
         """
         if not argument:
-            log.bug("argument non � un parametro valido: %r" % argument)
+            log.bug("argument non ? un parametro valido: %r" % argument)
             return None
 
         if not location:
-            log.bug("location passato non � un parametro valido: %r (argument %r)" % (location, argument))
+            log.bug("location passato non ? un parametro valido: %r (argument %r)" % (location, argument))
             return None
 
         # -------------------------------------------------------------------------
@@ -502,9 +502,9 @@ class FindEntitySuperclass(object):
         if number - 1 > len(founded_entities):
             return None
 
-        # Una volta trovata la lista delle potenziali entit� corrispondenti
+        # Una volta trovata la lista delle potenziali entit? corrispondenti
         # le riordina in maniera tale da tenere in testa quelle relative
-        # alle parti del corpo pi� utilizzate: le mani e le entit� sopra ad altre
+        # alle parti del corpo pi? utilizzate: le mani e le entit? sopra ad altre
         ordered_entities = []
         for e in reversed(founded_entities):
             if PART.WIELD in e.wear_mode:
@@ -520,15 +520,15 @@ class FindEntitySuperclass(object):
                 founded_entities.remove(e)
         ordered_entities += founded_entities
 
-        # (TT) per ora invio il number al posto del counter che supporter� solo
-        # se servir� realmente, e ne dubito visto che queste sono entit�
-        # equipaggiate e quindi la quantity � sempre 1
+        # (TT) per ora invio il number al posto del counter che supporter? solo
+        # se servir? realmente, e ne dubito visto che queste sono entit?
+        # equipaggiate e quindi la quantity ? sempre 1
         return ordered_entities[number - 1]
     #- Fine Funzione -
 
     def find_room(self, argument):
         if not argument:
-            log.bug("argument non � un parametro valido: %r" % argument)
+            log.bug("argument non ? un parametro valido: %r" % argument)
             return None
 
         # ---------------------------------------------------------------------
@@ -589,7 +589,7 @@ class FindEntitySuperclass(object):
 
     def find_proto(self, argument, entity_tables=None, compare_functions=None):
         if not argument:
-            log.bug("argument non � un parametro valido: %r" % argument)
+            log.bug("argument non ? un parametro valido: %r" % argument)
             return None
 
         # -------------------------------------------------------------------------
@@ -609,7 +609,7 @@ class FindEntitySuperclass(object):
         if not compare_functions:
             compare_functions = [is_same, is_prefix, is_suffix, is_infix]
 
-        # Permette la ricerca numerica di una entit�. Per intenderci con
+        # Permette la ricerca numerica di una entit?. Per intenderci con
         # 3.spada verrebbe raccolta la terza spada trovata
         original_argument = argument
         number, argument = number_argument(argument)
@@ -620,9 +620,9 @@ class FindEntitySuperclass(object):
         # Esegue la ricerca tramite le funzioni di compare volute
         for compare_function in compare_functions:
             counter = 1
-            # Cerca tutte le tipologie di entit� nell'ordine passato
+            # Cerca tutte le tipologie di entit? nell'ordine passato
             for entity_type in entity_tables:
-                # Controlla se il dato � compatibile
+                # Controlla se il dato ? compatibile
                 for data in database[entity_type].values():
                     keywords = data.get_keywords(self)
                     if compare_function(argument, keywords) or compare_function(argument, data.code) or compare_function(argument, data.code.split("#")[0]):
@@ -638,23 +638,23 @@ class FindEntitySuperclass(object):
 
 def _find_entity_handler(entity, argument, list_to_search, number, compare_function, avoid_inventory=False, avoid_equipment=True, avoid_doors=False):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return None
 
     if not argument:
-        log.bug("argument non � un parametro valido: %r" % argument)
+        log.bug("argument non ? un parametro valido: %r" % argument)
         return None
 
     if not list_to_search and list_to_search != []:
-        log.bug("list_to_search non � valido: %r" % list_to_search)
+        log.bug("list_to_search non ? valido: %r" % list_to_search)
         return None
 
     if number <= 0:
-        log.bug("number non � un parametro valido: %r" % number)
+        log.bug("number non ? un parametro valido: %r" % number)
         return None
 
     if not compare_function:
-        log.bug("compare_function non � un parametro valido: %r" % compare_function)
+        log.bug("compare_function non ? un parametro valido: %r" % compare_function)
         return None
 
     # -------------------------------------------------------------------------
@@ -687,27 +687,27 @@ def _find_entity_handler(entity, argument, list_to_search, number, compare_funct
 def _find_entity_handler_for_admin(entity, argument, list_to_search, number, compare_function, avoid_inventory=False, avoid_equipment=True, avoid_doors=False):
     """
     Per velocizzare la find_entity, che con parametro location passato a Null
-    pu� arrivare a rallentamenti notevoli, � stata creata questa copia dalla
+    pu? arrivare a rallentamenti notevoli, ? stata creata questa copia dalla
     _find_entity_handler con un check aggiuntivo che riguarda solo gli admin.
     """
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return None
 
     if not argument:
-        log.bug("argument non � un parametro valido: %r" % argument)  # (TT) questo test potrebbe non servire
+        log.bug("argument non ? un parametro valido: %r" % argument)  # (TT) questo test potrebbe non servire
         return None
 
     if not list_to_search and list_to_search != []:
-        log.bug("list_to_search non � valido: %r" % list_to_search)
+        log.bug("list_to_search non ? valido: %r" % list_to_search)
         return None
 
     if number <= 0:
-        log.bug("number non � un parametro valido: %r" % number)
+        log.bug("number non ? un parametro valido: %r" % number)
         return None
 
     if not compare_function:
-        log.bug("compare_function non � un parametro valido: %r" % compare_function)
+        log.bug("compare_function non ? un parametro valido: %r" % compare_function)
         return None
 
     # -------------------------------------------------------------------------
@@ -739,22 +739,22 @@ def _find_entity_handler_for_admin(entity, argument, list_to_search, number, com
 
 def _find_entities_handler(entity, argument, list_to_search, compare_function, avoid_inventory, avoid_equipment, avoid_doors):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return []
 
     if not argument:
-        log.bug("argument non � un parametro valido: %r" % argument)
+        log.bug("argument non ? un parametro valido: %r" % argument)
         return []
 
     if not list_to_search and list_to_search != []:
-        log.bug("list_to_search non � valido: %r" % list_to_search)
+        log.bug("list_to_search non ? valido: %r" % list_to_search)
         return []
 
     if not compare_function:
-        log.bug("compare_function non � un parametro valido: %r" % compare_function)
+        log.bug("compare_function non ? un parametro valido: %r" % compare_function)
         return []
 
-    # avoid_inventory e avoid_equipment e avoid_doors hanno valore di verit�
+    # avoid_inventory e avoid_equipment e avoid_doors hanno valore di verit?
 
     # -------------------------------------------------------------------------
 
@@ -787,23 +787,23 @@ def _find_entities_handler(entity, argument, list_to_search, compare_function, a
 def _find_entities_handler_for_admin(entity, argument, list_to_search, compare_function, avoid_inventory=False, avoid_equipment=True, avoid_doors=False):
     """
     Per velocizzare la find_entity, che con parametro location passato a Null
-    pu� arrivare a rallentamenti notevoli, � stata creata questa copia dalla
+    pu? arrivare a rallentamenti notevoli, ? stata creata questa copia dalla
     _find_entity_handler con un check aggiuntivo che riguarda solo gli admin.
     """
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return []
 
     if not argument:
-        log.bug("argument non � un parametro valido: %r" % argument)  # (TT) questo test potrebbe non servire
+        log.bug("argument non ? un parametro valido: %r" % argument)  # (TT) questo test potrebbe non servire
         return []
 
     if not list_to_search and list_to_search != []:
-        log.bug("list_to_search non � valido: %r" % list_to_search)
+        log.bug("list_to_search non ? valido: %r" % list_to_search)
         return []
 
     if not compare_function:
-        log.bug("compare_function non � un parametro valido: %r" % compare_function)
+        log.bug("compare_function non ? un parametro valido: %r" % compare_function)
         return []
 
     # -------------------------------------------------------------------------

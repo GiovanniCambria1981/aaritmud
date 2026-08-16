@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 """
-Modulo contenente la classe contenente tutti i metodi di act, cioè una
+Modulo contenente la classe contenente tutti i metodi di act, cioÃ¨ una
 funzione che invia dell'output ai giocatori che rapprensentano delle azioni
-le cui stringhe sono composte da dei tag $ che rappresentano varie entità.
+le cui stringhe sono composte da dei tag $ che rappresentano varie entitÃ .
 """
 
 #= IMPORT ======================================================================
@@ -26,25 +26,25 @@ class Act(object):
     # (TD) devo implementare ancora la show_on_location
     def act(self, message, to, target=None, aux1=None, aux2=None, show_on_location=False, send_to_location=None, avoid_prompt=False, break_line=True):
         """
-        Serve ad inviare un messaggio d'azione di un'entità a tutte le entità
+        Serve ad inviare un messaggio d'azione di un'entitÃ  a tutte le entitÃ 
         bersaglio che possono vedere l'azione.
-        Il messaggio può contenere determinati tipi di codice che vanno
+        Il messaggio puÃ² contenere determinati tipi di codice che vanno
         sostituiti secondo specifiche regole di template.
         Se si passa il parametro to come TO.OTHERS e il parametro target valido
         allora TO.OTHERS funziona come lo smaug-like TO.NOTARGET, ovvero invia
         i messaggi a tutti gli altri tranne che al target.
         """
         if not message:
-            log.bug("message non è un parametro valido: %r (to: %r, target: %r)" % (
+            log.bug("message non Ã¨ un parametro valido: %r (to: %r, target: %r)" % (
                 message, to.code, target.code if target else "None"))
             return
 
         if not to:
-            log.bug("to non è un parametro valido: %r" % to)
+            log.bug("to non Ã¨ un parametro valido: %r" % to)
             return
 
         if not target and to == TO.TARGET:
-            log.bug("target non è un parametro valido %r con to %r" % (target, to.code))
+            log.bug("target non Ã¨ un parametro valido %r con to %r" % (target, to.code))
             return
 
         # ---------------------------------------------------------------------
@@ -56,7 +56,7 @@ class Act(object):
         if hasattr(self, "account") and self.account and OPTION.LESS_COLORS in self.account.options:
             message = remove_colors(message)
 
-        # (TD) Se il mob o l'oggetto devono rimanere segreti e se to non è TO_CHAR allora ritorna
+        # (TD) Se il mob o l'oggetto devono rimanere segreti e se to non Ã¨ TO_CHAR allora ritorna
         pass
 
         if send_to_location:
@@ -64,7 +64,7 @@ class Act(object):
         else:
             entity_location = self.location
         if not entity_location and to not in (TO.ENTITY, TO.TARGET):
-            log.bug("entity_location non è valida per entity %s" % self.code)
+            log.bug("entity_location non Ã¨ valida per entity %s" % self.code)
             return
 
         # A seconda dell'argomento passato 'to' prepara una lista di others a
@@ -80,8 +80,8 @@ class Act(object):
             elif not send_to_location:
                 log.bug("self %s not nella lista others composta da %d elementi (location=%s) (to=%s): %s (%s %s %d)" % (
                     self.code, len(others), entity_location, to, message, FLAG.EXTRACTED in self.flags, FLAG.WEAKLY_EXTRACTED in self.flags, self.quantity))
-            # Non è un errore che target non sia valido qui, dipende se il
-            # TO.OTHERS è inteso a tutti, oppure a tutti tranne il target,
+            # Non Ã¨ un errore che target non sia valido qui, dipende se il
+            # TO.OTHERS Ã¨ inteso a tutti, oppure a tutti tranne il target,
             # nell'ultimo caso si passa appunto il target
             if target in others:
                 others.remove(target)
@@ -90,7 +90,7 @@ class Act(object):
             if aux2 in others:
                 others.remove(aux2)
         elif to == TO.ADMINS:
-            # (TD) ma qui per lo switch non è che dovrò creare una lista others
+            # (TD) ma qui per lo switch non Ã¨ che dovrÃ² creare una lista others
             # uguale a quella dell'elemento TO.OTHERS?
             others = list(entity_location.players)
             if self in others:
@@ -105,7 +105,7 @@ class Act(object):
             return
 
         # Prepara il messaggio sostituendo i tag non dipendenti dal punto di
-        # vista di entità che lo leggeranno
+        # vista di entitÃ  che lo leggeranno
         if "$" in message:
             message = self.replace_act_tags(message, target=target)
 
@@ -125,7 +125,7 @@ class Act(object):
                 if other.trust <= TRUST.PLAYER:
                     continue
                 else:
-                    other.send_to_admin("\nAnche se %s è in incognito vedi l'act" % self.name, break_line=False)
+                    other.send_to_admin("\nAnche se %s Ã¨ in incognito vedi l'act" % self.name, break_line=False)
 
             # Salta gli other che stanno dormendo, a meno che non siano admin
             if other.IS_ACTOR and other.position <= POSITION.SLEEP:
@@ -163,7 +163,7 @@ class Act(object):
         se viene
         """
         if not message:
-            log.bug("message non è un parametro valido: %s" % message)
+            log.bug("message non Ã¨ un parametro valido: %s" % message)
             return ""
 
         # ---------------------------------------------------------------------
@@ -231,7 +231,7 @@ class Act(object):
 
         # Tag relativi a mani e piedi della razza di self
         # (TT) pensare se spostare questa parte nella replace_act_tags_name
-        # per non far vedere che tipo di mani o piedi ha un'entità invisibile
+        # per non far vedere che tipo di mani o piedi ha un'entitÃ  invisibile
         # (TD) per ora le parti del corpo non hanno colori, quindi basta la
         # capitalize, fare attenzione a possibili problemi futuri nel qual caso
         # si utilizzino i colori
@@ -701,7 +701,7 @@ class Act(object):
 
     def replace_act_tags_name(self, message, looker=None, target=None, aux1=None, aux2=None, send_to_location=None, formatted_name=False, use_number_argument=True):
         if not message:
-            log.bug("message non è un parametro valido: %r" % message)
+            log.bug("message non Ã¨ un parametro valido: %r" % message)
             return ""
 
         # ---------------------------------------------------------------------
@@ -710,9 +710,9 @@ class Act(object):
             return message
 
         if "$n" in message:
-            # (TD) se si fa un send_to_location allora il soggetto è lontano, a
-            # meno che non sia una porta, in futuro probabilmente imposterò
-            # almeno la location della porta, quindi questa parte cambierà
+            # (TD) se si fa un send_to_location allora il soggetto Ã¨ lontano, a
+            # meno che non sia una porta, in futuro probabilmente imposterÃ²
+            # almeno la location della porta, quindi questa parte cambierÃ 
             if send_to_location and self.location:
                 if ". $n" in message:
                     message = message.replace(". $n", ". Qualcuno")
@@ -844,7 +844,7 @@ class Act(object):
             if "?\n$l" in message:
                 message = message.replace("?\n$l", "?\n%s" % color_first_upper(name))
             if "in $l" in message and not self.location.IS_PLAYER:
-                # (TD) se name è il nome di persona allora il replace è
+                # (TD) se name Ã¨ il nome di persona allora il replace Ã¨
                 # semplicemente "in" come il check soprastante relativo all'IS_PLAYER
                 genre = GRAMMAR.FEMININE if self.location.sex == SEX.FEMALE else GRAMMAR.MASCULINE
                 message = message.replace("in $l", clean_and_add_article(name, GRAMMAR.PREPOSITION_IN, genre=genre))
@@ -918,7 +918,7 @@ class Act(object):
             else:
                 message = message.replace("$P", name)
 
-        # Ritorna i nomi in elenco delle entità visibili in una locazione.
+        # Ritorna i nomi in elenco delle entitÃ  visibili in una locazione.
         # Nonostante la $i sia minuscola fa riferimento sempre a target.
         if target and "$i" in message:
             contains = []
@@ -959,7 +959,7 @@ class Act(object):
             else:
                 message = message.replace("$i", contains)
 
-        # Ritorna il nome dell'entità che pesa di più in una locazione
+        # Ritorna il nome dell'entitÃ  che pesa di piÃ¹ in una locazione
         if target and "$I" in message:
             weights = []
             list_of_entites = target.get_list_of_entities(looker)
@@ -1027,7 +1027,7 @@ class Act(object):
 
     def sex_replacer(self, argument, is_subject=True):
         if not argument:
-            log.bug("argument non è un parametro valido: %r" % argument)
+            log.bug("argument non Ã¨ un parametro valido: %r" % argument)
             return ""
 
         # -------------------------------------------------------------------------
@@ -1049,13 +1049,13 @@ class PersistentAct(object):
     """
     La persistenza dell'azione.
     Praticamente si salva le informazioni di un messaggio di act relativo una
-    entità, ed eventualmente anche il corrispettivo messaggio di act per gli
-    altri e/o per il target, e lo invia al posto della long dell'entità che
+    entitÃ , ed eventualmente anche il corrispettivo messaggio di act per gli
+    altri e/o per il target, e lo invia al posto della long dell'entitÃ  che
     ha eseguito l'azione se un giocatore entro un limite di tempo abbastanza
-    breve eseguirà il look dopo l'azione.
+    breve eseguirÃ  il look dopo l'azione.
     """
     def __init__(self, entity=None):
-        self.entity_message       = ""  # Messaggio di act entità utilizzato come long
+        self.entity_message       = ""  # Messaggio di act entitÃ  utilizzato come long
         self.entity_args          = []  # Argomenti da passare ai metodi di act per il messaggio entity
         self.others_message       = ""  # Messaggio di act others utilizzato come long
         self.others_args          = []  # Argomenti da passare ai metodi di act per il messaggio others
@@ -1114,7 +1114,7 @@ class PersistentAct(object):
     #- Fine Metodo -
 
     def destruction(self, entity):
-        # È normale che entity qui sia None, significa che è stato estratto
+        # Ãˆ normale che entity qui sia None, significa che Ã¨ stato estratto
         # prima che la deferred scattasse e impostato poi a None dalle funzioni
         # di deferred
         if not entity:
@@ -1128,14 +1128,14 @@ class PersistentAct(object):
 
 def replace_act_tags_translate(message, replace_act_tag, entity=None):
     if not message:
-        log.bug("message non è un parametro valido: %r" % message)
+        log.bug("message non Ã¨ un parametro valido: %r" % message)
         return
 
     if not replace_act_tag:
-        log.bug("message non è un parametro valido: %r" % replace_act_tag)
+        log.bug("message non Ã¨ un parametro valido: %r" % replace_act_tag)
         return
 
-    # Se entity non è un parametro valido allora il giocatore probabilmente
+    # Se entity non Ã¨ un parametro valido allora il giocatore probabilmente
     # si trova in una pagina web non connessa al gioco
 
     # -------------------------------------------------------------------------
@@ -1148,7 +1148,7 @@ def replace_act_tags_translate(message, replace_act_tag, entity=None):
         char_position = t_position + 2
         input = ""
         while char_position < len(message):
-            if message[char_position] in (" \n\r\t.,;:!?-_'=)(/&%$£\"[]<>#@°§+*\\{}~"):
+            if message[char_position] in (" \n\r\t.,;:!?-_'=)(/&%$Â£\"[]<>#@Â°Â§+*\\{}~"):
                 break
             input += message[char_position]
             char_position += 1

@@ -30,7 +30,7 @@ class BackupDbPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.MASTER
     MINIMUM_TRUST_ON_POST = TRUST.MASTER
 
-    PAGE_TEMPLATE = string.Template(open("src/views/backup_db.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/backup_db.view", encoding="utf-8-sig").read())
 
     NEW_PAGE = True
 

@@ -33,39 +33,39 @@ class OpenableGenericType(object):
     def __init__(self):
         self.comment                = ""
         self.key_code               = ""   # Codice della chiave che serve ad aprire la porta
-        self.pick_lock_difficulty   = 0    # Livello di difficolt‡ per il pick lock
-        self.entity_open_message    = ""   # Messaggio d'apertura stile act all'entit‡ che apre
-        self.target_open_message    = ""   # Messaggio d'apertura stile act all'entit‡ door
+        self.pick_lock_difficulty   = 0    # Livello di difficolt√† per il pick lock
+        self.entity_open_message    = ""   # Messaggio d'apertura stile act all'entit√† che apre
+        self.target_open_message    = ""   # Messaggio d'apertura stile act all'entit√† door
         self.others_open_message    = ""   # Messaggio d'apertura stile act a tutti gli altri
-        self.entity_close_message   = ""   # Messaggio di chiusura stile act all'entit‡ che apre
-        self.target_close_message   = ""   # Messaggio di chiusura stile act all'entit‡ door
+        self.entity_close_message   = ""   # Messaggio di chiusura stile act all'entit√† che apre
+        self.target_close_message   = ""   # Messaggio di chiusura stile act all'entit√† door
         self.others_close_message   = ""   # Messaggio di chiusura stile act a tutti gli altri
-        self.entity_lock_message    = ""   # Messaggio di blocco(key) stile act all'entit‡ che apre
-        self.target_lock_message    = ""   # Messaggio di blocco(key) stile act all'entit‡ door
+        self.entity_lock_message    = ""   # Messaggio di blocco(key) stile act all'entit√† che apre
+        self.target_lock_message    = ""   # Messaggio di blocco(key) stile act all'entit√† door
         self.others_lock_message    = ""   # Messaggio di blocco(key) stile act a tutti gli altri
-        self.entity_unlock_message  = ""   # Messaggio di sblocco(key) stile act all'entit‡ che apre
-        self.target_unlock_message  = ""   # Messaggio di sblocco(key) stile act all'entit‡ door
+        self.entity_unlock_message  = ""   # Messaggio di sblocco(key) stile act all'entit√† che apre
+        self.target_unlock_message  = ""   # Messaggio di sblocco(key) stile act all'entit√† door
         self.others_unlock_message  = ""   # Messaggio di sblocco(key) stile act a tutti gli altri
-        self.entity_eatkey_message  = ""   # Messaggio di distruzione(key) stile act all'entit‡ che sblocca
+        self.entity_eatkey_message  = ""   # Messaggio di distruzione(key) stile act all'entit√† che sblocca
         self.others_eatkey_message  = ""   # Messaggio di distruzione(key) stile act a tutti gli altri
         self.target_eatkey_message  = ""   # Messaggio di distruzione(key) stile act alla chiave
-        self.entity_unbolt_message  = ""   # Messaggio di svincolo(bolt) stile act all'entit‡ che apre
-        self.target_unbolt_message  = ""   # Messaggio di svincolo(bolt) stile act all'entit‡ door
+        self.entity_unbolt_message  = ""   # Messaggio di svincolo(bolt) stile act all'entit√† che apre
+        self.target_unbolt_message  = ""   # Messaggio di svincolo(bolt) stile act all'entit√† door
         self.others_unbolt_message  = ""   # Messaggio di svincolo(bolt) stile act a tutti gli altri
-        self.entity_bolt_message    = ""   # Messaggio di blocco(bolt) stile act all'entit‡ che apre
-        self.target_bolt_message    = ""   # Messaggio di blocco(bolt) stile act all'entit‡ door
+        self.entity_bolt_message    = ""   # Messaggio di blocco(bolt) stile act all'entit√† che apre
+        self.target_bolt_message    = ""   # Messaggio di blocco(bolt) stile act all'entit√† door
         self.others_bolt_message    = ""   # Messaggio di blocco(bolt) stile act a tutti gli altri
     #- Fine Inizializzazione -
 
     def get_error_message(self, entity):
         if self.key_code and self.key_code not in database["proto_items"]:
-            return "key_code non Ë un codice di oggetto prototipo valido: %s" % self.key_code
+            return "key_code non √® un codice di oggetto prototipo valido: %s" % self.key_code
         elif self.pick_lock_difficulty < 0:
-            return "pick_lock_difficulty non puÚ essere negativo: %s" % self.pick_lock_difficulty
+            return "pick_lock_difficulty non pu√≤ essere negativo: %s" % self.pick_lock_difficulty
 
-        # L'esistenza dei diversi messaggi Ë slegata tra loro, ovvero possono
+        # L'esistenza dei diversi messaggi √® slegata tra loro, ovvero possono
         # essere inizializzati tutti come solo uno di loro o, naturalmente,
-        # nessuno, quindi non vi Ë bisogno di controllarli
+        # nessuno, quindi non vi √® bisogno di controllarli
 
         return ""
     #- Fine Metodo -
@@ -134,15 +134,15 @@ class OpenableGenericType(object):
 
     def send_open_messages(self, entity, target, verbs, direction=None, destination_room=None, target_on_destination=None):
         if not entity:
-            log.bug("entity non Ë un parametro valido: %r" % entity)
+            log.bug("entity non √® un parametro valido: %r" % entity)
             return
 
         if not target:
-            log.bug("target non Ë un parametro valido: %r" % target)
+            log.bug("target non √® un parametro valido: %r" % target)
             return
 
         if not verbs:
-            log.bug("verbs non Ë un parametro valido: %r" % verbs)
+            log.bug("verbs non √® un parametro valido: %r" % verbs)
             return False
 
         # ---------------------------------------------------------------------
@@ -199,15 +199,15 @@ class OpenableGenericType(object):
 
     def send_close_messages(self, entity, target, verbs, direction=None, destination_room=None, target_on_destination=None):
         if not entity:
-            log.bug("entity non Ë un parametro valido: %r" % entity)
+            log.bug("entity non √® un parametro valido: %r" % entity)
             return
 
         if not target:
-            log.bug("target non Ë un parametro valido: %r" % target)
+            log.bug("target non √® un parametro valido: %r" % target)
             return
 
         if not verbs:
-            log.bug("verbs non Ë un parametro valido: %r" % verbs)
+            log.bug("verbs non √® un parametro valido: %r" % verbs)
             return False
 
         # ---------------------------------------------------------------------
@@ -266,15 +266,15 @@ class OpenableGenericType(object):
 
     def send_lock_messages(self, entity, target, verbs, direction=None, destination_room=None):
         if not entity:
-            log.bug("entity non Ë un parametro valido: %r" % entity)
+            log.bug("entity non √® un parametro valido: %r" % entity)
             return
 
         if not target:
-            log.bug("target non Ë un parametro valido: %r" % target)
+            log.bug("target non √® un parametro valido: %r" % target)
             return
 
         if not verbs:
-            log.bug("verbs non Ë un parametro valido: %r" % verbs)
+            log.bug("verbs non √® un parametro valido: %r" % verbs)
             return False
 
         # ---------------------------------------------------------------------
@@ -331,15 +331,15 @@ class OpenableGenericType(object):
 
     def send_unlock_messages(self, entity, target, verbs, direction=None, destination_room=None):
         if not entity:
-            log.bug("entity non Ë un parametro valido: %r" % entity)
+            log.bug("entity non √® un parametro valido: %r" % entity)
             return
 
         if not target:
-            log.bug("target non Ë un parametro valido: %r" % target)
+            log.bug("target non √® un parametro valido: %r" % target)
             return
 
         if not verbs:
-            log.bug("verbs non Ë un parametro valido: %r" % verbs)
+            log.bug("verbs non √® un parametro valido: %r" % verbs)
             return False
 
         # ---------------------------------------------------------------------
@@ -398,11 +398,11 @@ class OpenableGenericType(object):
 
     def send_eatkey_messages(self, entity, target, key, direction=None, destination_room=None):
         if not entity:
-            log.bug("entity non Ë un parametro valido: %r" % entity)
+            log.bug("entity non √® un parametro valido: %r" % entity)
             return
 
         if not target:
-            log.bug("target non Ë un parametro valido: %r" % target)
+            log.bug("target non √® un parametro valido: %r" % target)
             return
 
         # ---------------------------------------------------------------------
@@ -446,15 +446,15 @@ class OpenableGenericType(object):
 
     def send_bolt_messages(self, entity, target, verbs, direction=None, destination_room=None):
         if not entity:
-            log.bug("entity non Ë un parametro valido: %r" % entity)
+            log.bug("entity non √® un parametro valido: %r" % entity)
             return
 
         if not target:
-            log.bug("target non Ë un parametro valido: %r" % target)
+            log.bug("target non √® un parametro valido: %r" % target)
             return
 
         if not verbs:
-            log.bug("verbs non Ë un parametro valido: %r" % verbs)
+            log.bug("verbs non √® un parametro valido: %r" % verbs)
             return False
 
         # ---------------------------------------------------------------------
@@ -511,15 +511,15 @@ class OpenableGenericType(object):
 
     def send_unbolt_messages(self, entity, target, verbs, direction=None, destination_room=None):
         if not entity:
-            log.bug("entity non Ë un parametro valido: %r" % entity)
+            log.bug("entity non √® un parametro valido: %r" % entity)
             return
 
         if not target:
-            log.bug("target non Ë un parametro valido: %r" % target)
+            log.bug("target non √® un parametro valido: %r" % target)
             return
 
         if not verbs:
-            log.bug("verbs non Ë un parametro valido: %r" % verbs)
+            log.bug("verbs non √® un parametro valido: %r" % verbs)
             return False
 
         # ---------------------------------------------------------------------

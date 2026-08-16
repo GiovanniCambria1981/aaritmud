@@ -62,18 +62,46 @@ class WebResource(resource.Resource):
     MINIMUM_TRUST_ON_GET       = TRUST.NONE
     MINIMUM_TRUST_ON_POST      = TRUST.NONE
 
-    GOOGLE_ANALYTICS_TEMPLATE  = string.Template(open("src/views/__google_analytics__.view").read())
-    HEADER_TEMPLATE            = string.Template(open("src/views/__header__.view").read())
-    FOOTER_TEMPLATE            = string.Template(open("src/views/__footer__.view").read())
-    MENU_TEMPLATE              = string.Template(open("src/views/__menu__.view").read())
-    SQUARE_TEMPLATE            = string.Template(open("src/views/__square__.view").read())
-    NO_SHOW_SQUARE_TEMPLATE    = string.Template(open("src/views/__no_show_square__.view").read())
-    WEB_MENU_LIST              = [_line.strip() for _line in open("data/web_menu.list"].readlines())
+    GOOGLE_ANALYTICS_TEMPLATE  = string.Template(open("src/views/__google_analytics__.view", encoding="utf-8-sig").read())
+    HEADER_TEMPLATE            = string.Template(open("src/views/__header__.view", encoding="utf-8-sig").read())
+    FOOTER_TEMPLATE            = string.Template(open("src/views/__footer__.view", encoding="utf-8-sig").read())
+    MENU_TEMPLATE              = string.Template(open("src/views/__menu__.view", encoding="utf-8-sig").read())
+    SQUARE_TEMPLATE            = string.Template(open("src/views/__square__.view", encoding="utf-8-sig").read())
+    NO_SHOW_SQUARE_TEMPLATE    = string.Template(open("src/views/__no_show_square__.view", encoding="utf-8-sig").read())
+    WEB_MENU_LIST              = [_line.strip() for _line in open("data/web_menu.list").readlines()]
 
     NEW_PAGE = False
 
     def render(self, request):
         starting_time = time.time()
+        request.setHeader(b"content-type", b"text/html; charset=utf-8")
+
+        # Twisted moderno espone metodo, argomenti e header come bytes/API
+        # strutturate; i controller Aarit si aspettano le vecchie stringhe.
+        if isinstance(request.method, bytes):
+            request.method = request.method.decode("ascii")
+
+        normalized_args = {}
+        for key, values in request.args.items():
+            if isinstance(key, bytes):
+                key = key.decode("utf-8")
+            normalized_args[key] = [
+                value.decode("utf-8") if isinstance(value, bytes) else value
+                for value in values
+            ]
+        request.args = normalized_args
+
+        if not hasattr(request, "received_headers"):
+            request.received_headers = {}
+            for name, values in request.requestHeaders.getAllRawHeaders():
+                if isinstance(name, bytes):
+                    name = name.decode("ascii")
+                decoded_values = [
+                    value.decode("utf-8") if isinstance(value, bytes) else value
+                    for value in values
+                ]
+                if decoded_values:
+                    request.received_headers[name.lower()] = decoded_values[-1]
 
         # Ricava, se esiste, la connessione dalla sessione
         session = request.getSession()
@@ -161,9 +189,9 @@ class WebResource(resource.Resource):
                 result = result.replace("${milliseconds}", milliseconds)
 
             if "${bytes}" in result:
-                bytes = len(result)
+                page_bytes = len(result)
                 # Avverte di diminuire la grandezza della pagina
-                if (bytes > 100000
+                if (page_bytes > 100000
                 and not self.ACCOUNT_MUST_EXIST_IN_GET
                 and not self.ACCOUNT_MUST_EXIST_IN_POST
                 and not self.PLAYER_MUST_EXIST_IN_GET
@@ -171,12 +199,12 @@ class WebResource(resource.Resource):
                 and self.MINIMUM_TRUST_ON_GET == TRUST.NONE
                 and self.MINIMUM_TRUST_ON_POST == TRUST.NONE):
                     log.bug("Attenzione! Google indicizzerà solo i primi 100 Kb della pagina pubblica %s" % request.uri)
-                result = result.replace("${bytes}", commafy(bytes))
+                result = result.replace("${bytes}", commafy(page_bytes))
 
-            return result
+            return result.encode("utf-8")
         else:
             # Normalmente accade solo nei redirect e quindi non è un errore
-            return ""
+            return b""
     #- Fine Metodo -
 
     def render_HEAD(self, request, conn):
@@ -218,7 +246,7 @@ class WebResource(resource.Resource):
 
         if config.google_analytics_ua:
             if config.reload_web_pages:
-                self.GOOGLE_ANALYTICS_TEMPLATE = string.Template(open("src/views/__google_analytics__.view").read())
+                self.GOOGLE_ANALYTICS_TEMPLATE = string.Template(open("src/views/__google_analytics__.view", encoding="utf-8-sig").read())
             mapping = {"google_analytics_ua" : config.google_analytics_ua}
             google_analytics = self.GOOGLE_ANALYTICS_TEMPLATE.safe_substitute(mapping)
         else:
@@ -231,7 +259,7 @@ class WebResource(resource.Resource):
                    "allow_web_robots"      : allow_web_robots,
                    "google_analytics"  : google_analytics}
         if config.reload_web_pages:
-            self.HEADER_TEMPLATE = string.Template(open("src/views/__header__.view").read())
+            self.HEADER_TEMPLATE = string.Template(open("src/views/__header__.view", encoding="utf-8-sig").read())
         return self.HEADER_TEMPLATE.safe_substitute(mapping)
     #- Fine Metodo -
 
@@ -247,8 +275,8 @@ class WebResource(resource.Resource):
         Crea il menù a sinistra nelle pagine normali del sito.
         """
         if config.reload_web_pages:
-            self.MENU_TEMPLATE = string.Template(open("src/views/__menu__.view").read())
-            self.WEB_MENU_LIST = [_line.strip() for _line in open("data/web_menu.list"].readlines())
+            self.MENU_TEMPLATE = string.Template(open("src/views/__menu__.view", encoding="utf-8-sig").read())
+            self.WEB_MENU_LIST = [_line.strip() for _line in open("data/web_menu.list").readlines()]
 
         page_url = str(request.URLPath()).rsplit("/", 1)[-1]
         if not page_url:
@@ -282,7 +310,7 @@ class WebResource(resource.Resource):
             # (TD) spostare i link alla fine della lista del menù, così da
             # separare un numero finito di volte e supportare eventuali link
             # con ; all'interno
-            pieces = [_line.strip() for _line in line.split("|"])
+            pieces = [piece.strip() for piece in line.split("|")]
             if len(pieces) == 1:
                 log.bug("C'è una linea errata nel file con le voci del menù web: %s" % line)
                 continue
@@ -383,13 +411,13 @@ class WebResource(resource.Resource):
         """
         if config.max_square_messages == 0:
             if config.reload_web_pages:
-                self.NO_SHOW_SQUARE_TEMPLATE = string.Template(open("src/views/__no_show_square__.view").read())
+                self.NO_SHOW_SQUARE_TEMPLATE = string.Template(open("src/views/__no_show_square__.view", encoding="utf-8-sig").read())
             return self.NO_SHOW_SQUARE_TEMPLATE.safe_substitute({})
 
         # ---------------------------------------------------------------------
 
         if config.reload_web_pages:
-            self.SQUARE_TEMPLATE = string.Template(open("src/views/__square__.view").read())
+            self.SQUARE_TEMPLATE = string.Template(open("src/views/__square__.view", encoding="utf-8-sig").read())
 
         # (TD) aggiungerne delle altre per migliorare graficamente il sito
         image_paths = ("images/bg.jpg", )
@@ -409,7 +437,7 @@ class WebResource(resource.Resource):
                    "engine_version" : config.engine_version,
                    "server_name"    : config.server_name}
         if config.reload_web_pages:
-            self.FOOTER_TEMPLATE = string.Template(open("src/views/__footer__.view").read())
+            self.FOOTER_TEMPLATE = string.Template(open("src/views/__footer__.view", encoding="utf-8-sig").read())
         return self.FOOTER_TEMPLATE.safe_substitute(mapping)
     #- Fine Metodo -
 
@@ -583,7 +611,7 @@ class EditResource(WebResource):
                     if row.string_action:
                         # (TD) come diamine si chiamava un metodo in maniera pulita? forse con globals o locals
                         pass
-                elif type(attribute) in (int, long):
+                elif type(attribute) is int:
                     value = int(request.args[row.attr][0])
                 elif type(attribute) == list:
                     value = int(request.args[row.attr][0])

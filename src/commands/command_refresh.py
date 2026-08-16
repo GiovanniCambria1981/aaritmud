@@ -13,7 +13,7 @@ from src.utility  import copy_existing_attributes
 
 #= COSTANTI ====================================================================
 
-# Extras viene copiato a parte poichÈ Ë una classe
+# Extras viene copiato a parte poich√© √® una classe
 REFRESHABLE_ATTR_NAMES = ("keywords_name", "keywords_short", "keywords_short_night",
                           "name", "short", "short_night", "long", "long_night",
                           "descr", "descr_night", "descr_hearing", "descr_hearing_night",
@@ -25,7 +25,7 @@ REFRESHABLE_ATTR_NAMES = ("keywords_name", "keywords_short", "keywords_short_nig
 
 def command_refresh(entity, argument=""):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -34,8 +34,8 @@ def command_refresh(entity, argument=""):
         if not data.prototype:
             log.bug("data %s senza il proprio prototype valido: %r" % (data.code, data.prototype))
             continue
-        # (TD) Evita le entit‡ con owner che Ë un player, perÚ Ë un placebo,
-        # in realt‡ bisognerebbe proprio diversificare i restring fatti dagli
+        # (TD) Evita le entit√† con owner che √® un player, per√≤ √® un placebo,
+        # in realt√† bisognerebbe proprio diversificare i restring fatti dagli
         # admin dalle descrizioni vere e proprie con un sistema identificativo
         # fatto ad uopo
         if data.owner and data.owner().code in database["players"]:
@@ -54,7 +54,7 @@ def command_refresh(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

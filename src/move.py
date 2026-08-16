@@ -2,7 +2,7 @@
 
 """
 Modulo che contiene il codice relativo il movimento direzione di base delle
-entit‡.
+entit√†.
 """
 
 #= IMPORT ======================================================================
@@ -28,14 +28,14 @@ from src.commands.command_open import command_open
 class EntityMoveSuperclass(object):
     def move(self, direction, behavioured=False, following=False, fleeing=False, fall_number=0):
         """
-        Se possibile muove l'entit‡ verso la direzione voluta.
+        Se possibile muove l'entit√† verso la direzione voluta.
         """
         if not direction:
-            log.bug("direction non Ë un parametro valido: %r" % direction)
+            log.bug("direction non √® un parametro valido: %r" % direction)
             return False
 
         if fall_number < 0 or fall_number > 10000:
-            log.bug("fall_number non Ë un parametro valido: %d" % fall_number)
+            log.bug("fall_number non √® un parametro valido: %d" % fall_number)
             return False
 
         # ---------------------------------------------------------------------
@@ -65,9 +65,9 @@ class EntityMoveSuperclass(object):
             if mount_drunk:
                 mount_drunk_direction.randomize()
 
-        # Se non Ë possibile andare da quella parte e non vi Ë nemmeno una porta
+        # Se non √® possibile andare da quella parte e non vi √® nemmeno una porta
         # stampa dei messaggi appositi.
-        # (TD) visto che per ora non ci si puÚ ubriacare evito i messaggi per il drunk walking
+        # (TD) visto che per ora non ci si pu√≤ ubriacare evito i messaggi per il drunk walking
         if drunk and not mount_drunk:
             if drunk_direction not in self.location.exits or EXIT.DIGGABLE in self.location.exits[drunk_direction].flags:
                 return False
@@ -85,31 +85,31 @@ class EntityMoveSuperclass(object):
                 return False
         else:
             if direction not in self.location.exits or EXIT.DIGGABLE in self.location.exits[direction].flags:
-                self.send_output("Non ti Ë possibile andare verso %s." % direction)
+                self.send_output("Non ti √® possibile andare verso %s." % direction)
                 return False
 
-        # Se l'uscita ha una porta e questa Ë chiusa blocca il percorso o
+        # Se l'uscita ha una porta e questa √® chiusa blocca il percorso o
         # controlla se sia per caso una finestra
         door = self.location.get_door(direction)
         if door:
-            # Se l'uscita Ë una finestra non c'Ë modo di oltrepassarla a meno
+            # Se l'uscita √® una finestra non c'√® modo di oltrepassarla a meno
             # che non sia una porta-finestra
-            # (TD) Ë un controllo da effettuare quando avrÚ creato gli oggetti, per ora fatto alla buona
+            # (TD) √® un controllo da effettuare quando avr√≤ creato gli oggetti, per ora fatto alla buona
             if door.door_type and DOOR.WINDOW in door.door_type.flags:
-                self.send_output("Non c'Ë nessuna porta verso %s ma una finestra." % direction)
+                self.send_output("Non c'√® nessuna porta verso %s ma una finestra." % direction)
                 return False
 
-            # (TD) Se l'uscita Ë una porta e questa Ë chiusa ci si va' contro
+            # (TD) Se l'uscita √® una porta e questa √® chiusa ci si va' contro
             # a meno che non abbia attivato l'opzione AUTO_OPEN, in quel caso
             # apre la porta automaticamente
             if self != door and door.door_type and DOOR.CLOSED in door.door_type.flags:
                 if door.door_type and DOOR.SECRET in door.door_type.flags:
-                    self.send_output("Non ti Ë possibile andare verso %s." % direction)
+                    self.send_output("Non ti √® possibile andare verso %s." % direction)
                     return False
                 else:
-                    # Se l'uscita Ë una porta liscia liscia ed apribile andandoci
-                    # contro la porta verr‡ aperta automatica tramite l'opzione
-                    # AUTO_OPEN; lo stesso controllo viene effettuato pi˘ sotto
+                    # Se l'uscita √® una porta liscia liscia ed apribile andandoci
+                    # contro la porta verr√† aperta automatica tramite l'opzione
+                    # AUTO_OPEN; lo stesso controllo viene effettuato pi√π sotto
                     if (self.IS_PLAYER and OPTION.AUTO_OPEN in self.account.options
                     and DOOR.LOCKED     not in door.door_type.flags
                     and DOOR.NO_USE_DIR not in door.door_type.flags):
@@ -118,13 +118,13 @@ class EntityMoveSuperclass(object):
                         else:
                             return command_open(self, door.get_numbered_keyword(looker=self))
                     else:
-                        self.send_output("Non puoi andare %s, c'Ë %s%s." % (direction.to_dir2, door.get_name(self), door.door_type.get_status(door.sex)))
+                        self.send_output("Non puoi andare %s, c'√® %s%s." % (direction.to_dir2, door.get_name(self), door.door_type.get_status(door.sex)))
                         return False
 
             reverse_door = self.location.get_door(direction, direct_search=False)
             if reverse_door:
                 if reverse_door.door_type and DOOR.WINDOW in reverse_door.door_type.flags:
-                    self.send_output("Non c'Ë nessuna porta verso %s ma una finestra." % direction)
+                    self.send_output("Non c'√® nessuna porta verso %s ma una finestra." % direction)
                     return False
 
                 if reverse_door.door_type and DOOR.CLOSED in reverse_door.door_type.flags:
@@ -137,14 +137,14 @@ class EntityMoveSuperclass(object):
                             else:
                                 return command_open(self, direction.english)
                         else:
-                            self.send_output("Non ti Ë possibile andare verso %s." % direction)
+                            self.send_output("Non ti √® possibile andare verso %s." % direction)
                             return False
                     else:
-                        self.send_output("Non puoi andare %s, c'Ë %s%s." % (direction.to_dir2, reverse_door.get_name(self), reverse_door.door_type.get_status(reverse_door.sex)))
+                        self.send_output("Non puoi andare %s, c'√® %s%s." % (direction.to_dir2, reverse_door.get_name(self), reverse_door.door_type.get_status(reverse_door.sex)))
                         return False
 
-        # Se l'entit‡ Ë sotto charm e il suo padrone Ë nei paraggi questa
-        # non puÚ andarsene
+        # Se l'entit√† √® sotto charm e il suo padrone √® nei paraggi questa
+        # non pu√≤ andarsene
         if (fall_number == 0 and is_affected(self, "charm")
         and self.owner() and self.location == self.owner().location):
             if self.master.sex == SEX.FEMALE:
@@ -153,43 +153,43 @@ class EntityMoveSuperclass(object):
                 self.send_output("No! Non vuoi stare lontano dal tuo Padrone.")
             return False
 
-        # (TD) Se l'area della nuova stanza Ë differente da quella precedente
+        # (TD) Se l'area della nuova stanza √® differente da quella precedente
         # cerca di inviare un *.mid tramite send_audio se questo esiste
         # (Vedere il bard per questo)
         pass
 
-        # (TD) ci sono cosÏ tante cose da fare ancora che lascio perdere..
-        # facciamo finta di nulla e facciamo passare sta povera entit‡..
+        # (TD) ci sono cos√¨ tante cose da fare ancora che lascio perdere..
+        # facciamo finta di nulla e facciamo passare sta povera entit√†..
         if fall_number == 0:
             pass
 
-        # Finalmente trova la stanza di destinazione e muove l'entit‡ laggi˘
+        # Finalmente trova la stanza di destinazione e muove l'entit√† laggi√π
         # (TD) devo ricordarmi di aggiungere le due "direzioni ubriache"
         destination_room = self.location.get_destination_room(direction)
         if not destination_room:
             if self.IS_PLAYER:
                 log.bug("destination inesistente partendo dalla stanza %s %d %d %d e andando verso %s" % (
                     self.area.code, self.location.x, self.location.y, self.location.z, direction))
-            self.send_output("Non ti Ë possibile andare verso %s." % str(direction).lower())
+            self.send_output("Non ti √® possibile andare verso %s." % str(direction).lower())
             return False
 
         if (not following and self.IS_MOB    and EXIT.NO_MOB    in self.location.exits[direction].flags
         or  not following and self.IS_ITEM   and EXIT.NO_ITEM   in self.location.exits[direction].flags
         or  not following and self.IS_ROOM   and EXIT.NO_ROOM   in self.location.exits[direction].flags
         or                    self.IS_PLAYER and EXIT.NO_PLAYER in self.location.exits[direction].flags):
-            self.act("Ti Ë proibito andare verso %s." % direction, TO.ENTITY)
-            self.act("$n cerca di andare verso %s ma gli Ë proibito." % direction, TO.OTHERS)
+            self.act("Ti √® proibito andare verso %s." % direction, TO.ENTITY)
+            self.act("$n cerca di andare verso %s ma gli √® proibito." % direction, TO.OTHERS)
             return False
 
         if (not following and self.IS_MOB    and ROOM.NO_MOB    in destination_room.flags
         or  not following and self.IS_ITEM   and ROOM.NO_ITEM   in destination_room.flags
         or  not following and self.IS_ROOM   and ROOM.NO_ROOM   in destination_room.flags
         or                    self.IS_PLAYER and ROOM.NO_PLAYER in destination_room.flags):
-            self.act("Ti Ë proibito entrare in $N.", TO.ENTITY, destination_room)  # (GR)
-            self.act("$n cerca di entrare in $N ma gli Ë proibito.", TO.OTHERS, destination_room)  # (GR)
+            self.act("Ti √® proibito entrare in $N.", TO.ENTITY, destination_room)  # (GR)
+            self.act("$n cerca di entrare in $N ma gli √® proibito.", TO.OTHERS, destination_room)  # (GR)
             return False
 
-        # Se si sta combattendo allora non si puÚ muoversi normalmente
+        # Se si sta combattendo allora non si pu√≤ muoversi normalmente
         # ma tramite il flee, automatico o meno
         if not fleeing and self.is_fighting() and self.get_opponent().location == self.location:
             if self.IS_PLAYER and OPTION.AUTO_FLEE in self.account.options:
@@ -197,13 +197,13 @@ class EntityMoveSuperclass(object):
             else:
                 flee_translation = translate_input(self, "flee", "en")
                 if not flee_translation:
-                    log.bug("flee_translation non Ë valido: %r" % flee_translation)
+                    log.bug("flee_translation non √® valido: %r" % flee_translation)
                     flee_translation = "fuggi"
                 javascript_code = '''javascript:parent.sendInput('%s');''' % flee_translation
                 self.send_output('''Se vuoi andartene mentre stai combattendo, <a href="%s">fuggi</a>!''' % javascript_code)
                 return False
 
-        # Controlla se l'entit‡ stia correndo, cioË se stia inviando comandi
+        # Controlla se l'entit√† stia correndo, cio√® se stia inviando comandi
         # di movimento con una certa frequenza
         running = False
         if self.last_movement:
@@ -232,7 +232,7 @@ class EntityMoveSuperclass(object):
         avoid_prompt = bool(followers)
         break_line = not avoid_prompt
 
-        # Se arriva fin qui significa che alla direzione voluta c'Ë un'uscita
+        # Se arriva fin qui significa che alla direzione voluta c'√® un'uscita
         exit = self.location.exits[direction]
 
         follower_names = []
@@ -256,7 +256,7 @@ class EntityMoveSuperclass(object):
         # Per risparmiare in cpu esegue la modifica iterativa di tutti i
         # riferimenti area solo se ci si sta muovendo effettivamente da un'area
         # ad un'altra
-        # (TT) Per ora l'use_look nel movimento Ë per i soli player, Ë una
+        # (TT) Per ora l'use_look nel movimento √® per i soli player, √® una
         # scelta per diminuire i costi della cpu, ma potrebbe non essere
         # buona per il futuro quando ci saranno tutti i gamescript attivabili
         if self.location.area == destination_room.area:
@@ -266,7 +266,7 @@ class EntityMoveSuperclass(object):
             self = self.from_location(1, use_repop=True)
             self.to_location(destination_room, use_look=True if self.IS_PLAYER else False)
 
-        # Messaggio aggiunto per rendere pi˘ chiaro a colui che viene seguito di esserlo
+        # Messaggio aggiunto per rendere pi√π chiaro a colui che viene seguito di esserlo
         if follower_names:
             send_follow_entity_come_message(self.walker, self, direction, fleeing, running, follower_names)
 
@@ -287,12 +287,12 @@ class EntityMoveSuperclass(object):
             if self.IS_PLAYER:
                 self.dies(teleport_corpse=True)
             else:
-                # use_repop a True perchÈ magari un builder inserisce una
+                # use_repop a True perch√© magari un builder inserisce una
                 # entity reset in una DT
                 self.extract(1, use_repop=True)
 
         # Imposta il tempo attuale per poter cronometrare il prossimo comando
-        # di movimento e vedere se l'entit‡ sta correndo o meno
+        # di movimento e vedere se l'entit√† sta correndo o meno
         self.last_movement = time.time()
 
         force_return = check_trigger(self, "after_move", self, self.location, direction, destination_room, running, behavioured)
@@ -357,8 +357,8 @@ class EntityMoveSuperclass(object):
         if self.location.IS_ROOM and ROOM.UNDERWATER in self.location.flags:
             return "ha nuotato"
 
-        # Gli altri nell'altra stanza non capiscono che sta correndo perchÈ
-        # sta fuggendo ma l'effetto Ë quello
+        # Gli altri nell'altra stanza non capiscono che sta correndo perch√©
+        # sta fuggendo ma l'effetto √® quello
         if fleeing:
             return self.run_verb_it()
 
@@ -398,7 +398,7 @@ class EntityMoveSuperclass(object):
 
 class Walker(object):
     """
-    Classe che contiene le informazioni relative alle entit‡ che camminano in
+    Classe che contiene le informazioni relative alle entit√† che camminano in
     maniera particolare.
     """
     PRIMARY_KEY = ""
@@ -416,15 +416,15 @@ class Walker(object):
         self.run_verb_you    = ""  # Verbo di corsa alla seconda persona
         self.run_verb_it     = ""  # Verbo di corsa alla terza persona
         self.runned_verb_it  = ""  # Verbo di corsa al passato per i messaggi di persistenza dell'azione
-        self.follow_entity_go_message   = ""  # Messaggio di follow da inviare all'entit‡ che segue prima dello spostamento
-        self.follow_others_go_message   = ""  # Messaggio di follow da inviare a tutti gli altri prima che l'entit‡ che segue si sposti
-        self.follow_entity_come_message = ""  # Messaggio di follow da inviare all'entit‡ dopo che ha eseguito lo spostamento
-        self.follow_others_come_message = ""  # Messaggio di follow da inviare a tutti gli altri dopo che l'entit‡ che segue si Ë spostata
+        self.follow_entity_go_message   = ""  # Messaggio di follow da inviare all'entit√† che segue prima dello spostamento
+        self.follow_others_go_message   = ""  # Messaggio di follow da inviare a tutti gli altri prima che l'entit√† che segue si sposti
+        self.follow_entity_come_message = ""  # Messaggio di follow da inviare all'entit√† dopo che ha eseguito lo spostamento
+        self.follow_others_come_message = ""  # Messaggio di follow da inviare a tutti gli altri dopo che l'entit√† che segue si √® spostata
     #- Fine Inizializzazione -
 
     def get_error_message(self, entity):
-        # Tutti i campi sono facoltativi, perÚ se la struttura esiste
-        # almeno uno Ë atteso
+        # Tutti i campi sono facoltativi, per√≤ se la struttura esiste
+        # almeno uno √® atteso
         if (not self.go_verb_you and not self.go_verb_it and not self.come_verb_it
         and not self.run_verb_you and not self.run_verb_it and not self.runned_verb_it
         and not self.follow_entity_go_message and not self.follow_others_go_message and not self.follow_others_come_message):
@@ -474,17 +474,17 @@ class Walker(object):
 
 
 def send_follow_entity_go_message(walker, entity, direction, fleeing, running):
-    # walker puÚ essere None
+    # walker pu√≤ essere None
 
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not direction:
-        log.bug("direction non Ë un parametro valido: %r" % direction)
+        log.bug("direction non √® un parametro valido: %r" % direction)
         return
 
-    # fleeing e running hanno valore di verit‡
+    # fleeing e running hanno valore di verit√†
 
     # -------------------------------------------------------------------------
 
@@ -508,17 +508,17 @@ def send_follow_entity_go_message(walker, entity, direction, fleeing, running):
 
 
 def send_follow_others_go_message(walker, entity, direction, fleeing, running):
-    # walker puÚ essere None
+    # walker pu√≤ essere None
 
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not direction:
-        log.bug("direction non Ë un parametro valido: %r" % direction)
+        log.bug("direction non √® un parametro valido: %r" % direction)
         return
 
-    # fleeing e running hanno valore di verit‡
+    # fleeing e running hanno valore di verit√†
 
     # -------------------------------------------------------------------------
 
@@ -542,20 +542,20 @@ def send_follow_others_go_message(walker, entity, direction, fleeing, running):
 
 
 def send_follow_entity_come_message(walker, entity, direction, fleeing, running, follower_names):
-    # walker puÚ essere None
+    # walker pu√≤ essere None
 
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not direction:
-        log.bug("direction non Ë un parametro valido: %r" % direction)
+        log.bug("direction non √® un parametro valido: %r" % direction)
         return
 
-    # fleeing e running hanno valore di verit‡
+    # fleeing e running hanno valore di verit√†
 
     if not follower_names:
-        log.bug("follower_names non Ë un parametro valido : %r" % follower_names)
+        log.bug("follower_names non √® un parametro valido : %r" % follower_names)
         return
 
     # -------------------------------------------------------------------------
@@ -582,17 +582,17 @@ def send_follow_entity_come_message(walker, entity, direction, fleeing, running,
 
 
 def send_follow_others_come_message(walker, entity, direction, fleeing, running):
-    # walker puÚ essere None
+    # walker pu√≤ essere None
 
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not direction:
-        log.bug("direction non Ë un parametro valido: %r" % direction)
+        log.bug("direction non √® un parametro valido: %r" % direction)
         return
 
-    # fleeing e running hanno valore di verit‡
+    # fleeing e running hanno valore di verit√†
 
     # -------------------------------------------------------------------------
 

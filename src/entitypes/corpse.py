@@ -16,10 +16,10 @@ from src.utility  import copy_existing_attributes
 #= COSTANTI ====================================================================
 
 CORPSE_DESCRS = ("$N giace qui.",
-                 "$N � attaccato da un nugolo di mosche.",
+                 "$N ? attaccato da un nugolo di mosche.",
                  "$N appesta l'aria con un terribile olezzo.",
                  "$N pullula di vermi e parassiti.",
-                 "$N � ormai all'ultimo stadio di decadimento.")
+                 "$N ? ormai all'ultimo stadio di decadimento.")
 
 
 #= CLASSI ======================================================================
@@ -40,7 +40,7 @@ class Corpse(object):
 
     def get_error_message(self, entity):
         if self.decomposition_rpg_hours < 0:
-            return "decomposition_rpg_hours non � un valore di ore rpg valido: %d" % self.decomposition_rpg_hours
+            return "decomposition_rpg_hours non ? un valore di ore rpg valido: %d" % self.decomposition_rpg_hours
 
         return ""
     #- Fine Metodo -
@@ -80,7 +80,7 @@ class Corpse(object):
 class DecomposerLoop(UnstoppableLoop):
     def __init__(self):
         super(DecomposerLoop, self).__init__()
-        self.paused = False  # Indica se questo ciclo � stato messo in pausa dal comando loop
+        self.paused = False  # Indica se questo ciclo ? stato messo in pausa dal comando loop
     #- Fine Inizializzazione -
 
     def start(self, seconds=0):
@@ -88,7 +88,7 @@ class DecomposerLoop(UnstoppableLoop):
             # Qui i secondi andrebbero impostati come:
             # config.seconds_in_minute * config.minutes_in_hour
             # tuttavia per rendere omogeneo tutto il codice e la configurazione
-            # dei cicli il valore � stato calcolato e inserito nel config
+            # dei cicli il valore ? stato calcolato e inserito nel config
             seconds = config.decomposer_loop_seconds
         super(DecomposerLoop, self).start(seconds)
     #- Fine Metodo -
@@ -97,7 +97,7 @@ class DecomposerLoop(UnstoppableLoop):
         if self.running:
             super(DecomposerLoop, self).stop()
         else:
-            log.bug("Il DecomposerLoop non � stato trovato attivo.")
+            log.bug("Il DecomposerLoop non ? stato trovato attivo.")
     #- Fine Metodo -
 
     def cycle(self):
@@ -115,8 +115,8 @@ class DecomposerLoop(UnstoppableLoop):
                     if not data.corpse_type.was_player or data.is_empty():
                         to_extracts.append(data)
 
-        # Li estrai in un ciclo a parte perch� altrimenti sballerebbe l'iterabilit�
-        # del ciclo superiore, l'alternativa � quella di utilizzare reversed
+        # Li estrai in un ciclo a parte perch? altrimenti sballerebbe l'iterabilit?
+        # del ciclo superiore, l'alternativa ? quella di utilizzare reversed
         # ma si va a perdere in performance
         for en in to_extracts:
             en.extract(en.quantity, use_repop=False)

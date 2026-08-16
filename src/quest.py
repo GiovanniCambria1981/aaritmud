@@ -3,7 +3,7 @@
 """
 Modulo per la gestione delle quest automatico, basato sullo schema di Propp:
 http://it.wikipedia.org/wiki/Schema_di_Propp.
-Lo schema generale di una fiaba, secondo Propp, è il seguente:
+Lo schema generale di una fiaba, secondo Propp, Ã¨ il seguente:
     Equilibrio iniziale (inizio);
     Rottura dell'equilibrio iniziale (movente o complicazione);
     Peripezie dell'eroe;
@@ -69,17 +69,17 @@ class Quest(Data):
         self.code = code  # Codice identificativo della quest
 
         # Elenco dei possibili Attanti della quest:
-        # Uno stesso ruolo può essere ricoperto da più personaggi (ad esempio,
+        # Uno stesso ruolo puÃ² essere ricoperto da piÃ¹ personaggi (ad esempio,
         # l'eroe sconfigge il drago malefico e la sorella, altrettanto malvagia,
         # si incarica del ruolo antagonistico di inseguirlo per ucciderlo e
         # vendicarsi); oppure, per converso, uno dei personaggi potrebbe
-        # ricoprire più ruoli (ad esempio, un padre potrebbe mandare suo figlio
+        # ricoprire piÃ¹ ruoli (ad esempio, un padre potrebbe mandare suo figlio
         # alla ricerca dell'oggetto della mancanza e dargli una spada, agendo
         # quindi sia da mandante che da donatore).
         self.antagonist = []  # L'antagonista, colui che lotta contro l'eroe
         self.mandator   = []  # Il mandante: il personaggio che esplicita la mancanza e manda via l'eroe
         self.helper     = []  # L'aiutante (magico): la persona che aiuta l'eroe nella sua ricerca
-        self.award      = []  # Il premio: l'eroe si rende degno del premio nel corso della storia, ma è impossibilitato a usufruirne per via di una serie di ingiustizie, generalmente causate dall'antagonista
+        self.award      = []  # Il premio: l'eroe si rende degno del premio nel corso della storia, ma Ã¨ impossibilitato a usufruirne per via di una serie di ingiustizie, generalmente causate dall'antagonista
         self.owner      = []  # Il proprietario del premio: colui che fornisce gli incarichi all'eroe, identifica il falso eroe e dona il premio a questi
         self.giver      = []  # Il donatore: il personaggio che prepara l'eroe o gli fornisce l'oggetto magico
         self.hero       = []  # L'eroe o la vittima/il ricercatore: colui che reagisce al donatore
@@ -89,7 +89,7 @@ class Quest(Data):
         # Occasionalmente, alcune di queste funzioni possono essere invertite:
         # ad esempio, l'eroe potrebbe ricevere l'oggetto magico quando si trova
         # ancora a casa, anticipando quindi la funzione del donatore.
-        # Più frequentemente, il donatore nega l'oggetto all'eroe per ben due
+        # PiÃ¹ frequentemente, il donatore nega l'oggetto all'eroe per ben due
         # volte prima di consegnarglielo, secondo quelle che vengono chiamate
         # -Le tre regole della Cultura Occidentale:
         self.introduction      = []  # Situazione Iniziale

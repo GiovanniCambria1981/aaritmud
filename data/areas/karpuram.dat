@@ -1525,18 +1525,6 @@ RoomResets:
 			Type: 	RESET.PUT
 			ProtoEntity: 	karpuram_item_eq-guanti-edera
 		End
-		EntityResets:
-			WearMode:	PART.BACK
-			Quantity:	1
-			Type: 	RESET.PUT
-			ProtoEntity: 	karpuram_item_eq-mantello-semplice
-		End
-		EntityResets:
-			WearMode:	PART.RIGHT_HAND PART.LEFT_HAND
-			Quantity:	1
-			Type: 	RESET.PUT
-			ProtoEntity: 	karpuram_item_eq-guanti-edera
-		End
 	End
 End
 RoomResets:

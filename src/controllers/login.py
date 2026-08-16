@@ -28,7 +28,7 @@ class LoginPage(WebResource):
     """
     TITLE = "Login"
 
-    PAGE_TEMPLATE = string.Template(open("src/views/login.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/login.view", encoding="utf-8-sig").read())
 
     NEW_PAGE = True
 

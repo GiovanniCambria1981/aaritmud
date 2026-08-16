@@ -16,15 +16,15 @@ from src.utility    import get_weight_descr
 
 def goto_entity_handler(entity, argument, table_name):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return None, None, ""
 
     if not argument:
-        log.bug("argument non Ë un parametro valido: %r" % argument)
+        log.bug("argument non √® un parametro valido: %r" % argument)
         return None, None, ""
 
     if not table_name:
-        log.bug("table_name non Ë un parametro valido: %r" % table_name)
+        log.bug("table_name non √® un parametro valido: %r" % table_name)
         return None, None, ""
 
     # -------------------------------------------------------------------------
@@ -51,13 +51,13 @@ def goto_entity_handler(entity, argument, table_name):
             entity.send_output("Il giocatore offline %s non ha una stanza valida: %r" % (target.name, room))
             return None, None, ""
         if not room.IS_ROOM:
-            entity.send_output("Il giocatore offline %s non si trova in una stanza: %s (normale se il giocatore non si Ë mai collegato o se sono state rimosse le persistenze)" % (
+            entity.send_output("Il giocatore offline %s non si trova in una stanza: %s (normale se il giocatore non si √® mai collegato o se sono state rimosse le persistenze)" % (
                 target.name, room))
             return None, None, ""
         return target, room, "Il giocatore %s ha quittato in questa stanza." % target.name
 
     if not target.location:
-        entity.send_output("%s %s esiste ma non Ë raggiungibile perchÈ non ha location valida: %r" % (
+        entity.send_output("%s %s esiste ma non √® raggiungibile perch√© non ha location valida: %r" % (
             target.__class__.__name__, target.code, target.location))
         return None, None, ""
 
@@ -68,12 +68,12 @@ def goto_entity_handler(entity, argument, table_name):
             where_is = "stomaco"
         else:
             where_is = "inventario"
-        entity.send_output("L'entit‡ %s si trova nel tuo %s." % (target.get_name(), where_is))
+        entity.send_output("L'entit√† %s si trova nel tuo %s." % (target.get_name(), where_is))
         return None, None, ""
 
     room = target.get_in_room()
     if not room:
-        entity.send_output("Per qualche strano motivo bacoso l'entit‡ %s (contenuta o meno) non si trova in una stanza." % target.get_name())
+        entity.send_output("Per qualche strano motivo bacoso l'entit√† %s (contenuta o meno) non si trova in una stanza." % target.get_name())
         return None, None, ""
 
     if target == entity:
@@ -95,22 +95,22 @@ def goto_entity_handler(entity, argument, table_name):
 
 def goto_message(entity, room, command_name):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return
 
     if not command_name:
-        log.bug("command_name non Ë un parametro valido: %r" % command_name)
+        log.bug("command_name non √® un parametro valido: %r" % command_name)
         return
 
     # -------------------------------------------------------------------------
 
     room_destination = room.get_destination()
     if not room_destination:
-        log.bug("room_destination non Ë valida: %r" % destination)
+        log.bug("room_destination non √® valida: %r" % destination)
         return
 
     javascript_code = '''javascript:parent.sendInput('rgoto %s');''' % room_destination

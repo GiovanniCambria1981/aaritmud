@@ -44,7 +44,7 @@ DESTROY_SECONDS = 2.5
 #= FUNZIONI ====================================================================
 
 def command_destroy(entity, argument="", verbs=VERBS, behavioured=False):
-    # � possibile se il comando � stato deferrato
+    # ? possibile se il comando ? stato deferrato
     if not entity:
         return False
 
@@ -62,11 +62,11 @@ def command_destroy(entity, argument="", verbs=VERBS, behavioured=False):
 
     # Solo gli oggetti animati possono utilizzare tale comando
     if entity.IS_ITEM and FLAG.CAN_DAMAGING not in entity.flags:
-        entity.act("Non ti � possibile %s nulla di nulla.", TO.ENTITY)
-        entity.act("$n sembra vibrare per un attimo... ma forse � stato un abbaglio.", TO.OTHERS)
+        entity.act("Non ti ? possibile %s nulla di nulla.", TO.ENTITY)
+        entity.act("$n sembra vibrare per un attimo... ma forse ? stato un abbaglio.", TO.OTHERS)
         return False
 
-    # Ricava l'eventuale quantit� d'oggetti da raccogliere
+    # Ricava l'eventuale quantit? d'oggetti da raccogliere
     quantity, argument = quantity_argument(argument)
     arg, argument = one_argument(argument)
 
@@ -79,12 +79,12 @@ def command_destroy(entity, argument="", verbs=VERBS, behavioured=False):
             destroy_noun = verbs["noun"] % grammar_gender(target)
             attack_noun = ATTACK_VERBS["noun"] % grammar_gender(target)
             html_code = '''<a href="%s">%s</a>''' % (javascript_code, attack_noun)
-            entity.act("$N non � un oggetto quindi non puoi %s, ma puoi sempre %s." % (destroy_noun, html_code), TO.ENTITY, target)
+            entity.act("$N non ? un oggetto quindi non puoi %s, ma puoi sempre %s." % (destroy_noun, html_code), TO.ENTITY, target)
             entity.act("$n posa uno sguardo indagatore su $N.", TO.OTHERS, target)
             entity.act("$n posa uno sguardo indagatore su di te.", TO.TARGET, target)
         else:
             entity.act("Non riesci a trovare nessun [white]%s[close] da %s" % (arg, verbs["infinitive"]), TO.ENTITY)
-            entity.act("$n cerca qualcosa che per� non trova.", TO.OTHERS)
+            entity.act("$n cerca qualcosa che per? non trova.", TO.OTHERS)
         return False
 
     # (TD) resistenza al comando se charmati
@@ -94,12 +94,12 @@ def command_destroy(entity, argument="", verbs=VERBS, behavioured=False):
     if quantity == 0:
         quantity = target.quantity
     elif target.quantity < quantity:
-        entity.act("Non puoi %s $N perch� ve ne sono solo %d e non %d." % (verbs["infinitive"], target.quantity, quantity), TO.ENTITY, target)
+        entity.act("Non puoi %s $N perch? ve ne sono solo %d e non %d." % (verbs["infinitive"], target.quantity, quantity), TO.ENTITY, target)
         entity.act("$n sta cercando di ammucchiare un quantitativo voluto di $N per poterlo %s" % verbs["infinitive"], TO.OTHERS, target)
         entity.act("$n sta cercando di ammucchiarti per un quantitativo voluto per %s" % ["you2"], TO.TARGET, target)
         return False
 
-    # In questa maniera crea l'entit� finale che verr� manipolata dai trigger
+    # In questa maniera crea l'entit? finale che verr? manipolata dai trigger
     # in maniera omogenea senza dover attendere la chiamata della from_location
     target = target.split_entity(quantity)
 
@@ -130,18 +130,18 @@ def command_destroy(entity, argument="", verbs=VERBS, behavioured=False):
 
 def continue_destroy(entity, target, verbs, behavioured):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return
 
     if not target:
-        log.bug("target non � un parametro valido: %r" % target)
+        log.bug("target non ? un parametro valido: %r" % target)
         return
 
     if not verbs:
-        log.bug("verbs non � un parametro valido: %r" % verbs)
+        log.bug("verbs non ? un parametro valido: %r" % verbs)
         return
 
-    # behavioured ha valore di verit�
+    # behavioured ha valore di verit?
 
     # -------------------------------------------------------------------------
 
@@ -164,18 +164,18 @@ def continue_destroy(entity, target, verbs, behavioured):
 
 def end_destroy(entity, target, verbs, behavioured):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return
 
     if not target:
-        log.bug("target non � un parametro valido: %r" % target)
+        log.bug("target non ? un parametro valido: %r" % target)
         return
 
     if not verbs:
-        log.bug("verbs non � un parametro valido: %r" % verbs)
+        log.bug("verbs non ? un parametro valido: %r" % verbs)
         return
 
-    # behavioured ha valore di verit�
+    # behavioured ha valore di verit?
 
     # -------------------------------------------------------------------------
 
@@ -194,7 +194,7 @@ def end_destroy(entity, target, verbs, behavioured):
     target.dies(opponent=entity, quantity=target.quantity)
 
     # Il comando dona 1 punto xp per ogni oggetto distrutto, poca roba, ma
-    # magari serve ad incoraggiare la pulizia da parte dei giocatori di entit�
+    # magari serve ad incoraggiare la pulizia da parte dei giocatori di entit?
     # ormai inutili
     if entity.IS_PLAYER:
         reason = "per aver distrutto con successo %s" % target.get_name(looker=entity)
@@ -212,21 +212,21 @@ def end_destroy(entity, target, verbs, behavioured):
 def stop_destroy(entity, target, verbs, behavioured):
     """
     Funzione chiamata nel qual caso le deferLater vengano interrotte da un'altra
-    azione interattiva dell'entit�.
+    azione interattiva dell'entit?.
     """
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return
 
     if not target:
-        log.bug("target non � un parametro valido: %r" % target)
+        log.bug("target non ? un parametro valido: %r" % target)
         return
 
     if not verbs:
-        log.bug("verbs non � un parametro valido: %r" % verbs)
+        log.bug("verbs non ? un parametro valido: %r" % verbs)
         return
 
-    # behavioured ha valore di verit�
+    # behavioured ha valore di verit?
 
     # -------------------------------------------------------------------------
 
@@ -240,11 +240,11 @@ def stop_destroy(entity, target, verbs, behavioured):
 
 def damage_target(entity, target):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return 0
 
     if not target:
-        log.bug("target non � un parametro valido: %r" % target)
+        log.bug("target non ? un parametro valido: %r" % target)
         return 0
 
     # -------------------------------------------------------------------------
@@ -256,18 +256,18 @@ def damage_target(entity, target):
         elif material.hardness == -1:
             # Non avere impostato l'hardness ad un materiale sarebbe visto
             # come errore, ma qui siamo un po' permissivi visto che la
-            # distruzione di entit� serve anche a ripulire la RAM del gioco.
+            # distruzione di entit? serve anche a ripulire la RAM del gioco.
             # Vista l'anomalia della cosa al posto di life utilizzo max_life
-            # tanto per confondere un po' di pi� le cose :P
+            # tanto per confondere un po' di pi? le cose :P
             damage = target.max_life
         elif target.life <= material.hardness:
-            # In questa maniera gli oggetti piccoli, cio� con tanta life,
+            # In questa maniera gli oggetti piccoli, cio? con tanta life,
             # vengono distrutti in un round solo
             damage = target.life
         else:
             damage = target.max_life / material.hardness
             # Per un maggior realismo diminuisce il danno se il numero di
-            # target � pi� di uno
+            # target ? pi? di uno
             damage = damage / target.quantity
 
     # (TD) utilizzare la skill che provoca danni maggiorati
@@ -285,7 +285,7 @@ def damage_target(entity, target):
 
 def get_destroy_verbs(damage):
     if damage < 0:
-        log.bug("damage non � un parametro valido: %d" % damage)
+        log.bug("damage non ? un parametro valido: %d" % damage)
         return "", ""
 
     # -------------------------------------------------------------------------
@@ -301,7 +301,7 @@ def get_destroy_verbs(damage):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------
@@ -326,23 +326,23 @@ class Destroy(object):
 
     def __init__(self):
         self.comment                 = ""  # Commento
-        self.start_destroy_entity    = ""  # Messaggio inviato all'entit� che sta iniziando a distruggere qualcosa
+        self.start_destroy_entity    = ""  # Messaggio inviato all'entit? che sta iniziando a distruggere qualcosa
         self.start_destroy_others    = ""  # Messaggio inviato a tutti coloro che possono vedere l'azione dell'inizio della rottura
-        self.start_destroy_target    = ""  # Messaggio inviato all'entit� su cui si ha iniziato l'azione di distruggere
-        self.continue_destroy_entity = ""  # Messaggio inviato all'entit� mentre sta continuando a distruggere qualcosa
+        self.start_destroy_target    = ""  # Messaggio inviato all'entit? su cui si ha iniziato l'azione di distruggere
+        self.continue_destroy_entity = ""  # Messaggio inviato all'entit? mentre sta continuando a distruggere qualcosa
         self.continue_destroy_others = ""  # Messaggio inviato a tutti coloro che vedono l'azione continuativa della rottura
-        self.continue_destroy_target = ""  # Messaggio inviato all'entit� che sta venendo in continuazione rotta
-        self.end_destroy_entity      = ""  # Messaggio inviato all'entit� mentre sta continuando a distruggere qualcosa
+        self.continue_destroy_target = ""  # Messaggio inviato all'entit? che sta venendo in continuazione rotta
+        self.end_destroy_entity      = ""  # Messaggio inviato all'entit? mentre sta continuando a distruggere qualcosa
         self.end_destroy_others      = ""  # Messaggio inviato a tutti coloro che vedono l'azione continuativa della rottura
-        self.end_destroy_target      = ""  # Messaggio inviato all'entit� che sta venendo in continuazione rotta
-        self.stop_destroy_entity     = ""  # Messaggio inviato all'entit� che ha fermato l'atto di distruggere qualcosa
-        self.stop_destroy_others     = ""  # Messaggio inviato a tutti coloro che vedono l'entit� fermarsi nell'atto di distruggere qualcosa
-        self.stop_destroy_target     = ""  # Messaggio inviato all'entit� su cui viene fermato l'atto di distruggerla
+        self.end_destroy_target      = ""  # Messaggio inviato all'entit? che sta venendo in continuazione rotta
+        self.stop_destroy_entity     = ""  # Messaggio inviato all'entit? che ha fermato l'atto di distruggere qualcosa
+        self.stop_destroy_others     = ""  # Messaggio inviato a tutti coloro che vedono l'entit? fermarsi nell'atto di distruggere qualcosa
+        self.stop_destroy_target     = ""  # Messaggio inviato all'entit? su cui viene fermato l'atto di distruggerla
     #- Fine Inizializzazione -
 
     def get_error_message(self, entity):
-        # Tutti i campi sono facoltativi, per� se la struttura esiste
-        # almeno uno � atteso
+        # Tutti i campi sono facoltativi, per? se la struttura esiste
+        # almeno uno ? atteso
         if (not self.start_destroy_entity and not self.start_destroy_others and not self.start_destroy_target
         and not self.continue_destroy_entity and not self.continue_destroy_others and not self.continue_destroy_target
         and not self.end_destroy_entity and not self.end_destroy_others and not self.end_destroy_target
@@ -396,18 +396,18 @@ class Destroy(object):
 
 def send_destroy_messages(messages, message_type, entity, target, verbs, new_line=False):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return
 
     if not target:
-        log.bug("target non � un parametro valido: %r" % target)
+        log.bug("target non ? un parametro valido: %r" % target)
         return
 
     if not verbs:
-        log.bug("verbs non � un parametro valido: %r" % verbs)
+        log.bug("verbs non ? un parametro valido: %r" % verbs)
         return
 
-    # new_line ha valore di verit�
+    # new_line ha valore di verit?
 
     # -------------------------------------------------------------------------
 

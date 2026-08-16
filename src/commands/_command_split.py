@@ -27,7 +27,7 @@ VERBS = {"infinitive" : "[khaki]dividere[close]",
 #= FUNZIONI ====================================================================
 
 def command_split(entity, argument="", verbs=VERBS, behavioured=False):
-    # È possibile se il comando è stato deferrato
+    # Ãˆ possibile se il comando Ã¨ stato deferrato
     if not entity:
         return False
 
@@ -55,14 +55,14 @@ def command_split(entity, argument="", verbs=VERBS, behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non Ã¨ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------
 
     syntax = ""
     syntax += "split <mucchio da divedere>\n"
-    syntax += "split <mucchio da divedere> <quantità voluta>\n"
+    syntax += "split <mucchio da divedere> <quantitÃ  voluta>\n"
 
     return syntax
 #- Fine Funzione -

@@ -28,7 +28,7 @@ class DescriptionsPage(WebResource):
     ACCOUNT_MUST_EXIST_IN_GET  = True
     ACCOUNT_MUST_EXIST_IN_POST = True
 
-    PAGE_TEMPLATE = string.Template(open("src/views/descriptions.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/descriptions.view", encoding="utf-8-sig").read())
 
     DESCR_ATTRS = ["descr",         "descr_night",
                    "descr_hearing", "descr_hearing_night",

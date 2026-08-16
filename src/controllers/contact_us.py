@@ -26,7 +26,7 @@ class ContactUsPage(WebResource):
     """
     TITLE = "Contattaci"
 
-    PAGE_TEMPLATE = string.Template(open("src/views/contact_us.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/contact_us.view", encoding="utf-8-sig").read())
 
     NEW_PAGE = True
 

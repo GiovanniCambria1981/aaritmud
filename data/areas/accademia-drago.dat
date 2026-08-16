@@ -71,9 +71,6 @@ RoomResets:
 	End
 
 	EntityResets:
-		ProtoEntity:	accademia-drago_item_spada-ordinanza
-	End
-	EntityResets:
 		Quantity:	1
 		ProtoEntity:	accademia-drago_mob_werr
 	End
@@ -333,6 +330,7 @@ RoomResets:
 	End
 
 	EntityResets:
+		Quantity:	3
 		ProtoEntity:	accademia-drago_item_spada-ordinanza
 	End
 	EntityResets:
@@ -345,9 +343,6 @@ RoomResets:
 	End
 
 	EntityResets:
-		ProtoEntity:	accademia-drago_item_spada-ordinanza
-	End
-	EntityResets:
 		Quantity:	1
 		ProtoEntity:	accademia-drago_mob_guardia-onore-rosso
 		EntityResets:
@@ -356,9 +351,6 @@ RoomResets:
 		End
 	End
 
-	EntityResets:
-		ProtoEntity:	accademia-drago_item_spada-ordinanza
-	End
 	Destination:	4 10 1 accademia-drago
 End
 RoomResets:
@@ -721,11 +713,7 @@ End
 RoomResets:
 	ProtoRoom:	accademia-drago_room_099_camerate-099
 	EntityResets:
-		Quantity:	1
-		ProtoEntity:	accademia-drago_mob_cavaliere-apprendista-blu-03
-	End
-	EntityResets:
-		Quantity:	1
+		Quantity:	2
 		ProtoEntity:	accademia-drago_mob_cavaliere-apprendista-blu-03
 	End
 	Destination:	6 11 0 accademia-drago

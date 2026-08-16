@@ -44,10 +44,23 @@ FOLDER      = 2  # Nome della directory in cui vengono salvati sotto quella /dat
 SUBFOLDER   = 3  # I dati di quel tipo verranno suddivisi creando delle sottocartelle relative all'attributo in questo campo
 IMPORT      = 4  # Indica come importare la lista delle subfolder
 
+
+def open_legacy_text(path):
+    """Open mixed UTF-8/Windows-1252 data files as text."""
+    with open(path, "rb") as probe:
+        raw = probe.read()
+    try:
+        raw.decode("utf-8")
+        encoding = "utf-8"
+    except UnicodeDecodeError:
+        encoding = "cp1252"
+    return open(path, "r", encoding=encoding)
+
+
 # Lista dei caratteri invisibili che non devono esistere nelle stringhe; tutti
 # tranne l'orizontal tab, il line feed e il carriage return
 UNALLOWED_CHARS = []
-ordinals = range(32)
+ordinals = list(range(32))
 ordinals.remove(9)
 ordinals.remove(10)
 ordinals.remove(13)
@@ -146,7 +159,7 @@ class Database(dict):
         self.check_for_error_messages()
 
         log.booting("Controlla le funzioni di comando duplicate o inesistenti negli input.")
-        from command import check_commands_fun_name
+        from src.command import check_commands_fun_name
         check_commands_fun_name()
 
         log.booting("Rimozione dei dati zombie senza alcun tipo di locazione valida")
@@ -231,7 +244,7 @@ class Database(dict):
                         continue
                     path = "%s/%s" % (root, filename)
                     try:
-                        data_file = open(path, "r")
+                        data_file = open_legacy_text(path)
                     except IOError:
                         log.bug("Impossibile aprire il file %s/%s in lettura" % (root, filename))
                         continue
@@ -1047,9 +1060,9 @@ def fread(file, module_name, class_name, indent=0, parent_line="", parent_attr="
     module = __import__(module_name, globals(), locals(), [""])
     try:
         data = getattr(module, class_name)()
-    except AttributeError as (errno, strerror):
-        log.bug("Errore numero %d: %s (tentando di creare un dato con modulo %s e classe %s)" % (
-            errno, strerror, module_name, class_name))
+    except AttributeError as error:
+        log.bug("Errore %s (tentando di creare un dato con modulo %s e classe %s)" % (
+            error, module_name, class_name))
         sys.exit(1)
 
     # Prepara la lista degli attributi che potrebbe incontrare durante la
@@ -1179,7 +1192,7 @@ def fread(file, module_name, class_name, indent=0, parent_line="", parent_attr="
                         sub_module = __import__(sub_module_name, globals(), locals(), [""])
                         sub_class = getattr(sub_module, sub_class_name)
                         if sub_class_name == "Flags":
-                            from element import Flags
+                            from src.element import Flags
                             var.append(Flags(remaining_line))
                         elif hasattr(sub_class(), "fread_the_line"):
                             sub_var = sub_class()
@@ -1191,7 +1204,7 @@ def fread(file, module_name, class_name, indent=0, parent_line="", parent_attr="
                         sub_data = fread(file, sub_module_name, sub_class_name, indent+1, remaining_line, attr, data)
                         key = getattr(sub_data, sub_data.PRIMARY_KEY)
                         var[key] = sub_data
-                    elif isinstance(var, types.InstanceType):
+                    elif hasattr(var, "__dict__"):
                         var = fread(file, sub_module_name, sub_class_name, indent+1, remaining_line, attr, data)
                     else:
                         var_was_none = False
@@ -1325,7 +1338,7 @@ def fread(file, module_name, class_name, indent=0, parent_line="", parent_attr="
                     setattr(data, attr, remaining_line[1:].rstrip(" ").lstrip("\t"))
                 else:
                     setattr(data, attr, remaining_line.strip(" ").lstrip("\t"))
-            elif type(var) in (int, long):
+            elif type(var) is int:
                 if not remaining_line:
                     log.bug("Il Contenuto dell'etichetta %s è vuoto nel file %s, era atteso un numero" % (label, file.name))
                     continue
@@ -1426,7 +1439,7 @@ def create_all_couples_of_keywords(data):
 
     # -------------------------------------------------------------------------
 
-    from entity import create_keywords
+    from src.entity import create_keywords
 
     if data.IS_ROOM or data.IS_PLAYER:
         log.bug("Le stanze e i giocatori non hanno le keywords: %r" % data)
@@ -1840,7 +1853,7 @@ def fwrite(file, data, data_label="", indentation=""):
         elif attr_name in data.SCHEMA:
             sub_module_name = data.SCHEMA[attr_name][MODULE_NAME]
             sub_class_name  = data.SCHEMA[attr_name][CLASS_NAME]
-            if isinstance(attr, types.InstanceType):
+            if hasattr(attr, "__dict__"):
                 file.write("%s%s\n" % (indentation, label.strip()))
                 fwrite(file, attr, label, "%s\t" % indentation)
                 file.write("%sEnd\n" % indentation[1 : ])
@@ -1896,7 +1909,7 @@ def fwrite(file, data, data_label="", indentation=""):
                 file.write("%s%s\n" % (indentation, label.strip()))
                 fwrite(file, attr, label, "\t%s" % indentation)
                 file.write("%sEnd\n" % indentation[1 : ])
-        elif type(attr) in (int, long):
+        elif type(attr) is int:
             fwrite_number(file, attr, attr_name, label, indentation)
         elif isinstance(attr, str):
             fwrite_string(file, attr, attr_name, label, indentation)
@@ -2310,7 +2323,7 @@ def _check_all_strings(table_name, data_code, data):
     elif type(data) == EnumElement:
         log.bug("Non dovrebbero esistere EnumElement tra i dati del database (%s/%s)" % (
             table_name, data_code))
-    elif isinstance(data, types.InstanceType):
+    elif hasattr(data, "__dict__"):
         references = []
         if hasattr(data, "REFERENCES"):
             references += data.REFERENCES.keys()

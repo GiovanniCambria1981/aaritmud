@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Comando che serve a rimuovere dal gioco un'entit‡.
+Comando che serve a rimuovere dal gioco un'entit√†.
 """
 
 
@@ -17,7 +17,7 @@ from src.utility import one_argument, quantity_argument
 
 def command_extract(entity, argument=""):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -35,11 +35,11 @@ def command_extract(entity, argument=""):
 
     target = entity.find_entity_extensively(arg, quantity=quantity)
     if not target:
-        entity.send_output("Nessuna entit‡ trovata con argomento [white]%s[close]." % arg)
+        entity.send_output("Nessuna entit√† trovata con argomento [white]%s[close]." % arg)
         return False
 
     if target.IS_PLAYER:
-        entity.send_output("Non ti Ë possibile estrarre dei personaggi, se c'Ë un problema con un giocatore contattare i capoccia del Mud.")
+        entity.send_output("Non ti √® possibile estrarre dei personaggi, se c'√® un problema con un giocatore contattare i capoccia del Mud.")
         return False
 
     if quantity == 0:
@@ -55,7 +55,7 @@ def command_extract(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------
@@ -64,7 +64,7 @@ def get_syntax_template(entity):
 
     syntax += "extract\n"
     syntax += "extract <vittima>\n"
-    syntax += "extract <vittima> <quantit‡>\n"
+    syntax += "extract <vittima> <quantit√†>\n"
 
     return syntax
 #- Fine Funzione -

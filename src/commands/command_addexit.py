@@ -21,7 +21,7 @@ from src.utility import one_argument, multiple_arguments, is_number
 
 def command_addexit(entity, argument=""):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -48,7 +48,7 @@ def command_addexit(entity, argument=""):
             destination_message = " che porta a %s" % room.exits[direction].destination
         else:
             destination_message = ""
-        entity.send_output("C'Ë gi‡ un uscita %s%s, non puoi aggiungerne un'altra se non rimuovendola con il comando [limegreen]delexit[close] con il comando [limegreen]modifyexit[close]." % (
+        entity.send_output("C'√® gi√† un uscita %s%s, non puoi aggiungerne un'altra se non rimuovendola con il comando [limegreen]delexit[close] con il comando [limegreen]modifyexit[close]." % (
             direction.to_dir))
         return False
 
@@ -60,13 +60,13 @@ def command_addexit(entity, argument=""):
             entity.send_output("Sintassi del comando non valida, se si vuole specificare una destinazione servono le relative coordinate ed eventualmente il codice dell'area.")
             return False
         if not is_number(args[0]):
-            entity.send_output("La coordinata X non Ë un numero valido: %s" % args[0])
+            entity.send_output("La coordinata X non √® un numero valido: %s" % args[0])
             return False
         if not is_number(args[1]):
-            entity.send_output("La coordinata Y non Ë un numero valido: %s" % args[1])
+            entity.send_output("La coordinata Y non √® un numero valido: %s" % args[1])
             return False
         if not is_number(args[2]):
-            entity.send_output("La coordinata Z non Ë un numero valido: %s" % args[2])
+            entity.send_output("La coordinata Z non √® un numero valido: %s" % args[2])
             return False
         if len(args) == 4:
             area = get_area_from_argument(args[3])
@@ -90,7 +90,7 @@ def command_addexit(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

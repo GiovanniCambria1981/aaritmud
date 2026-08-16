@@ -18,7 +18,7 @@ from src.utility import is_same, is_prefix
 
 def command_invoke(entity, argument=""):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non Ã¨ un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -29,15 +29,15 @@ def command_invoke(entity, argument=""):
 
 def invoke_handler(entity, argument, command_name, table_name):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non Ã¨ un parametro valido: %r" % entity)
         return False
 
     if not command_name:
-        log.bug("command_name non è un parametro valido: %r" % command_name)
+        log.bug("command_name non Ã¨ un parametro valido: %r" % command_name)
         return False
 
     if not table_name:
-        log.bug("table_name non è un parametro valido: %r" % table_name)
+        log.bug("table_name non Ã¨ un parametro valido: %r" % table_name)
         return False
 
     # -------------------------------------------------------------------------
@@ -53,20 +53,20 @@ def invoke_handler(entity, argument, command_name, table_name):
         if not target:
             target = entity.find_entity(argument, entity_tables=[table_name], avoid_equipment=False)
             if not target:
-                entity.send_output("Non è stato trovato nessun player con argomento [green]%s[close]." % argument)
+                entity.send_output("Non Ã¨ stato trovato nessun player con argomento [green]%s[close]." % argument)
             elif not target.game_request:
-                entity.send_output("%s non è un player attualmente online." % target.name)
+                entity.send_output("%s non Ã¨ un player attualmente online." % target.name)
             else:
                 entity.send_output("Devi digitare il nome per intero se intendevi il player %s altrimenti digitane un'altro sempre per intero." % target.name)
             return False
     else:
         target = entity.find_entity(argument, entity_tables=[table_name], avoid_equipment=False)
         if not target:
-            entity.send_output("Non è stato trovato nessun %s con argomento [green]%s[close]." % (table_name, argument))
+            entity.send_output("Non Ã¨ stato trovato nessun %s con argomento [green]%s[close]." % (table_name, argument))
             return False
 
     if entity == target:
-        entity.send_output("Non è saggio invocare sé stessi!")
+        entity.send_output("Non Ã¨ saggio invocare sÃ© stessi!")
         return False
 
     entity.act("Apri un [royalblue]misterioso portale[close] con cui risucchiare $N.", TO.ENTITY, target)
@@ -87,7 +87,7 @@ def invoke_handler(entity, argument, command_name, table_name):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non Ã¨ un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

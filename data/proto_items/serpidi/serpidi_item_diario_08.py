@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-Sfogliando il diario c'Ë una probabilit‡ che vengano "persi" dei pezzi.
-Il danneggiamento Ë solo virtuale.
+Sfogliando il diario c'√® una probabilit√† che vengano "persi" dei pezzi.
+Il danneggiamento √® solo virtuale.
 """
 
 #= IMPORT ======================================================================

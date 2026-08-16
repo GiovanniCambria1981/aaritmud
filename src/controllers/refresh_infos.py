@@ -36,7 +36,7 @@ class RefreshInfosPage(WebResource):
 
     NEW_PAGE = True
 
-    # Il metodo GET non � supportato volutamente
+    # Il metodo GET non ? supportato volutamente
 
     def render_POST(self, request, conn):
         if not conn:
@@ -61,7 +61,7 @@ class RefreshInfosPage(WebResource):
                 else:
                     response["last_square_message"] = ""
             else:
-                log.bug("last_refresh_id non � un numero: " % request.args["last_refresh_id"][0])
+                log.bug("last_refresh_id non ? un numero: " % request.args["last_refresh_id"][0])
 
         return pprint.pformat(response, indent=0)
     #- Fine Metodo -

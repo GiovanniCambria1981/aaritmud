@@ -28,7 +28,7 @@ class ManagePlayersGiftsPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.IMPLEMENTOR
     MINIMUM_TRUST_ON_POST = TRUST.IMPLEMENTOR
 
-    PAGE_TEMPLATE = string.Template(open("src/views/manage_players_gifts.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/manage_players_gifts.view", encoding="utf-8-sig").read())
 
     NEW_PAGE = True
 
@@ -78,11 +78,11 @@ class ManagePlayersGiftsPage(WebResource):
 
 def get_gift_codes(player, conn):
     if not player:
-        log.bug("player non � un parametro valido: %r" % player)
+        log.bug("player non ? un parametro valido: %r" % player)
         return ""
 
     if not conn:
-        log.bug("conn non � un parametro valido: %r" % conn)
+        log.bug("conn non ? un parametro valido: %r" % conn)
         return ""
 
     # ---------------------------------------------------------------------
@@ -102,11 +102,11 @@ def get_gift_codes(player, conn):
 
 def player_has_gift(player, gift):
     if not player:
-        log.bug("player non � un parametro valido: %r" % player)
+        log.bug("player non ? un parametro valido: %r" % player)
         return False
 
     if not gift:
-        log.bug("gift non � un parametro valido: %r" % gift)
+        log.bug("gift non ? un parametro valido: %r" % gift)
         return False
 
     # ---------------------------------------------------------------------

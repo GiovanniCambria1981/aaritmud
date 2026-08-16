@@ -38,7 +38,6 @@ ALFA_ONLY_PATTERN = re.compile("[^a-zA-Zì ]+")
 
 def on_booting(charlie):
     # Concettualmente al riavvio del gioco è meglio raddoppiare i tempi di
-    print("on_booting di charlie", charlie)
     # reset in maniera tale che il giocatore abbia il tempo di "riprendersi"
     if charlie.specials:
         reset_call = reactor.callLater(random.randint(400, 600), reset_banana_quest, charlie)

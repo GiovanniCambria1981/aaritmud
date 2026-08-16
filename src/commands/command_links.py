@@ -13,7 +13,7 @@ from src.utility  import is_same, is_prefix, one_argument, nifty_value_search
 
 def command_links(entity, argument="", behavioured=False):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -63,7 +63,7 @@ def command_links(entity, argument="", behavioured=False):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

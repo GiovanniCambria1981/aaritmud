@@ -16,7 +16,7 @@ from src.log     import log
 
 def command_slay(entity, argument=""):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -28,11 +28,11 @@ def command_slay(entity, argument=""):
 
     target = entity.find_entity_extensively(argument)
     if not target:
-        entity.send_output("Nessuna entit‡ trovata con argomento [green]%s[close]." % argument)
+        entity.send_output("Nessuna entit√† trovata con argomento [green]%s[close]." % argument)
         return False
 
     if target.IS_PLAYER and entity.trust < TRUST.IMPLEMENTOR:
-        entity.send_output("Non ti Ë possibile slayare dei personaggi, se c'Ë un problema con un giocatore contattare i capoccia del Mud.")
+        entity.send_output("Non ti √® possibile slayare dei personaggi, se c'√® un problema con un giocatore contattare i capoccia del Mud.")
         return False
 
     entity.act("Esegui uno slay su $N!", TO.ENTITY, target)
@@ -45,7 +45,7 @@ def command_slay(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

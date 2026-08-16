@@ -66,7 +66,12 @@ class Site(server.Site):
         indirizzi del browser il meno aliena possibile.
         """
         for module_name in self.iter_controller_module_names():
-            rpy_file = open(self.WWW_PATH + "/%s%s" % (module_name, self.RPY_EXTENSION), "w")
+            rpy_file = open(
+                self.WWW_PATH + "/%s%s" % (module_name, self.RPY_EXTENSION),
+                "w",
+                encoding="utf-8",
+            )
+            rpy_file.write("from importlib import reload\n")
             rpy_file.write("from src.config import config as config_module\n")
             rpy_file.write("from %s import %s\n" % (self.CONTROLLERS_PATH.replace("/", "."), module_name))
             rpy_file.write("if config_module.reload_web_pages:\n")

@@ -33,7 +33,7 @@ class StatsBrowserPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.MASTER
     MINIMUM_TRUST_ON_POST = TRUST.MASTER
 
-    PAGE_TEMPLATE = string.Template(open("src/views/stats_browser.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/stats_browser.view", encoding="utf-8-sig").read())
 
     def render_GET(self, request, conn):
         detailed_browsers = {}

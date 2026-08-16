@@ -2,8 +2,8 @@
 
 """
 Modulo per la modifica di un'area.
-Preferisco non dare possibilit� di creare una nuova area da zero per dare
-maggiore peso al miglioramento di quelle gi� esistenti.
+Preferisco non dare possibilit? di creare una nuova area da zero per dare
+maggiore peso al miglioramento di quelle gi? esistenti.
 """
 
 
@@ -32,8 +32,8 @@ class AreaEditorPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.BUILDER
     MINIMUM_TRUST_ON_POST = TRUST.BUILDER
 
-    ADDITIONAL_TEMPLATE = string.Template(open("src/views/area_editor_additional_header.view").read())
-    PAGE_TEMPLATE       = string.Template(open("src/views/area_editor.view").read())
+    ADDITIONAL_TEMPLATE = string.Template(open("src/views/area_editor_additional_header.view", encoding="utf-8-sig").read())
+    PAGE_TEMPLATE       = string.Template(open("src/views/area_editor.view", encoding="utf-8-sig").read())
 
     def create_additional_header(self, request, conn):
         mapping = {}
@@ -63,10 +63,10 @@ class AreaEditorPage(WebResource):
             if "coord_z" in request.args:
                 coord_z = request.args["coord_z"][0]
                 if not coord_z:
-                    error_message = "La coordinata Z non � un valore valido: %r" % coord_z
+                    error_message = "La coordinata Z non ? un valore valido: %r" % coord_z
                     coord_z = 0
                 if not is_number(coord_z):
-                    error_message = "La coordinata Z non � un valore numerico valido: %s" % coord_z
+                    error_message = "La coordinata Z non ? un valore numerico valido: %s" % coord_z
                     coord_z = 0
                 coord_z = int(coord_z)
         else:
@@ -212,6 +212,6 @@ class AreaEditorPage(WebResource):
         return "".join(area_labels)
     # - Fine Metodo -
 
-# (TD) questo da aggiungere nel POST una volta che si far�:
+# (TD) questo da aggiungere nel POST una volta che si far?:
 #            new_area.creators = conn.account.code
 #            database["areas"][new_code] = new_area

@@ -20,19 +20,16 @@ provacolore = ["un [red]dado[close] da gioco",
 #= FUNZIONI ====================================================================
 
 def after_inject(coin, location):
-    print(" novizi2_item_dado >>>>>>inject<<<<<<")
-    item.short = random.choice(provacolore)
+    coin.short = random.choice(provacolore)
 #- Fine Funzione -
 
 
 def on_booting(item):
-    print(" novizi2_item_dado >>>>>>booting<<<<<<")
     item.short = random.choice(provacolore)
 #- Fine Funzione -
 
 
 def on_reset(item):
-    print(" novizi2_item_dado >>>>>>reset<<<<<<")
     item.short = random.choice(provacolore)
 #- Fine Funzione -
 

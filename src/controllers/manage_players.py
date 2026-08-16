@@ -33,7 +33,7 @@ class ManagePlayersPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.MASTER
     MINIMUM_TRUST_ON_POST = TRUST.MASTER
 
-    PAGE_TEMPLATE = string.Template(open("src/views/manage_players.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/manage_players.view", encoding="utf-8-sig").read())
 
     NEW_PAGE = True
 

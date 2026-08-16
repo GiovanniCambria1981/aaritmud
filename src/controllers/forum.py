@@ -27,7 +27,7 @@ class ForumPage(WebResource):
     MINIMUM_TRUST_ON_GET  = TRUST.PLAYER
     MINIMUM_TRUST_ON_POST = TRUST.PLAYER
 
-    PAGE_TEMPLATE = string.Template(open("src/views/forum.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/forum.view", encoding="utf-8-sig").read())
 
     def create_square(self, request, conn):
         return ""
@@ -43,7 +43,7 @@ class ForumPage(WebResource):
 
     def create_forum_rows(self, request, conn, forum_type):
         if forum_type not in ("player", "clan", "admin"):
-            log.bug("forum_type non è un parametro valido: %s" % forum_type)
+            log.bug("forum_type non Ã¨ un parametro valido: %s" % forum_type)
             return ""
 
         # ---------------------------------------------------------------------

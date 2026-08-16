@@ -26,7 +26,7 @@ class StyleElement(EnumElement):
 
 NONE       = StyleElement("Nessuno")
 QUICK      = StyleElement("[yellow]Veloce[close]",     "Sei pronto a combattere contro nemici veloci")
-DEFENSIVE  = StyleElement("[green]Difensivo[close]",   "Così ti difenderai dai colpi avversari")
+DEFENSIVE  = StyleElement("[green]Difensivo[close]",   "CosÃ¬ ti difenderai dai colpi avversari")
 NORMAL     = StyleElement("Normale",                   "Non hai nessun stile di combattimento")
 AGGRESSIVE = StyleElement("[red]Aggressivo[close]",    "Hai intenzione di picchiare duramente il nemico")
 HEAVY      = StyleElement("[royalblue]Pesante[close]", "Sei pronto a combattere contro nemici grossi")

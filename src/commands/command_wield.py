@@ -47,19 +47,19 @@ WIELD_VERBS = VERBS
 def command_wield(entity, argument="", verbs=VERBS, behavioured=False, command_name="wield"):
     """
     Permette di prendere un oggetto nella mano secondaria o, se quest'ultima
-    Ë occupata, in quella primaria.
+    √® occupata, in quella primaria.
     """
     if not verbs:
-        log.bug("verbs non Ë un parametro valido: %r" % verbs)
+        log.bug("verbs non √® un parametro valido: %r" % verbs)
         return False
 
     if command_name not in ("wield", "hold"):
-        log.bug("command_name non Ë un parametro valido: %r" % command_name)
+        log.bug("command_name non √® un parametro valido: %r" % command_name)
         return False
 
     # -------------------------------------------------------------------------
 
-    # » possibile se il comando Ë stato deferrato
+    # √à possibile se il comando √® stato deferrato
     if not entity:
         return False
 
@@ -72,7 +72,7 @@ def command_wield(entity, argument="", verbs=VERBS, behavioured=False, command_n
             entity.send_output(syntax, break_line=False)
         return False
 
-    # (TD) Controllo sul mental state dell'entit‡
+    # (TD) Controllo sul mental state dell'entit√†
 
     target = entity.find_entity(argument, location=entity)
     if not target:
@@ -82,12 +82,12 @@ def command_wield(entity, argument="", verbs=VERBS, behavioured=False, command_n
 
     if target == entity:
         entity.act("Cerchi di %s da sol$o... impossibile!" % verbs["you2_min"], TO.ENTITY)
-        entity.act("$n cerca di %s da sol$o... sar‡ dura!" % verbs["self_min"], TO.OTHERS)
+        entity.act("$n cerca di %s da sol$o... sar√† dura!" % verbs["self_min"], TO.OTHERS)
         return False
 
     if FLAG.NO_HOLD in target.flags:
         if entity.trust >= TRUST.MASTER:
-            entity.send_to_admin("Raccogli l'oggetto anche se Ë NO_HOLD")
+            entity.send_to_admin("Raccogli l'oggetto anche se √® NO_HOLD")
         else:
             entity.act("Cerchi di $a $N... ma [darkgray]senza successo[close].", TO.ENTITY, target, verbs["infinitive"])
             entity.act("$n cerca di $a $N... [darkgray]senza successo[close].", TO.OTHERS, target, verbs["infinitive"])
@@ -97,7 +97,7 @@ def command_wield(entity, argument="", verbs=VERBS, behavioured=False, command_n
     if ((    entity.location.IS_ROOM and ROOM.NO_HOLD in entity.location.flags)
     or  (not entity.location.IS_ROOM and FLAG.NO_HOLD in entity.location.flags)):
         if entity.trust >= TRUST.MASTER:
-            entity.send_to_admin("Raccogli l'oggetto anche se la stanza Ë NO_HOLD")
+            entity.send_to_admin("Raccogli l'oggetto anche se la stanza √® NO_HOLD")
         else:
             entity.act("Cerchi di %s $N, tuttavia una [royalblue]forza misteriosa[close] del luogo l$o respinge." % verbs["infinitive"], TO.ENTITY, target)
             entity.act("$n cerca di %s $N, tuttavia una [royalblue]forza misteriosa[close] del luogo sembra respingerl$o." % verbs["infinitive"], TO.OTHERS, target)
@@ -150,7 +150,7 @@ def command_wield(entity, argument="", verbs=VERBS, behavioured=False, command_n
         already_use_flag = PART.HOLD
         normal_flag = PART.WIELD
         if target.level > entity.level:
-            tooltip = create_tooltip(entity.get_conn(), "CiÚ significa che il suo livello Ë troppo alto rispetto al tuo", "{?}")
+            tooltip = create_tooltip(entity.get_conn(), "Ci√≤ significa che il suo livello √® troppo alto rispetto al tuo", "{?}")
             entity.act("Senti che non potrai usufruire al meglio del danno di $N. %s" % tooltip, TO.ENTITY, target)
             entity.act("$n non si sente a suo agio con in mano $N.", TO.OTHERS, target)
             entity.act("$n non si sente a suo agio con te in mano.", TO.TARGET, target)
@@ -195,11 +195,11 @@ def command_wield(entity, argument="", verbs=VERBS, behavioured=False, command_n
         entity.act("\n$n %s con tutte e due le $hands," % verbs["you3_min"], TO.TARGET, target)
         target.wear_mode = Flags(normal_flag, already_use_flag)
     elif already_use_check:
-        entity.act("Cerchi di %s con la %s $N ma essendo gi‡ occupata utilizzi la %s." % (
+        entity.act("Cerchi di %s con la %s $N ma essendo gi√† occupata utilizzi la %s." % (
             verbs["infinitive_min"], first_hand_to_use, second_hand_to_use), TO.ENTITY, target)
-        entity.act("$n cerca di %s $N con la %s ma essendo gi‡ occupata utilizza la %s." % (
+        entity.act("$n cerca di %s $N con la %s ma essendo gi√† occupata utilizza la %s." % (
             verbs["infinitive_min"], first_hand_to_use, second_hand_to_use), TO.OTHERS, target)
-        entity.act("\n$n cerca di %s con la %s ma essendo gi‡ occupata utilizza la %s." % (
+        entity.act("\n$n cerca di %s con la %s ma essendo gi√† occupata utilizza la %s." % (
             verbs["you2_min"], first_hand_to_use, second_hand_to_use), TO.TARGET, target)
         target.wear_mode = Flags(already_use_flag)
     else:
@@ -211,8 +211,8 @@ def command_wield(entity, argument="", verbs=VERBS, behavioured=False, command_n
     for affect in target.affects:
         affect.apply()
 
-    # PoichÈ l'entit‡ Ë stata impugnata forse ha un valore nel gioco e non
-    # verr‡ quindi purificata
+    # Poich√© l'entit√† √® stata impugnata forse ha un valore nel gioco e non
+    # verr√† quindi purificata
     if target.deferred_purification:
         target.stop_purification()
 
@@ -233,7 +233,7 @@ def command_wield(entity, argument="", verbs=VERBS, behavioured=False, command_n
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

@@ -27,7 +27,7 @@ class IndexPage(WebResource):
     """
     TITLE = "il Mud"
 
-    PAGE_TEMPLATE = string.Template(open("src/views/index.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/index.view", encoding="utf-8-sig").read())
 
     NEW_PAGE = True
 

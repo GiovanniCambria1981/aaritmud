@@ -28,16 +28,16 @@ STATS = ("speed", "intelligence")
 
 #= FUNZIONI ====================================================================
 
-# Questa skill non è digitabile quindi non ha skill_counter
+# Questa skill non Ã¨ digitabile quindi non ha skill_counter
 
 
 def skill_counter(entity, target, verbs=VERBS, silent=False):
     if not entity:
-        log.bug("entity non è un parametro valido: %r" % entity)
+        log.bug("entity non Ã¨ un parametro valido: %r" % entity)
         return "failure"
 
     if not target:
-        log.bug("target non è un parametro valido: %r" % target)
+        log.bug("target non Ã¨ un parametro valido: %r" % target)
         return "failure"
 
     # -------------------------------------------------------------------------
@@ -56,7 +56,7 @@ def skill_counter(entity, target, verbs=VERBS, silent=False):
             entity.act("$n tenta maldestramente di %s ma si ingarbuglia e perde il ritmo dell'attacco." % verbs["you2"], TO.TARGET, target)
         return "clumsy"
     elif skill_result < config.failure_value:
-        # Nessun messaggio se v'è il fallimento
+        # Nessun messaggio se v'Ã¨ il fallimento
         return "failure"
     elif skill_result < config.success_value:
         if not silent:

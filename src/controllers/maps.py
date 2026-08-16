@@ -19,7 +19,7 @@ class MapsPage(WebResource):
     """
     TITLE = "Maps"
 
-    PAGE_TEMPLATE = string.Template(open("src/views/maps.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/maps.view", encoding="utf-8-sig").read())
 
     def render_GET(self, request, conn):
         mapping = {}

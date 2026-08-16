@@ -139,7 +139,7 @@ class GameLoop(UnstoppableLoop):
         # i comportamenti
         if (self.elapsed_seconds % config.seconds_in_minute == 1
         or config.seconds_in_minute == 1):
-            areas = database["areas"].values()
+            areas = list(database["areas"].values())
             # Può capitare che il gioco sia stato avviato vergine di aree
             if areas:
                 self.update_behaviours(areas, "mobs")
@@ -147,7 +147,7 @@ class GameLoop(UnstoppableLoop):
 
         #- Cose aggiornate ogni mezz'ora RPG: ---------------------------------
 
-        if self.elapsed_seconds % ((config.seconds_in_minute * config.minutes_in_hour) / 2) == 0:
+        if self.elapsed_seconds % ((config.seconds_in_minute * config.minutes_in_hour) // 2) == 0:
             # Aggiornamento delle condizioni: fame, sete, sonno... etc etc
             # (TD) fare quel sistema di iter database
             for entity in list(database["mobs"].values()) + list(database["players"].values()):
@@ -186,7 +186,7 @@ class GameLoop(UnstoppableLoop):
         if not config.use_behaviours:
             return
 
-        for area in random.sample(areas, len(areas) / 2 + 1):
+        for area in random.sample(areas, len(areas) // 2 + 1):
             for entity in getattr(area, list_to_use):
                 if not entity.location:
                     continue

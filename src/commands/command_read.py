@@ -36,12 +36,12 @@ VERBS = {"infinitive" : "[sandybrown]leggere[close]",
 
 def command_read(entity, argument="", verbs=VERBS, behavioured=False):
     if not verbs:
-        log.bug("verbs non � un parametro valido: %r" % verbs)
+        log.bug("verbs non ? un parametro valido: %r" % verbs)
         return False
 
     # -------------------------------------------------------------------------
 
-    # � possibile se il comando � stato deferrato
+    # ? possibile se il comando ? stato deferrato
     if not entity:
         return False
 
@@ -78,7 +78,7 @@ def command_read(entity, argument="", verbs=VERBS, behavioured=False):
         target = entity.find_entity_extensively(arg1, inventory_pos="first")
     if not target:
         result = read_extra_from_location(entity, location if location else entity.location, arg1, verbs, behavioured)
-        # (TT) non dovrebbero servire queste righe perch� ci pensa la fine
+        # (TT) non dovrebbero servire queste righe perch? ci pensa la fine
         # della read_extra_from_location, tuttavia ho un dubbio sulla
         # sense_at_direction e quindi mantengo le linee per un po' a vedere...
         #if not result:
@@ -97,14 +97,14 @@ def command_read(entity, argument="", verbs=VERBS, behavioured=False):
         return False
 
     if page_number > len(target.readable_type.pages) - 1:
-        entity.act("Puoi %s solo fino alla %d� pagina di $N." % (verbs["infinitive"], len(target.readable_type.pages)-1), TO.ENTITY, target)
-        # E' voluto che qui il messaggio sia uguale a quello sopra, non � un copia e incolla selvaggio
+        entity.act("Puoi %s solo fino alla %d? pagina di $N." % (verbs["infinitive"], len(target.readable_type.pages)-1), TO.ENTITY, target)
+        # E' voluto che qui il messaggio sia uguale a quello sopra, non ? un copia e incolla selvaggio
         entity.act("$n cerca di %s pagine inesistenti di $N" % verbs["infinitive"], TO.OTHERS, target)
         return False
 
     output = target.readable_type.get_pages(entity, target, page_number, location)
     if not output:
-        log.bug("Output ricavato dalle pagine per il comando read con entit� %s e book %s non valido: %r" % (entity.code, target.code, output))
+        log.bug("Output ricavato dalle pagine per il comando read con entit? %s e book %s non valido: %r" % (entity.code, target.code, output))
         return False
 
     force_return = check_trigger(entity, "before_read", entity, target, output, None, behavioured)
@@ -162,7 +162,7 @@ def command_read(entity, argument="", verbs=VERBS, behavioured=False):
             entity.act("%s $N%s." % (color_first_upper(verbs["you"]), from_descr), TO.ENTITY, target)
             entity.act("$n %s $N%s." % (verbs["it"], from_descr), TO.OTHERS, target)
 
-    # Visualizza la o le pagine dell'entit� leggibile al lettore
+    # Visualizza la o le pagine dell'entit? leggibile al lettore
     entity.send_output(output)
 
     # Dona un po' di esperienza ai giocatori che leggono per la prima
@@ -188,22 +188,22 @@ def command_read(entity, argument="", verbs=VERBS, behavioured=False):
 
 def read_extra_from_location(entity, location, extra_argument, verbs, behavioured):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return False
 
     if not location:
-        log.bug("location non � un parametro valido: %r" % location)
+        log.bug("location non ? un parametro valido: %r" % location)
         return False
 
     if not extra_argument:
-        log.bug("extra_argument non � un parametro valido: %r" % extra_argument)
+        log.bug("extra_argument non ? un parametro valido: %r" % extra_argument)
         return False
 
     if not verbs:
-        log.bug("verbs non � un parametro valido: %r" % verbs)
+        log.bug("verbs non ? un parametro valido: %r" % verbs)
         return False
 
-    # behavioured ha valore di verit�
+    # behavioured ha valore di verit?
 
     # -------------------------------------------------------------------------
 
@@ -276,17 +276,17 @@ def read_extra_from_location(entity, location, extra_argument, verbs, behavioure
 
 def can_read(entity, location, verbs, extra):
     # (TD) in futuro al posto di utilizzare il contenitore bisogna dare la
-    # possibilit� di leggere anche da libri appoggiati sui mobili
+    # possibilit? di leggere anche da libri appoggiati sui mobili
     if EXTRA.INSIDE_CONTAINER in extra.flags:
         if not location.container_type:
-            entity.act("Non ti sar� possibile %s nulla da $N non potendo contenere nulla." % verbs["infinitive"], TO.ENTITY, location)
-            entity.act("$n sembra voler %s da $N ma ci� non gli � possibile poich� che non � un contenitore." % verbs["infinitive"], TO.OTHERS, location)
-            entity.act("$n sembra voler %s da te ma ci� non gli � possibile poich� che non � un contenitore." % verbs["infinitive"], TO.TARGET, location)
+            entity.act("Non ti sar? possibile %s nulla da $N non potendo contenere nulla." % verbs["infinitive"], TO.ENTITY, location)
+            entity.act("$n sembra voler %s da $N ma ci? non gli ? possibile poich? che non ? un contenitore." % verbs["infinitive"], TO.OTHERS, location)
+            entity.act("$n sembra voler %s da te ma ci? non gli ? possibile poich? che non ? un contenitore." % verbs["infinitive"], TO.TARGET, location)
             return False
         if CONTAINER.CLOSED in location.container_type.flags:
-            entity.act("Non ti sar� possibile %s nulla da $N non essendo aperto." % verbs["infinitive"], TO.ENTITY, location)
-            entity.act("$n sembra voler %s da $N ma ci� non gli � possibile poich� che non � aperto." % verbs["infinitive"], TO.OTHERS, location)
-            entity.act("$n sembra voler %s da te ma ci� non gli � possibile poich� che non � aperto." % verbs["infinitive"], TO.TARGET, location)
+            entity.act("Non ti sar? possibile %s nulla da $N non essendo aperto." % verbs["infinitive"], TO.ENTITY, location)
+            entity.act("$n sembra voler %s da $N ma ci? non gli ? possibile poich? che non ? aperto." % verbs["infinitive"], TO.OTHERS, location)
+            entity.act("$n sembra voler %s da te ma ci? non gli ? possibile poich? che non ? aperto." % verbs["infinitive"], TO.TARGET, location)
             return False
 
     # Qui arriva anche nel caso che non vi sia la flag INSIDE_CONTAINER
@@ -296,7 +296,7 @@ def can_read(entity, location, verbs, extra):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

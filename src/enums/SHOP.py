@@ -26,7 +26,7 @@ class ShopElement(EnumElement):
 
 NONE      = ShopElement("Nessuno")
 NORMAL    = ShopElement("Normal",       "Il negoziante normale, vende oggetti o creature")
-DISPENSER = ShopElement("Distributore", "Il negoziante Ë in realt‡ un distributore, per il resto funziona come un venditore normale")
+DISPENSER = ShopElement("Distributore", "Il negoziante √® in realt√† un distributore, per il resto funziona come un venditore normale")
 REPAIR    = ShopElement("Repair",       "Il negoziante ripara armi e armature o altri oggetti rovinati")
 RECHARGE  = ShopElement("Recharge",     "Il negoziante ricarica oggetti magici scarichi")
 

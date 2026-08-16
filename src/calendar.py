@@ -20,12 +20,12 @@ from src.utility    import is_number
 #= COSTANTI ====================================================================
 
 ECHOES_DAWN =           ("[yellow]Comincia un nuovo giorno.[close]",
-                         "[yellow]� un nuovo giorno.[close]",
+                         "[yellow]? un nuovo giorno.[close]",
                          "[yellow]Il cielo lentamente si rischiara, nell'alba di un nuovo giorno.[close]",
                          "[yellow]S'affaccia adagio il sole, al giorno appena nato.[close]")
 
 ECHOES_DAWN_NO_SUN =    ("[yellow]Comincia un nuovo giorno.[close]",
-                         "[yellow]� un nuovo giorno.[close]",
+                         "[yellow]? un nuovo giorno.[close]",
                          "[yellow]Il cielo lentamente si rischiara, nell'alba di un nuovo giorno.[close]",
                          "[yellow]S'affaccia adagio il sole, al giorno appena nato.[close]")
 
@@ -39,19 +39,19 @@ ECHOES_SUNRISE_NO_SUN = ("[orange]Il sole nasce di raggi tiepidi, sorgendo ad es
                          "[orange]Un sole fosco alza lo sguardo sul piatto dell'orizzonte...[close]",
                          "[orange]Un giorno nuovo saluta il mondo all'ascesa di un pallido sole...[close]")
 
-ECHOES_NOON =           ("[white]Il sole � alto nel cielo, l'intensit� del suo diadema infuocato annuncia il mezzogiorno di luce...[close]",
-                         "[white]La luce del sole � vigorosa, nel cielo disegna un bagliore acceso: � mezzogiorno.[close]")
+ECHOES_NOON =           ("[white]Il sole ? alto nel cielo, l'intensit? del suo diadema infuocato annuncia il mezzogiorno di luce...[close]",
+                         "[white]La luce del sole ? vigorosa, nel cielo disegna un bagliore acceso: ? mezzogiorno.[close]")
 
-ECHOES_NOON_NO_SUN =    ("[white]Il sole � alto nel cielo, l'intensit� del suo diadema infuocato annuncia il mezzogiorno di luce...[close]",
-                         "[white]La luce del sole � vigorosa, nel cielo disegna un bagliore acceso: � mezzogiorno.[close]")
+ECHOES_NOON_NO_SUN =    ("[white]Il sole ? alto nel cielo, l'intensit? del suo diadema infuocato annuncia il mezzogiorno di luce...[close]",
+                         "[white]La luce del sole ? vigorosa, nel cielo disegna un bagliore acceso: ? mezzogiorno.[close]")
 
 ECHOES_SUNSET =         ("[red]L'occidente riluce dell'abbraccio infuocato del sole che tramonta...[close]",
-                         "[red]L'orizzonte � tagliato dalla corona rossa del sole in tramonto...[close]",
+                         "[red]L'orizzonte ? tagliato dalla corona rossa del sole in tramonto...[close]",
                          "[red]Il cielo si dipinge d'oro rosso brillante, il sole ruotando adagio tramonta oltre lo sguardo...[close]",
                          "[red]Il sole finisce il suo viaggio portando i raggi splendenti nel sonno del tramonto...[close]")
 
 ECHOES_SUNSET_NO_SUN =  ("[red]L'occidente riluce dell'abbraccio infuocato del sole che tramonta...[close]",
-                         "[red]L'orizzonte � tagliato dalla corona rossa del sole in tramonto...[close]",
+                         "[red]L'orizzonte ? tagliato dalla corona rossa del sole in tramonto...[close]",
                          "[red]Il cielo si dipinge d'oro rosso brillante, il sole ruotando adagio tramonta oltre lo sguardo...[close]",
                          "[red]Il sole finisce il suo viaggio portando i raggi splendenti nel sonno del tramonto...[close]")
 
@@ -82,13 +82,13 @@ class Calendar(object):
     #- Fine Inizializzazione -
 
     def get_error_message(self):
-        # L'anno non ha bisogno di check perch� pu� avere qualsiasi valore
+        # L'anno non ha bisogno di check perch? pu? avere qualsiasi valore
         if self.minute < 0 or self.minute > config.minutes_in_hour - 1:
-            msg = "minute non � un valore valido: %d (dev'essere tra -1 e %d)" % (self.minute, config.minutes_in_hour - 1)
+            msg = "minute non ? un valore valido: %d (dev'essere tra -1 e %d)" % (self.minute, config.minutes_in_hour - 1)
         elif self.hour < 0 or self.hour > config.hours_in_day - 1:
-            msg = "hour non � un valore valido: %d (dev'essere tra 0 e %d)" % (self.hour, config.hours_in_day)
+            msg = "hour non ? un valore valido: %d (dev'essere tra 0 e %d)" % (self.hour, config.hours_in_day)
         elif self.day <= 0 or self.day > config.days_in_month:
-            msg = "day non � un valore valido: %s (dev'essere tra -1 e %s)" % (self.day, config.days_in_month)
+            msg = "day non ? un valore valido: %s (dev'essere tra -1 e %s)" % (self.day, config.days_in_month)
         elif self.month.get_error_message(MONTH, "month") != "":
             msg = self.month.get_error_message(MONTH, "month")
         else:
@@ -119,7 +119,7 @@ class Calendar(object):
                 continue
             break
         else:
-            log.bug("Non � stato trovato nessuna riga valida al file %s" % filepath)
+            log.bug("Non ? stato trovato nessuna riga valida al file %s" % filepath)
             file.close()
             return
         file.close()
@@ -209,7 +209,7 @@ class Calendar(object):
         elif self.month == MONTH.SEVEN or self.month == MONTH.EIGHT or self.month == MONTH.NINE:
             return SEASON.AUTUMN
 
-        log.bug("self.month non � valido: %r" % self.month)
+        log.bug("self.month non ? valido: %r" % self.month)
         return SEASON.NONE
     #- Fine Metodo -
 
@@ -228,26 +228,26 @@ class Calendar(object):
 
     def get_real_seconds_to(self, minute=-1, hour=-1, day=-1, month=MONTH.NONE, year=-1, force_advance=False):
         if minute < -1 or minute > config.minutes_in_hour:
-            log.bug("minute non � un parametro valido: %d" % minute)
+            log.bug("minute non ? un parametro valido: %d" % minute)
             return -1
 
         if hour < -1 or hour > config.hours_in_day:
-            log.bug("hour non � un parametro valido: %d" % hour)
+            log.bug("hour non ? un parametro valido: %d" % hour)
             return -1
 
         if day < -1 or day > config.days_in_month:
-            log.bug("day non � un parametro valido: %d" % day)
+            log.bug("day non ? un parametro valido: %d" % day)
             return -1
 
         if not month:
-            log.bug("month non � un parametro valido: %r" % month)
+            log.bug("month non ? un parametro valido: %r" % month)
             return -1
 
         if year < -1:
-            log.bug("year non � un parametro valido: %d" % year)
+            log.bug("year non ? un parametro valido: %d" % year)
             return -1
 
-        # force_advance ha valore di verit�
+        # force_advance ha valore di verit?
 
         # ---------------------------------------------------------------------
 
@@ -308,12 +308,12 @@ class Calendar(object):
             if month == MONTH.ONE:
                 year += 1
 
-        # year non ha limite superiore per cui non c'� bisogno di controllarlo
+        # year non ha limite superiore per cui non c'? bisogno di controllarlo
 
         # ---------------------------------------------------------------------
 
         #print minute, hour, day, month.index, year, "-->",
-        # (TD) Brrrr... lo so che fa schifo, ma per ora si tiene cos� fino a
+        # (TD) Brrrr... lo so che fa schifo, ma per ora si tiene cos? fino a
         # che non si trova un po' di tempo per trovare una struttura smart
         if force_advance:
             if month < self.month:
@@ -482,14 +482,14 @@ class Calendar(object):
                 if area_echoes:
                     echoes = area_echoes
 
-                # Poich� esistono anche gli echoes personalizzabili per stanza
+                # Poich? esistono anche gli echoes personalizzabili per stanza
                 # allora esegue una ricerca stanza per stanza
                 for room in reversed(area.rooms.values()):
                     room_echoes = getattr(room, "echoes_%s" % moment_type)
                     if room_echoes:
                         echoes = room_echoes
 
-                    # Se la stanza � interna allora non fa visualizzare i
+                    # Se la stanza ? interna allora non fa visualizzare i
                     # messaggi di echo di default, a meno che appunto non
                     # siano stati inseriti ad uopo per la stanza
                     if ROOM.INSIDE in room.flags and not room_echoes:
@@ -508,16 +508,16 @@ class Calendar(object):
                         if force_return:
                             break
 
-        # A tutti fa visualizzare se il giorno � il primo dell'anno o del mese
+        # A tutti fa visualizzare se il giorno ? il primo dell'anno o del mese
         # (TD) in futuro anche il nome della settimana
         for player in database["players"].values():
             if not player.game_request:
                 continue
             if first_day_of_year:
-                player.send_output("\nOggi � il [white]primo giorno[close] dell'anno %d!" % self.year)
+                player.send_output("\nOggi ? il [white]primo giorno[close] dell'anno %d!" % self.year)
                 player.send_prompt()
             elif first_day_of_month:
-                player.send_output("\nOggi � il [white]primo giorno[close] del mese %s." % self.month.description)
+                player.send_output("\nOggi ? il [white]primo giorno[close] del mese %s." % self.month.description)
                 player.send_prompt()
     #- Fine Metodo -
 
@@ -533,11 +533,11 @@ class Calendar(object):
 #
 #    def get_error_message(self):
 #        if self.minute < -1 or self.minute > config.minutes_in_hour - 1:
-#            return "minute non � un valore valido: %d (dev'essere tra -1 e %d)" % (self.minute, config.minutes_in_hour - 1)
+#            return "minute non ? un valore valido: %d (dev'essere tra -1 e %d)" % (self.minute, config.minutes_in_hour - 1)
 #        elif self.hour < 0 or self.hour > config.hours_in_day - 1:
-#            return "hour non � un valore valido: %d (dev'essere tra -1 e %d)" % (self.hour, config.hours_in_day - 1)
+#            return "hour non ? un valore valido: %d (dev'essere tra -1 e %d)" % (self.hour, config.hours_in_day - 1)
 #        elif self.day <= 0 or self.day > config.days_in_month:
-#            return "day non � un valore valido: %s (dev'essere tra -1 e %s)" % (self.day, config.days_in_month)
+#            return "day non ? un valore valido: %s (dev'essere tra -1 e %s)" % (self.day, config.days_in_month)
 #        elif self.month.get_error_message(MONTH, "month") != "":
 #            return self.month.get_error_message(MONTH, "month")
 #
@@ -546,15 +546,15 @@ class Calendar(object):
 #
 #    def fread_the_line(self, file, line, attr):
 #        if not file:
-#            log.bug("file non � un parametro valido: %r" % file)
+#            log.bug("file non ? un parametro valido: %r" % file)
 #            return
 #
 #        if not line:
-#            log.bug("line non � un parametro valido: %r" % line)
+#            log.bug("line non ? un parametro valido: %r" % line)
 #            return
 #
 #        if not attr:
-#            log.bug("attr non � un parametro valido: %r" % attr)
+#            log.bug("attr non ? un parametro valido: %r" % attr)
 #            return
 #
 #        # ---------------------------------------------------------------------
@@ -564,11 +564,11 @@ class Calendar(object):
 #
 #    def fwrite_the_line(self, file, label, indentation=""):
 #        if not file:
-#            log.bug("file non � un parametro valido: %r" % file)
+#            log.bug("file non ? un parametro valido: %r" % file)
 #            return
 #
 #        if not label:
-#            log.bug("label non � un parametro valido: %r" % label)
+#            log.bug("label non ? un parametro valido: %r" % label)
 #            return
 #
 #        # -------------------------------------------------------------------------

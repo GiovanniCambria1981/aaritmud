@@ -12,10 +12,10 @@ from src.log      import log
 
 def command_snoopers(entity, argument=""):
     """
-    Permette di visualizzare tutto l'output di uno o pi� entit�.
+    Permette di visualizzare tutto l'output di uno o pi? entit?.
     """
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -27,7 +27,7 @@ def command_snoopers(entity, argument=""):
             entity.send_output("Non trovi nessun amministratore con argomento [white]%s[close]" % argument)
             return False
         if target.trust < TRUST.MASTER:
-            entity.send_output("Il giocatore %s non � un amministratore." % target.name)
+            entity.send_output("Il giocatore %s non ? un amministratore." % target.name)
             return False
         syntax = get_command_syntax(entity, "command_snoopers")
         entity.send_output(syntax, break_line=False)
@@ -51,7 +51,7 @@ def command_snoopers(entity, argument=""):
     for admin, snooped_players in snooped_by.items():
         if not snooped_players:
             continue
-        lines.append("Entit� snoopate da %s:" % admin.name)
+        lines.append("Entit? snoopate da %s:" % admin.name)
         for snooped_player in snooped_players:
             lines.append(snooped_player.name)
 
@@ -66,7 +66,7 @@ def command_snoopers(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non � un parametro valido: %r" % entity)
+        log.bug("entity non ? un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

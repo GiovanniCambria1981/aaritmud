@@ -17,7 +17,7 @@ def command_repaint(entity, argument=""):
     Permette di modificare la short, nome e descrizione di una stanza.
     """
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return False
 
     # -------------------------------------------------------------------------
@@ -115,13 +115,13 @@ def command_repaint(entity, argument=""):
         attr_descr = "la descrizione intuitiva notturna"
 
     if not attribute:
-        syntax = "L'etichetta da modificare all'entit‡ '%s' Ë errata: %s" % (room.code, arg1)
+        syntax = "L'etichetta da modificare all'entit√† '%s' √® errata: %s" % (room.code, arg1)
         syntax += get_command_syntax(entity, "command_repaint")
         entity.send_output(syntax, break_line=False)
         return False
 
     if not argument:
-        syntax = "Il testo da sostituire nell'etichetta Ë vuoto."
+        syntax = "Il testo da sostituire nell'etichetta √® vuoto."
         syntax += get_command_syntax(entity, "command_repaint")
         entity.send_output(syntax, break_line=False)
         return False
@@ -143,7 +143,7 @@ def command_repaint(entity, argument=""):
 
 def get_syntax_template(entity):
     if not entity:
-        log.bug("entity non Ë un parametro valido: %r" % entity)
+        log.bug("entity non √® un parametro valido: %r" % entity)
         return ""
 
     # -------------------------------------------------------------------------

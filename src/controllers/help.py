@@ -23,7 +23,7 @@ class HelpPage(WebResource):
     """
     TITLE = "Help"
 
-    PAGE_TEMPLATE = string.Template(open("src/views/help.view").read())
+    PAGE_TEMPLATE = string.Template(open("src/views/help.view", encoding="utf-8-sig").read())
 
     def render_GET(self, request, conn):
         max_help_types = len(HELP.elements)
@@ -67,7 +67,7 @@ class HelpPage(WebResource):
         # Ricava gli argomenti del form dalla richiesta
         pass
 
-        # Controlla la validit‡ degli argomenti inseriti nel form
+        # Controlla la validit√† degli argomenti inseriti nel form
         pass
 
         return self.create_page(request, conn)

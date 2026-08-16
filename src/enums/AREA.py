@@ -25,7 +25,7 @@ class AreaElement(EnumElement):
 #-------------------------------------------------------------------------------
 
 NONE       = AreaElement("Nessuna")
-RENTABLE   = AreaElement("Rentable",  "Nell'area si può rentare quittando")
+RENTABLE   = AreaElement("Rentable",  "Nell'area si puÃ² rentare quittando")
 DONT_LIST  = AreaElement("DontList",  "L'area non viene visualizzata nella lista delle aree")
 MAZE       = AreaElement("Maze",      "L'area vienegenerata come labirinto")
 WUMPUS     = AreaElement("Wumpus",    "L'area viene wumpizzata")
