@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Local development environment
+.venv/
+
+# Runtime output
+backup/
+log/
+
+# Web pages generated from src/views at boot
+/www/*.html
